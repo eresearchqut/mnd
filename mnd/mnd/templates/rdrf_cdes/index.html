@@ -1,0 +1,67 @@
+{% load static from staticfiles %}
+{% load version_number %}
+{% load i18n %}
+{% load translate %}
+{% load project_title %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>{% project_title %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- stylesheets -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/compiled/theme.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/vendor/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap-3.3.6/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap-3.3.6/css/bootstrap-theme.min.css' %}">
+
+
+    <!-- javascript -->
+    <script type="text/javascript" src="{% static 'js/vendor/jquery-1.11.3.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'bootstrap-3.3.6/js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/theme.js' %}"></script>
+
+    <!--[if lt IE 9]>
+      <script type="text/javascript" src="{% static 'js/vendor/html5shiv-3.7.3.min.js' %}"></script>
+    <![endif]-->
+</head>
+<body id="home">
+    <header class="navbar navbar-inverse hero" role="banner">
+          <div class="container">
+            <div class="navbar-header">
+                  <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button>
+                  <!--
+                  <a href="{% url 'landing' %}" style="position:absolute; left: 350px;" class="navbar-brand">TRRF {% version_number %}</a>
+                  -->
+                  <img src="{% static 'images/qut/progress.png' %}" style="position:absolute; height: 150px; left: 10px;">
+                  <img src="{% static 'images/qut/nhmrc.png' %}" style="position:absolute; height: 150px; right: 10px;">
+                  <div style="position:absolute; width: 60%; left: 20%; top: 130px;">
+                    <img src="{% static 'images/qut/grid.png' %}" style="width:100%">
+                    <p>&nbsp;</p>
+                    <img src="{% static 'images/qut/partnership.png' %}" style="width:100%">
+                  </div>
+                  <div style="position:absolute; width: 200px; right: 40px; top: 300px;">
+                        <p style="text-align:center;">
+                        <b><font style="font-size:20px; color:#355692">
+                            <a href="{% url 'two_factor:login' %}?next=/router/">{% project_title %} {% trans "Login Here" %}</a>
+                        </font></b>
+                        </p>
+                  </div>
+		  <div style="position:absolute; width: 200px; right: 40px; top: 450px;">
+                        <p style="text-align:center;">
+                        <b><font style="font-size:20px; color:#355692">
+                            <a href="{% url 'registration_register' registries.0.code %}">{% trans "Carer / Patient Register Here" %}</a>
+                        </font></b>
+                        </p>
+                  </div>
+            </div>
+          </div>
+    </header>
+</body>
+</html>
