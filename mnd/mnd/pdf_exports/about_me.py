@@ -1,11 +1,11 @@
 _STATE_VALUE_MAPPING = {
- 'AU-SA': 'SA',
- 'AU-ACT': 'ACT',
- 'AU-NT': 'NT',
- 'AU-TAS': 'TAS',
- 'AU-QLD': 'QLD',
- 'AU-WA': 'WA',
- 'AU-VIC': 'VIC'
+    'AU-SA': 'SA',
+    'AU-ACT': 'ACT',
+    'AU-NT': 'NT',
+    'AU-TAS': 'TAS',
+    'AU-QLD': 'QLD',
+    'AU-WA': 'WA',
+    'AU-VIC': 'VIC'
 }
 
 
