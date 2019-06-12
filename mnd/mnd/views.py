@@ -2,32 +2,31 @@ from io import BytesIO
 import logging
 import os
 
-from django.contrib.auth.decorators import user_passes_test, login_required
-from django.http import FileResponse
+from django.contrib.auth.decorators import login_required
+from django.http import FileResponse, HttpResponseForbidden
 from django.shortcuts import get_object_or_404
-from django.views.decorators.http import require_http_methods
+from django.views.decorators.http import require_GET
 
-from registry.patients.models import Patient, PatientAddress
+from registry.patients.models import Patient
+from rdrf.models.definition.models import Registry
 
 from .pdf_exports.export import export_to_pdf
 
 logger = logging.getLogger("registry_log")
 
 
-def user_is_patient_or_superuser(user):
-    # TODO: what is the relation between patient and user ?
-    return user.is_superuser
-
-
+@require_GET
 @login_required
-@require_http_methods(['GET'])
-@user_passes_test(user_is_patient_or_superuser)
-def pdf_export(request, patient_id):
+def pdf_export(request, registry_code, patient_id):
+    registry = get_object_or_404(Registry, code=registry_code)
     patient = get_object_or_404(Patient, pk=patient_id)
-    patient_address = PatientAddress.objects.filter(patient=patient).first()
 
-    result_pdf_path = export_to_pdf(patient, patient_address)
+    # TODO: might need further refinement, allow carer of patient, clinicians etc.
+    if not (request.user.is_superuser or request.user == patient.user):
+        return HttpResponseForbidden()
+
+    result_pdf_path = export_to_pdf(registry, patient)
     with open(result_pdf_path, 'rb') as f:
-        file = BytesIO(f.read())
-        os.remove(result_pdf_path)
-        return FileResponse(file, as_attachment=True, filename='pdf_export.pdf')
+        data = BytesIO(f.read())
+    os.remove(result_pdf_path)
+    return FileResponse(data, as_attachment=True, filename='about_me.pdf')

@@ -11,7 +11,7 @@ _STATE_VALUE_MAPPING = {
 }
 
 
-def generate_pdf_form_fields(patient, patient_address):
+def generate_pdf_form_fields(registry, patient):
     data = {
         'First': patient.given_names,
         'Last': patient.family_name,
@@ -21,6 +21,7 @@ def generate_pdf_form_fields(patient, patient_address):
         'Mobile Number': patient.mobile_phone or '',
         'Email': patient.email or ''
     }
+    patient_address = patient.home_address
     if patient_address:
         data.update({
             'Suburb': patient_address.suburb,
@@ -28,6 +29,10 @@ def generate_pdf_form_fields(patient, patient_address):
             'Postcode': patient_address.postcode,
             'State': _STATE_VALUE_MAPPING.get(patient_address.state, 'QLD')
         })
+
+    # TODO
+    # dynamic_data = patient.get_dynamic_data(registry)
+
     return data
 
 
