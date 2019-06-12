@@ -25,8 +25,10 @@ def pdf_export(request, registry_code, patient_id):
     if not (request.user.is_superuser or request.user == patient.user):
         return HttpResponseForbidden()
 
+    filename = f'About Me MND - {patient.display_name}.pdf'
+
     result_pdf_path = export_to_pdf(registry, patient)
     with open(result_pdf_path, 'rb') as f:
         data = BytesIO(f.read())
     os.remove(result_pdf_path)
-    return FileResponse(data, as_attachment=True, filename='about_me.pdf')
+    return FileResponse(data, as_attachment=True, filename=filename)
