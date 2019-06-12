@@ -1,5 +1,6 @@
 from io import BytesIO
 import logging
+import os
 
 from django.contrib.auth.decorators import user_passes_test, login_required
 from django.http import FileResponse
@@ -28,4 +29,5 @@ def pdf_export(request, patient_id):
     result_pdf_path = export_to_pdf(patient, patient_address)
     with open(result_pdf_path, 'rb') as f:
         file = BytesIO(f.read())
+        os.remove(result_pdf_path)
         return FileResponse(file, as_attachment=True, filename='pdf_export.pdf')
