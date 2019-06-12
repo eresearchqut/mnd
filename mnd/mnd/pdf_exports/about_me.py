@@ -1,3 +1,5 @@
+from ..settings import PDF_TEMPLATES_PATH
+
 _STATE_VALUE_MAPPING = {
     'AU-SA': 'SA',
     'AU-ACT': 'ACT',
@@ -29,5 +31,5 @@ def generate_pdf_form_fields(patient, patient_address):
     return data
 
 
-def get_pdf_template(base_path):
-    return f"{base_path}/about_me.pdf"
+def get_pdf_template():
+    return f"{PDF_TEMPLATES_PATH}/about_me.pdf"

@@ -24,3 +24,5 @@ PROJECT_TITLE_LINK = "login_router"
 # REGISTRATION_CLASS = "mnd.custom_registration.CustomRegistration"
 
 VERSION = env.get('app_version', '%s (mnd)' % mnd.VERSION)
+
+PDF_TEMPLATES_PATH = f"{os.path.dirname(os.path.dirname(os.path.abspath(__file__)))}/mnd/templates/pdf_export"

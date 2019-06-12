@@ -8,7 +8,7 @@ from django.views.decorators.http import require_http_methods
 
 from registry.patients.models import Patient, PatientAddress
 
-from .pdf_export import export_to_pdf
+from .pdf_exports.export import export_to_pdf
 
 logger = logging.getLogger("registry_log")
 
