@@ -13,8 +13,8 @@ _STATE_VALUE_MAPPING = {
 
 def generate_pdf_form_fields(registry, patient):
     data = {
-        'pLastName': patient.given_names,
-        'pFirstName': patient.family_name,
+        'pFirstName': patient.given_names,
+        'pLastName': patient.family_name,
         'pMaidenName': patient.maiden_name,
         'pDOB': patient.date_of_birth.strftime("%d/%m/%Y") if patient.date_of_birth else '',
         'pPhoneNo': patient.home_phone or '',
