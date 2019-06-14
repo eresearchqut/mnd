@@ -1,4 +1,3 @@
-from io import BytesIO
 import logging
 import os
 
@@ -27,8 +26,15 @@ def pdf_export(request, registry_code, patient_id):
 
     filename = f'About Me MND - {patient.display_name}.pdf'
 
-    result_pdf_path = export_to_pdf(registry, patient)
-    with open(result_pdf_path, 'rb') as f:
-        data = BytesIO(f.read())
-    os.remove(result_pdf_path)
-    return FileResponse(data, as_attachment=True, filename=filename)
+    local_pdf_filename = export_to_pdf(registry, patient)
+    return AutoCleaningFileResponse(local_pdf_filename, as_attachment=True, filename=filename)
+
+
+class AutoCleaningFileResponse(FileResponse):
+    def __init__(self, local_filename, *args, **kwargs):
+        self.local_filename = local_filename
+        super().__init__(open(local_filename, 'rb'), *args, **kwargs)
+
+    def close(self):
+        super().close()
+        os.remove(self.local_filename)

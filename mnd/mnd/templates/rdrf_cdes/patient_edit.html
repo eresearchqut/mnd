@@ -6,7 +6,7 @@
   {{ block.super }}
   <div width="100%" class="panel panel-default collapsible">
     <div class="panel-body">
-      <a href="{% url 'about_me' registry_code patient_id %}">
+      <a href="{% url 'about_me' registry_code patient_id %}" download>
         <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
         {% trans 'About Me PDF' %}
       </a>
