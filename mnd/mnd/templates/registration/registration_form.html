@@ -12,6 +12,10 @@
     setUpStateOnCountryChange("#id_country", "#id_state");
     setUpStateOnCountryChange("#id_parent_guardian_country", "#id_parent_guardian_state");
 
+    // TODO - fix this
+    // We set Country to Australia so we fire a change event to load the Australian States
+    $('#id_country').change();
+
     $("#same_address").on("click", function() {
         var self = this;
         $("#patient-address-div").slideToggle("fast", function() {
@@ -278,11 +282,15 @@
                             </div>
                             <div class="form-group">
                                 <select class="form-control" placeholder="{% trans 'Country' %}" id="id_country" name="country" required title="{% trans 'Country is required' %}">
+                                    <option selected value="AU">Australia</option>
+                                  {% comment %}
                                     <option selected value="0">{% trans "Country" %}</option>
+
                                     {% countries as countries %}
                                     {% for con in countries %}
                                         <option value="{{con.alpha_2}}">{{con.name}}</option>
                                     {% endfor %}
+                                  {% endcomment %}
                                 </select>
                             </div>
                             <div class="form-group">
