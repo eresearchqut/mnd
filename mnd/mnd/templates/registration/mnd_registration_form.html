@@ -1,0 +1,196 @@
+{% extends "registration/registration_base.html" %}
+
+{% load i18n %}
+{% load countries %}
+{% load project_title %}
+{% load recaptcha_site_key %}
+
+{% block extra_js_init %}
+
+    $("#id_date_of_birth").datepicker(dateOptions);
+    setStatesOnLoad("#id_country", "#id_state", "#patient_state_value");
+    setUpStateOnCountryChange("#id_country", "#id_state");
+
+    {% if not is_mobile %}
+        $("#extra-info-form").accordion({
+            heightStyle: "content",
+            collapsible: true,
+            active: false
+        });
+
+        $("#insurance-form").accordion({
+            heightStyle: "content",
+            collapsible: true,
+            active: false
+        });
+
+        $("#primary-carer-form").accordion({
+            heightStyle: "content",
+            collapsible: true,
+            active: false
+        });
+    {% endif %}
+
+    $("#id_is_primary_carer").change(function() {
+        if(this.checked) {
+            $("#id_primary_carer_first_name").val($("#id_contact_first_name").val());
+            $("#id_primary_carer_surname").val($("#id_contact_surname").val());
+            $("#id_primary_carer_phone").val($("#id_contact_phone").val());
+            $("#id_primary_carer_email").val($("#id_contact_email").val());
+        }
+    });
+
+    $("#id_contact_method").change(function() {
+        if (this.value == "person") {
+            $("#preferred_contact_data").css('display', 'block');
+        } else {
+            $("#preferred_contact_data").css('display', 'none');
+        }
+    });
+
+    $("#id_insurer").change(function() {
+        if (this.value == "") {
+            $("#pension_number").css('display', 'block');
+        } else {
+            $("#pension_number").css('display', 'none');
+        }
+    });
+
+    $("#id_ndis_number").change(function() {
+        if (this.value.trim() == "") {
+            $("#health_fund_name").css('display', 'block');
+            $("#health_fund_number").css('display', 'block');
+        } else {
+            $("#health_fund_name").css('display', 'none');
+            $("#health_fund_number").css('display', 'none');
+        }
+    });
+
+
+
+{% endblock %}
+
+{% block content %}
+
+    <h3>
+        <strong>{% project_title %} - {% trans "Patient Registration - MND" %}</strong>
+    </h3>
+
+    <div class="alert alert-danger" style="display: none" id="username-error">
+        <p>
+            <b>{% trans "Username error:  This username already exists, please choose a different username." %}</b>
+        </p>
+        <p>
+            {% trans "If you have already registered and would like to update your data or add another patient, you don't have to register again. Just go to the login page and login with the e-mail address and password you previously registered with." %}
+        </p>
+        <p>
+            {% trans "If you have forgotten your password, please  click on 'forgotten your password?'" %}
+        </p>
+    </div>
+
+    <form id="registration-form" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="registry_code" value="{{registry_code}}">
+        <input id="id_email" name="email" type="hidden" />
+        <input type="hidden" id="patient_state_value" value="{{form.state.value}}">
+        <div class="row">
+            <div class="col-md-6">
+                {% include "registration/registration_login_details.html" %}
+            </div>
+            <div class="col-md-6" >
+                <div id="patient-form">
+                    {% include "registration/registration_patient_details.html" %}
+                    {% include "registration/registration_patient_address.html" %}
+                </div>
+                </div>
+                <div id="extra-info-form">
+                    <h2>{% trans "Preferred contact" %}</h2>
+                    <div id="parent_guardian_form">
+                        <div class="form-group">
+                            {{form.contact_method}}
+                        </div>
+                        <div id="preferred_contact_data" style="display:none;">
+                            <div class="form-group">
+                                {{form.contact_email}}
+                            </div>
+                            <div class="form-group">
+                                {{form.contact_first_name}}
+                            </div>
+                            <div class="form-group">
+                                {{form.contact_surname}}
+                            </div>
+                            <div class="form-group">
+                                {{form.contact_phone}}
+                            </div>
+                            <div class="form-group top-separator">
+                                {{form.is_primary_carer}} {% trans "Is the person above the primary carer ?" %}
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    <div id="insurance-form">
+                        <h2>{% trans "Insurance details" %}</h2>
+                        <div id="insurance-details">
+                            <div class="form-group">
+                                {{form.medicare_number}}
+                            </div>
+                            <div class="form-group" id="pension_number">
+                                {{form.pension_number}}
+                            </div>
+                            <div class="form-group" id="health_fund_name" style="display:block;">
+                                {{form.insurer}}
+                            </div>
+                            <div class="form-group" id="health_fund_number" style="display:block;">
+                                {{form.health_fund_number}}
+                            </div>
+                            <div class="form-group">
+                                {{form.ndis_number}}
+                            </div>
+                            <div class="form-group">
+                                {{form.ndis_plan_manager}}
+                            </div>
+                            <div class="form-group">
+                                {{form.ndis_coordinator_first_name}}
+                            </div>
+                            <div class="form-group">
+                                {{form.ndis_coordinator_surname}}
+                            </div>
+                            <div class="form-group">
+                                {{form.ndis_coordinator_phone}}
+                            </div>
+                        </div>
+                    </div>
+                    <div id="primary-carer-form">
+                        <h2>{% trans "Primary carer details" %}</h2>
+                        <div id="primary-carer-details">
+                            <div class="form-group">
+                                {{form.primary_carer_first_name}}
+                            </div>
+                            <div class="form-group">
+                                {{form.primary_carer_surname}}
+                            </div>
+                            <div class="form-group">
+                                {{form.primary_carer_relationship}}
+                            </div>
+                            <div class="form-group">
+                                {{form.primary_carer_relation_specify}}
+                            </div>
+                            <div class="form-group">
+                                {{form.primary_carer_phone}}
+                            </div>
+                            <div class="form-group">
+                                {{form.primary_carer_email}}
+                            </div>
+                        </div>
+                    </div>
+            <br/>
+            <div class="col-md-6">
+                <div class="g-recaptcha" data-sitekey="{% recaptcha_site_key %}"  data-callback='reCaptchaCallback' data-expired-callback='reCaptchaExpiredCallback'></div>
+            </div>
+            <div class="col-md-6">
+                <button type="button" id="registration-submit" class="btn btn-success pull-right">Submit</button>
+            </div>
+        </div>
+    </form>
+
+{% endblock %}

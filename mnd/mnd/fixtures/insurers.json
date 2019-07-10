@@ -1,0 +1,192 @@
+[
+  {
+    "insurer": "ACA Health Benefits Fund",
+    "id": "ACA",
+    "type": "Restricted"
+  },
+  {
+    "insurer": "ahm health insurance",
+    "id": "AHM",
+    "type": "Open"
+  },
+  {
+    "insurer": "Australian Unity Health Limited",
+    "id": "AUF",
+    "type": "Open"
+  },
+  {
+    "insurer": "Bupa HI Pty Ltd",
+    "id": "BUP",
+    "type": "Open"
+  },
+  {
+    "insurer": "CBHS Corporate Health Pty Ltd",
+    "id": "CBC",
+    "type": "Open"
+  },
+  {
+    "insurer": "CBHS Health Fund Limited",
+    "id": "CBH",
+    "type": "Restricted"
+  },
+  {
+    "insurer": "CDH Benefits Fund",
+    "id": "CDH",
+    "type": "Open"
+  },
+  {
+    "insurer": "CUA Health Limited",
+    "id": "CPS",
+    "type": "Open"
+  },
+  {
+    "insurer": "Defence Health Limited",
+    "id": "AHB",
+    "type": "Restricted"
+  },
+  {
+    "insurer": "Doctors' Health Fund",
+    "id": "AMA",
+    "type": "Restricted"
+  },
+  {
+    "insurer": "Emergency Services Health",
+    "id": "ESH",
+    "type": "Restricted"
+  },
+  {
+    "insurer": "GMHBA Limited",
+    "id": "GMH",
+    "type": "Open"
+  },
+  {
+    "insurer": "Grand United Corporate Health",
+    "id": "FAI",
+    "type": "Open"
+  },
+  {
+    "insurer": "HBF Health Limited",
+    "id": "HBF",
+    "type": "Open"
+  },
+  {
+    "insurer": "HCF",
+    "id": "HCF",
+    "type": "Open"
+  },
+  {
+    "insurer": "Health Care Insurance Limited",
+    "id": "HCI",
+    "type": "Open"
+  },
+  {
+    "insurer": "Health Insurance Fund of Australia Limited",
+    "id": "HIF",
+    "type": "Open"
+  },
+  {
+    "insurer": "Health Partners",
+    "id": "SPS",
+    "type": "Open"
+  },
+  {
+    "insurer": "health.com.au",
+    "id": "HEA",
+    "type": "Open"
+  },
+  {
+    "insurer": "Latrobe Health Services",
+    "id": "LHS",
+    "type": "Open"
+  },
+  {
+    "insurer": "Medibank Private Limited",
+    "id": "MBP",
+    "type": "Open"
+  },
+  {
+    "insurer": "Mildura Health Fund",
+    "id": "MDH",
+    "type": "Open"
+  },
+  {
+    "insurer": "MO Health",
+    "id": "MYO",
+    "type": "Open"
+  },
+  {
+    "insurer": "National Health Benefits Australia Pty Ltd (onemedifund)",
+    "id": "OMF",
+    "type": "Open"
+  },
+  {
+    "insurer": "Navy Health Ltd",
+    "id": "NHB",
+    "type": "Restricted"
+  },
+  {
+    "insurer": "nib Health Funds Ltd.",
+    "id": "NIB",
+    "type": "Open"
+  },
+  {
+    "insurer": "Nurses & Midwives Health",
+    "id": "NMW",
+    "type": "Restricted"
+  },
+  {
+    "insurer": "Peoplecare Health Insurance",
+    "id": "LHM",
+    "type": "Open"
+  },
+  {
+    "insurer": "Phoenix Health Fund Limited",
+    "id": "PWA",
+    "type": "Open"
+  },
+  {
+    "insurer": "Police Health",
+    "id": "SPE",
+    "type": "Restricted"
+  },
+  {
+    "insurer": "Queensland Country Health Fund Ltd",
+    "id": "QCH",
+    "type": "Open"
+  },
+  {
+    "insurer": "Railway and Transport Health Fund Limited",
+    "id": "RTE",
+    "type": "Restricted"
+  },
+  {
+    "insurer": "Reserve Bank Health Society Ltd",
+    "id": "RBH",
+    "type": "Restricted"
+  },
+  {
+    "insurer": "St.Lukes Health",
+    "id": "SLM",
+    "type": "Open"
+  },
+  {
+    "insurer": "Teachers Health",
+    "id": "NTF",
+    "type": "Restricted"
+  },
+  {
+    "insurer": "Transport Health Pty Ltd",
+    "id": "TFS",
+    "type": "Open"
+  },
+  {
+    "insurer": "TUH Health Fund",
+    "id": "QTU",
+    "type": "Restricted"
+  },
+  {
+    "insurer": "Westfund Limited",
+    "id": "WFD",
+    "type": "Open"
+  }
+]
