@@ -31,41 +31,98 @@
         });
     {% endif %}
 
-    $("#id_is_primary_carer").change(function() {
-        if(this.checked) {
-            $("#id_primary_carer_first_name").val($("#id_contact_first_name").val());
-            $("#id_primary_carer_surname").val($("#id_contact_surname").val());
-            $("#id_primary_carer_phone").val($("#id_contact_phone").val());
-            $("#id_primary_carer_email").val($("#id_contact_email").val());
+
+    $("#id_preferred_contact_contact_method").change(function() {
+        var current_value = this.value;
+        switch (current_value) {
+            case "person": {
+                $("#preferred_contact_data").css('display', 'block');
+                $("#id_preferred_contact_first_name").attr('required','');
+                $("#id_preferred_contact_last_name").attr('required','');
+                $("#id_preferred_contact_phone").attr('required','');
+                $("#id_preferred_contact_email").attr('required','');
+                break;
+            }
+            default:
+                $("#preferred_contact_data").css('display', 'none');
+                $("#id_preferred_contact_first_name").removeAttr('required');
+                $("#id_preferred_contact_last_name").removeAttr('required');
+                $("#id_preferred_contact_phone").removeAttr('required');
+                $("#id_preferred_contact_email").removeAttr('required');
         }
     });
 
-    $("#id_contact_method").change(function() {
-        if (this.value == "person") {
-            $("#preferred_contact_data").css('display', 'block');
-        } else {
-            $("#preferred_contact_data").css('display', 'none');
-        }
-    });
-
-    $("#id_insurer").change(function() {
+    $("#id_patient_insurance_private_health_fund_name").change(function() {
         if (this.value == "") {
-            $("#pension_number").css('display', 'block');
+            $("#patient_insurance_pension_number").css('display', 'block');
+            $("#patient_insurance_pension_number").attr('required','');
+            $("#patient_insurance_private_health_fund_number").css('display', 'none');
+            $("#id_patient_insurance_private_health_fund_number").removeAttr('required');
         } else {
-            $("#pension_number").css('display', 'none');
+            $("#patient_insurance_pension_number").css('display', 'none');
+            $("#patient_insurance_private_health_fund_number").css('display', 'block');
+            $("#patient_insurance_pension_number").removeAttr('required');
+            $("#id_patient_insurance_private_health_fund_number").attr('required', '');
         }
     });
 
-    $("#id_ndis_number").change(function() {
+    $("#id_patient_insurance_ndis_number").change(function() {
         if (this.value.trim() == "") {
-            $("#health_fund_name").css('display', 'block');
-            $("#health_fund_number").css('display', 'block');
+            $("#patient_insurance_private_health_fund_name").css('display', 'block');
+            $("#patient_insurance_private_health_fund_number").css('display', 'block');
+            $("#id_patient_insurance_private_health_fund_name").attr('required', '');
+            $("#id_patient_insurance_private_health_fund_number").attr('required', '');
+
         } else {
-            $("#health_fund_name").css('display', 'none');
-            $("#health_fund_number").css('display', 'none');
+            $("#patient_insurance_private_health_fund_name").css('display', 'none');
+            $("#patient_insurance_private_health_fund_number").css('display', 'none');
+            $("#id_patient_insurance_private_health_fund_name").removeAttr('required');
+            $("#id_patient_insurance_private_health_fund_number").removeAttr('required');
         }
     });
 
+    $("#id_primary_carer_relationship").change(function() {
+        if (this.value.trim() == "other") {
+            $('#primary_carer_relationship_info').css('display', 'block');
+        } else {
+            $('#primary_carer_relationship_info').css('display', 'none');
+        }
+    });
+
+    $("#id_patient_insurance_ndis_plan_manager").change(function() {
+        if (this.value.trim() == "other") {
+            $("#plan_manager_info").css('display', 'block');
+            $("#id_patient_insurance_ndis_coordinator_first_name").attr('required','');
+            $("#id_patient_insurance_ndis_coordinator_last_name").attr('required','');
+            $("#id_patient_insurance_ndis_coordinator_phone").attr('required','');
+        } else {
+            $("#plan_manager_info").css('display', 'none');
+            $("#id_patient_insurance_ndis_coordinator_first_name").removeAttr('required');
+            $("#id_patient_insurance_ndis_coordinator_last_name").removeAttr('required');
+            $("#id_patient_insurance_ndis_coordinator_phone").removeAttr('required');
+        }
+    });
+
+    $("#registration-submit").click(function() {
+        var registration_form = $("#registration-form");
+        $("#patient-form").accordion("option", "active" ,0);
+        $("#extra-info-form").accordion("option", "active" ,0);
+        $("#insurance-form").accordion("option", "active" ,0);
+        $("#primary-carer-form").accordion("option", "active" ,0);
+        $("#id_email").val($("#id_username").val());
+        if (registration_form.valid()) {
+            registration_form.submit();
+        } else {
+            var msg = $("#form-invalid");
+            msg.slideDown("slow", function() {
+                setTimeout(function() {
+                    msg.slideUp("slow")
+                    }, 2000);
+            });
+
+            onValidationError();
+        }
+    });
 
 
 {% endblock %}
@@ -107,23 +164,20 @@
                     <h2>{% trans "Preferred contact" %}</h2>
                     <div id="parent_guardian_form">
                         <div class="form-group">
-                            {{form.contact_method}}
+                            {{form.preferred_contact_contact_method}}
                         </div>
                         <div id="preferred_contact_data" style="display:none;">
                             <div class="form-group">
-                                {{form.contact_email}}
+                                {{form.preferred_contact_email}}
                             </div>
                             <div class="form-group">
-                                {{form.contact_first_name}}
+                                {{form.preferred_contact_first_name}}
                             </div>
                             <div class="form-group">
-                                {{form.contact_surname}}
+                                {{form.preferred_contact_last_name}}
                             </div>
                             <div class="form-group">
-                                {{form.contact_phone}}
-                            </div>
-                            <div class="form-group top-separator">
-                                {{form.is_primary_carer}} {% trans "Is the person above the primary carer ?" %}
+                                {{form.preferred_contact_phone}}
                             </div>
                         </div>
                     </div>
@@ -132,31 +186,33 @@
                         <h2>{% trans "Insurance details" %}</h2>
                         <div id="insurance-details">
                             <div class="form-group">
-                                {{form.medicare_number}}
+                                {{form.patient_insurance_medicare_number}}
                             </div>
-                            <div class="form-group" id="pension_number">
-                                {{form.pension_number}}
+                            <div class="form-group" id="patient_insurance_pension_number">
+                                {{form.patient_insurance_pension_number}}
                             </div>
-                            <div class="form-group" id="health_fund_name" style="display:block;">
-                                {{form.insurer}}
+                            <div class="form-group" id="patient_insurance_private_health_fund_name" style="display:block;">
+                                {{form.patient_insurance_private_health_fund_name}}
                             </div>
-                            <div class="form-group" id="health_fund_number" style="display:block;">
-                                {{form.health_fund_number}}
-                            </div>
-                            <div class="form-group">
-                                {{form.ndis_number}}
+                            <div class="form-group" id="patient_insurance_private_health_fund_number" style="display:none;">
+                                {{form.patient_insurance_private_health_fund_number}}
                             </div>
                             <div class="form-group">
-                                {{form.ndis_plan_manager}}
+                                {{form.patient_insurance_ndis_number}}
                             </div>
                             <div class="form-group">
-                                {{form.ndis_coordinator_first_name}}
+                                {{form.patient_insurance_ndis_plan_manager}}
                             </div>
-                            <div class="form-group">
-                                {{form.ndis_coordinator_surname}}
-                            </div>
-                            <div class="form-group">
-                                {{form.ndis_coordinator_phone}}
+                            <div id="plan_manager_info" style="display:none">
+                                <div class="form-group">
+                                    {{form.patient_insurance_ndis_coordinator_first_name}}
+                                </div>
+                                <div class="form-group">
+                                    {{form.patient_insurance_ndis_coordinator_last_name}}
+                                </div>
+                                <div class="form-group">
+                                    {{form.patient_insurance_ndis_coordinator_phone}}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -167,13 +223,13 @@
                                 {{form.primary_carer_first_name}}
                             </div>
                             <div class="form-group">
-                                {{form.primary_carer_surname}}
+                                {{form.primary_carer_last_name}}
                             </div>
                             <div class="form-group">
                                 {{form.primary_carer_relationship}}
                             </div>
-                            <div class="form-group">
-                                {{form.primary_carer_relation_specify}}
+                            <div class="form-group" style="display:none" id="primary_carer_relationship_info">
+                                {{form.primary_carer_relationship_info}}
                             </div>
                             <div class="form-group">
                                 {{form.primary_carer_phone}}

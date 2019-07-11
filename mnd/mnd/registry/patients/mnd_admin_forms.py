@@ -10,10 +10,12 @@ class PatientInsuranceForm(forms.ModelForm):
                   'ndis_coordinator_last_name', 'ndis_coordinator_phone')
 
     def _clean_fields(self):
-        required_health_fund_number = self.data.get('private_health_fund_name', '').strip() != ''
-        self.fields['private_health_fund_number'].required = required_health_fund_number
-        required_plan_manager = self.data.get('ndis_number', '').strip() != ''
-        self.fields['ndis_plan_manager'].required = required_plan_manager
+        health_fund_number_set = self.data.get('private_health_fund_name', '').strip() != ''
+        self.fields['private_health_fund_number'].required = health_fund_number_set
+        self.fields['pension_number'].required = not health_fund_number_set
+        ndis_number_set = self.data.get('ndis_number', '').strip() != ''
+        self.fields['private_health_fund_name'].required = not ndis_number_set
+        self.fields['private_health_fund_number'].required = not ndis_number_set
         ndis_coordinator_info = [
             'ndis_coordinator_first_name', 'ndis_coordinator_last_name', 'ndis_coordinator_phone'
         ]
@@ -36,4 +38,12 @@ class PrimaryCarerForm(forms.ModelForm):
 class PreferredContactForm(forms.ModelForm):
     class Meta:
         model = PreferredContact
-        fields = ('first_name', 'last_name', 'phone', 'email', 'primary_carer', 'contact_method')
+        fields = ('first_name', 'last_name', 'phone', 'email', 'contact_method')
+
+        def _clean_fields(self):
+            required_info = self.data.get('contact_method', '').strip() == 'person'
+            if required_info:
+                required_fields = ['first_name', 'last_name', 'phone', 'email']
+                for f in required_fields:
+                    self.fields[f].required = True
+

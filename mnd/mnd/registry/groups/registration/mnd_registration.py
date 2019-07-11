@@ -31,13 +31,10 @@ class MNDRegistration(PatientRegistration):
         address.save()
         logger.debug("Registration process - created patient address")
 
-        form_data = self.form.cleaned_data
-        preferred_contact = self._create_preferred_contact(patient)
-        primary_carer = self._create_primary_carer(patient)
-        patient_insurance = self._create_insurance_data(patient)
-
-        if form_data['is_primary_carer']:
-            preferred_contact.primary_carer = primary_carer
+        self.form.cleaned_data
+        self._create_preferred_contact(patient)
+        self._create_primary_carer(patient)
+        self._create_insurance_data(patient)
 
         template_data = {
             "patient": patient,
@@ -51,40 +48,37 @@ class MNDRegistration(PatientRegistration):
 
     def _create_insurance_data(self, patient):
         form_data = self.form.cleaned_data
-        patient_insurace = PatientInsurance.objects.create(
+        PatientInsurance.objects.create(
             patient=patient,
-            medicare_number=form_data["medicare_number"],
-            pension_number=form_data["pension_number"],
-            private_health_fund_name=form_data["insurer"],
-            private_health_fund_number=form_data["health_fund_number"],
-            ndis_number=form_data["ndis_number"],
-            ndis_plan_manager=form_data["ndis_plan_manager"],
-            ndis_coordinator_first_name=form_data["ndis_coordinator_first_name"],
-            ndis_coordinator_last_name=form_data["ndis_coordinator_surname"],
-            ndis_coordinator_phone=form_data["ndis_coordinator_phone"]
+            medicare_number=form_data["patient_insurance_medicare_number"],
+            pension_number=form_data["patient_insurance_pension_number"],
+            private_health_fund_name=form_data["patient_insurance_private_health_fund_name"],
+            private_health_fund_number=form_data["patient_insurance_private_health_fund_number"],
+            ndis_number=form_data["patient_insurance_ndis_number"],
+            ndis_plan_manager=form_data["patient_insurance_ndis_plan_manager"],
+            ndis_coordinator_first_name=form_data["patient_insurance_ndis_coordinator_first_name"],
+            ndis_coordinator_last_name=form_data["patient_insurance_ndis_coordinator_last_name"],
+            ndis_coordinator_phone=form_data["patient_insurance_ndis_coordinator_phone"]
         )
-        return patient_insurace
 
     def _create_preferred_contact(self, patient):
         form_data = self.form.cleaned_data
-        preferred_contact = PreferredContact.objects.create(
+        PreferredContact.objects.create(
             patient=patient,
-            first_name=form_data["contact_first_name"],
-            last_name=form_data["contact_surname"],
-            phone=form_data["contact_phone"],
-            contact_method=form_data["contact_method"]
+            first_name=form_data["preferred_contact_first_name"],
+            last_name=form_data["preferred_contact_last_name"],
+            phone=form_data["preferred_contact_phone"],
+            contact_method=form_data["preferred_contact_contact_method"]
         )
-        return preferred_contact
 
     def _create_primary_carer(self, patient):
         form_data = self.form.cleaned_data
-
-        primary_carer = PrimaryCarer.objects.create(
+        PrimaryCarer.objects.create(
             patient=patient,
             first_name=form_data["primary_carer_first_name"],
-            last_name=form_data["primary_carer_surname"],
+            last_name=form_data["primary_carer_last_name"],
             email=form_data['primary_carer_email'],
             phone=form_data['primary_carer_phone'],
-            relationship=form_data['primary_carer_relationship']
+            relationship=form_data['primary_carer_relationship'],
+            relationship_info=form_data['primary_carer_relationship_info']
         )
-        return primary_carer

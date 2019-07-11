@@ -1,18 +1,26 @@
 from django.db import models
 
+from django.utils.translation import gettext as _
 from registry.patients.models import Patient
 
-from .constants import PRIMARY_CARER_RELATIONS, CONTACT_METHOD_CHOICES, PLAN_MANAGER_CHOICES
 from .utils import load_insurers_list
 
 
 class PatientInsurance(models.Model):
+
+    PLAN_MANAGER_CHOICES = [
+        ('', _("NDIS Plan Manager")),
+        ('self', _("Self")),
+        ('agency', _("Agency")),
+        ('other', _("Other")),
+    ]
+
     patient = models.OneToOneField(Patient, related_name='insurance_data', on_delete=models.CASCADE)
     medicare_number = models.BigIntegerField(null=True, blank=True)
     pension_number = models.BigIntegerField(null=True, blank=True)
     private_health_fund_name = models.CharField(choices=load_insurers_list(), max_length=10, blank=True)
     private_health_fund_number = models.BigIntegerField(null=True, blank=True)
-    ndis_number = models.CharField(max_length=30)
+    ndis_number = models.CharField(max_length=30, null=True, blank=True)
     ndis_plan_manager = models.CharField(choices=PLAN_MANAGER_CHOICES, max_length=30)
     ndis_coordinator_first_name = models.CharField(max_length=30, null=True, blank=True)
     ndis_coordinator_last_name = models.CharField(max_length=30, null=True, blank=True)
@@ -20,6 +28,16 @@ class PatientInsurance(models.Model):
 
 
 class PrimaryCarer(models.Model):
+
+    PRIMARY_CARER_RELATIONS = [
+        ('', _("Primary carer relationship")),
+        ('spouse', _("Spouse")),
+        ('child', _("Child")),
+        ('sibling', _("Sibling")),
+        ('friend', _("Friend")),
+        ('other', _("Other(specify)")),
+    ]
+
     patient = models.OneToOneField(Patient, related_name='primary_carer', on_delete=models.CASCADE)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
@@ -33,13 +51,21 @@ class PrimaryCarer(models.Model):
 
 
 class PreferredContact(models.Model):
+
+    CONTACT_METHOD_CHOICES = [
+        ('', _("Preferred contact method")),
+        ('phone', _("Phone")),
+        ('sms', _("SMS")),
+        ('person', _("Nominated person below")),
+        ('email', _("Email")),
+        ('primary_carer', _("Primary Carer"))
+    ]
+
     patient = models.OneToOneField(Patient, related_name='preferred_contact', on_delete=models.CASCADE)
-    first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=30)
-    phone = models.CharField(max_length=30)
-    email = models.CharField(max_length=30)
-    primary_carer = models.OneToOneField(PrimaryCarer, related_name='preferred_contact', on_delete=models.CASCADE,
-                                         null=True, blank=True)
+    first_name = models.CharField(max_length=30, null=True, blank=True)
+    last_name = models.CharField(max_length=30, null=True, blank=True)
+    phone = models.CharField(max_length=30, null=True, blank=True)
+    email = models.CharField(max_length=30, null=True, blank=True)
     contact_method = models.CharField(choices=CONTACT_METHOD_CHOICES, max_length=30)
 
 
