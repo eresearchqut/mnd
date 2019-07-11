@@ -11,6 +11,18 @@
     setStatesOnLoad("#id_country", "#id_state", "#patient_state_value");
     setUpStateOnCountryChange("#id_country", "#id_state");
 
+    function load_private_health_funds() {
+        var target = $("#id_patient_insurance_private_health_fund");
+        target.empty();
+        target.append($('<option>', { value : "" }).text("Private Health Fund Name"));
+        var fund_lookup_url = "{% url 'load_private_health_funds' %}";
+        $.getJSON( fund_lookup_url, function( data ) {
+            $.each( data.funds, function( key, val ) {
+                target.append($('<option>', { value : val.code }).text(val.name));
+            });
+        });
+    }
+
     {% if not is_mobile %}
         $("#extra-info-form").accordion({
             heightStyle: "content",
@@ -52,7 +64,7 @@
         }
     });
 
-    $("#id_patient_insurance_private_health_fund_name").change(function() {
+    $("#id_patient_insurance_private_health_fund").change(function() {
         if (this.value == "") {
             $("#patient_insurance_pension_number").css('display', 'block');
             $("#patient_insurance_pension_number").attr('required','');
@@ -68,13 +80,13 @@
 
     $("#id_patient_insurance_ndis_number").change(function() {
         if (this.value.trim() == "") {
-            $("#patient_insurance_private_health_fund_name").css('display', 'block');
+            $("#patient_insurance_private_health_fund").css('display', 'block');
             $("#patient_insurance_private_health_fund_number").css('display', 'block');
             $("#id_patient_insurance_private_health_fund_name").attr('required', '');
             $("#id_patient_insurance_private_health_fund_number").attr('required', '');
 
         } else {
-            $("#patient_insurance_private_health_fund_name").css('display', 'none');
+            $("#patient_insurance_private_health_fund").css('display', 'none');
             $("#patient_insurance_private_health_fund_number").css('display', 'none');
             $("#id_patient_insurance_private_health_fund_name").removeAttr('required');
             $("#id_patient_insurance_private_health_fund_number").removeAttr('required');
@@ -124,6 +136,7 @@
         }
     });
 
+    load_private_health_funds();
 
 {% endblock %}
 
@@ -191,8 +204,8 @@
                             <div class="form-group" id="patient_insurance_pension_number">
                                 {{form.patient_insurance_pension_number}}
                             </div>
-                            <div class="form-group" id="patient_insurance_private_health_fund_name" style="display:block;">
-                                {{form.patient_insurance_private_health_fund_name}}
+                            <div class="form-group" id="patient_insurance_private_health_fund" style="display:block;">
+                                {{form.patient_insurance_private_health_fund}}
                             </div>
                             <div class="form-group" id="patient_insurance_private_health_fund_number" style="display:none;">
                                 {{form.patient_insurance_private_health_fund_number}}

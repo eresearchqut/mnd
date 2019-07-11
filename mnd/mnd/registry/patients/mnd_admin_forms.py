@@ -5,16 +5,16 @@ from mnd.models import PatientInsurance, PrimaryCarer, PreferredContact
 class PatientInsuranceForm(forms.ModelForm):
     class Meta:
         model = PatientInsurance
-        fields = ('medicare_number', 'pension_number', 'private_health_fund_name', 'private_health_fund_number',
+        fields = ('medicare_number', 'pension_number', 'private_health_fund', 'private_health_fund_number',
                   'ndis_number', 'ndis_plan_manager', 'ndis_coordinator_first_name',
                   'ndis_coordinator_last_name', 'ndis_coordinator_phone')
 
     def _clean_fields(self):
-        health_fund_number_set = self.data.get('private_health_fund_name', '').strip() != ''
-        self.fields['private_health_fund_number'].required = health_fund_number_set
+        health_fund_number_set = self.data.get('private_health_fund', '').strip() != ''
+        self.fields['private_health_fund'].required = health_fund_number_set
         self.fields['pension_number'].required = not health_fund_number_set
         ndis_number_set = self.data.get('ndis_number', '').strip() != ''
-        self.fields['private_health_fund_name'].required = not ndis_number_set
+        self.fields['private_health_fund'].required = not ndis_number_set
         self.fields['private_health_fund_number'].required = not ndis_number_set
         ndis_coordinator_info = [
             'ndis_coordinator_first_name', 'ndis_coordinator_last_name', 'ndis_coordinator_phone'

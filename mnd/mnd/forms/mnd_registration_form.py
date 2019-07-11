@@ -1,5 +1,8 @@
 from collections import OrderedDict
 
+from django.forms import CharField
+from django.forms.widgets import  Select
+
 from django.utils.translation import gettext as _
 
 from rdrf.forms.registration_forms import PatientRegistrationForm
@@ -35,15 +38,18 @@ class MNDRegistrationForm(PatientRegistrationForm):
 
     })
 
+    patient_insurance_private_health_fund = CharField(required=True, widget=Select)
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for prefix, form in self.parent_forms.items():
             for name, value in form().fields.items():
-                self.fields[f"{prefix}_{name}"] = value
+                if name != 'private_health_fund':
+                    self.fields[f"{prefix}_{name}"] = value
         self.setup_fields()
 
     def _clean_fields(self):
-        if self.data.get('patient_insurance_health_fund_name', '').strip() != '':
+        if self.data.get('patient_insurance_health_fund', '').strip() != '':
             self.fields['patient_insurance_health_fund_number'].required = True
         if self.data.get('patient_insurance_ndis_number', '').strip() != '':
             self.fields['patient_insurance_ndis_plan_manager'].required = True
