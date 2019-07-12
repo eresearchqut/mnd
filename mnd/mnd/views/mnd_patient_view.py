@@ -1,41 +1,37 @@
-from django.forms.models import inlineformset_factory
 from django.utils.translation import ugettext as _
 
 from rdrf.views.patient_view import (
     PatientFormMixin, AddPatientView as ParentAddPatientView, PatientEditView as ParentEditPatientView
 )
 
-from registry.patients.models import Patient
 
-from ..models import PatientInsurance, PrimaryCarer, PreferredContact
 from ..registry.patients.mnd_admin_forms import PatientInsuranceForm, PrimaryCarerForm, PreferredContactForm
 
 import logging
 logger = logging.getLogger(__name__)
 
 
-def get_section(patient, model, form, section_name, section_prefix):
-    formset = inlineformset_factory(Patient,
-                                    model,
-                                    form=form,
-                                    min_num=1,
-                                    max_num=1,
-                                    extra=0,
-                                    can_delete=False,
-                                    validate_min=True,
-                                    validate_max=True,
-                                    fields="__all__")
+def get_section(form, section_name, section_prefix, instance):
 
-    result_form = formset(instance=patient, prefix=section_prefix)
-    section = (section_name, None)
-    return result_form, (section,)
+    instance = form(prefix=section_prefix, instance=instance)
+    section = (section_name, [f for f in instance.fields])
+    return instance, (section,)
 
 
-def get_formset(model, form, request, prefix, instance=None):
-    formset = inlineformset_factory(
-        Patient, model, form=form, fields="__all__"
-    )
-    return formset(request.POST, instance=instance, prefix=prefix)
+def get_form(form, request, prefix, instance=None):
+    return form(request.POST, prefix=prefix, instance=instance)
+
+
+def get_insurance_data(patient):
+    return patient.insurance_data if hasattr(patient, 'insurance_data') else None
+
+
+def get_primary_carer(patient):
+    return patient.primary_carer if hasattr(patient, 'primary_carer') else None
+
+
+def get_preferred_contact(patient):
+    return patient.preferred_contact if hasattr(patient, 'preferred_contact') else None
 
 
 class FormSectionMixin(PatientFormMixin):
@@ -66,22 +62,28 @@ class FormSectionMixin(PatientFormMixin):
         ]
 
         filtered_sections.extend([
-            get_section(patient, PatientInsurance, PatientInsuranceForm, _("Patient Insurance"), "patient_insurance"),
-            get_section(patient, PrimaryCarer, PrimaryCarerForm, _("Primary Carer"), "primary_carer"),
-            get_section(patient, PreferredContact, PreferredContactForm, _("Preferred Contact"), "preferred_contact")
+            get_section(
+                PatientInsuranceForm, _("Patient Insurance"), "patient_insurance",  get_insurance_data(patient)
+            ),
+            get_section(
+                PrimaryCarerForm, _("Primary Carer"), "primary_carer", get_primary_carer(patient)
+            ),
+            get_section(
+                PreferredContactForm, _("Preferred Contact"), "preferred_contact", get_preferred_contact(patient)
+            )
         ])
         return filtered_sections
 
     def get_forms(self, request, registry_model, user, instance=None):
         forms = super().get_forms(request, registry_model, user, instance)
         forms[self.PATIENT_INSURANCE_KEY] = (
-            get_formset(PatientInsurance, PatientInsuranceForm, request, "patient_insurance", instance)
+            get_form(PatientInsuranceForm, request, "patient_insurance", get_insurance_data(instance))
         )
         forms[self.PRIMARY_CARER_KEY] = (
-            get_formset(PrimaryCarer, PrimaryCarerForm, request, "primary_carer", instance)
+            get_form(PrimaryCarerForm, request, "primary_carer", get_primary_carer(instance))
         )
         forms[self.PREFERRED_CONTACT_KEY] = (
-            get_formset(PreferredContact, PreferredContactForm, request, "preferred_contact", instance)
+            get_form(PreferredContactForm, request, "preferred_contact", get_preferred_contact(instance))
         )
         return forms
 
@@ -89,13 +91,10 @@ class FormSectionMixin(PatientFormMixin):
         ret_val = super().all_forms_valid(forms)
         formset_keys = [self.PATIENT_INSURANCE_KEY, self.PRIMARY_CARER_KEY, self.PREFERRED_CONTACT_KEY]
         for key in formset_keys:
-            formset = forms[key]
-            formset.instance = self.object
-            formset_models = formset.save()
-            for model_instance in formset_models:
-                model_instance.patient = self.object
-                model_instance.save()
-                break
+            instance = forms[key].save(commit=False)
+            instance.patient = self.object
+            instance.save()
+
         return ret_val
 
 
