@@ -1,0 +1,122 @@
+<script language="JavaScript">
+
+    function showElement(selector) {
+        selector.css('display', 'block');
+        selector.parents('.form-group').css('display', 'block');
+    }
+
+    function hideElement(selector) {
+        selector.css('display', 'none');
+        selector.parents('.form-group').css('display', 'none');
+
+    }
+
+    function makeRequired(selector) {
+        selector.attr('required','');
+        var existing = selector.parents('.form-group').find('label').html();
+        selector.parents('.form-group')
+            .find('label')
+            .html(existing + '<span class="glyphicon glyphicon-asterisk" style="color: red;" aria-hidden="true">');
+    }
+
+    function removeRequired(selector) {
+        selector.removeAttr('required');
+        selector.parents('.form-group').find('label').find('span').remove();
+    }
+
+    function show(selector) {
+        showElement(selector);
+        makeRequired(selector);
+    }
+
+    function hide(selector) {
+        hideElement(selector);
+        removeRequired(selector);
+    }
+
+    function showSelectors(selectors) {
+        for (idx = 0; idx < selectors.length; idx ++) {
+            show(selectors[idx]);
+        }
+    }
+
+    function hideSelectors(selectors) {
+        for (idx = 0; idx < selectors.length; idx ++) {
+            hide(selectors[idx]);
+        }
+    }
+
+
+    $(document).ready(function() {
+
+        $("#id_preferred_contact-contact_method").change(function() {
+            var current_value = this.value;
+            var selectors = [
+                $("#id_preferred_contact-first_name"),
+                $("#id_preferred_contact-last_name"),
+                $("#id_preferred_contact-phone"),
+                $("#id_preferred_contact-email")
+            ];
+            switch (current_value) {
+                case "person": {
+                    showSelectors(selectors);
+                    break;
+                }
+                default: {
+                    hideSelectors(selectors);
+                    break;
+                }
+            }
+        });
+
+        $("#id_patient_insurance-private_health_fund").change(function() {
+            if (this.value == "") {
+                show($("#id_patient_insurance-pension_number"));
+                hide($("#id_patient_insurance-private_health_fund_number"));
+            } else {
+                hide($("#id_patient_insurance-pension_number"));
+                show($("#id_patient_insurance-private_health_fund_number"));
+            }
+        });
+
+        $("#id_patient_insurance-ndis_number").change(function() {
+            var selectors = [
+                $("#id_patient_insurance-private_health_fund"),
+                $("#id_patient_insurance_private_health_fund_number")
+            ];
+            if (this.value.trim() == "") {
+                showSelectors(selectors);
+            } else {
+                hideSelectors(selectors);
+            }
+        });
+
+        $("#id_primary_carer-relationship").change(function() {
+            if (this.value.trim() == "other") {
+                show($('#id_primary_carer-relationship_info'));
+            } else {
+                hide($('#id_primary_carer-relationship_info'));
+            }
+        });
+
+        $("#id_patient_insurance-ndis_plan_manager").change(function() {
+            var selectors = [
+                $("#id_patient_insurance-ndis_coordinator_first_name"),
+                $("#id_patient_insurance-ndis_coordinator_last_name"),
+                $("#id_patient_insurance-ndis_coordinator_phone")
+            ];
+            if (this.value.trim() == "other") {
+                showSelectors(selectors);
+            } else {
+                hideSelectors(selectors);
+            }
+        });
+
+        $("#id_preferred_contact-contact_method").trigger("change");
+        $("#id_patient_insurance-private_health_fund").trigger("change");
+        $("#id_patient_insurance-ndis_number").trigger("change");
+        $("#id_primary_carer-relationship").trigger("change");
+        $("#id_patient_insurance-ndis_plan_manager").trigger("change");
+
+    });
+</script>
