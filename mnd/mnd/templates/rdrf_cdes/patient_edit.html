@@ -1,6 +1,7 @@
 {% extends "rdrf_cdes/patient_edit.html" %}
 
 {% load i18n %}
+{% load static %}
 
 {% block sidebar %}
   {{ block.super }}
@@ -12,6 +13,11 @@
       </a>
     </div>
   </div>
+{% endblock %}
+
+{% block extrahead %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'js/patient_helpers.js' %}"></script>
 {% endblock %}
 
 {% block content %}

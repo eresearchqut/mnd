@@ -1,51 +1,17 @@
 <script language="JavaScript">
 
-    function showElement(selector) {
-        selector.css('display', 'block');
-        selector.parents('.form-group').css('display', 'block');
-    }
-
-    function hideElement(selector) {
-        selector.css('display', 'none');
-        selector.parents('.form-group').css('display', 'none');
-
-    }
-
-    function makeRequired(selector) {
-        selector.attr('required','');
+    function extraRequiredFn(selector) {
         var existing = selector.parents('.form-group').find('label').html();
-        selector.parents('.form-group')
-            .find('label')
-            .html(existing + '<span class="glyphicon glyphicon-asterisk" style="color: red;" aria-hidden="true">');
+        if (!existing.includes("glyphicon-asterisk")) {
+            selector.parents('.form-group')
+                .find('label')
+                .html(existing + '<span class="glyphicon glyphicon-asterisk" style="color: red;" aria-hidden="true">');
+        }
     }
 
-    function removeRequired(selector) {
-        selector.removeAttr('required');
+    function extraHideFn(selector) {
         selector.parents('.form-group').find('label').find('span').remove();
     }
-
-    function show(selector) {
-        showElement(selector);
-        makeRequired(selector);
-    }
-
-    function hide(selector) {
-        hideElement(selector);
-        removeRequired(selector);
-    }
-
-    function showSelectors(selectors) {
-        for (idx = 0; idx < selectors.length; idx ++) {
-            show(selectors[idx]);
-        }
-    }
-
-    function hideSelectors(selectors) {
-        for (idx = 0; idx < selectors.length; idx ++) {
-            hide(selectors[idx]);
-        }
-    }
-
 
     $(document).ready(function() {
 
@@ -59,11 +25,11 @@
             ];
             switch (current_value) {
                 case "person": {
-                    showSelectors(selectors);
+                    showSelectors(selectors, extraRequiredFn);
                     break;
                 }
                 default: {
-                    hideSelectors(selectors);
+                    hideSelectors(selectors, extraHideFn);
                     break;
                 }
             }
@@ -71,11 +37,11 @@
 
         $("#id_patient_insurance-private_health_fund").change(function() {
             if (this.value == "") {
-                show($("#id_patient_insurance-pension_number"));
-                hide($("#id_patient_insurance-private_health_fund_number"));
+                show($("#id_patient_insurance-pension_number"), extraRequiredFn);
+                hide($("#id_patient_insurance-private_health_fund_number"), extraHideFn);
             } else {
-                hide($("#id_patient_insurance-pension_number"));
-                show($("#id_patient_insurance-private_health_fund_number"));
+                hide($("#id_patient_insurance-pension_number"), extraHideFn);
+                show($("#id_patient_insurance-private_health_fund_number"), extraRequiredFn);
             }
         });
 
@@ -85,17 +51,17 @@
                 $("#id_patient_insurance_private_health_fund_number")
             ];
             if (this.value.trim() == "") {
-                showSelectors(selectors);
+                showSelectors(selectors, extraRequiredFn);
             } else {
-                hideSelectors(selectors);
+                hideSelectors(selectors, extraHideFn);
             }
         });
 
         $("#id_primary_carer-relationship").change(function() {
             if (this.value.trim() == "other") {
-                show($('#id_primary_carer-relationship_info'));
+                show($('#id_primary_carer-relationship_info'), extraRequiredFn);
             } else {
-                hide($('#id_primary_carer-relationship_info'));
+                hide($('#id_primary_carer-relationship_info'), extraHideFn);
             }
         });
 
@@ -106,9 +72,9 @@
                 $("#id_patient_insurance-ndis_coordinator_phone")
             ];
             if (this.value.trim() == "other") {
-                showSelectors(selectors);
+                showSelectors(selectors, extraRequiredFn);
             } else {
-                hideSelectors(selectors);
+                hideSelectors(selectors, extraHideFn);
             }
         });
 

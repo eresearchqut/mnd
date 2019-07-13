@@ -1,4 +1,5 @@
 from django import forms
+from django.forms.utils import ErrorDict
 from django.utils.translation import ugettext as _
 
 from mnd.models import PatientInsurance, PrimaryCarer, PreferredContact
@@ -8,6 +9,15 @@ class PrefixedModelForm(forms.ModelForm):
 
     def field_name(self, name):
         return f"{self.prefix}-{name}" if self.prefix else name
+
+    def clean(self):
+        prefix = self.prefix
+        ret_val = super().clean()
+        new_fields = ErrorDict()
+        for k, v in self.errors.items():
+            new_fields[f"{prefix}-{k}"] = v
+        self._errors = new_fields
+        return ret_val
 
 
 class PatientInsuranceForm(PrefixedModelForm):
@@ -49,7 +59,7 @@ class PrimaryCarerForm(PrefixedModelForm):
 
     def _clean_fields(self):
         required_relationship_info = self.data.get(self.field_name('relationship'), '').strip() == 'other'
-        self.fields[f'relationship_info'].required = required_relationship_info
+        self.fields['relationship_info'].required = required_relationship_info
         super()._clean_fields()
 
 

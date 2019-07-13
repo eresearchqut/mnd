@@ -4,6 +4,13 @@
 {% load countries %}
 {% load project_title %}
 {% load recaptcha_site_key %}
+{% load static %}
+
+{% block extrahead %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'js/patient_helpers.js' %}"></script>
+{% endblock %}
+
 
 {% block extra_js_init %}
 
@@ -11,7 +18,10 @@
     setStatesOnLoad("#id_country", "#id_state", "#patient_state_value");
     setUpStateOnCountryChange("#id_country", "#id_state");
 
-    function load_private_health_funds() {
+    function load_private_health_funds(currentValueSelector) {
+        if (typeof currentValueSelector === 'undefined') {
+            currentValueSelector = '';
+        }
         var target = $("#id_patient_insurance_private_health_fund");
         target.empty();
         target.append($('<option>', { value : "" }).text("Private Health Fund Name"));
@@ -20,7 +30,14 @@
             $.each( data.funds, function( key, val ) {
                 target.append($('<option>', { value : val.code }).text(val.name));
             });
+            if (currentValueSelector !== '') {
+                var current_value = $(currentValueSelector).val();
+                if (current_value !== '') {
+                    target.val(current_value);
+                }
+            }
         });
+
     }
 
     {% if not is_mobile %}
@@ -46,76 +63,75 @@
 
     $("#id_preferred_contact_contact_method").change(function() {
         var current_value = this.value;
+        var selectors = [
+            $("#id_preferred_contact_first_name"),
+            $("#id_preferred_contact_last_name"),
+            $("#id_preferred_contact_phone"),
+            $("#id_preferred_contact_email")
+        ];
         switch (current_value) {
             case "person": {
-                $("#preferred_contact_data").css('display', 'block');
-                $("#id_preferred_contact_first_name").attr('required','');
-                $("#id_preferred_contact_last_name").attr('required','');
-                $("#id_preferred_contact_phone").attr('required','');
-                $("#id_preferred_contact_email").attr('required','');
+                showSelectors(selectors);
                 break;
             }
-            default:
-                $("#preferred_contact_data").css('display', 'none');
-                $("#id_preferred_contact_first_name").removeAttr('required');
-                $("#id_preferred_contact_last_name").removeAttr('required');
-                $("#id_preferred_contact_phone").removeAttr('required');
-                $("#id_preferred_contact_email").removeAttr('required');
+            default: {
+                hideSelectors(selectors);
+                break;
+            }
         }
     });
 
     $("#id_patient_insurance_private_health_fund").change(function() {
         if (this.value == "") {
-            $("#patient_insurance_pension_number").css('display', 'block');
-            $("#patient_insurance_pension_number").attr('required','');
-            $("#patient_insurance_private_health_fund_number").css('display', 'none');
-            $("#id_patient_insurance_private_health_fund_number").removeAttr('required');
+            show($("#id_patient_insurance_pension_number"));
+            hide($("#id_patient_insurance_private_health_fund_number"));
         } else {
-            $("#patient_insurance_pension_number").css('display', 'none');
-            $("#patient_insurance_private_health_fund_number").css('display', 'block');
-            $("#patient_insurance_pension_number").removeAttr('required');
-            $("#id_patient_insurance_private_health_fund_number").attr('required', '');
+            hide($("#id_patient_insurance_pension_number"));
+            show($("#id_patient_insurance_private_health_fund_number"));
         }
     });
 
     $("#id_patient_insurance_ndis_number").change(function() {
+        var selectors = [
+            $("#id_patient_insurance_private_health_fund"),
+            $("#id_patient_insurance_private_health_fund_number")
+        ];
         if (this.value.trim() == "") {
-            $("#patient_insurance_private_health_fund").css('display', 'block');
-            $("#patient_insurance_private_health_fund_number").css('display', 'block');
-            $("#id_patient_insurance_private_health_fund_name").attr('required', '');
-            $("#id_patient_insurance_private_health_fund_number").attr('required', '');
-
+            showSelectors(selectors);
         } else {
-            $("#patient_insurance_private_health_fund").css('display', 'none');
-            $("#patient_insurance_private_health_fund_number").css('display', 'none');
-            $("#id_patient_insurance_private_health_fund_name").removeAttr('required');
-            $("#id_patient_insurance_private_health_fund_number").removeAttr('required');
+            hideSelectors(selectors);
         }
     });
 
     $("#id_primary_carer_relationship").change(function() {
         if (this.value.trim() == "other") {
-            $('#primary_carer_relationship_info').css('display', 'block');
+            show($('#id_primary_carer_relationship_info'));
         } else {
-            $('#primary_carer_relationship_info').css('display', 'none');
+            hide($('#id_primary_carer_relationship_info'));
         }
     });
 
     $("#id_patient_insurance_ndis_plan_manager").change(function() {
+        var selectors = [
+            $("#id_patient_insurance_ndis_coordinator_first_name"),
+            $("#id_patient_insurance_ndis_coordinator_last_name"),
+            $("#id_patient_insurance_ndis_coordinator_phone")
+        ];
         if (this.value.trim() == "other") {
-            $("#plan_manager_info").css('display', 'block');
-            $("#id_patient_insurance_ndis_coordinator_first_name").attr('required','');
-            $("#id_patient_insurance_ndis_coordinator_last_name").attr('required','');
-            $("#id_patient_insurance_ndis_coordinator_phone").attr('required','');
+            showSelectors(selectors);
         } else {
-            $("#plan_manager_info").css('display', 'none');
-            $("#id_patient_insurance_ndis_coordinator_first_name").removeAttr('required');
-            $("#id_patient_insurance_ndis_coordinator_last_name").removeAttr('required');
-            $("#id_patient_insurance_ndis_coordinator_phone").removeAttr('required');
+            hideSelectors(selectors);
         }
     });
 
-    $("#registration-submit").click(function() {
+    load_private_health_funds("#private_health_fund_value");
+    $("#id_preferred_contact_contact_method").trigger("change");
+    $("#id_patient_insurance_private_health_fund").trigger("change");
+    $("#id_patient_insurance_ndis_number").trigger("change");
+    $("#id_primary_carer_relationship").trigger("change");
+    $("#id_patient_insurance_ndis_plan_manager").trigger("change");
+
+     $("#registration-submit").click(function() {
         var registration_form = $("#registration-form");
         $("#patient-form").accordion("option", "active" ,0);
         $("#extra-info-form").accordion("option", "active" ,0);
@@ -131,12 +147,10 @@
                     msg.slideUp("slow")
                     }, 2000);
             });
-
             onValidationError();
         }
     });
 
-    load_private_health_funds();
 
 {% endblock %}
 
@@ -163,6 +177,7 @@
         <input type="hidden" name="registry_code" value="{{registry_code}}">
         <input id="id_email" name="email" type="hidden" />
         <input type="hidden" id="patient_state_value" value="{{form.state.value}}">
+        <input type="hidden" id="private_health_fund_value" value="{{form.patient_insurance_private_health_fund.value}}">
         <div class="row">
             <div class="col-md-6">
                 {% include "registration/registration_login_details.html" %}
@@ -179,19 +194,17 @@
                         <div class="form-group">
                             {{form.preferred_contact_contact_method}}
                         </div>
-                        <div id="preferred_contact_data" style="display:none;">
-                            <div class="form-group">
-                                {{form.preferred_contact_email}}
-                            </div>
-                            <div class="form-group">
-                                {{form.preferred_contact_first_name}}
-                            </div>
-                            <div class="form-group">
-                                {{form.preferred_contact_last_name}}
-                            </div>
-                            <div class="form-group">
-                                {{form.preferred_contact_phone}}
-                            </div>
+                        <div class="form-group">
+                            {{form.preferred_contact_email}}
+                        </div>
+                        <div class="form-group">
+                            {{form.preferred_contact_first_name}}
+                        </div>
+                        <div class="form-group">
+                            {{form.preferred_contact_last_name}}
+                        </div>
+                        <div class="form-group">
+                            {{form.preferred_contact_phone}}
                         </div>
                     </div>
                     </div>
@@ -201,13 +214,13 @@
                             <div class="form-group">
                                 {{form.patient_insurance_medicare_number}}
                             </div>
-                            <div class="form-group" id="patient_insurance_pension_number">
+                            <div class="form-group">
                                 {{form.patient_insurance_pension_number}}
                             </div>
-                            <div class="form-group" id="patient_insurance_private_health_fund" style="display:block;">
+                            <div class="form-group">
                                 {{form.patient_insurance_private_health_fund}}
                             </div>
-                            <div class="form-group" id="patient_insurance_private_health_fund_number" style="display:none;">
+                            <div class="form-group">
                                 {{form.patient_insurance_private_health_fund_number}}
                             </div>
                             <div class="form-group">
@@ -216,7 +229,7 @@
                             <div class="form-group">
                                 {{form.patient_insurance_ndis_plan_manager}}
                             </div>
-                            <div id="plan_manager_info" style="display:none">
+                            <div id="plan_manager_info">
                                 <div class="form-group">
                                     {{form.patient_insurance_ndis_coordinator_first_name}}
                                 </div>
@@ -241,7 +254,7 @@
                             <div class="form-group">
                                 {{form.primary_carer_relationship}}
                             </div>
-                            <div class="form-group" style="display:none" id="primary_carer_relationship_info">
+                            <div class="form-group">
                                 {{form.primary_carer_relationship_info}}
                             </div>
                             <div class="form-group">
