@@ -11,7 +11,6 @@
     <script type="text/javascript" src="{% static 'js/patient_helpers.js' %}"></script>
 {% endblock %}
 
-
 {% block extra_js_init %}
 
     $("#id_date_of_birth").datepicker(dateOptions);
@@ -37,8 +36,18 @@
                 }
             }
         });
-
     }
+
+    function extraRequiredFn(selector) {
+        if (selector.parent().find('span').length == 0) {
+            selector.before('<span style="color:red">*</span>')
+        }
+    }
+
+    function extraHideFn(selector) {
+       selector.parent().find('span').remove();
+    }
+
 
     {% if not is_mobile %}
         $("#extra-info-form").accordion({
@@ -71,11 +80,11 @@
         ];
         switch (current_value) {
             case "person": {
-                showSelectors(selectors);
+                showSelectors(selectors, extraRequiredFn);
                 break;
             }
             default: {
-                hideSelectors(selectors);
+                hideSelectors(selectors, extraHideFn);
                 break;
             }
         }
@@ -83,11 +92,11 @@
 
     $("#id_patient_insurance_private_health_fund").change(function() {
         if (this.value == "") {
-            show($("#id_patient_insurance_pension_number"));
-            hide($("#id_patient_insurance_private_health_fund_number"));
+            show($("#id_patient_insurance_pension_number"), extraRequiredFn);
+            hide($("#id_patient_insurance_private_health_fund_number"), extraHideFn);
         } else {
-            hide($("#id_patient_insurance_pension_number"));
-            show($("#id_patient_insurance_private_health_fund_number"));
+            hide($("#id_patient_insurance_pension_number"), extraHideFn);
+            show($("#id_patient_insurance_private_health_fund_number"), extraRequiredFn);
         }
     });
 
@@ -97,17 +106,17 @@
             $("#id_patient_insurance_private_health_fund_number")
         ];
         if (this.value.trim() == "") {
-            showSelectors(selectors);
+            showSelectors(selectors, extraRequiredFn);
         } else {
-            hideSelectors(selectors);
+            hideSelectors(selectors, extraHideFn);
         }
     });
 
     $("#id_primary_carer_relationship").change(function() {
         if (this.value.trim() == "other") {
-            show($('#id_primary_carer_relationship_info'));
+            show($('#id_primary_carer_relationship_info'), extraRequiredFn);
         } else {
-            hide($('#id_primary_carer_relationship_info'));
+            hide($('#id_primary_carer_relationship_info'), extraHideFn);
         }
     });
 
@@ -118,13 +127,16 @@
             $("#id_patient_insurance_ndis_coordinator_phone")
         ];
         if (this.value.trim() == "other") {
-            showSelectors(selectors);
+            showSelectors(selectors, extraRequiredFn);
         } else {
-            hideSelectors(selectors);
+            hideSelectors(selectors, extraHideFn);
         }
     });
 
     load_private_health_funds("#private_health_fund_value");
+
+    $('input,textarea,select').filter('[required]').before('<span style="color:red">*</span>');
+
     $("#id_preferred_contact_contact_method").trigger("change");
     $("#id_patient_insurance_private_health_fund").trigger("change");
     $("#id_patient_insurance_ndis_number").trigger("change");
