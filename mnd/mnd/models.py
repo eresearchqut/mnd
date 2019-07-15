@@ -64,9 +64,9 @@ class PreferredContact(models.Model):
         ('', _("Preferred contact method")),
         ('phone', _("Phone")),
         ('sms', _("SMS")),
-        ('person', _("Nominated person below")),
         ('email', _("Email")),
-        ('primary_carer', _("Primary Carer"))
+        ('primary_carer', _("Primary Carer")),
+        ('person', _("Nominated person below")),
     ]
 
     patient = models.OneToOneField(Patient, related_name='preferred_contact', on_delete=models.CASCADE)

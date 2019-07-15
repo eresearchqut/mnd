@@ -23,15 +23,15 @@ def get_form(form, request, prefix, instance=None):
 
 
 def get_insurance_data(patient):
-    return patient.insurance_data if hasattr(patient, 'insurance_data') else None
+    return getattr(patient, 'insurance_data', None)
 
 
 def get_primary_carer(patient):
-    return patient.primary_carer if hasattr(patient, 'primary_carer') else None
+    return getattr(patient, 'primary_carer', None)
 
 
 def get_preferred_contact(patient):
-    return patient.preferred_contact if hasattr(patient, 'preferred_contact') else None
+    return getattr(patient, 'preferred_contact', None)
 
 
 class FormSectionMixin(PatientFormMixin):

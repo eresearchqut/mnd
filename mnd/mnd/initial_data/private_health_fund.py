@@ -1,4 +1,4 @@
-'''A large list of genes.'''
+'''Load the list of private health funds and writes in into the database.'''
 
 import os
 from mnd.models import PrivateHealthFund

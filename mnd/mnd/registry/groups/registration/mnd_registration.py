@@ -31,7 +31,6 @@ class MNDRegistration(PatientRegistration):
         address.save()
         logger.debug("Registration process - created patient address")
 
-        self.form.cleaned_data
         self._create_preferred_contact(patient)
         self._create_primary_carer(patient)
         self._create_insurance_data(patient)
