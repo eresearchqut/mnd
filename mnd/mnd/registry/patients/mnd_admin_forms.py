@@ -46,7 +46,7 @@ class PatientInsuranceForm(PrefixedModelForm):
         ]
         coordinator_required_data = self.data.get(self.field_name('ndis_plan_manager'), '') == 'other'
         for f in ndis_coordinator_info:
-            self.fields[f].required = coordinator_required_data
+            self.fields[f].required = coordinator_required_data and ndis_number_set
         super()._clean_fields()
 
 

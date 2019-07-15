@@ -98,6 +98,9 @@
     $("#id_patient_insurance_ndis_number").change(function() {
         if (this.value == "") {
             hide($("#id_patient_insurance_ndis_plan_manager"), extraHideFn);
+            hide($("#id_patient_insurance-ndis_coordinator_first_name"), extraHideFn);
+            hide($("#id_patient_insurance-ndis_coordinator_last_name"), extraHideFn);,
+            hide($("#id_patient_insurance-ndis_coordinator_phone"), extraHideFn);
         } else {
             show($("#id_patient_insurance_ndis_plan_manager"), extraRequiredFn);
         }

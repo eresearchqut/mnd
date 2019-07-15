@@ -51,11 +51,11 @@ class MNDRegistrationForm(PatientRegistrationForm):
     def _clean_fields(self):
         if self.data.get('patient_insurance_health_fund', '') != '':
             self.fields['patient_insurance_health_fund_number'].required = True
-        if self.data.get('patient_insurance_ndis_number', '') != '':
-            self.fields['patient_insurance_ndis_plan_manager'].required = True
-            if self.data.get('patient_insurance_ndis_plan_manager', '') == 'other':
-                for f in ['patient_insurance_ndis_coordinator_first_name',
-                          'patient_insurance_ndis_coordinator_surname',
-                          'patient_insurance_ndis_coordinator_phone']:
-                    self.fields[f].required = True
+        ndis_number_set = self.data.get('patient_insurance_ndis_number', '') != ''
+        self.fields['patient_insurance_ndis_plan_manager'].required = ndis_number_set
+        if self.data.get('patient_insurance_ndis_plan_manager', '') == 'other':
+            for f in ['patient_insurance_ndis_coordinator_first_name',
+                      'patient_insurance_ndis_coordinator_surname',
+                      'patient_insurance_ndis_coordinator_phone']:
+                self.fields[f].required = ndis_number_set
         super()._clean_fields()
