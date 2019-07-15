@@ -11,11 +11,14 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-def get_section(form, section_name, section_prefix, instance):
+def get_section(form, section_name, section_prefix, instance, request):
+    if request.POST:
+        form_instance = form(data=request.POST, prefix=section_prefix)
+    else:
+        form_instance = form(prefix=section_prefix, instance=instance)
 
-    instance = form(prefix=section_prefix, instance=instance)
-    section = (section_name, [f for f in instance.fields])
-    return instance, (section,)
+    section = (section_name, [f for f in form_instance.fields])
+    return form_instance, (section,)
 
 
 def get_form(form, request, prefix, instance=None):
@@ -45,14 +48,14 @@ class FormSectionMixin(PatientFormMixin):
         "maiden_name", "umrn", "place_of_birth", "date_of_migration", "country_of_birth", "ethnic_origin",
     ]
 
-    def get_form_sections(self, user, patient, registry, registry_code, patient_form,
+    def get_form_sections(self, user, request, patient, registry, registry_code, patient_form,
                           patient_address_form, patient_doctor_form, patient_relative_form):
 
         def filter_fields(fields):
             return [f for f in fields if f not in self.EXCLUDED_FIELDS] if fields else None
 
         form_sections = super().get_form_sections(
-            user, patient, registry, registry_code, patient_form,
+            user, request, patient, registry, registry_code, patient_form,
             patient_address_form, patient_doctor_form, patient_relative_form
         )
 
@@ -63,13 +66,13 @@ class FormSectionMixin(PatientFormMixin):
 
         filtered_sections.extend([
             get_section(
-                PatientInsuranceForm, _("Patient Insurance"), "patient_insurance",  get_insurance_data(patient)
+                PatientInsuranceForm, _("Patient Insurance"), "patient_insurance",  get_insurance_data(patient), request
             ),
             get_section(
-                PrimaryCarerForm, _("Primary Carer"), "primary_carer", get_primary_carer(patient)
+                PrimaryCarerForm, _("Primary Carer"), "primary_carer", get_primary_carer(patient), request
             ),
             get_section(
-                PreferredContactForm, _("Preferred Contact"), "preferred_contact", get_preferred_contact(patient)
+                PreferredContactForm, _("Preferred Contact"), "preferred_contact", get_preferred_contact(patient), request
             )
         ])
         return filtered_sections
