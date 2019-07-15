@@ -41,9 +41,9 @@
 
         $("#id_patient_insurance-ndis_number").change(function() {
             if (this.value == "") {
-                show($("#id_patient_insurance-ndis_plan_manager"), extraRequiredFn);
-            } else {
                 hide($("#id_patient_insurance-ndis_plan_manager"), extraHideFn);
+            } else {
+                show($("#id_patient_insurance-ndis_plan_manager"), extraRequiredFn);
             }
         });
 
