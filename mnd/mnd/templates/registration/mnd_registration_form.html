@@ -78,15 +78,10 @@
             $("#id_preferred_contact_phone"),
             $("#id_preferred_contact_email")
         ];
-        switch (current_value) {
-            case "person": {
-                showSelectors(selectors, extraRequiredFn);
-                break;
-            }
-            default: {
-                hideSelectors(selectors, extraHideFn);
-                break;
-            }
+        if (this.value == "person") {
+            showSelectors(selectors, extraRequiredFn);
+        } else {
+            hideSelectors(selectors, extraHideFn);
         }
     });
 
@@ -101,19 +96,15 @@
     });
 
     $("#id_patient_insurance_ndis_number").change(function() {
-        var selectors = [
-            $("#id_patient_insurance_private_health_fund"),
-            $("#id_patient_insurance_private_health_fund_number")
-        ];
-        if (this.value.trim() == "") {
-            showSelectors(selectors, extraRequiredFn);
+        if (this.value == "") {
+            show($("#id_patient_insurance_ndis_plan_manager"), extraRequiredFn);
         } else {
-            hideSelectors(selectors, extraHideFn);
+            hide($("#id_patient_insurance_ndis_plan_manager"), extraHideFn);
         }
     });
 
     $("#id_primary_carer_relationship").change(function() {
-        if (this.value.trim() == "other") {
+        if (this.value == "other") {
             show($('#id_primary_carer_relationship_info'), extraRequiredFn);
         } else {
             hide($('#id_primary_carer_relationship_info'), extraHideFn);
@@ -126,7 +117,7 @@
             $("#id_patient_insurance_ndis_coordinator_last_name"),
             $("#id_patient_insurance_ndis_coordinator_phone")
         ];
-        if (this.value.trim() == "other") {
+        if (this.value == "other") {
             showSelectors(selectors, extraRequiredFn);
         } else {
             hideSelectors(selectors, extraHideFn);
@@ -135,7 +126,12 @@
 
     load_private_health_funds("#private_health_fund_value");
 
-    $('input,textarea,select').filter('[required]').before('<span style="color:red">*</span>');
+    $('input,textarea,select').filter('[required]')
+        .not(function() {
+            return ['id_gender_0', 'id_gender_1','id_gender_2'].includes(this.id);
+        })
+        .before('<span style="color:red">*</span>');
+    $('fieldset').before('<span style="color:red">*</span>');
 
     $("#id_preferred_contact_contact_method").trigger("change");
     $("#id_patient_insurance_private_health_fund").trigger("change");
