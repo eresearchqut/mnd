@@ -36,15 +36,15 @@ class PatientInsuranceForm(PrefixedModelForm):
 
     def _clean_fields(self):
 
-        health_fund_number_set = self.data.get(self.field_name('private_health_fund'), '').strip() != ''
+        health_fund_number_set = self.data.get(self.field_name('private_health_fund'), '') != ''
         self.fields['private_health_fund'].required = health_fund_number_set
         self.fields['pension_number'].required = not health_fund_number_set
-        ndis_number_set = self.data.get(self.field_name('ndis_number'), '').strip() != ''
+        ndis_number_set = self.data.get(self.field_name('ndis_number'), '') != ''
         self.fields['ndis_plan_manager'].required = ndis_number_set
         ndis_coordinator_info = [
             'ndis_coordinator_first_name', 'ndis_coordinator_last_name', 'ndis_coordinator_phone'
         ]
-        coordinator_required_data = self.data.get(self.field_name('ndis_plan_manager'), '').strip() == 'other'
+        coordinator_required_data = self.data.get(self.field_name('ndis_plan_manager'), '') == 'other'
         for f in ndis_coordinator_info:
             self.fields[f].required = coordinator_required_data
         super()._clean_fields()
@@ -57,7 +57,7 @@ class PrimaryCarerForm(PrefixedModelForm):
         fields = ('first_name', 'last_name', 'phone', 'email', 'relationship', 'relationship_info')
 
     def _clean_fields(self):
-        required_relationship_info = self.data.get(self.field_name('relationship'), '').strip() == 'other'
+        required_relationship_info = self.data.get(self.field_name('relationship'), '') == 'other'
         self.fields['relationship_info'].required = required_relationship_info
         super()._clean_fields()
 
@@ -68,7 +68,7 @@ class PreferredContactForm(PrefixedModelForm):
         fields = ('first_name', 'last_name', 'phone', 'email', 'contact_method')
 
     def _clean_fields(self):
-        required_info = self.data.get(self.field_name('contact_method'), '').strip() == 'person'
+        required_info = self.data.get(self.field_name('contact_method'), '') == 'person'
         if required_info:
             required_fields = ['first_name', 'last_name', 'phone', 'email']
             for f in required_fields:

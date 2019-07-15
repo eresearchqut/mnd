@@ -59,7 +59,7 @@ class MNDRegistration(PatientRegistration):
             ndis_coordinator_last_name=form_data["patient_insurance_ndis_coordinator_last_name"],
             ndis_coordinator_phone=form_data["patient_insurance_ndis_coordinator_phone"]
         )
-        if health_fund_code and health_fund_code.strip() != "":
+        if health_fund_code and health_fund_code != "":
             patient_insurance.private_health_fund = PrivateHealthFund.objects.get(code=health_fund_code)
             patient_insurance.save()
 
