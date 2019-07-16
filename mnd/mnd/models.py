@@ -24,10 +24,10 @@ class PatientInsurance(models.Model):
     ]
 
     patient = models.OneToOneField(Patient, related_name='insurance_data', on_delete=models.CASCADE)
-    medicare_number = models.BigIntegerField(null=True, blank=True)
-    pension_number = models.BigIntegerField(null=True, blank=True)
+    medicare_number = models.CharField(max_length=30, null=True, blank=True)
+    pension_number = models.CharField(max_length=30, null=True, blank=True)
     private_health_fund = models.ForeignKey(PrivateHealthFund, null=True, blank=True, on_delete=models.CASCADE)
-    private_health_fund_number = models.BigIntegerField(null=True, blank=True)
+    private_health_fund_number = models.CharField(max_length=30, null=True, blank=True)
     ndis_number = models.CharField(max_length=30, null=True, blank=True)
     ndis_plan_manager = models.CharField(choices=PLAN_MANAGER_CHOICES, max_length=30)
     ndis_coordinator_first_name = models.CharField(max_length=30, null=True, blank=True)
