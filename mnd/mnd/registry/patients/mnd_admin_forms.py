@@ -28,7 +28,6 @@ class PatientInsuranceForm(PrefixedModelForm):
         health_fund_set = self.data.get(self.field_name('private_health_fund'), '') != ''
         self.fields['private_health_fund'].required = health_fund_set
         self.fields['private_health_fund_number'].required = health_fund_set
-        self.fields['pension_number'].required = not health_fund_set
         ndis_number_set = self.data.get(self.field_name('ndis_number'), '') != ''
         self.fields['ndis_plan_manager'].required = ndis_number_set
         ndis_coordinator_info = [

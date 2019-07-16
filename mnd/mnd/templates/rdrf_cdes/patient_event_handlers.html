@@ -31,10 +31,8 @@
 
         $("#id_patient_insurance-private_health_fund").change(function() {
             if (this.value == "") {
-                show($("#id_patient_insurance-pension_number"), extraRequiredFn);
                 hide($("#id_patient_insurance-private_health_fund_number"), extraHideFn);
             } else {
-                hide($("#id_patient_insurance-pension_number"), extraHideFn);
                 show($("#id_patient_insurance-private_health_fund_number"), extraRequiredFn);
             }
         });

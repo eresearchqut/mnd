@@ -38,19 +38,19 @@ class MNDRegistrationForm(PatientRegistrationForm):
 
     })
 
-    patient_insurance_private_health_fund = CharField(required=True, widget=Select)
+    patient_insurance_private_health_fund = CharField(widget=Select)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for prefix, form in self.parent_forms.items():
             for name, value in form().fields.items():
-                if name != 'private_health_fund':
-                    self.fields[f"{prefix}_{name}"] = value
+                self.fields[f"{prefix}_{name}"] = value
         self.setup_fields()
 
     def _clean_fields(self):
-        if self.data.get('patient_insurance_health_fund', '') != '':
-            self.fields['patient_insurance_health_fund_number'].required = True
+        health_fund_set = self.data.get('patient_insurance_private_health_fund', '') != ''
+        self.fields['patient_insurance_private_health_fund_number'].required = health_fund_set
+
         ndis_number_set = self.data.get('patient_insurance_ndis_number', '') != ''
         self.fields['patient_insurance_ndis_plan_manager'].required = ndis_number_set
         if self.data.get('patient_insurance_ndis_plan_manager', '') == 'other':
