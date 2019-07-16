@@ -35,10 +35,10 @@ class PatientInsuranceForm(PrefixedModelForm):
         }
 
     def _clean_fields(self):
-
-        health_fund_number_set = self.data.get(self.field_name('private_health_fund'), '') != ''
-        self.fields['private_health_fund'].required = health_fund_number_set
-        self.fields['pension_number'].required = not health_fund_number_set
+        health_fund_set = self.data.get(self.field_name('private_health_fund'), '') != ''
+        self.fields['private_health_fund'].required = health_fund_set
+        self.fields['private_health_fund_number'].required = health_fund_set
+        self.fields['pension_number'].required = not health_fund_set
         ndis_number_set = self.data.get(self.field_name('ndis_number'), '') != ''
         self.fields['ndis_plan_manager'].required = ndis_number_set
         ndis_coordinator_info = [
@@ -65,7 +65,7 @@ class PrimaryCarerForm(PrefixedModelForm):
 class PreferredContactForm(PrefixedModelForm):
     class Meta:
         model = PreferredContact
-        fields = ('first_name', 'last_name', 'phone', 'email', 'contact_method')
+        fields = ('contact_method', 'first_name', 'last_name', 'phone', 'email')
 
     def _clean_fields(self):
         required_info = self.data.get(self.field_name('contact_method'), '') == 'person'

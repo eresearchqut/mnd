@@ -43,7 +43,7 @@ class FormSectionMixin(PatientFormMixin):
     PRIMARY_CARER_KEY = "primary_carer_form"
     PREFERRED_CONTACT_KEY = "preferred_contact_form"
 
-    EXCLUDED_SECTIONS = [_("Next of Kin"), _("Patient Doctor")]
+    EXCLUDED_SECTIONS = [_("Next of Kin")]
     EXCLUDED_FIELDS = [
         "maiden_name", "umrn", "place_of_birth", "date_of_migration", "country_of_birth", "ethnic_origin",
     ]
