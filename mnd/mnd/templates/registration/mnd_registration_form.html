@@ -26,6 +26,7 @@
     $("#id_date_of_birth").datepicker(dateOptions);
     setStatesOnLoad("#id_country", "#id_state", "#patient_state_value");
     setUpStateOnCountryChange("#id_country", "#id_state");
+    $("#id_state").attr("required", "");
 
     function load_private_health_funds(currentValueSelector) {
         if (typeof currentValueSelector === 'undefined') {
