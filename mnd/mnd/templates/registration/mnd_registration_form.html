@@ -41,9 +41,7 @@
             });
             if (currentValueSelector !== '') {
                 var current_value = $(currentValueSelector).val();
-                if (current_value !== '') {
-                    target.val(current_value);
-                }
+                target.val(current_value);
             }
         });
     }
@@ -179,8 +177,8 @@
         {% csrf_token %}
         <input type="hidden" name="registry_code" value="{{registry_code}}">
         <input id="id_email" name="email" type="hidden" />
-        <input type="hidden" id="patient_state_value" value="{{form.state.value}}">
-        <input type="hidden" id="private_health_fund_value" value="{{form.patient_insurance_private_health_fund.value}}">
+        <input type="hidden" id="patient_state_value" value='{{form.state.value|default_if_none:"" }}'>
+        <input type="hidden" id="private_health_fund_value" value='{{form.patient_insurance_private_health_fund.value|default_if_none:"" }}'>
         <div class="row">
             <div class="col-md-6">
                 {% include "registration/registration_login_details.html" %}
