@@ -9,6 +9,16 @@
 {% block extrahead %}
     {{ block.super }}
     <script type="text/javascript" src="{% static 'js/patient_helpers.js' %}"></script>
+
+    <style>
+        :required  {
+            background: url({% static 'images/red-asterisk-16.png' %}) no-repeat;
+            background-size: 8px;
+            background-position:right top;
+            background-clip: padding-box;
+            background-origin: content-box;
+        }
+    </style>
 {% endblock %}
 
 {% block extra_js_init %}
@@ -37,17 +47,6 @@
             }
         });
     }
-
-    function extraRequiredFn(selector) {
-        if (selector.parent().find('span').length == 0) {
-            selector.before('<span style="color:red">*</span>')
-        }
-    }
-
-    function extraHideFn(selector) {
-       selector.parent().find('span').remove();
-    }
-
 
     {% if not is_mobile %}
         $("#extra-info-form").accordion({
@@ -79,36 +78,36 @@
             $("#id_preferred_contact_email")
         ];
         if (this.value == "person") {
-            showSelectors(selectors, extraRequiredFn);
+            showSelectors(selectors);
         } else {
-            hideSelectors(selectors, extraHideFn);
+            hideSelectors(selectors);
         }
     });
 
     $("#id_patient_insurance_private_health_fund").change(function() {
         if (this.value == "") {
-            hide($("#id_patient_insurance_private_health_fund_number"), extraHideFn);
+            hide($("#id_patient_insurance_private_health_fund_number"));
         } else {
-            show($("#id_patient_insurance_private_health_fund_number"), extraRequiredFn);
+            show($("#id_patient_insurance_private_health_fund_number"));
         }
     });
 
     $("#id_patient_insurance_ndis_number").change(function() {
         if (this.value == "") {
-            hide($("#id_patient_insurance_ndis_plan_manager"), extraHideFn);
-            hide($("#id_patient_insurance-ndis_coordinator_first_name"), extraHideFn);
-            hide($("#id_patient_insurance-ndis_coordinator_last_name"), extraHideFn);
-            hide($("#id_patient_insurance-ndis_coordinator_phone"), extraHideFn);
+            hide($("#id_patient_insurance_ndis_plan_manager"));
+            hide($("#id_patient_insurance-ndis_coordinator_first_name"));
+            hide($("#id_patient_insurance-ndis_coordinator_last_name"));
+            hide($("#id_patient_insurance-ndis_coordinator_phone"));
         } else {
-            show($("#id_patient_insurance_ndis_plan_manager"), extraRequiredFn);
+            show($("#id_patient_insurance_ndis_plan_manager"));
         }
     });
 
     $("#id_primary_carer_relationship").change(function() {
         if (this.value == "other") {
-            show($('#id_primary_carer_relationship_info'), extraRequiredFn);
+            show($('#id_primary_carer_relationship_info'));
         } else {
-            hide($('#id_primary_carer_relationship_info'), extraHideFn);
+            hide($('#id_primary_carer_relationship_info'));
         }
     });
 
@@ -119,19 +118,14 @@
             $("#id_patient_insurance_ndis_coordinator_phone")
         ];
         if (this.value == "other") {
-            showSelectors(selectors, extraRequiredFn);
+            showSelectors(selectors);
         } else {
-            hideSelectors(selectors, extraHideFn);
+            hideSelectors(selectors);
         }
     });
 
     load_private_health_funds("#private_health_fund_value");
 
-    $('input,textarea,select').filter('[required]')
-        .not(function() {
-            return ['id_gender_0', 'id_gender_1','id_gender_2'].includes(this.id);
-        })
-        .before('<span style="color:red">*</span>');
     $('fieldset').before('<span style="color:red">*</span>');
 
     $("#id_preferred_contact_contact_method").trigger("change");
