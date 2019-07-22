@@ -77,6 +77,9 @@ RUN addgroup --gid 1000 django \
   && chown django:django /data \
   && chown django:django /app
 
+# https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=863199
+RUN mkdir -p /usr/share/man/man1
+
 RUN apt-get update && apt-get install -y --no-install-recommends \
   # Base
   # TODO check if requirements are needed
