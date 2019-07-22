@@ -1,0 +1,14 @@
+{% extends "rdrf_cdes/generic_patient.html" %}
+
+{% load i18n %}
+{% load static %}
+
+{% block extrahead %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'js/patient_helpers.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    {% include "rdrf_cdes/patient_event_handlers.html" %}
+    {{block.super}}
+{% endblock %}

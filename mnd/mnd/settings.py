@@ -25,7 +25,7 @@ PROJECT_TITLE_LINK = "login_router"
 
 VERSION = env.get('app_version', '%s (mnd)' % mnd.VERSION)
 
-# TODO replace
-REGISTRATION_CLASS = "mnd.patient_registration.dummy_registration.PatientRegistration"
-
 PDF_TEMPLATES_PATH = f"{os.path.dirname(os.path.dirname(os.path.abspath(__file__)))}/mnd/templates/pdf_export"
+
+REGISTRATION_FORM = 'mnd.forms.mnd_registration_form.MNDRegistrationForm'
+REGISTRATION_CLASS = 'mnd.registry.groups.registration.mnd_registration.MNDRegistration'

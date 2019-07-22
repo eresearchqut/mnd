@@ -1,0 +1,79 @@
+<script language="JavaScript">
+
+    function extraRequiredFn(selector) {
+        var existing = selector.parents('.form-group').find('label').html();
+        if (!existing.includes("glyphicon-asterisk")) {
+            selector.parents('.form-group')
+                .find('label')
+                .html(existing + '<span class="glyphicon glyphicon-asterisk" style="color: red;" aria-hidden="true">');
+        }
+    }
+
+    function extraHideFn(selector) {
+        selector.parents('.form-group').find('label').find('span').remove();
+    }
+
+    $(document).ready(function() {
+
+        $("#id_preferred_contact-contact_method").change(function() {
+            var selectors = [
+                $("#id_preferred_contact-first_name"),
+                $("#id_preferred_contact-last_name"),
+                $("#id_preferred_contact-phone"),
+                $("#id_preferred_contact-email")
+            ];
+            if (this.value == "person") {
+                showSelectors(selectors, extraRequiredFn);
+            } else {
+                hideSelectors(selectors, extraHideFn);
+            }
+        });
+
+        $("#id_patient_insurance-private_health_fund").change(function() {
+            if (this.value == "") {
+                hide($("#id_patient_insurance-private_health_fund_number"), extraHideFn);
+            } else {
+                show($("#id_patient_insurance-private_health_fund_number"), extraRequiredFn);
+            }
+        });
+
+        $("#id_patient_insurance-ndis_number").change(function() {
+            if (this.value == "") {
+                hide($("#id_patient_insurance-ndis_plan_manager"), extraHideFn);
+                hide($("#id_patient_insurance-ndis_coordinator_first_name"), extraHideFn);
+                hide($("#id_patient_insurance-ndis_coordinator_last_name"), extraHideFn);
+                hide($("#id_patient_insurance-ndis_coordinator_phone"), extraHideFn);
+            } else {
+                show($("#id_patient_insurance-ndis_plan_manager"), extraRequiredFn);
+            }
+        });
+
+        $("#id_primary_carer-relationship").change(function() {
+            if (this.value.trim() == "other") {
+                show($('#id_primary_carer-relationship_info'), extraRequiredFn);
+            } else {
+                hide($('#id_primary_carer-relationship_info'), extraHideFn);
+            }
+        });
+
+        $("#id_patient_insurance-ndis_plan_manager").change(function() {
+            var selectors = [
+                $("#id_patient_insurance-ndis_coordinator_first_name"),
+                $("#id_patient_insurance-ndis_coordinator_last_name"),
+                $("#id_patient_insurance-ndis_coordinator_phone")
+            ];
+            if (this.value == "other") {
+                showSelectors(selectors, extraRequiredFn);
+            } else {
+                hideSelectors(selectors, extraHideFn);
+            }
+        });
+
+        $("#id_preferred_contact-contact_method").trigger("change");
+        $("#id_patient_insurance-private_health_fund").trigger("change");
+        $("#id_patient_insurance-ndis_number").trigger("change");
+        $("#id_primary_carer-relationship").trigger("change");
+        $("#id_patient_insurance-ndis_plan_manager").trigger("change");
+
+    });
+</script>
