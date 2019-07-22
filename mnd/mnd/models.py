@@ -75,8 +75,3 @@ class PreferredContact(models.Model):
     phone = models.CharField(max_length=30, null=True, blank=True)
     email = models.CharField(max_length=30, null=True, blank=True)
     contact_method = models.CharField(choices=CONTACT_METHOD_CHOICES, max_length=30)
-
-
-
-
-

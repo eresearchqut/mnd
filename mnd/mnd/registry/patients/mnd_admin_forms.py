@@ -63,4 +63,3 @@ class PreferredContactForm(PrefixedModelForm):
             for f in required_fields:
                 self.fields[f].required = True
         super()._clean_fields()
-

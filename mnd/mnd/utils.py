@@ -3,6 +3,7 @@ import os
 
 from django.utils.translation import gettext as _
 
+
 def load_insurers_list():
     current_dir = os.path.dirname(os.path.abspath(__file__))
     with open(f"{current_dir}/fixtures/insurers.json") as json_file:

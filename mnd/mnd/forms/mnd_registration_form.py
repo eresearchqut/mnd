@@ -1,7 +1,7 @@
 from collections import OrderedDict
 
 from django.forms import CharField
-from django.forms.widgets import  Select
+from django.forms.widgets import Select
 
 from django.utils.translation import gettext as _
 

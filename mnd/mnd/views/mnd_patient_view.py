@@ -66,7 +66,7 @@ class FormSectionMixin(PatientFormMixin):
 
         filtered_sections.extend([
             get_section(
-                PatientInsuranceForm, _("Patient Insurance"), "patient_insurance",  get_insurance_data(patient), request
+                PatientInsuranceForm, _("Patient Insurance"), "patient_insurance", get_insurance_data(patient), request
             ),
             get_section(
                 PrimaryCarerForm, _("Primary Carer"), "primary_carer", get_primary_carer(patient), request
