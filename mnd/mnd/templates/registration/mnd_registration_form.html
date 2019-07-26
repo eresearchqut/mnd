@@ -9,16 +9,6 @@
 {% block extrahead %}
     {{ block.super }}
     <script type="text/javascript" src="{% static 'js/patient_helpers.js' %}"></script>
-
-    <style>
-        :required  {
-            background: url({% static 'images/red-asterisk-16.png' %}) no-repeat;
-            background-size: 8px;
-            background-position:right top;
-            background-clip: padding-box;
-            background-origin: content-box;
-        }
-    </style>
 {% endblock %}
 
 {% block extra_js_init %}
@@ -123,8 +113,6 @@
     });
 
     load_private_health_funds("#private_health_fund_value");
-
-    $('fieldset').before('<span style="color:red">*</span>');
 
     $("#id_preferred_contact_contact_method").trigger("change");
     $("#id_patient_insurance_private_health_fund").trigger("change");
