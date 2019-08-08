@@ -43,28 +43,15 @@ class FormSectionMixin(PatientFormMixin):
     PRIMARY_CARER_KEY = "primary_carer_form"
     PREFERRED_CONTACT_KEY = "preferred_contact_form"
 
-    EXCLUDED_SECTIONS = [_("Next of Kin")]
-    EXCLUDED_FIELDS = [
-        "maiden_name", "umrn", "place_of_birth", "date_of_migration", "country_of_birth", "ethnic_origin",
-    ]
-
     def get_form_sections(self, user, request, patient, registry, registry_code, patient_form,
                           patient_address_form, patient_doctor_form, patient_relative_form):
-
-        def filter_fields(fields):
-            return [f for f in fields if f not in self.EXCLUDED_FIELDS] if fields else None
 
         form_sections = super().get_form_sections(
             user, request, patient, registry, registry_code, patient_form,
             patient_address_form, patient_doctor_form, patient_relative_form
         )
 
-        filtered_sections = [
-            (result_form, ((section_name, filter_fields(fields)),)) for result_form, ((section_name, fields),)
-            in form_sections if section_name not in self.EXCLUDED_SECTIONS
-        ]
-
-        filtered_sections.extend([
+        form_sections.extend([
             get_section(
                 PatientInsuranceForm, _("Patient Insurance"), "patient_insurance", get_insurance_data(patient), request
             ),
@@ -75,7 +62,7 @@ class FormSectionMixin(PatientFormMixin):
                 PreferredContactForm, _("Preferred Contact"), "preferred_contact", get_preferred_contact(patient), request
             )
         ])
-        return filtered_sections
+        return form_sections
 
     def get_forms(self, request, registry_model, user, instance=None):
         forms = super().get_forms(request, registry_model, user, instance)
