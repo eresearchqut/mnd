@@ -35,10 +35,13 @@ class MNDRegistration(PatientRegistration):
         self._create_primary_carer(patient)
         self._create_insurance_data(patient)
 
+        registration = RegistrationProfile.objects.get(user=user)
         template_data = {
             "patient": patient,
-            "registration": RegistrationProfile.objects.get(user=user)
+            "registration": registration,
+            "activation_url": self.get_registration_activation_url(registration),
         }
+
         process_notification(registry_code, EventType.NEW_PATIENT, template_data)
         logger.debug("Registration process - sent notification for NEW_PATIENT")
 
