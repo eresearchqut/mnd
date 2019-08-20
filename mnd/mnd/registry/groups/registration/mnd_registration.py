@@ -5,7 +5,7 @@ from registration.models import RegistrationProfile
 from rdrf.events.events import EventType
 from rdrf.services.io.notifications.email_notification import process_notification
 
-from mnd.models import PatientInsurance, PrimaryCarer, PreferredContact, PrivateHealthFund
+from mnd.models import PatientInsurance, PrimaryCarer, PreferredContact
 
 logger = logging.getLogger(__name__)
 
@@ -50,21 +50,18 @@ class MNDRegistration(PatientRegistration):
 
     def _create_insurance_data(self, patient):
         form_data = self.form.cleaned_data
-        health_fund_code = form_data["patient_insurance_private_health_fund"]
-        patient_insurance = PatientInsurance.objects.create(
+        PatientInsurance.objects.create(
             patient=patient,
             medicare_number=form_data["patient_insurance_medicare_number"],
             pension_number=form_data["patient_insurance_pension_number"],
+            private_health_fund=form_data["patient_insurance_private_health_fund"],
             private_health_fund_number=form_data["patient_insurance_private_health_fund_number"],
             ndis_number=form_data["patient_insurance_ndis_number"],
             ndis_plan_manager=form_data["patient_insurance_ndis_plan_manager"],
             ndis_coordinator_first_name=form_data["patient_insurance_ndis_coordinator_first_name"],
             ndis_coordinator_last_name=form_data["patient_insurance_ndis_coordinator_last_name"],
-            ndis_coordinator_phone=form_data["patient_insurance_ndis_coordinator_phone"]
+            ndis_coordinator_phone=form_data["patient_insurance_ndis_coordinator_phone"],
         )
-        if health_fund_code and health_fund_code != "":
-            patient_insurance.private_health_fund = PrivateHealthFund.objects.get(code=health_fund_code)
-            patient_insurance.save()
 
     def _create_preferred_contact(self, patient):
         form_data = self.form.cleaned_data

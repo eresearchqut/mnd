@@ -17,25 +17,6 @@
     setStatesOnLoad("#id_country", "#id_state", "#patient_state_value");
     setUpStateOnCountryChange("#id_country", "#id_state");
 
-    function load_private_health_funds(currentValueSelector) {
-        if (typeof currentValueSelector === 'undefined') {
-            currentValueSelector = '';
-        }
-        var target = $("#id_patient_insurance_private_health_fund");
-        target.empty();
-        target.append($('<option>', { value : "" }).text("Private Health Fund Name"));
-        var fund_lookup_url = "{% url 'load_private_health_funds' %}";
-        $.getJSON( fund_lookup_url, function( data ) {
-            $.each( data.funds, function( key, val ) {
-                target.append($('<option>', { value : val.code }).text(val.name));
-            });
-            if (currentValueSelector !== '') {
-                var current_value = $(currentValueSelector).val();
-                target.val(current_value);
-            }
-        });
-    }
-
     {% if not is_mobile %}
         $("#extra-info-form").accordion({
             heightStyle: "content",
@@ -111,8 +92,6 @@
             hideSelectors(selectors);
         }
     });
-
-    load_private_health_funds("#private_health_fund_value");
 
     $("#id_preferred_contact_contact_method").trigger("change");
     $("#id_patient_insurance_private_health_fund").trigger("change");
