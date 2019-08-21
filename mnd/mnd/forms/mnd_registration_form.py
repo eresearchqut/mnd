@@ -1,8 +1,5 @@
 from collections import OrderedDict
 
-from django.forms import CharField
-from django.forms.widgets import Select
-
 from django.utils.translation import gettext as _
 
 from rdrf.forms.registration_forms import PatientRegistrationForm
@@ -25,6 +22,7 @@ class MNDRegistrationForm(PatientRegistrationForm):
         'preferred_contact_phone': _("Preferred contact phone"),
         'patient_insurance_medicare_number': _("Medicare number"),
         'patient_insurance_pension_number': _("Pension number"),
+        'patient_insurance_private_health_fund': _("Private Health fund"),
         'patient_insurance_private_health_fund_number': _("Private Health fund number"),
         'patient_insurance_ndis_number': _("NDIS number"),
         'patient_insurance_ndis_coordinator_first_name': _("NDIS case coordinator first name"),
@@ -37,8 +35,6 @@ class MNDRegistrationForm(PatientRegistrationForm):
         'primary_carer_relationship_info': _("Specify relation to primary carer")
 
     })
-
-    patient_insurance_private_health_fund = CharField(widget=Select)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
