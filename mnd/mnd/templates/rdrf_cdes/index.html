@@ -53,13 +53,16 @@
                         </font></b>
                         </p>
                   </div>
-		  <div style="position:absolute; width: 200px; right: 40px; top: 450px;">
-                        <p style="text-align:center;">
-                        <b><font style="font-size:20px; color:#355692">
-                            <a href="{% url 'registration_register' registries.0.code %}">{% trans "Carer / Patient Register Here" %}</a>
-                        </font></b>
-                        </p>
-                  </div>
+                  {% if registries %}
+                      {# Show registration link only when there is at least on registry defined to avoid server-side error on url lookup #}
+                      <div style="position:absolute; width: 200px; right: 40px; top: 450px;">
+                            <p style="text-align:center;">
+                            <b><font style="font-size:20px; color:#355692">
+                                <a href="{% url 'registration_register' registries.0.code %}">{% trans "Carer / Patient Register Here" %}</a>
+                            </font></b>
+                            </p>
+                      </div>
+                  {% endif %}
             </div>
           </div>
     </header>
