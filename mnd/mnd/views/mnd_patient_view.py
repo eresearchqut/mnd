@@ -50,6 +50,10 @@ class FormSectionMixin(PatientFormMixin):
             user, request, patient, registry, registry_code, patient_form,
             patient_address_form, patient_doctor_form, patient_relative_form
         )
+        for form_instance, __ in form_sections:
+            if 'umrn' in form_instance.fields:
+                form_instance.fields['umrn'].label = _("AMNDR / Hospital ID")
+                break
 
         form_sections.extend([
             get_section(
