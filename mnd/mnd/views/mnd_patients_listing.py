@@ -1,5 +1,3 @@
-import logging
-
 from django.utils.translation import ugettext as _
 from django.utils.formats import date_format, time_format
 
@@ -9,8 +7,6 @@ from rdrf.views.patients_listing import (
     ColumnCodeField, ColumnDiagnosisProgress,
     ColumnGeneticDataMap, PatientsListingView
 )
-
-logger = logging.getLogger(__name__)
 
 
 class MNDPatientsListingView(PatientsListingView):
