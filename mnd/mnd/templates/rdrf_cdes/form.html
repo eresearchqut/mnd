@@ -6,10 +6,15 @@
   {{ block.super }}
   <div width="100%" class="panel panel-default collapsible">
     <div class="panel-body">
-      <a href="{% url 'about_me' registry_code patient_id %}" download>
+      {% if request.user.is_clinician and not request.user.ethically_cleared %}
         <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
         {% trans 'About Me PDF' %}
-      </a>
+      { % else %}
+        <a href="{% url 'about_me' registry_code patient_id %}" download>
+          <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+          {% trans 'About Me PDF2' %}
+        </a>
+      {% endif %}
     </div>
   </div>
 {% endblock %}
