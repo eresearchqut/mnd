@@ -4,6 +4,9 @@ from django.urls import re_path
 from .views.pdf_export_view import pdf_export
 from .views.mnd_patient_view import AddPatientView, PatientEditView
 from .views.mnd_patients_listing import MNDPatientsListingView
+from rdrf.urls import urlpatterns as rdrf_urlpatterns
+
+rdrf_urls = [p for p in rdrf_urlpatterns if not getattr(p, 'app_name', None) == 'api_urls']
 
 urlpatterns = [
     # Any custom URLs go here before we include the TRRF urls
@@ -12,5 +15,5 @@ urlpatterns = [
     re_path(r"^(?P<registry_code>\w+)/patient/(?P<patient_id>\d+)/edit$", PatientEditView.as_view(), name='patient_edit'),
     re_path(r'^patientslisting/?', MNDPatientsListingView.as_view(), name="patientslisting"),
     re_path(r'^api/v1/', include(('mnd.services.rest.urls.api_urls', 'api_urls'), namespace='v1')),
-    re_path(r'', include('rdrf.urls')),
+    re_path(r'', include(rdrf_urls)),
 ]
