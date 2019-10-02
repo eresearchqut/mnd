@@ -11,5 +11,6 @@ urlpatterns = [
     re_path(r"^(?P<registry_code>\w+)/patient/add/?$", AddPatientView.as_view(), name='patient_add'),
     re_path(r"^(?P<registry_code>\w+)/patient/(?P<patient_id>\d+)/edit$", PatientEditView.as_view(), name='patient_edit'),
     re_path(r'^patientslisting/?', MNDPatientsListingView.as_view(), name="patientslisting"),
+    re_path(r'^api/v1/', include(('mnd.services.rest.urls.api_urls', 'api_urls'), namespace='v1')),
     re_path(r'', include('rdrf.urls')),
 ]
