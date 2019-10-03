@@ -9,10 +9,10 @@
       {% if request.user.is_clinician and not request.user.ethically_cleared %}
         <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
         {% trans 'About Me PDF' %}
-      { % else %}
+      {% else %}
         <a href="{% url 'about_me' registry_code patient_id %}" download>
           <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
-          {% trans 'About Me PDF2' %}
+          {% trans 'About Me PDF' %}
         </a>
       {% endif %}
     </div>
