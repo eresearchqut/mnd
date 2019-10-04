@@ -1,0 +1,11 @@
+{% extends "two_factor/core/login.html" %}
+
+{% load i18n %}
+
+{% block footer %}
+<div class="panel-footer">
+    <a href="{% url 'login_assistance' %}">{% trans "Trouble signing in?" %}</a>
+    <div class="pull-right"><a href="http://mnd-and-me.registryframework.net/">MND-and-Me Portal</a></div>
+    <div class="clearfix"></div>
+</div>
+{% endblock %}
