@@ -15,6 +15,8 @@
 
     $(document).ready(function() {
 
+        var NULLABLE_BOOL_FIELD_YES = "2"
+
         $("#id_preferred_contact-contact_method").change(function() {
             var selectors = [
                 $("#id_preferred_contact-first_name"),
@@ -69,11 +71,63 @@
             }
         });
 
+        $("#id_patient_insurance-dva_card_number").change(function() {
+            if (this.value.trim() == "") {
+                hide($("#id_patient_insurance-dva_card_type"), extraHideFn);
+            } else {
+                show($("#id_patient_insurance-dva_card_type"), extraRequiredFn);
+            }
+        });
+
+        $("#id_patient_insurance-referred_for_mac_care").change(function() {
+            if (this.value.trim() != NULLABLE_BOOL_FIELD_YES) {
+                hide($("#id_patient_insurance-needed_mac_level"), extraHideFn);
+            } else {
+                show($("#id_patient_insurance-needed_mac_level"), extraRequiredFn);
+            }
+        });
+
+        $("#id_patient_insurance-eligible_for_home_care").change(function() {
+            if (this.checked) {
+                show($("#id_patient_insurance-receiving_home_care"), extraRequiredFn);
+                show($("#id_patient_insurance-home_care_level"), extraRequiredFn);
+            } else {
+                hide($("#id_patient_insurance-receiving_home_care"), extraHideFn);
+                hide($("#id_patient_insurance-home_care_level"), extraHideFn);
+            }
+        });
+
+        $("#id_patient_insurance-receiving_home_care").change(function() {
+            if (this.checked) {
+                show($("#id_patient_insurance-home_care_level"), extraRequiredFn);
+            } else {
+                hide($("#id_patient_insurance-home_care_level"), extraHideFn);
+            }
+        });
+
+        $("#id_primary_carer-same_address").change(function() {
+            var selectors = [
+                $("#id_primary_carer-address"),
+                $("#id_primary_carer-suburb"),
+                $("#id_primary_carer-postcode")
+            ];
+            if (this.checked) {
+                hideSelectors(selectors, extraHideFn);
+            } else {
+                showSelectors(selectors, extraRequiredFn);
+            }
+        });
+
         $("#id_preferred_contact-contact_method").trigger("change");
         $("#id_patient_insurance-private_health_fund").trigger("change");
         $("#id_patient_insurance-ndis_number").trigger("change");
         $("#id_primary_carer-relationship").trigger("change");
         $("#id_patient_insurance-ndis_plan_manager").trigger("change");
+        $("#id_patient_insurance-dva_card_number").trigger("change");
+        $("#id_patient_insurance-referred_for_mac_care").trigger("change");
+        $("#id_patient_insurance-eligible_for_home_care").trigger("change");
+        $("#id_patient_insurance-receiving_home_care").trigger("change");
+        $("#id_primary_carer-same_address").trigger("change");
 
     });
 </script>

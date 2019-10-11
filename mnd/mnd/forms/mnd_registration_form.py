@@ -28,6 +28,7 @@ class MNDRegistrationForm(PatientRegistrationForm):
         'patient_insurance_ndis_coordinator_first_name': _("NDIS case coordinator first name"),
         'patient_insurance_ndis_coordinator_last_name': _("NDIS case coordinator family name"),
         'patient_insurance_ndis_coordinator_phone': _("NDIS case coordinator phone"),
+        'patient_insurance_ndis_coordinator_email': _("NDIS case coordinator email"),
         'primary_carer_first_name': _("Primary carer first name"),
         'primary_carer_last_name': _("Primary carer family name"),
         'primary_carer_phone': _("Primary carer phone"),
@@ -52,6 +53,7 @@ class MNDRegistrationForm(PatientRegistrationForm):
         if self.data.get('patient_insurance_ndis_plan_manager', '') == 'other':
             for f in ['patient_insurance_ndis_coordinator_first_name',
                       'patient_insurance_ndis_coordinator_surname',
-                      'patient_insurance_ndis_coordinator_phone']:
+                      'patient_insurance_ndis_coordinator_phone',
+                      'patient_insurance_ndis_coordinator_email']:
                 self.fields[f].required = ndis_number_set
         super()._clean_fields()
