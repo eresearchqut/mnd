@@ -13,6 +13,10 @@
         selector.parents('.form-group').find('label').find('span').remove();
     }
 
+    function noopFn(selector) {
+
+    }
+
     $(document).ready(function() {
 
         var NULLABLE_BOOL_FIELD_YES = "2"
@@ -89,9 +93,9 @@
 
         $("#id_patient_insurance-eligible_for_home_care").change(function() {
             if (this.checked) {
-                show($("#id_patient_insurance-receiving_home_care"), extraRequiredFn);
+                show($("#id_patient_insurance-receiving_home_care"), noopFn);
             } else {
-                hide($("#id_patient_insurance-receiving_home_care"), extraHideFn);
+                hide($("#id_patient_insurance-receiving_home_care"), noopFn);
             }
         });
 
@@ -112,7 +116,7 @@
             if (this.checked) {
                 hideSelectors(selectors, extraHideFn);
             } else {
-                showSelectors(selectors, function(selector){});
+                showSelectors(selectors, noopFn);
             }
         });
 
