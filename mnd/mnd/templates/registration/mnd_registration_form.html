@@ -67,6 +67,7 @@
             hide($("#id_patient_insurance-ndis_coordinator_first_name"));
             hide($("#id_patient_insurance-ndis_coordinator_last_name"));
             hide($("#id_patient_insurance-ndis_coordinator_phone"));
+            hide($("#id_patient_insurance_ndis_coordinator_email"));
         } else {
             show($("#id_patient_insurance_ndis_plan_manager"));
         }
@@ -84,7 +85,8 @@
         var selectors = [
             $("#id_patient_insurance_ndis_coordinator_first_name"),
             $("#id_patient_insurance_ndis_coordinator_last_name"),
-            $("#id_patient_insurance_ndis_coordinator_phone")
+            $("#id_patient_insurance_ndis_coordinator_phone"),
+            $("#id_patient_insurance_ndis_coordinator_email")
         ];
         if (this.value == "other") {
             showSelectors(selectors);
@@ -210,6 +212,9 @@
                                 </div>
                                 <div class="form-group">
                                     {{form.patient_insurance_ndis_coordinator_phone}}
+                                </div>
+                                <div class="form-group">
+                                    {{form.patient_insurance_ndis_coordinator_email}}
                                 </div>
                             </div>
                         </div>
