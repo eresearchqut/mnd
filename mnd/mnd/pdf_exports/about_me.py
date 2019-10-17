@@ -126,9 +126,12 @@ def _generate_primary_carer_fields(primary_carer, patient_address):
         return lang.name if lang else ''
 
     def primary_carer_address(primary_carer, patient_address):
-        address = patient_address.address if primary_carer.same_address else primary_carer.address
-        suburb = patient_address.suburub if primary_carer.same_address else primary_carer.suburb
-        postcode = patient_address.postcode if primary_carer.same_address else primary_carer.postcode
+        patient_adr = patient_address.address if patient_address else None
+        patient_suburb = patient_address.suburb if patient_address else None
+        patient_postcode = patient_address.postcode if patient_address else None
+        address = patient_adr if primary_carer.same_address else primary_carer.address
+        suburb = patient_suburb if primary_carer.same_address else primary_carer.suburb
+        postcode = patient_postcode if primary_carer.same_address else primary_carer.postcode
         return {
             'p2Address': address,
             'p2Suburb': suburb,

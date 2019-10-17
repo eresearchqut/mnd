@@ -54,7 +54,7 @@ class PatientInsuranceForm(PrefixedModelForm):
         dva_card_number_set = self.data.get(self.field_name('dva_card_number'), '') != ''
         self.fields['dva_card_type'].required = dva_card_number_set
         referred_for_mac_care_set = self.data.get(self.field_name('referred_for_mac_care'), '') != self._NULLABLE_BOOL_FIELD_YES
-        self.fields['needed_mac_level'].required = referred_for_mac_care_set
+        self.fields['needed_mac_level'].required = not referred_for_mac_care_set
         eligible_for_home_care = self.data.get(self.field_name('eligible_for_home_care'), '') == 'on'
         if not eligible_for_home_care:
             self.fields['receiving_home_care'].required = False
@@ -75,11 +75,7 @@ class PrimaryCarerForm(PrefixedModelForm):
 
     def _clean_fields(self):
         required_relationship_info = self.data.get(self.field_name('relationship'), '') == 'other'
-        required_address = self.data.get(self.field_name('same_address'), '')
         self.fields['relationship_info'].required = required_relationship_info
-        self.fields['address'].required = required_address
-        self.fields['suburb'].required = required_address
-        self.fields['postcode'].required = required_address
         super()._clean_fields()
 
 

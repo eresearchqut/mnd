@@ -90,10 +90,8 @@
         $("#id_patient_insurance-eligible_for_home_care").change(function() {
             if (this.checked) {
                 show($("#id_patient_insurance-receiving_home_care"), extraRequiredFn);
-                show($("#id_patient_insurance-home_care_level"), extraRequiredFn);
             } else {
                 hide($("#id_patient_insurance-receiving_home_care"), extraHideFn);
-                hide($("#id_patient_insurance-home_care_level"), extraHideFn);
             }
         });
 
@@ -114,7 +112,7 @@
             if (this.checked) {
                 hideSelectors(selectors, extraHideFn);
             } else {
-                showSelectors(selectors, extraRequiredFn);
+                showSelectors(selectors, function(selector){});
             }
         });
 
