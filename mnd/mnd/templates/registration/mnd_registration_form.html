@@ -8,6 +8,17 @@
 
 {% block extrahead %}
     {{ block.super }}
+
+    <script type="text/javascript">
+        function onBeforeSubmit() {
+            $("#id_email").val($("#id_username").val());
+            $("#patient-form").accordion("option", "active" ,0);
+            $("#extra-info-form").accordion("option", "active" ,0);
+            $("#insurance-form").accordion("option", "active" ,0);
+            $("#primary-carer-form").accordion("option", "active" ,0);
+        }
+    </script>
+
     <script type="text/javascript" src="{% static 'js/patient_helpers.js' %}"></script>
 {% endblock %}
 
@@ -100,28 +111,6 @@
     $("#id_patient_insurance_ndis_number").trigger("change");
     $("#id_primary_carer_relationship").trigger("change");
     $("#id_patient_insurance_ndis_plan_manager").trigger("change");
-
-    $("#registration-submit").click(function() {
-        var registration_form = $("#registration-form");
-        $("#patient-form").accordion("option", "active" ,0);
-        $("#extra-info-form").accordion("option", "active" ,0);
-        $("#insurance-form").accordion("option", "active" ,0);
-        $("#primary-carer-form").accordion("option", "active" ,0);
-        $("#id_email").val($("#id_username").val());
-        if (registration_form.valid()) {
-            registration_form.submit(function(evt) {
-                evt.preventDefault();
-            });
-        } else {
-            var msg = $("#form-invalid");
-            msg.slideDown("slow", function() {
-                setTimeout(function() {
-                    msg.slideUp("slow")
-                    }, 2000);
-            });
-            onValidationError();
-        }
-    });
 
     $("#id_state").attr("required", "");
     $("#id_country").trigger("change");
