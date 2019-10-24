@@ -4,15 +4,15 @@ from django.utils.translation import gettext as _
 
 from rdrf.forms.registration_forms import PatientRegistrationForm
 
-from mnd.registry.patients.mnd_admin_forms import PatientInsuranceForm, PreferredContactForm, PrimaryCarerForm
+from mnd.registry.patients.mnd_admin_forms import PatientInsuranceRegistrationForm, PreferredContactForm, PrimaryCarerRegistrationForm
 
 
 class MNDRegistrationForm(PatientRegistrationForm):
 
     parent_forms = OrderedDict({
-        'patient_insurance': PatientInsuranceForm,
+        'patient_insurance': PatientInsuranceRegistrationForm,
         'preferred_contact': PreferredContactForm,
-        'primary_carer': PrimaryCarerForm})
+        'primary_carer': PrimaryCarerRegistrationForm})
 
     PatientRegistrationForm.placeholders.update({
         'preferred_contact_contact_method': _("Preferred contact method"),

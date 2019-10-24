@@ -10,17 +10,13 @@ class PrefixedModelForm(forms.ModelForm):
         return f"{self.prefix}-{name}" if self.prefix else name
 
 
-class PatientInsuranceForm(PrefixedModelForm):
-
-    _NULLABLE_BOOL_FIELD_YES = "2"
+class PatientInsuranceRegistrationForm(PrefixedModelForm):
 
     class Meta:
         model = PatientInsurance
         fields = ('medicare_number', 'pension_number', 'private_health_fund', 'private_health_fund_number',
                   'ndis_number', 'ndis_plan_manager', 'ndis_coordinator_first_name',
-                  'ndis_coordinator_last_name', 'ndis_coordinator_phone', 'ndis_coordinator_email',
-                  'dva_card_number', 'dva_card_type', 'referred_for_mac_care', 'needed_mac_level',
-                  'eligible_for_home_care', 'receiving_home_care', 'home_care_level')
+                  'ndis_coordinator_last_name', 'ndis_coordinator_phone', 'ndis_coordinator_email')
         labels = {
             'ndis_number': _('NDIS number'),
             'ndis_plan_manager': _('NDIS Plan Manager'),
@@ -28,14 +24,6 @@ class PatientInsuranceForm(PrefixedModelForm):
             'ndis_coordinator_last_name': _('NDIS Coordinator last name'),
             'ndis_coordinator_phone': _('NDIS Coordinator phone'),
             'ndis_coordinator_email': _('NDIS Coordinator email'),
-            'dva_card_number': _("DVA card number"),
-            'dva_card_type': _("DVA card type"),
-            'referred_for_mac_care': _("Have you been referred for aged care via My Aged Care (MAC)?"),
-            'needed_mac_level': _("What MAC level were you assessed as needing?"),
-            'eligible_for_home_care': _("Eligible for a Community home care package?"),
-            'receiving_home_care': _("Are you receiving a community home care package?"),
-            'home_care_level': _("Home care package level")
-
         }
 
     def _clean_fields(self):
@@ -51,6 +39,30 @@ class PatientInsuranceForm(PrefixedModelForm):
         coordinator_required_data = self.data.get(self.field_name('ndis_plan_manager'), '') == 'other'
         for f in ndis_coordinator_info:
             self.fields[f].required = coordinator_required_data and ndis_number_set
+        super()._clean_fields()
+
+
+class PatientInsuranceForm(PatientInsuranceRegistrationForm):
+
+    _NULLABLE_BOOL_FIELD_YES = "2"
+
+    class Meta:
+        model = PatientInsurance
+        fields = PatientInsuranceRegistrationForm.Meta.fields + (
+            'dva_card_number', 'dva_card_type', 'referred_for_mac_care',
+            'needed_mac_level', 'eligible_for_home_care', 'receiving_home_care', 'home_care_level'
+        )
+        labels = PatientInsuranceRegistrationForm.Meta.labels.update({
+            'dva_card_number': _("DVA card number"),
+            'dva_card_type': _("DVA card type"),
+            'referred_for_mac_care': _("Have you been referred for aged care via My Aged Care (MAC)?"),
+            'needed_mac_level': _("What MAC level were you assessed as needing?"),
+            'eligible_for_home_care': _("Eligible for a Community home care package?"),
+            'receiving_home_care': _("Are you receiving a community home care package?"),
+            'home_care_level': _("Home care package level")
+        })
+
+    def _clean_fields(self):
         dva_card_number_set = self.data.get(self.field_name('dva_card_number'), '') != ''
         self.fields['dva_card_type'].required = dva_card_number_set
         referred_for_mac_care_set = self.data.get(self.field_name('referred_for_mac_care'), '') != self._NULLABLE_BOOL_FIELD_YES
@@ -65,18 +77,24 @@ class PatientInsuranceForm(PrefixedModelForm):
         super()._clean_fields()
 
 
-class PrimaryCarerForm(PrefixedModelForm):
-
+class PrimaryCarerRegistrationForm(PrefixedModelForm):
     class Meta:
         model = PrimaryCarer
-        fields = ('first_name', 'last_name', 'phone', 'email', 'relationship', 'relationship_info',
-                  'preferred_language', 'interpreter_required', 'same_address', 'address', 'suburb',
-                  'postcode')
+        fields = ('first_name', 'last_name', 'phone', 'email', 'relationship', 'relationship_info',)
 
     def _clean_fields(self):
         required_relationship_info = self.data.get(self.field_name('relationship'), '') == 'other'
         self.fields['relationship_info'].required = required_relationship_info
         super()._clean_fields()
+
+
+class PrimaryCarerForm(PrimaryCarerRegistrationForm):
+
+    class Meta:
+        model = PrimaryCarer
+        fields = PrimaryCarerRegistrationForm.Meta.fields + (
+            'preferred_language', 'interpreter_required', 'same_address', 'address', 'suburb', 'postcode'
+        )
 
 
 class PreferredContactForm(PrefixedModelForm):
