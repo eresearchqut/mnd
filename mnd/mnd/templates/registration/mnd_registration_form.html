@@ -109,7 +109,9 @@
         $("#primary-carer-form").accordion("option", "active" ,0);
         $("#id_email").val($("#id_username").val());
         if (registration_form.valid()) {
-            registration_form.submit();
+            registration_form.submit(function(evt) {
+                evt.preventDefault();
+            });
         } else {
             var msg = $("#form-invalid");
             msg.slideDown("slow", function() {
