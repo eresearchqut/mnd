@@ -58,6 +58,10 @@ ENV MEDIA_ROOT="/data/static/media"
 #    libxml2 \
 #   && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+# This is done in order to workaround problems installing openjdk as reported here:
+# https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=863199
+RUN mkdir -p /usr/share/man/man1
+
 RUN apt-get update && apt-get install -y --no-install-recommends \
   # Base
   # TODO check if requirements are needed
