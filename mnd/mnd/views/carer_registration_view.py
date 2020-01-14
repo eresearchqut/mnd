@@ -1,19 +1,22 @@
 from datetime import timedelta
 import uuid
 
+from django.contrib.sites.models import Site
 from django.forms import ValidationError
 from django.http.response import HttpResponseNotFound
 from django.shortcuts import render, redirect, reverse
 from django.utils import timezone
+from django.utils.http import urlencode
 from django.utils.translation import ugettext as _
 from django.views import View
 
 from registration.backends.default.views import RegistrationView
+from rdrf.events.events import EventType
+from rdrf.services.io.notifications.email_notification import process_notification
 
-from ..forms.mnd_registration_form import MNDCarerRegistrationForm
+
 from ..registry.patients.mnd_admin_forms import PrimaryCarerForm
 from registry.patients.mixins import LoginRequiredMixin
-from registry.groups.models import CustomUser
 
 from ..models import CarerRegistration, PrimaryCarer
 
@@ -26,13 +29,14 @@ class PatientCarerRegistrationView(LoginRequiredMixin, View):
     def primary_carer_str(self, primary_carer):
         return f"{primary_carer.first_name} {primary_carer.last_name} ({primary_carer.email})"
 
-    def render_form(self, request, form, primary_carer):
+    def render_form(self, request, form, primary_carer, is_valid):
         return render(
             request,
             "registration/carer_enroll.html",
             context={
                 "form": form,
-                "carer": self.primary_carer_str(primary_carer)
+                "carer": self.primary_carer_str(primary_carer),
+                "valid": is_valid
             }
         )
 
@@ -49,12 +53,14 @@ class PatientCarerRegistrationView(LoginRequiredMixin, View):
             return HttpResponseNotFound()
         patient = request.user.user_object.first()
         primary_carer = PrimaryCarer.objects.filter(patient_id=patient.id).first()
+        is_valid = True
         if self.has_existing_registration(primary_carer):
             form = PrimaryCarerForm(data=primary_carer.__dict__)
             form.add_error(None, ValidationError(_("A token was already generated for this carer !")))
+            is_valid = False
         else:
             form = PrimaryCarerForm(instance=primary_carer)
-        return self.render_form(request, form, primary_carer)
+        return self.render_form(request, form, primary_carer, is_valid)
 
     def post(self, request):
         if not request.user.is_patient:
@@ -69,10 +75,24 @@ class PatientCarerRegistrationView(LoginRequiredMixin, View):
             token=uuid.uuid4(),
             expires_on=timezone.now() + timedelta(days=1)
         )
+        registry_code = patient.rdrf_registry.first().code
+        registration_url = reverse('carer_registration', kwargs={"registry_code": registry_code})
+        domain = Site.objects.get_current().domain
+        protocol = "https"
+        if domain == "localhost:8000":
+            protocol = "http"
+        registration_full_url = f"{protocol}://{domain}{registration_url}?token={reg.token}&username={primary_carer.email}"
+
+        template_data = {
+            "primary_carer": primary_carer,
+            "registration_url": registration_full_url,
+            "patient": patient
+        }
+        process_notification(registry_code, EventType.NEW_CARER, template_data)
         return render(
             request,
             "registration/carer_enroll_token.html",
-            context={"token": reg.token}
+            context={"email": primary_carer.email}
         )
 
 
@@ -81,8 +101,9 @@ class CarerRegistrationView(RegistrationView):
     def get(self, request, registry_code):
         request.session['REGISTRATION_CLASS'] = 'mnd.registry.groups.registration.mnd_registration.MNDCarerRegistration'
         request.session['REGISTRATION_FORM'] = 'mnd.forms.mnd_registration_form.MNDCarerRegistrationForm'
+        params = urlencode(request.GET.dict())
         url = reverse('registration_register', kwargs={'registry_code': registry_code})
-        return redirect(url)
+        return redirect(f"{url}?{params}") if params else redirect(url)
 
 
 class PatientRegistrationView(RegistrationView):
@@ -92,50 +113,3 @@ class PatientRegistrationView(RegistrationView):
         request.session['REGISTRATION_FORM'] = 'mnd.forms.mnd_registration_form.MNDRegistrationForm'
         url = reverse('registration_register', kwargs={'registry_code': registry_code})
         return redirect(url)
-
-
-class ApproveCarerView(LoginRequiredMixin, View):
-
-    def carer_registration(self, primary_carer):
-        return CarerRegistration.objects.filter(
-            carer=primary_carer,
-            expires_on__gte=timezone.now(),
-            status=CarerRegistration.REGISTERED
-        ).first()
-
-    def primary_carer_str(self, primary_carer):
-        return f"{primary_carer.first_name} {primary_carer.last_name} ({primary_carer.email})"
-
-    def get(self, request):
-        if not request.user.is_patient:
-            return HttpResponseNotFound()
-        patient = request.user.user_object.first()
-        primary_carer = PrimaryCarer.objects.filter(patient_id=patient.id).first()
-        if self.carer_registration(primary_carer):
-            return render(
-                request,
-                "registration/approve_carer_registration.html",
-                context={
-                    "carer": self.primary_carer_str(primary_carer)
-                }
-            )
-
-    def post(self, request):
-        if not request.user.is_patient:
-            return HttpResponseNotFound()
-        has_approval = request.POST.get('approval', '').lower() == "yes"
-        patient = request.user.user_object.first()
-        primary_carer = PrimaryCarer.objects.filter(patient_id=patient.id).first()
-        registration = self.carer_registration(primary_carer)
-        if registration:
-            registration.status = CarerRegistration.APPROVED if has_approval else CarerRegistration.REJECTED
-            registration.save()
-            CustomUser.objects.filter(carer_object=patient).update(is_active=True)
-            return render(
-                request,
-                "registration/carer_registration_result.html",
-                context={
-                    "carer": self.primary_carer_str(primary_carer),
-                    "result": _("approved") if has_approval else _("rejected")
-                }
-            )

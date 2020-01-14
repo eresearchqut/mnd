@@ -1,10 +1,5 @@
 {% extends "rdrf_cdes/base-1-col.html" %}
 {% block content %}
 <body>
-    <h3>Token for carer registration generated !</h3>
-    <p>
-        {% csrf_token %}
-        <strong>Token:</strong> <i>{{token}}</i><br/>
-    </p>
-</body>
+    <h3>Notification email sent to {{email}} !</h3>
 {% endblock %}

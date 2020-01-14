@@ -6,6 +6,8 @@
 {{ form.non_field_errors }}
 <form action="{% url 'patient_carer_registration' %}" method="post">
     {% csrf_token %}
-    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="form.submit();">{% trans 'Link carer:' %} {{carer}}</button>
+    {% if valid %}
+        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="form.submit();">{% trans 'Link carer:' %} {{carer}}</button>
+    {% endif %}
 </form>
 {% endblock %}

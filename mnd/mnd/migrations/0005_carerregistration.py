@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('token', models.UUIDField()),
                 ('expires_on', models.DateTimeField()),
-                ('status', models.CharField(choices=[('created', 'created'), ('registered', 'registered'), ('approved', 'approved'), ('rejected', 'rejected')], default='created', max_length=16)),
+                ('status', models.CharField(choices=[('created', 'created'), ('registered', 'registered')], default='created', max_length=16)),
                 ('carer', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='mnd.PrimaryCarer')),
             ],
         ),

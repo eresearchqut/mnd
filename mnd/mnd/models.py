@@ -106,14 +106,10 @@ class CarerRegistration(models.Model):
 
     CREATED = 'created'
     REGISTERED = 'registered'
-    APPROVED = 'approved'
-    REJECTED = 'rejected'
 
     REGISTRATION_STATUS_CHOICES = [
         (CREATED, CREATED),
         (REGISTERED, REGISTERED),
-        (APPROVED, APPROVED),
-        (REJECTED, REJECTED)
     ]
     carer = models.ForeignKey(PrimaryCarer, on_delete=models.CASCADE)
     token = models.UUIDField(null=False, blank=False)
