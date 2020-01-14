@@ -8,7 +8,6 @@ from rdrf.views.patients_listing import (
     ColumnDateOfBirth,
     ColumnDiagnosisProgress,
     ColumnFullName,
-    ColumnGeneticDataMap,
     PatientsListingView
 )
 
@@ -21,7 +20,6 @@ class MNDPatientsListingView(PatientsListingView):
             ColumnDateOfBirth(_("Date of Birth"), "patients.can_see_dob"),
             ColumnCodeField(_("Gender"), "patients.can_see_code_field"),
             ColumnDiagnosisProgress(_("Overall Form Progress"), "patients.can_see_diagnosis_progress"),
-            ColumnGeneticDataMap(_("Genetic Data"), "patients.can_see_genetic_data_map"),
             ColumnDateLastUpdated(_("Date Last Updated"), "patients.can_see_last_updated_at"),
             ColumnContextMenu(_("Modules"), "patients.can_see_data_modules"),
         ]
