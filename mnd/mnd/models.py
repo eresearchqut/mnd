@@ -100,3 +100,28 @@ class PreferredContact(models.Model):
     phone = models.CharField(max_length=30, null=True, blank=True)
     email = models.CharField(max_length=30, null=True, blank=True)
     contact_method = models.CharField(choices=CONTACT_METHOD_CHOICES, max_length=30)
+
+
+class CarerRegistration(models.Model):
+
+    CREATED = 'created'
+    REGISTERED = 'registered'
+    APPROVED = 'approved'
+    REJECTED = 'rejected'
+
+    REGISTRATION_STATUS_CHOICES = [
+        (CREATED, CREATED),
+        (REGISTERED, REGISTERED),
+        (APPROVED, APPROVED),
+        (REJECTED, REJECTED)
+    ]
+    carer = models.ForeignKey(PrimaryCarer, on_delete=models.CASCADE)
+    token = models.UUIDField(null=False, blank=False)
+    expires_on = models.DateTimeField(null=False, blank=False)
+    status = models.CharField(
+        choices=REGISTRATION_STATUS_CHOICES,
+        null=False,
+        blank=False,
+        default=CREATED,
+        max_length=16
+    )

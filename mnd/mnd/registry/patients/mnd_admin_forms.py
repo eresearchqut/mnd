@@ -1,7 +1,7 @@
 from django import forms
 from django.utils.translation import ugettext as _
 
-from mnd.models import PatientInsurance, PrimaryCarer, PreferredContact
+from mnd.models import PatientInsurance, PrimaryCarer, PreferredContact, CarerRegistration
 
 
 class PrefixedModelForm(forms.ModelForm):
@@ -109,3 +109,4 @@ class PreferredContactForm(PrefixedModelForm):
             for f in required_fields:
                 self.fields[f].required = True
         super()._clean_fields()
+

@@ -1,0 +1,14 @@
+{% extends "rdrf_cdes/base-2-cols.html" %}
+
+{% load i18n %}
+{% load translate %}
+
+{% block patient_menu %}
+    {% if request.user.is_patient %}
+        <li>
+            <a href="{% url 'patient_carer_registration' %}"><span class="glyphicon glyphicon-user"></span>
+                {% trans 'Carer registration' %}
+            </a>
+        </li>
+    {% endif %}
+{% endblock %}

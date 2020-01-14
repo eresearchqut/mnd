@@ -1,0 +1,21 @@
+{% extends "rdrf_cdes/base-1-col.html" %}
+{% load i18n %}
+{% load translate %}
+
+{% block content %}
+{{ form.non_field_errors }}
+<form action="{% url 'approve_carer_registration' %}" method="post">
+    {% csrf_token %}
+    <div id="primary-carer-form">
+        <h2>{% trans "Approve carer" %}</h2>
+        <div id="primary-carer-details">
+            <p>{%trans "Do you want to approve" %} <strong>{{carer}}</strong> {%trans "as your carer ?" %}</p>
+            <div class="form-group">
+                <label>&nbsp;{%trans "Approve" %}</label>&nbsp;
+                <input type="checkbox" name="approval" value="Yes"><br/>
+            </div>
+        </div>
+    </div>
+    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="form.submit();">{% trans 'Submit' %}</button>
+</form>
+{% endblock %}
