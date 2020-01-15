@@ -52,15 +52,6 @@ class PatientInsurance(models.Model):
 
 class PrimaryCarer(models.Model):
 
-    PRIMARY_CARER_RELATIONS = [
-        ('', _("Primary carer relationship")),
-        ('spouse', _("Spouse")),
-        ('child', _("Child")),
-        ('sibling', _("Sibling")),
-        ('friend', _("Friend")),
-        ('other', _("Other(specify)")),
-    ]
-
     LANGUAGE_CHOICES = [
         (l.alpha_2, l.name) for l in pycountry.languages if hasattr(l, 'alpha_2')
     ]
@@ -70,8 +61,6 @@ class PrimaryCarer(models.Model):
     last_name = models.CharField(max_length=30)
     phone = models.CharField(max_length=30)
     email = models.CharField(max_length=30)
-    relationship = models.CharField(choices=PRIMARY_CARER_RELATIONS, max_length=30)
-    relationship_info = models.CharField(max_length=30, null=True, blank=True)
     preferred_language = models.CharField(choices=LANGUAGE_CHOICES, max_length=30, default='en')
     interpreter_required = models.BooleanField(null=False, blank=False, default=False)
     same_address = models.BooleanField(null=False, blank=False, default=True)
@@ -81,6 +70,22 @@ class PrimaryCarer(models.Model):
 
     def __str__(self):
         return "{} {}".format(self.first_name, self.last_name)
+
+
+class PrimaryCarerRelationship(models.Model):
+
+    PRIMARY_CARER_RELATIONS = [
+        ('', _("Primary carer relationship")),
+        ('spouse', _("Spouse")),
+        ('child', _("Child")),
+        ('sibling', _("Sibling")),
+        ('friend', _("Friend")),
+        ('other', _("Other(specify)")),
+    ]
+    carer = models.ForeignKey(PrimaryCarer, related_name='relation', on_delete=models.CASCADE)
+    patient = models.ForeignKey(Patient, related_name='carer_relation', on_delete=models.CASCADE)
+    relationship = models.CharField(choices=PRIMARY_CARER_RELATIONS, max_length=30)
+    relationship_info = models.CharField(max_length=30, null=True, blank=True)
 
 
 class PreferredContact(models.Model):

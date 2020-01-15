@@ -80,11 +80,11 @@ class PatientInsuranceForm(PatientInsuranceRegistrationForm):
 class PrimaryCarerRegistrationForm(PrefixedModelForm):
     class Meta:
         model = PrimaryCarer
-        fields = ('first_name', 'last_name', 'phone', 'email', 'relationship', 'relationship_info',)
+        fields = ('first_name', 'last_name', 'phone', 'email')
 
     def _clean_fields(self):
-        required_relationship_info = self.data.get(self.field_name('relationship'), '') == 'other'
-        self.fields['relationship_info'].required = required_relationship_info
+        # required_relationship_info = self.data.get(self.field_name('relationship'), '') == 'other'
+        # self.fields['relationship_info'].required = required_relationship_info
         super()._clean_fields()
 
 
