@@ -111,9 +111,9 @@ class CarerRegistration(models.Model):
         (CREATED, CREATED),
         (REGISTERED, REGISTERED),
     ]
-    carer = models.ForeignKey(PrimaryCarer, on_delete=models.CASCADE)
+    carer = models.ForeignKey(PrimaryCarer, on_delete=models.CASCADE, null=False, blank=False)
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE, null=False, blank=False)
     token = models.UUIDField(null=False, blank=False)
-    expires_on = models.DateTimeField(null=False, blank=False)
     status = models.CharField(
         choices=REGISTRATION_STATUS_CHOICES,
         null=False,
@@ -121,3 +121,5 @@ class CarerRegistration(models.Model):
         default=CREATED,
         max_length=16
     )
+    expires_on = models.DateTimeField(null=False, blank=False)
+    registration_ts = models.DateTimeField(null=True, blank=True)

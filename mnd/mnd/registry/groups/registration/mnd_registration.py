@@ -1,5 +1,7 @@
 import logging
 
+from django.utils import timezone
+
 from registry.groups import GROUPS
 from registry.groups.registration.base import BaseRegistration
 from registry.groups.registration.patient import PatientRegistration
@@ -115,9 +117,10 @@ class MNDCarerRegistration(BaseRegistration):
     def update_django_user(self, django_user, registry):
         carer_registration = CarerRegistration.objects.get(token=self.form.cleaned_data['token'])
         carer_registration.status = CarerRegistration.REGISTERED
+        carer_registration.registration_ts = timezone.now()
         carer_registration.save()
         pc = carer_registration.carer
-        patient = pc.patient
+        patient = carer_registration.patient
         patient.carer = django_user
         patient.save()
         return self.setup_django_user(django_user, registry, GROUPS.CARER, pc.first_name, pc.last_name)

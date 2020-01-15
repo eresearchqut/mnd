@@ -40,10 +40,11 @@ class PatientCarerRegistrationView(LoginRequiredMixin, View):
             }
         )
 
-    def has_existing_registration(self, primary_carer):
+    def has_existing_registration(self, primary_carer, patient):
         return (
             CarerRegistration.objects.filter(
                 carer=primary_carer,
+                patient=patient,
                 expires_on__gte=timezone.now()
             ).exists()
         )
@@ -54,7 +55,7 @@ class PatientCarerRegistrationView(LoginRequiredMixin, View):
         patient = request.user.user_object.first()
         primary_carer = PrimaryCarer.objects.filter(patient_id=patient.id).first()
         is_valid = True
-        if self.has_existing_registration(primary_carer):
+        if self.has_existing_registration(primary_carer, patient):
             form = PrimaryCarerForm(data=primary_carer.__dict__)
             form.add_error(None, ValidationError(_("A token was already generated for this carer !")))
             is_valid = False
@@ -72,6 +73,7 @@ class PatientCarerRegistrationView(LoginRequiredMixin, View):
 
         reg = CarerRegistration.objects.create(
             carer=primary_carer,
+            patient=patient,
             token=uuid.uuid4(),
             expires_on=timezone.now() + timedelta(days=1)
         )
