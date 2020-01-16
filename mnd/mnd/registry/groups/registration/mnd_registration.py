@@ -85,12 +85,16 @@ class MNDRegistration(PatientRegistration):
 
     def _create_primary_carer(self, patient):
         form_data = self.form.cleaned_data
-        pc = PrimaryCarer.objects.create(
-            first_name=form_data["primary_carer_first_name"],
-            last_name=form_data["primary_carer_last_name"],
-            email=form_data['primary_carer_email'],
-            phone=form_data['primary_carer_phone'],
-        )
+        pc = None
+        if form_data['primary_carer_email']:
+            pc = PrimaryCarer.objects.filter(email=form_data['primary_carer_email']).first()
+        if not pc:
+            pc = PrimaryCarer.objects.create(
+                first_name=form_data["primary_carer_first_name"],
+                last_name=form_data["primary_carer_last_name"],
+                email=form_data['primary_carer_email'],
+                phone=form_data['primary_carer_phone'],
+            )
         pc.patients.add(patient)
         PrimaryCarerRelationship.objects.create(
             carer=pc,

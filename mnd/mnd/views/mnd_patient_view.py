@@ -30,7 +30,12 @@ def get_insurance_data(patient):
 
 
 def get_primary_carer(patient):
-    return patient.primary_carers.first()
+    carer = patient.primary_carers.first()
+    if carer and carer.relation.exists():
+        relation = carer.relation.filter(patient=patient).first()
+        setattr(carer, 'relationship', relation.relationship)
+        setattr(carer, 'relationship_info', relation.relationship_info)
+    return carer
 
 
 def get_preferred_contact(patient):
