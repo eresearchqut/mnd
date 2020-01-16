@@ -9,7 +9,13 @@ from registration.models import RegistrationProfile
 from rdrf.events.events import EventType
 from rdrf.services.io.notifications.email_notification import process_notification
 
-from mnd.models import PatientInsurance, PrimaryCarer, PreferredContact, CarerRegistration
+from mnd.models import (
+    CarerRegistration,
+    PreferredContact,
+    PatientInsurance,
+    PrimaryCarer,
+    PrimaryCarerRelationship
+)
 
 logger = logging.getLogger(__name__)
 
@@ -79,14 +85,18 @@ class MNDRegistration(PatientRegistration):
 
     def _create_primary_carer(self, patient):
         form_data = self.form.cleaned_data
-        PrimaryCarer.objects.create(
-            patient=patient,
+        pc = PrimaryCarer.objects.create(
             first_name=form_data["primary_carer_first_name"],
             last_name=form_data["primary_carer_last_name"],
             email=form_data['primary_carer_email'],
             phone=form_data['primary_carer_phone'],
-            relationship=form_data['primary_carer_relationship'],
-            relationship_info=form_data['primary_carer_relationship_info']
+        )
+        pc.patients.add(patient)
+        PrimaryCarerRelationship.objects.create(
+            carer=pc,
+            patient=patient,
+            relationship=form_data["primary_carer_relationship"],
+            relationship_info=form_data["primary_carer_relationship_info"]
         )
 
 

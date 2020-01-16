@@ -1,7 +1,13 @@
 from django import forms
 from django.utils.translation import ugettext as _
 
-from mnd.models import PatientInsurance, PrimaryCarer, PreferredContact, CarerRegistration
+from mnd.models import (
+    CarerRegistration,
+    PreferredContact,
+    PatientInsurance,
+    PrimaryCarer,
+    PrimaryCarerRelationship,
+)
 
 
 class PrefixedModelForm(forms.ModelForm):
@@ -78,13 +84,17 @@ class PatientInsuranceForm(PatientInsuranceRegistrationForm):
 
 
 class PrimaryCarerRegistrationForm(PrefixedModelForm):
+
+    relationship = forms.ChoiceField(choices=PrimaryCarerRelationship.PRIMARY_CARER_RELATIONS, required=True)
+    relationship_info = forms.CharField(max_length=30, required=False)
+
     class Meta:
         model = PrimaryCarer
-        fields = ('first_name', 'last_name', 'phone', 'email')
+        fields = ('first_name', 'last_name', 'phone', 'email', 'relationship', 'relationship_info')
 
     def _clean_fields(self):
-        # required_relationship_info = self.data.get(self.field_name('relationship'), '') == 'other'
-        # self.fields['relationship_info'].required = required_relationship_info
+        required_relationship_info = self.data.get(self.field_name('relationship'), '') == 'other'
+        self.fields['relationship_info'].required = required_relationship_info
         super()._clean_fields()
 
 

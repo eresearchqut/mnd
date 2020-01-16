@@ -30,7 +30,7 @@ def get_insurance_data(patient):
 
 
 def get_primary_carer(patient):
-    return getattr(patient, 'primary_carer', None)
+    return patient.primary_carers.first()
 
 
 def get_preferred_contact(patient):

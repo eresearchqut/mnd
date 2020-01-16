@@ -53,7 +53,7 @@ class PatientCarerRegistrationView(LoginRequiredMixin, View):
         if not request.user.is_patient:
             return HttpResponseNotFound()
         patient = request.user.user_object.first()
-        primary_carer = PrimaryCarer.objects.filter(patient_id=patient.id).first()
+        primary_carer = PrimaryCarer.objects.filter(patients__id=patient.id).first()
         is_valid = True
         if self.has_existing_registration(primary_carer, patient):
             form = PrimaryCarerForm(data=primary_carer.__dict__)
@@ -67,8 +67,8 @@ class PatientCarerRegistrationView(LoginRequiredMixin, View):
         if not request.user.is_patient:
             return HttpResponseNotFound()
         patient = request.user.user_object.first()
-        primary_carer = PrimaryCarer.objects.filter(patient_id=patient.id).first()
-        if self.has_existing_registration(primary_carer):
+        primary_carer = PrimaryCarer.objects.filter(patients__id=patient.id).first()
+        if self.has_existing_registration(primary_carer, patient):
             return HttpResponseNotFound()
 
         reg = CarerRegistration.objects.create(
