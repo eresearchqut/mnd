@@ -11,11 +11,11 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-def get_section(form, section_name, section_prefix, instance, request):
+def get_section(form, section_name, section_prefix, instance, request, initial=None):
     if request.POST:
         form_instance = form(data=request.POST, prefix=section_prefix)
     else:
-        form_instance = form(prefix=section_prefix, instance=instance)
+        form_instance = form(initial=initial or {}, prefix=section_prefix, instance=instance)
 
     section = (section_name, [f for f in form_instance.fields])
     return form_instance, (section,)
@@ -30,12 +30,17 @@ def get_insurance_data(patient):
 
 
 def get_primary_carer(patient):
+    return patient.primary_carers.first()
+
+
+def get_primary_carer_initial_data(patient):
+    data = {}
     carer = patient.primary_carers.first()
     if carer and carer.relation.exists():
         relation = carer.relation.filter(patient=patient).first()
-        setattr(carer, 'relationship', relation.relationship)
-        setattr(carer, 'relationship_info', relation.relationship_info)
-    return carer
+        data['relationship'] = relation.relationship
+        data['relationship_info'] = relation.relationship_info
+    return data
 
 
 def get_preferred_contact(patient):
@@ -65,7 +70,8 @@ class FormSectionMixin(PatientFormMixin):
                 PatientInsuranceForm, _("Patient Insurance"), "patient_insurance", get_insurance_data(patient), request
             ),
             get_section(
-                PrimaryCarerForm, _("Primary Carer"), "primary_carer", get_primary_carer(patient), request
+                PrimaryCarerForm, _("Primary Carer"), "primary_carer", get_primary_carer(patient), request,
+                get_primary_carer_initial_data(patient)
             ),
             get_section(
                 PreferredContactForm, _("Preferred Contact"), "preferred_contact", get_preferred_contact(patient), request
