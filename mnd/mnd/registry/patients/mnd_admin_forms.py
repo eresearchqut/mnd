@@ -100,11 +100,26 @@ class PrimaryCarerRegistrationForm(PrefixedModelForm):
 
 class PrimaryCarerForm(PrimaryCarerRegistrationForm):
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.patient = None
+
     class Meta:
         model = PrimaryCarer
         fields = PrimaryCarerRegistrationForm.Meta.fields + (
             'preferred_language', 'interpreter_required', 'same_address', 'address', 'suburb', 'postcode'
         )
+
+    def save(self, commit=True):
+        rel = self.cleaned_data.get('relationship')
+        rel_info = self.cleaned_data.get('relationship_info')
+        ret_val = super().save(commit)
+        if self.instance and self.patient:
+            pc, _ = PrimaryCarerRelationship.objects.get_or_create(carer=self.instance, patient=self.patient)
+            pc.relationship = rel
+            pc.relationship_info = rel_info
+            pc.save()
+        return ret_val
 
 
 class PreferredContactForm(PrefixedModelForm):

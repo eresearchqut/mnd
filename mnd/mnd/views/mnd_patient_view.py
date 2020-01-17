@@ -11,18 +11,24 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-def get_section(form, section_name, section_prefix, instance, request, initial=None):
+def get_section(form, section_name, section_prefix, instance, request, initial=None, patient=None):
     if request.POST:
         form_instance = form(data=request.POST, prefix=section_prefix)
     else:
         form_instance = form(initial=initial or {}, prefix=section_prefix, instance=instance)
 
+    if patient:
+        form_instance.patient = patient
+
     section = (section_name, [f for f in form_instance.fields])
     return form_instance, (section,)
 
 
-def get_form(form, request, prefix, instance=None):
-    return form(request.POST, prefix=prefix, instance=instance)
+def get_form(form, request, prefix, instance=None, initial=None, patient=None):
+    form_instance = form(request.POST, prefix=prefix, instance=instance, initial=initial or {})
+    if patient:
+        form_instance.patient = patient
+    return form_instance
 
 
 def get_insurance_data(patient):
@@ -36,7 +42,7 @@ def get_primary_carer(patient):
 def get_primary_carer_initial_data(patient):
     data = {}
     carer = patient.primary_carers.first()
-    if carer and carer.relation.exists():
+    if carer and carer.relation.filter(patient=patient).exists():
         relation = carer.relation.filter(patient=patient).first()
         data['relationship'] = relation.relationship
         data['relationship_info'] = relation.relationship_info
@@ -71,7 +77,7 @@ class FormSectionMixin(PatientFormMixin):
             ),
             get_section(
                 PrimaryCarerForm, _("Primary Carer"), "primary_carer", get_primary_carer(patient), request,
-                get_primary_carer_initial_data(patient)
+                get_primary_carer_initial_data(patient), patient
             ),
             get_section(
                 PreferredContactForm, _("Preferred Contact"), "preferred_contact", get_preferred_contact(patient), request
@@ -85,7 +91,8 @@ class FormSectionMixin(PatientFormMixin):
             get_form(PatientInsuranceForm, request, "patient_insurance", get_insurance_data(instance))
         )
         forms[self.PRIMARY_CARER_KEY] = (
-            get_form(PrimaryCarerForm, request, "primary_carer", get_primary_carer(instance))
+            get_form(PrimaryCarerForm, request, "primary_carer", get_primary_carer(instance),
+            get_primary_carer_initial_data(instance), instance)
         )
         forms[self.PREFERRED_CONTACT_KEY] = (
             get_form(PreferredContactForm, request, "preferred_contact", get_preferred_contact(instance))
