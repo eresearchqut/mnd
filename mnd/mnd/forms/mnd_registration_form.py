@@ -1,8 +1,7 @@
 from collections import OrderedDict
-import logging
 import uuid
 
-from django.forms import CharField, UUIDField
+from django.forms import CharField
 from django.forms import ValidationError
 from django.utils.translation import gettext as _
 from django.utils import timezone
@@ -17,8 +16,6 @@ from mnd.registry.patients.mnd_admin_forms import (
 )
 
 from ..models import CarerRegistration
-
-logger = logging.getLogger(__name__)
 
 
 class MNDRegistrationForm(PatientRegistrationForm):
@@ -52,15 +49,9 @@ class MNDCarerRegistrationForm(RegistrationForm):
 
     def clean_token(self):
         token = self.cleaned_data['token']
-        logger.info(f"token={token}, type={type(token)}")
         uid_token = uuid.UUID(token)
         if not CarerRegistration.objects.filter(
             token=token, status=CarerRegistration.CREATED, expires_on__gte=timezone.now()
         ).exists():
             raise ValidationError(_("Invalid token !"))
         return uid_token
-
-    def clean(self):
-        logger.info("Clean")
-        logger.info(f"cleaneddata={self.cleaned_data}")
-        super().clean()

@@ -3,7 +3,7 @@ import uuid
 
 from django.contrib.sites.models import Site
 from django.forms import ValidationError
-from django.http.response import HttpResponseNotFound
+from django.http.response import HttpResponseForbidden
 from django.shortcuts import render, redirect, reverse
 from django.utils import timezone
 from django.utils.http import urlencode
@@ -16,6 +16,7 @@ from rdrf.services.io.notifications.email_notification import process_notificati
 
 
 from ..registry.patients.mnd_admin_forms import PrimaryCarerForm
+from registry.groups.models import CustomUser
 from registry.patients.mixins import LoginRequiredMixin
 
 from ..models import CarerRegistration, PrimaryCarer
@@ -41,17 +42,32 @@ class PatientCarerRegistrationView(LoginRequiredMixin, View):
         )
 
     def has_existing_registration(self, primary_carer, patient):
-        return (
+        pending_carer = (
+            CarerRegistration.objects.filter(
+                carer=primary_carer,
+                expires_on__gte=timezone.now(),
+                status=CarerRegistration.CREATED
+            ).exists()
+        )
+        registered_carer = (
             CarerRegistration.objects.filter(
                 carer=primary_carer,
                 patient=patient,
-                expires_on__gte=timezone.now()
+                status=CarerRegistration.REGISTERED
             ).exists()
         )
+        return pending_carer or registered_carer
+
+    def get_base_url(self):
+        domain = Site.objects.get_current().domain
+        protocol = "https"
+        if domain == "localhost:8000":
+            protocol = "http"
+        return f"{protocol}://{domain}"
 
     def get(self, request):
         if not request.user.is_patient:
-            return HttpResponseNotFound()
+            return HttpResponseForbidden()
         patient = request.user.user_object.first()
         primary_carer = PrimaryCarer.objects.filter(patients__id=patient.id).first()
         is_valid = True
@@ -65,32 +81,47 @@ class PatientCarerRegistrationView(LoginRequiredMixin, View):
 
     def post(self, request):
         if not request.user.is_patient:
-            return HttpResponseNotFound()
+            return HttpResponseForbidden()
         patient = request.user.user_object.first()
         primary_carer = PrimaryCarer.objects.filter(patients__id=patient.id).first()
         if self.has_existing_registration(primary_carer, patient):
-            return HttpResponseNotFound()
+            return HttpResponseForbidden()
 
+        primary_carer_user = (
+            CustomUser.objects
+            .filter(email=primary_carer.email, carer_object__isnull=False)
+            .distinct()
+            .first()
+        )
+        registry_code = patient.rdrf_registry.first().code
         reg = CarerRegistration.objects.create(
             carer=primary_carer,
             patient=patient,
             token=uuid.uuid4(),
             expires_on=timezone.now() + timedelta(days=1)
         )
-        registry_code = patient.rdrf_registry.first().code
-        registration_url = reverse('carer_registration', kwargs={"registry_code": registry_code})
-        domain = Site.objects.get_current().domain
-        protocol = "https"
-        if domain == "localhost:8000":
-            protocol = "http"
-        registration_full_url = f"{protocol}://{domain}{registration_url}?token={reg.token}&username={primary_carer.email}"
+        if not primary_carer_user:
+            registration_url = reverse('carer_registration', kwargs={"registry_code": registry_code})
+            registration_full_url = f"{self.get_base_url()}{registration_url}?token={reg.token}&username={primary_carer.email}"
 
-        template_data = {
-            "primary_carer": primary_carer,
-            "registration_url": registration_full_url,
-            "patient": patient
-        }
-        process_notification(registry_code, EventType.NEW_CARER, template_data)
+            template_data = {
+                "primary_carer": primary_carer,
+                "registration_url": registration_full_url,
+                "patient": patient
+            }
+            process_notification(registry_code, EventType.NEW_CARER, template_data)
+        else:
+            template_data = {
+                "primary_carer": primary_carer,
+                "patient": patient
+            }
+            process_notification(registry_code, EventType.CARER_ASSIGNED, template_data)
+            patient.carer = primary_carer_user
+            patient.save(update_fields=['carer'])
+            reg.registration_ts = timezone.now()
+            reg.status = CarerRegistration.REGISTERED
+            reg.save(update_fields=['status', 'registration_ts'])
+
         return render(
             request,
             "registration/carer_enroll_token.html",
