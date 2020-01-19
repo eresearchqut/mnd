@@ -103,6 +103,9 @@ class PrimaryCarerForm(PrimaryCarerRegistrationForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.patient = None
+        instance = getattr(self, 'instance')
+        if instance:
+            self.fields['email'].widget.attrs['readonly'] = True
 
     class Meta:
         model = PrimaryCarer
@@ -120,6 +123,13 @@ class PrimaryCarerForm(PrimaryCarerRegistrationForm):
             pc.relationship_info = rel_info
             pc.save()
         return ret_val
+
+    def clean_email(self):
+        instance = getattr(self, 'instance', None)
+        if instance and instance.email:
+            return instance.email
+        else:
+            return self.cleaned_data['email']
 
 
 class PreferredContactForm(PrefixedModelForm):

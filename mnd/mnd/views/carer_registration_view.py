@@ -89,7 +89,7 @@ class PatientCarerRegistrationView(LoginRequiredMixin, View):
 
         primary_carer_user = (
             CustomUser.objects
-            .filter(email=primary_carer.email, carer_object__isnull=False)
+            .filter(email=primary_carer.email, patients_in_care__isnull=False)
             .distinct()
             .first()
         )
