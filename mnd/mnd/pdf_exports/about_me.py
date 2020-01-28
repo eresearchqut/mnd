@@ -122,9 +122,9 @@ def _generate_primary_carer_fields(primary_carer, patient, patient_address):
         }
         relation = (
             PrimaryCarerRelationship
-                .objects
-                .filter(carer=primary_carer, patient=patient)
-                .first()
+            .objects
+            .filter(carer=primary_carer, patient=patient)
+            .first()
         )
         if relation:
             return mapping.get(relation.relationship, 'Off')
@@ -172,7 +172,9 @@ def generate_pdf_form_fields(registry, patient):
     preferred_contact = getattr(patient, 'preferred_contact', None)
     data.update(_generate_preferred_contact_fields(preferred_contact))
     primary_carer = PrimaryCarer.get_primary_carer(patient)
-    data.update(_generate_primary_carer_fields(primary_carer, patient, patient_address))
+    data.update(
+        _generate_primary_carer_fields(primary_carer, patient, patient_address)
+    )
 
     # TODO
     # dynamic_data = patient.get_dynamic_data(registry)

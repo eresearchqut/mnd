@@ -6,7 +6,7 @@ from rdrf.views.patient_view import (
 
 
 from ..registry.patients.mnd_admin_forms import PatientInsuranceForm, PrimaryCarerForm, PreferredContactForm
-from ..models import PrimaryCarer
+from ..models import PrimaryCarer, PrimaryCarerRelationship
 
 import logging
 logger = logging.getLogger(__name__)
@@ -92,18 +92,36 @@ class FormSectionMixin(PatientFormMixin):
             get_form(PatientInsuranceForm, request, "patient_insurance", get_insurance_data(instance))
         )
         forms[self.PRIMARY_CARER_KEY] = (
-            get_form(PrimaryCarerForm, request, "primary_carer", get_primary_carer(instance),
-            get_primary_carer_initial_data(instance), instance)
+            get_form(
+                PrimaryCarerForm, request, "primary_carer", get_primary_carer(instance),
+                get_primary_carer_initial_data(instance), instance
+            )
         )
         forms[self.PREFERRED_CONTACT_KEY] = (
             get_form(PreferredContactForm, request, "preferred_contact", get_preferred_contact(instance))
         )
         return forms
 
+    def _handle_existing_primary_carer(self, form):
+        email = form.cleaned_data['email']
+        existing = PrimaryCarer.objects.filter(email=email).first()
+        if existing:
+            rel = form.cleaned_data.get('relationship')
+            rel_info = form.cleaned_data.get('relationship_info')
+            pc, _ = PrimaryCarerRelationship.objects.get_or_create(carer=existing, patient=self.object)
+            pc.relationship = rel
+            pc.relationship_info = rel_info
+            pc.save()
+            existing.patients.add(self.object)
+        return existing
+
     def all_forms_valid(self, forms):
         ret_val = super().all_forms_valid(forms)
         formset_keys = [self.PATIENT_INSURANCE_KEY, self.PRIMARY_CARER_KEY, self.PREFERRED_CONTACT_KEY]
         for key in formset_keys:
+            if key == self.PRIMARY_CARER_KEY:
+                if self._handle_existing_primary_carer(forms[key]):
+                    continue
             instance = forms[key].save(commit=False)
             instance.patient = self.object
             instance.save()

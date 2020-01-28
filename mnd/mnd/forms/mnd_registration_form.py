@@ -1,4 +1,3 @@
-from collections import OrderedDict
 import uuid
 
 from django.forms import CharField
@@ -9,18 +8,11 @@ from django.utils import timezone
 from registration.forms import RegistrationForm
 from rdrf.forms.registration_forms import PatientRegistrationForm
 
-from mnd.registry.patients.mnd_admin_forms import (
-    PatientInsuranceRegistrationForm,
-    PreferredContactForm,
-    PrimaryCarerRegistrationForm
-)
-
 from ..models import CarerRegistration
 
 
 class MNDRegistrationForm(PatientRegistrationForm):
     phone_number = None
-
 
 
 class MNDCarerRegistrationForm(RegistrationForm):

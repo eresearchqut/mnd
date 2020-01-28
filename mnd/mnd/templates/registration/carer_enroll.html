@@ -6,8 +6,18 @@
 {{ form.non_field_errors }}
 <form action="{% url 'patient_carer_registration' %}" method="post">
     {% csrf_token %}
-    {% if valid %}
+    {% if flags.can_register %}
         <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="form.submit();">{% trans 'Link carer:' %} {{carer}}</button>
     {% endif %}
+    {% if flags.can_deactivate %}
+        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="form.submit();">{% trans 'Deactivate carer:' %} {{carer}}</button>
+    {% endif %}
+    {% if flags.can_activate %}
+        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="form.submit();">{% trans 'Re-activate carer:' %} {{carer}}</button>
+    {% endif %}
+    {% if flags.can_resend_invite %}
+        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="form.submit();">{% trans 'Re-send invite email to carer:' %} {{carer}}</button>
+    {% endif %}
+
 </form>
 {% endblock %}

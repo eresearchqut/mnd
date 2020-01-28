@@ -117,10 +117,12 @@ class CarerRegistration(models.Model):
 
     CREATED = 'created'
     REGISTERED = 'registered'
+    DEACTIVATED = 'deactivated'
 
     REGISTRATION_STATUS_CHOICES = [
         (CREATED, CREATED),
         (REGISTERED, REGISTERED),
+        (DEACTIVATED, DEACTIVATED),
     ]
     carer = models.ForeignKey(PrimaryCarer, on_delete=models.CASCADE)
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
