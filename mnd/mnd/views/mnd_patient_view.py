@@ -6,6 +6,7 @@ from rdrf.views.patient_view import (
 
 
 from ..registry.patients.mnd_admin_forms import PatientInsuranceForm, PrimaryCarerForm, PreferredContactForm
+from ..models import PrimaryCarer
 
 import logging
 logger = logging.getLogger(__name__)
@@ -36,12 +37,12 @@ def get_insurance_data(patient):
 
 
 def get_primary_carer(patient):
-    return patient.primary_carers.first()
+    return PrimaryCarer.get_primary_carer(patient)
 
 
 def get_primary_carer_initial_data(patient):
     data = {}
-    carer = patient.primary_carers.first()
+    carer = get_primary_carer(patient)
     if carer and carer.relation.filter(patient=patient).exists():
         relation = carer.relation.filter(patient=patient).first()
         data['relationship'] = relation.relationship

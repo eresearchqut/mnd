@@ -1,7 +1,7 @@
 import pycountry
 
 from ..settings import PDF_TEMPLATES_PATH
-from ..models import PrimaryCarerRelationship
+from ..models import PrimaryCarerRelationship, PrimaryCarer
 
 
 def _yes_no(input):
@@ -171,7 +171,7 @@ def generate_pdf_form_fields(registry, patient):
     data.update(_generate_patient_insurance_fields(patient, insurance))
     preferred_contact = getattr(patient, 'preferred_contact', None)
     data.update(_generate_preferred_contact_fields(preferred_contact))
-    primary_carer = patient.primary_carers.first()
+    primary_carer = PrimaryCarer.get_primary_carer(patient)
     data.update(_generate_primary_carer_fields(primary_carer, patient, patient_address))
 
     # TODO

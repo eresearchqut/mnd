@@ -43,15 +43,18 @@ class MNDCarerRegistrationForm(RegistrationForm):
     def setup_fields(self):
         for field in self.fields:
             self.fields[field].widget.attrs['class'] = 'form-control'
-            self.fields[field].widget.attrs['placeholder'] = self.placeholders.get(field, _(''))
+            self.fields[field].widget.attrs['placeholder'] = self.placeholders.get(field, '')
             if field in self.password_fields:
                 self.fields[field].widget.render_value = True
 
     def clean_token(self):
         token = self.cleaned_data['token']
-        uid_token = uuid.UUID(token)
         if not CarerRegistration.objects.filter(
             token=token, status=CarerRegistration.CREATED, expires_on__gte=timezone.now()
         ).exists():
             raise ValidationError(_("Invalid token !"))
+        try:
+            uid_token = uuid.UUID(token)
+        except ValueError:
+            raise ValidationError(_("Invalid token format !"))
         return uid_token
