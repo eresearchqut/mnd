@@ -27,5 +27,7 @@ VERSION = env.get('app_version', '%s (mnd)' % mnd.VERSION)
 
 PDF_TEMPLATES_PATH = f"{os.path.dirname(os.path.dirname(os.path.abspath(__file__)))}/mnd/templates/pdf_export"
 
-REGISTRATION_FORM = 'mnd.forms.mnd_registration_form.MNDRegistrationForm'
-REGISTRATION_CLASS = 'mnd.registry.groups.registration.mnd_registration.MNDRegistration'
+# Currently using registration from base TRRF as-is, but keeping these for future reference
+#
+# REGISTRATION_FORM = 'mnd.forms.mnd_registration_form.MNDRegistrationForm'
+# REGISTRATION_CLASS = 'mnd.registry.groups.registration.mnd_registration.MNDRegistration'
