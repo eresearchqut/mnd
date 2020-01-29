@@ -5,7 +5,8 @@ from registration.models import RegistrationProfile
 from rdrf.events.events import EventType
 from rdrf.services.io.notifications.email_notification import process_notification
 
-from mnd.models import PatientInsurance, PrimaryCarer, PreferredContact
+from registry.patients.models import Patient
+from registry.patients.patient_stage_flows import get_registry_stage_flow
 
 logger = logging.getLogger(__name__)
 
@@ -13,7 +14,6 @@ logger = logging.getLogger(__name__)
 class MNDRegistration(PatientRegistration):
 
     def process(self, user):
-
         registry_code = self.form.cleaned_data['registry_code']
         registry = self._get_registry_object(registry_code)
 
@@ -27,14 +27,6 @@ class MNDRegistration(PatientRegistration):
         patient = self._create_patient(registry, working_group, user)
         logger.debug("Registration process - created patient")
 
-        address = self._create_patient_address(patient)
-        address.save()
-        logger.debug("Registration process - created patient address")
-
-        self._create_preferred_contact(patient)
-        self._create_primary_carer(patient)
-        self._create_insurance_data(patient)
-
         registration = RegistrationProfile.objects.get(user=user)
         template_data = {
             "patient": patient,
@@ -45,42 +37,23 @@ class MNDRegistration(PatientRegistration):
         process_notification(registry_code, EventType.NEW_PATIENT, template_data)
         logger.debug("Registration process - sent notification for NEW_PATIENT")
 
+    def _create_patient(self, registry, working_group, user, set_link_to_user=True):
+        form_data = self.form.cleaned_data
+        patient = Patient.objects.create(
+            consent=True,
+            family_name=form_data["surname"],
+            given_names=form_data["first_name"],
+            date_of_birth=form_data["date_of_birth"],
+            sex=form_data["gender"]
+        )
+
+        patient.rdrf_registry.add(registry)
+        patient.working_groups.add(working_group)
+        patient.email = user.username
+        patient.user = user if set_link_to_user else None
+        get_registry_stage_flow(registry).handle(patient)
+        patient.save()
+        return patient
+
     def get_template_name(self):
         return "registration/mnd_registration_form.html"
-
-    def _create_insurance_data(self, patient):
-        form_data = self.form.cleaned_data
-        PatientInsurance.objects.create(
-            patient=patient,
-            medicare_number=form_data["patient_insurance_medicare_number"],
-            pension_number=form_data["patient_insurance_pension_number"],
-            private_health_fund=form_data["patient_insurance_private_health_fund"],
-            private_health_fund_number=form_data["patient_insurance_private_health_fund_number"],
-            ndis_number=form_data["patient_insurance_ndis_number"],
-            ndis_plan_manager=form_data["patient_insurance_ndis_plan_manager"],
-            ndis_coordinator_first_name=form_data["patient_insurance_ndis_coordinator_first_name"],
-            ndis_coordinator_last_name=form_data["patient_insurance_ndis_coordinator_last_name"],
-            ndis_coordinator_phone=form_data["patient_insurance_ndis_coordinator_phone"],
-        )
-
-    def _create_preferred_contact(self, patient):
-        form_data = self.form.cleaned_data
-        PreferredContact.objects.create(
-            patient=patient,
-            first_name=form_data["preferred_contact_first_name"],
-            last_name=form_data["preferred_contact_last_name"],
-            phone=form_data["preferred_contact_phone"],
-            contact_method=form_data["preferred_contact_contact_method"]
-        )
-
-    def _create_primary_carer(self, patient):
-        form_data = self.form.cleaned_data
-        PrimaryCarer.objects.create(
-            patient=patient,
-            first_name=form_data["primary_carer_first_name"],
-            last_name=form_data["primary_carer_last_name"],
-            email=form_data['primary_carer_email'],
-            phone=form_data['primary_carer_phone'],
-            relationship=form_data['primary_carer_relationship'],
-            relationship_info=form_data['primary_carer_relationship_info']
-        )
