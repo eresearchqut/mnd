@@ -3,6 +3,7 @@ import pycountry
 from django.db import models
 
 from django.utils.translation import gettext as _
+from django.utils import timezone
 from registry.patients.models import Patient
 
 
@@ -113,6 +114,29 @@ class PreferredContact(models.Model):
     contact_method = models.CharField(choices=CONTACT_METHOD_CHOICES, max_length=30)
 
 
+class CarerRegistrationManager(models.Manager):
+
+    def has_pending_registration(self, primary_carer):
+        return self.filter(
+            carer=primary_carer, expires_on__gte=timezone.now(), status=CarerRegistration.CREATED
+        ).exists()
+
+    def has_registered_carer(self, primary_carer, patient):
+        return self.filter(
+            carer=primary_carer, patient=patient, status=CarerRegistration.REGISTERED
+        ).exists()
+
+    def has_deactivated_carer(self, primary_carer, patient):
+        return self.filter(
+            carer=primary_carer, patient=patient, status=CarerRegistration.DEACTIVATED
+        ).exists()
+
+    def has_expired_registration(self, primary_carer):
+        return self.filter(
+            carer=primary_carer, expires_on__lt=timezone.now(), status=CarerRegistration.CREATED,
+        ).exists()
+
+
 class CarerRegistration(models.Model):
 
     CREATED = 'created'
@@ -136,3 +160,5 @@ class CarerRegistration(models.Model):
     )
     expires_on = models.DateTimeField()
     registration_ts = models.DateTimeField(null=True, blank=True)
+
+    objects = CarerRegistrationManager()

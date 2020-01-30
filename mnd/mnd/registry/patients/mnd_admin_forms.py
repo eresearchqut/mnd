@@ -1,12 +1,17 @@
 from django import forms
+from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
 
 from mnd.models import (
+    CarerRegistration,
     PreferredContact,
     PatientInsurance,
     PrimaryCarer,
     PrimaryCarerRelationship,
 )
+
+import logging
+logger = logging.getLogger(__name__)
 
 
 class PrefixedModelForm(forms.ModelForm):
@@ -108,6 +113,25 @@ class PrimaryCarerForm(PrimaryCarerRegistrationForm):
         fields = PrimaryCarerRegistrationForm.Meta.fields + (
             'preferred_language', 'interpreter_required', 'same_address', 'address', 'suburb', 'postcode'
         )
+
+    def set_patient(self, patient):
+
+        def has_assigned_carer(instance):
+            if instance:
+                has_carer = instance.id in patient.primary_carers.values_list('id', flat=True)
+                is_active_carer = CarerRegistration.objects.has_registered_carer(instance, patient)
+                return has_carer and is_active_carer
+            return False
+
+        self.patient = patient
+        instance = getattr(self, 'instance')
+        if has_assigned_carer(instance):
+            for f in self.fields:
+                self.fields[f].widget.attrs['readonly'] = True
+            notification = (
+                _("You cannot change data which a primary carer is linked. To deactivate please use the Carer registration menu !")
+            )
+            self.fields['first_name'].help_text = mark_safe(f"<span style=\"color:red;\"><strong>{notification} </strong></span>")
 
     def save(self, commit=True):
         rel = self.cleaned_data.get('relationship')

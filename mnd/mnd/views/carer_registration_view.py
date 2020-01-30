@@ -25,33 +25,6 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-class RegistrationChecks:
-
-    def __init__(self, primary_carer, patient):
-        self.primary_carer = primary_carer
-        self.patient = patient
-
-    def has_pending_registration(self):
-        return CarerRegistration.objects.filter(
-            carer=self.primary_carer, expires_on__gte=timezone.now(), status=CarerRegistration.CREATED
-        ).exists()
-
-    def has_registered_carer(self):
-        return CarerRegistration.objects.filter(
-            carer=self.primary_carer, patient=self.patient, status=CarerRegistration.REGISTERED
-        ).exists()
-
-    def has_deactivated_carer(self):
-        return CarerRegistration.objects.filter(
-            carer=self.primary_carer, patient=self.patient, status=CarerRegistration.DEACTIVATED
-        ).exists()
-
-    def has_expired_registration(self):
-        return CarerRegistration.objects.filter(
-            carer=self.primary_carer, expires_on__lt=timezone.now(), status=CarerRegistration.CREATED,
-        ).exists()
-
-
 class RegistrationFlags:
 
     def __init__(self):
@@ -61,11 +34,10 @@ class RegistrationFlags:
         self.can_register = False
 
     def update(self, primary_carer, patient):
-        checks = RegistrationChecks(primary_carer, patient)
-        self.can_activate = checks.has_deactivated_carer()
-        self.can_deactivate = checks.has_registered_carer()
-        self.can_resend_invite = checks.has_expired_registration()
-        self.has_pending_registration = checks.has_pending_registration()
+        self.can_activate = CarerRegistration.objects.has_deactivated_carer(primary_carer, patient)
+        self.can_deactivate = CarerRegistration.objects.has_registered_carer(primary_carer, patient)
+        self.can_resend_invite = CarerRegistration.objects.has_expired_registration(primary_carer)
+        self.has_pending_registration = CarerRegistration.objects.has_pending_registration(primary_carer)
         self.can_register = not (
             self.has_pending_registration or self.can_deactivate or self.can_activate
         ) and primary_carer
@@ -207,15 +179,14 @@ class PatientCarerRegistrationView(LoginRequiredMixin, View):
             return HttpResponseForbidden()
         patient = request.user.user_object.first()
         primary_carer = PrimaryCarer.objects.filter(patients__id=patient.id).first()
-        checks = RegistrationChecks(primary_carer, patient)
         operations = CarerOperations(request, primary_carer, patient)
-        if checks.has_pending_registration():
+        if CarerRegistration.objects.has_pending_registration(primary_carer):
             return HttpResponseForbidden()
 
-        if checks.has_registered_carer():
+        if CarerRegistration.objects.has_registered_carer(primary_carer, patient):
             return operations.deactivate_carer()
 
-        if checks.has_deactivated_carer():
+        if CarerRegistration.objects.has_deactivated_carer(primary_carer, patient):
             return operations.activate_carer()
 
         # resending email invite for expired carers

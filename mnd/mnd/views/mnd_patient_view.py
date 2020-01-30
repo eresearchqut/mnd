@@ -19,7 +19,7 @@ def get_section(form, section_name, section_prefix, instance, request, initial=N
         form_instance = form(initial=initial or {}, prefix=section_prefix, instance=instance)
 
     if patient:
-        form_instance.patient = patient
+        form_instance.set_patient(patient)
 
     section = (section_name, [f for f in form_instance.fields])
     return form_instance, (section,)
