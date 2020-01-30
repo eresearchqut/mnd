@@ -172,4 +172,4 @@ def generate_pdf_form_fields(registry, patient):
 
 
 def get_pdf_template():
-    return f"{PDF_TEMPLATES_PATH}/About me and MND_Interactive_v4b.pdf"
+    return f"{PDF_TEMPLATES_PATH}/About me and MND_Interactive_v5a.pdf"
