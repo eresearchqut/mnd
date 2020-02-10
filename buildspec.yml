@@ -154,11 +154,11 @@ phases:
                 },
                 {
                   "name": "PROJECT_LOGO",
-                  "value": "images/mnd/MNDR_Logo_BBG.png"
+                  "value": "$PROJECT_LOGO"
                 },
                 {
                   "name": "PROJECT_TITLE",
-                  "value": "Australian MND Patient Registry"
+                  "value": "$PROJECT_TITLE"
                 },
                 {
                   "name": "TRRF_SOURCE_DIR",
