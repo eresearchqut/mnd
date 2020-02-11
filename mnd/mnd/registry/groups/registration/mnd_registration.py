@@ -30,12 +30,19 @@ class MNDCarerRegistration(BaseRegistration):
         user.save()
 
         registration = RegistrationProfile.objects.get(user=user)
+        carer, patient = self.get_carer_and_patient()
         template_data = {
             "registration": registration,
-            "activation_url": self.get_registration_activation_url(registration),
+            "registration_url": self.get_registration_activation_url(registration),
+            "primary_carer": carer,
+            "patient": patient
         }
         process_notification(registry_code, EventType.NEW_CARER, template_data)
-        logger.debug("Registration process - sent notification for NEW_CARER")
+        logger.info("Registration process - sent notification for NEW_CARER")
+
+    def get_carer_and_patient(self):
+        carer_registration = CarerRegistration.objects.get(token=self.form.cleaned_data['token'])
+        return carer_registration.carer, carer_registration.patient
 
     def update_django_user(self, django_user, registry):
         carer_registration = CarerRegistration.objects.get(token=self.form.cleaned_data['token'])

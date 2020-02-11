@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('token', models.UUIDField()),
-                ('status', models.CharField(choices=[('created', 'created'), ('registered', 'registered')], default='created', max_length=16)),
+                ('status', models.CharField(choices=[('created', 'created'), ('registered', 'registered'), ('deactivated', 'deactivated')], default='created', max_length=16)),
                 ('expires_on', models.DateTimeField()),
                 ('registration_ts', models.DateTimeField(blank=True, null=True)),
                 ('carer', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='mnd.PrimaryCarer')),

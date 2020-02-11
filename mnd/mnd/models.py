@@ -61,16 +61,16 @@ class PrimaryCarer(models.Model):
         (l.alpha_2, l.name) for l in pycountry.languages if hasattr(l, 'alpha_2')
     ]
 
-    patients = models.ManyToManyField(Patient, related_name='primary_carers')
     # This is Many to Many as we don't want to add a FK to Patient in TRRF
     # since TRRF is not aware of this MND specific model
+    patients = models.ManyToManyField(Patient, related_name='primary_carers', through='PrimaryCarerRelationship')
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     phone = models.CharField(max_length=30)
     email = models.CharField(max_length=30)
     preferred_language = models.CharField(choices=LANGUAGE_CHOICES, max_length=30, default='en')
-    interpreter_required = models.BooleanField(null=False, blank=False, default=False)
-    same_address = models.BooleanField(null=False, blank=False, default=True)
+    interpreter_required = models.BooleanField(default=False)
+    same_address = models.BooleanField(default=True)
     suburb = models.CharField(max_length=50, null=True, blank=True)
     address = models.TextField(null=True, blank=True)
     postcode = models.CharField(max_length=20, null=True, blank=True)
@@ -151,13 +151,7 @@ class CarerRegistration(models.Model):
     carer = models.ForeignKey(PrimaryCarer, on_delete=models.CASCADE)
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
     token = models.UUIDField()
-    status = models.CharField(
-        choices=REGISTRATION_STATUS_CHOICES,
-        null=False,
-        blank=False,
-        default=CREATED,
-        max_length=16
-    )
+    status = models.CharField(choices=REGISTRATION_STATUS_CHOICES, default=CREATED, max_length=16)
     expires_on = models.DateTimeField()
     registration_ts = models.DateTimeField(null=True, blank=True)
 

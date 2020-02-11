@@ -14,6 +14,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='primarycarer',
             name='patients',
-            field=models.ManyToManyField(related_name='primary_carers', to='patients.Patient'),
+            field=models.ManyToManyField(related_name='primary_carers', through='mnd.PrimaryCarerRelationship', to='patients.Patient'),
         ),
     ]

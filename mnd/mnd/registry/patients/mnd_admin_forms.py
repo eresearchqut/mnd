@@ -118,7 +118,7 @@ class PrimaryCarerForm(PrimaryCarerRegistrationForm):
 
         def has_assigned_carer(instance):
             if instance:
-                has_carer = instance.id in patient.primary_carers.values_list('id', flat=True)
+                has_carer = patient.primary_carers.filter(pk=instance.pk).exists()
                 is_active_carer = CarerRegistration.objects.has_registered_carer(instance, patient)
                 return has_carer and is_active_carer
             return False
@@ -129,7 +129,8 @@ class PrimaryCarerForm(PrimaryCarerRegistrationForm):
             for f in self.fields:
                 self.fields[f].widget.attrs['readonly'] = True
             notification = (
-                _("You cannot change data which a primary carer is linked. To deactivate please use the Carer registration menu !")
+                _("""You can't change the details of the primary carer while it is linked.
+                     To unlink the carer please use the Carer registration menu!""")
             )
             self.fields['first_name'].help_text = mark_safe(f"<span style=\"color:red;\"><strong>{notification} </strong></span>")
 

@@ -41,12 +41,12 @@ class MNDCarerRegistrationForm(RegistrationForm):
 
     def clean_token(self):
         token = self.cleaned_data['token']
-        if not CarerRegistration.objects.filter(
-            token=token, status=CarerRegistration.CREATED, expires_on__gte=timezone.now()
-        ).exists():
-            raise ValidationError(_("Invalid token !"))
         try:
             uid_token = uuid.UUID(token)
         except ValueError:
             raise ValidationError(_("Invalid token format !"))
+        if not CarerRegistration.objects.filter(
+            token=token, status=CarerRegistration.CREATED, expires_on__gte=timezone.now()
+        ).exists():
+            raise ValidationError(_("Invalid token !"))
         return uid_token

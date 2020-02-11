@@ -1,4 +1,4 @@
-{% extends "rdrf_cdes/base-2-cols.html" %}
+{% extends "rdrf_cdes/navbar_links.html" %}
 
 {% load i18n %}
 {% load translate %}
@@ -11,7 +11,7 @@
             </a>
         </li>
     {% endif %}
-    {% if request.user.is_carer and request.user.patients_in_care.count > 1 %}
+    {% if request.user.is_carer %}
         <li>
             <a href="{% url 'patientslisting' %}"><span class="glyphicon glyphicon-user"></span>
                 {% trans 'Patients list' %}
