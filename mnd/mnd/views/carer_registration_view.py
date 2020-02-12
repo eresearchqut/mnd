@@ -4,14 +4,12 @@ import uuid
 from django.conf import settings
 from django.forms import ValidationError
 from django.http.response import HttpResponseForbidden
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, reverse
 from django.utils import timezone
 from django.utils.functional import cached_property
-from django.utils.http import urlencode
 from django.utils.translation import ugettext as _
 from django.views import View
 
-from registration.backends.default.views import RegistrationView
 from rdrf.events.events import EventType
 from rdrf.services.io.notifications.email_notification import process_notification
 
@@ -210,13 +208,3 @@ class PatientCarerRegistrationView(LoginRequiredMixin, View):
         # resending email invite for expired carers
         # is the same as registering a carer
         return operations.register_carer()
-
-
-class CarerRegistrationView(RegistrationView):
-
-    def get(self, request, registry_code):
-        request.session['REGISTRATION_CLASS'] = 'mnd.registry.groups.registration.mnd_registration.MNDCarerRegistration'
-        request.session['REGISTRATION_FORM'] = 'mnd.forms.mnd_registration_form.MNDCarerRegistrationForm'
-        params = urlencode(request.GET.dict())
-        url = reverse('registration_register', kwargs={'registry_code': registry_code})
-        return redirect(f"{url}?{params}") if params else redirect(url)
