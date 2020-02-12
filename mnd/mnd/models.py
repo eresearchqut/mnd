@@ -55,7 +55,7 @@ class PrimaryCarer(models.Model):
 
     @classmethod
     def get_primary_carer(cls, patient):
-        return patient.primary_carers.first()
+        return patient.primary_carers.first() if patient else None
 
     LANGUAGE_CHOICES = [
         (l.alpha_2, l.name) for l in pycountry.languages if hasattr(l, 'alpha_2')
