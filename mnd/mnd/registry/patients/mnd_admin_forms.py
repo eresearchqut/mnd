@@ -114,18 +114,22 @@ class PrimaryCarerForm(PrimaryCarerRegistrationForm):
             'preferred_language', 'interpreter_required', 'same_address', 'address', 'suburb', 'postcode'
         )
 
-    def set_patient(self, patient):
-
-        def has_assigned_carer(instance):
-            if instance:
-                has_carer = patient.primary_carers.filter(pk=instance.pk).exists()
-                is_active_carer = CarerRegistration.objects.has_registered_carer(instance, patient)
-                return has_carer and is_active_carer
-            return False
-
-        self.patient = patient
+    def has_carer(self):
         instance = getattr(self, 'instance')
-        if has_assigned_carer(instance):
+        if instance and self.patient:
+            return self.patient.primary_carers.filter(pk=instance.pk).exists()
+        return False
+
+    def has_assigned_carer(self):
+        instance = getattr(self, 'instance')
+        if instance and self.patient:
+            is_active_carer = CarerRegistration.objects.has_registered_carer(instance, self.patient)
+            return self.has_carer() and is_active_carer
+        return False
+
+    def set_patient(self, patient):
+        self.patient = patient
+        if self.has_assigned_carer():
             for f in self.fields:
                 self.fields[f].widget.attrs['readonly'] = True
             notification = (
@@ -133,6 +137,19 @@ class PrimaryCarerForm(PrimaryCarerRegistrationForm):
                      To unlink the carer please use the Carer registration menu!""")
             )
             self.fields['first_name'].help_text = mark_safe(f"<span style=\"color:red;\"><strong>{notification} </strong></span>")
+        elif self.has_carer():
+            self.fields['email'].widget.attrs['readonly'] = True
+            notification = (
+                _("You can't change the email address the primary carer while it is linked, even if deactivated !")
+            )
+            self.fields['email'].help_text = mark_safe(f"<span style=\"color:red;\"><strong>{notification} </strong></span>")
+
+    def clean_email(self):
+        if self.has_carer():
+            instance = getattr(self, 'instance', None)
+            if instance and instance.pk:
+                return instance.email
+        return self.cleaned_data['email']
 
     def save(self, commit=True):
         rel = self.cleaned_data.get('relationship')

@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 
 def get_section(form, section_name, section_prefix, instance, request, initial=None, patient=None):
     if request.POST:
-        form_instance = form(data=request.POST, prefix=section_prefix)
+        form_instance = form(request.POST, prefix=section_prefix, instance=instance)
     else:
         form_instance = form(initial=initial or {}, prefix=section_prefix, instance=instance)
 
@@ -28,7 +28,7 @@ def get_section(form, section_name, section_prefix, instance, request, initial=N
 def get_form(form, request, prefix, instance=None, initial=None, patient=None):
     form_instance = form(request.POST, prefix=prefix, instance=instance, initial=initial or {})
     if patient:
-        form_instance.patient = patient
+        form_instance.set_patient(patient)
     return form_instance
 
 
@@ -113,15 +113,13 @@ class FormSectionMixin(PatientFormMixin):
             pc.relationship_info = rel_info
             pc.save()
             existing.patients.add(self.object)
-        return existing
 
     def all_forms_valid(self, forms):
         ret_val = super().all_forms_valid(forms)
         formset_keys = [self.PATIENT_INSURANCE_KEY, self.PRIMARY_CARER_KEY, self.PREFERRED_CONTACT_KEY]
         for key in formset_keys:
             if key == self.PRIMARY_CARER_KEY:
-                if self._handle_existing_primary_carer(forms[key]):
-                    continue
+                self._handle_existing_primary_carer(forms[key])
             instance = forms[key].save(commit=False)
             instance.patient = self.object
             instance.save()
