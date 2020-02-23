@@ -117,14 +117,13 @@ class PrimaryCarerForm(PrimaryCarerRegistrationForm):
     def has_carer(self):
         instance = getattr(self, 'instance')
         if instance and self.patient:
-            return self.patient.primary_carers.filter(pk=instance.pk).exists()
+            return CarerRegistration.objects.has_registration_records(instance, self.patient)
         return False
 
     def has_assigned_carer(self):
         instance = getattr(self, 'instance')
         if instance and self.patient:
-            is_active_carer = CarerRegistration.objects.has_registered_carer(instance, self.patient)
-            return self.has_carer() and is_active_carer
+            return CarerRegistration.objects.has_registered_carer(instance, self.patient)
         return False
 
     def set_patient(self, patient):
@@ -134,15 +133,15 @@ class PrimaryCarerForm(PrimaryCarerRegistrationForm):
                 self.fields[f].widget.attrs['readonly'] = True
             notification = (
                 _("""You can't change the details of the primary carer while it is linked.
-                     To unlink the carer please use the Carer registration menu!""")
+                     To unlink the carer please use the Carer Management menu!""")
             )
-            self.fields['first_name'].help_text = mark_safe(f"<span style=\"color:red;\"><strong>{notification} </strong></span>")
+            self.fields['first_name'].help_text = mark_safe(f"<span style=\"color:green;\"><strong>{notification} </strong></span>")
         elif self.has_carer():
             self.fields['email'].widget.attrs['readonly'] = True
             notification = (
-                _("You can't change the email address the primary carer while it is linked, even if deactivated !")
+                _("You can't change the email address of the primary carer at this time !")
             )
-            self.fields['email'].help_text = mark_safe(f"<span style=\"color:red;\"><strong>{notification} </strong></span>")
+            self.fields['email'].help_text = mark_safe(f"<span style=\"color:green;\"><strong>{notification} </strong></span>")
 
     def clean_email(self):
         if self.has_carer():
@@ -155,8 +154,9 @@ class PrimaryCarerForm(PrimaryCarerRegistrationForm):
         rel = self.cleaned_data.get('relationship')
         rel_info = self.cleaned_data.get('relationship_info')
         ret_val = super().save(commit)
-        if self.instance and self.patient:
-            pc, _ = PrimaryCarerRelationship.objects.get_or_create(carer=self.instance, patient=self.patient)
+        carer = self.instance or ret_val
+        if self.patient:
+            pc, _ = PrimaryCarerRelationship.objects.get_or_create(carer=carer, patient=self.patient)
             pc.relationship = rel
             pc.relationship_info = rel_info
             pc.save()

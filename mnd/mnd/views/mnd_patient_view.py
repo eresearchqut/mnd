@@ -102,27 +102,32 @@ class FormSectionMixin(PatientFormMixin):
         )
         return forms
 
-    def _handle_existing_primary_carer(self, form):
+    def _handle_primary_carer_relationship(self, form, instance):
         email = form.cleaned_data['email']
-        existing = PrimaryCarer.objects.filter(email=email).first()
-        if existing:
-            rel = form.cleaned_data.get('relationship')
-            rel_info = form.cleaned_data.get('relationship_info')
-            pc, _ = PrimaryCarerRelationship.objects.get_or_create(carer=existing, patient=self.object)
+        rel = form.cleaned_data.get('relationship')
+        rel_info = form.cleaned_data.get('relationship_info')
+        carer = instance or PrimaryCarer.objects.filter(email=email).first()
+        if carer:
+            pc, _ = PrimaryCarerRelationship.objects.get_or_create(carer=carer, patient=self.object)
             pc.relationship = rel
             pc.relationship_info = rel_info
             pc.save()
-            existing.patients.add(self.object)
+            carer.patients.add(self.object)
+        return carer is not None
 
     def all_forms_valid(self, forms):
         ret_val = super().all_forms_valid(forms)
         formset_keys = [self.PATIENT_INSURANCE_KEY, self.PRIMARY_CARER_KEY, self.PREFERRED_CONTACT_KEY]
         for key in formset_keys:
             if key == self.PRIMARY_CARER_KEY:
-                self._handle_existing_primary_carer(forms[key])
+                carer_handled = self._handle_primary_carer_relationship(forms[key], None)
+                if carer_handled:
+                    continue
             instance = forms[key].save(commit=False)
             instance.patient = self.object
             instance.save()
+            if key == self.PRIMARY_CARER_KEY:
+                self._handle_primary_carer_relationship(forms[key], instance)
 
         return ret_val
 

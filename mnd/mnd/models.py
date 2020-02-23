@@ -136,6 +136,12 @@ class CarerRegistrationManager(models.Manager):
             carer=primary_carer, expires_on__lt=timezone.now(), status=CarerRegistration.CREATED,
         ).exists()
 
+    def has_registration_records(self, primary_carer, patient):
+        pending = self.has_pending_registration(primary_carer)
+        registered = self.has_registered_carer(primary_carer, patient)
+        deactivated = self.has_deactivated_carer(primary_carer, patient)
+        return pending or deactivated or registered
+
 
 class CarerRegistration(models.Model):
 
