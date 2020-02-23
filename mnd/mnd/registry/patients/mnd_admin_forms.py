@@ -2,6 +2,8 @@ from django import forms
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
 
+from registry.patients.models import Patient
+
 from mnd.models import (
     CarerRegistration,
     PreferredContact,
@@ -9,6 +11,7 @@ from mnd.models import (
     PrimaryCarer,
     PrimaryCarerRelationship,
 )
+
 
 import logging
 logger = logging.getLogger(__name__)
@@ -151,11 +154,14 @@ class PrimaryCarerForm(PrimaryCarerRegistrationForm):
             self.fields['first_name'].help_text = mark_safe(f"<span style=\"color:green;\"><strong>{notification} </strong></span>")
 
     def clean_email(self):
+        email = self.cleaned_data['email']
         if self.has_carer():
             instance = getattr(self, 'instance', None)
             if instance and instance.pk:
                 return instance.email
-        return self.cleaned_data['email']
+        if Patient.objects.filter(email=email).exists():
+            raise forms.ValidationError(_("Incorrect email for carer. A patient with the same email is already registered !"))
+        return email
 
     def save(self, commit=True):
         rel = self.cleaned_data.get('relationship')
