@@ -127,21 +127,28 @@ class PrimaryCarerForm(PrimaryCarerRegistrationForm):
         return False
 
     def set_patient(self, patient):
+
+        def hide_and_disable_field(f):
+            self.fields[f].widget = forms.HiddenInput()
+            self.fields[f].widget.attrs['disabled'] = True
+            self.fields[f].required = False
+
         self.patient = patient
         if self.has_assigned_carer():
             for f in self.fields:
-                self.fields[f].widget.attrs['readonly'] = True
+                if f not in ('relationship', 'relationship_info'):
+                    hide_and_disable_field(f)
             notification = (
-                _("""You can't change the details of the primary carer while it is linked.
+                _("""You can't change the personal details of the primary carer while it is linked.
                      To unlink the carer please use the Carer Management menu!""")
             )
-            self.fields['first_name'].help_text = mark_safe(f"<span style=\"color:green;\"><strong>{notification} </strong></span>")
+            self.fields['relationship'].help_text = mark_safe(f"<span style=\"color:green;\"><strong>{notification} </strong></span>")
         elif self.has_carer():
-            self.fields['email'].widget.attrs['readonly'] = True
+            hide_and_disable_field('email')
             notification = (
                 _("You can't change the email address of the primary carer at this time !")
             )
-            self.fields['email'].help_text = mark_safe(f"<span style=\"color:green;\"><strong>{notification} </strong></span>")
+            self.fields['first_name'].help_text = mark_safe(f"<span style=\"color:green;\"><strong>{notification} </strong></span>")
 
     def clean_email(self):
         if self.has_carer():
@@ -155,7 +162,7 @@ class PrimaryCarerForm(PrimaryCarerRegistrationForm):
         rel_info = self.cleaned_data.get('relationship_info')
         ret_val = super().save(commit)
         carer = self.instance or ret_val
-        if self.patient:
+        if self.patient and commit:
             pc, _ = PrimaryCarerRelationship.objects.get_or_create(carer=carer, patient=self.patient)
             pc.relationship = rel
             pc.relationship_info = rel_info

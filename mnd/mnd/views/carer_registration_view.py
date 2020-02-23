@@ -60,7 +60,7 @@ class RegistrationFlags:
 
     @cached_property
     def token_already_generated(self):
-        return self.primary_carer and self.no_activation
+        return self.primary_carer and self.no_activation and self.has_pending_registration
 
     @cached_property
     def no_primary_carer_set(self):

@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 
 def get_section(form, section_name, section_prefix, instance, request, initial=None, patient=None):
     if request.POST:
-        form_instance = form(request.POST, prefix=section_prefix, instance=instance)
+        form_instance = form(request.POST, prefix=section_prefix, instance=instance, initial=initial or {})
     else:
         form_instance = form(initial=initial or {}, prefix=section_prefix, instance=instance)
 
