@@ -3,21 +3,35 @@
 {% load translate %}
 
 {% block content %}
-{{ form.non_field_errors }}
-<form action="{% url 'patient_carer_registration' %}" method="post">
-    {% csrf_token %}
-    {% if flags.can_register %}
-        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="form.submit();">{% trans 'Link carer:' %} {{carer}}</button>
+    {%if flags.token_already_generated %}
+        <h3> You already sent an invitation to your primary carer.</h3>
+        <p> While the invitation is pending you are not allowed to send other invitations.</p>
+    {% elif flags.no_primary_carer_set %}
+        <h3> Primary carer not currently set.</h3>
+        <p3> In order to invite your primary carer to use the system you need to fill the data in the Demographics page</p>
+    {% else %}
+        <form action="{% url 'patient_carer_registration' %}" method="post">
+            {% csrf_token %}
+            {% if flags.can_register %}
+                <h3> Would you like to invite your carer to use the system? </h3>
+                <p>You can send them an invitation by email by clicking the button below.Please be aware that this give the carer rights to view and edit all your details in the system.</p>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="form.submit();">{% trans 'Link carer:' %} {{carer}}</button>
+            {% endif %}
+            {% if flags.can_deactivate %}
+                <h3> Would you like to deactivate your carer ? </h3>
+                <p>You can deactivate your carer by clicking the button below. This will remove the carer's rights to view and edit your details in the system.</p>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="form.submit();">{% trans 'Deactivate carer:' %} {{carer}}</button>
+            {% endif %}
+            {% if flags.can_activate %}
+                <h3> Would you like to reactivate your carer ? </h3>
+                <p>You can reactivate your carer by clicking the button below. This will give your carer rights to view and edit your details in the system.</p>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="form.submit();">{% trans 'Re-activate carer:' %} {{carer}}</button>
+            {% endif %}
+            {% if flags.can_resend_invite %}
+                <h3> The invite email to your carer has expired. Would you like to resend the invitation email ? </h3>
+                <p>You can resend the invitation email by clicking the button below. This will give your carer rights to view and edit your details in the system.</p>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="form.submit();">{% trans 'Re-send invite email to carer:' %} {{carer}}</button>
+            {% endif %}
+        </form>
     {% endif %}
-    {% if flags.can_deactivate %}
-        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="form.submit();">{% trans 'Deactivate carer:' %} {{carer}}</button>
-    {% endif %}
-    {% if flags.can_activate %}
-        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="form.submit();">{% trans 'Re-activate carer:' %} {{carer}}</button>
-    {% endif %}
-    {% if flags.can_resend_invite %}
-        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="form.submit();">{% trans 'Re-send invite email to carer:' %} {{carer}}</button>
-    {% endif %}
-
-</form>
 {% endblock %}

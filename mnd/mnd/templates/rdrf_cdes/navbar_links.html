@@ -7,7 +7,7 @@
     {% if request.user.is_patient %}
         <li>
             <a href="{% url 'patient_carer_registration' %}"><span class="glyphicon glyphicon-user"></span>
-                {% trans 'Carer registration' %}
+                {% trans 'Carer management' %}
             </a>
         </li>
     {% endif %}
