@@ -112,7 +112,6 @@ class FormSectionMixin(PatientFormMixin):
             pc.relationship = rel
             pc.relationship_info = rel_info
             pc.save()
-            carer.patients.add(self.object)
         return carer is not None
 
     def all_forms_valid(self, forms):
