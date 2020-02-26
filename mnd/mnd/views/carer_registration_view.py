@@ -65,6 +65,14 @@ class RegistrationFlags:
     def no_primary_carer_set(self):
         return self.no_activation and not self.primary_carer
 
+    @cached_property
+    def registration_allowed(self):
+        registry = self.patient.rdrf_registry.first()
+        if registry:
+            return registry.carer_registration_allowed()
+        return False
+
+
 
 class CarerOperations:
 

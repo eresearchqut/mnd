@@ -3,7 +3,10 @@
 {% load translate %}
 
 {% block content %}
-    {%if flags.token_already_generated %}
+    {% if not flags.registration_allowed %}
+        <h3> Carer registration is not currently enabled !.</h3>
+        <p> You can only register carers when the carer registration is enabled by an admin.</p>
+    {% elif flags.token_already_generated %}
         <h3> You already sent an invitation to your primary carer.</h3>
         <p> While the invitation is pending you are not allowed to send other invitations.</p>
     {% elif flags.no_primary_carer_set %}
