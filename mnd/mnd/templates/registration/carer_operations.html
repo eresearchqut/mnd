@@ -1,0 +1,17 @@
+{% extends "rdrf_cdes/base-1-col.html" %}
+{% load i18n %}
+{% load translate %}
+
+{% block content %}
+        <ul>
+        {% for p in patients %}
+            <li>
+                <form action="{% url 'carer_operations' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="patient_id" value="{{p.id}}"/>
+                    <h3>Would you like to be deactivated as a carer for {{p.given_names}} {{p.family_name}} ?</h3>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="form.submit();">{% trans 'Deactivate' %}</button>
+                </form>
+             </li>        
+        {% endfor %}
+{% endblock %}

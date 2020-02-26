@@ -2,7 +2,7 @@ from datetime import timedelta
 import uuid
 
 from django.conf import settings
-from django.http.response import HttpResponseForbidden
+from django.http.response import HttpResponseForbidden, HttpResponseRedirect
 from django.shortcuts import render, reverse
 from django.utils import timezone
 from django.utils.functional import cached_property
@@ -16,6 +16,7 @@ from rdrf.services.io.notifications.email_notification import process_notificati
 from registry.groups.models import CustomUser
 from registry.groups.registration.base import BaseRegistration
 from registry.patients.mixins import LoginRequiredMixin
+from registry.patients.models import Patient
 
 
 from ..models import CarerRegistration, PrimaryCarer
@@ -67,10 +68,11 @@ class RegistrationFlags:
 
 class CarerOperations:
 
-    def __init__(self, request, primary_carer, patient):
+    def __init__(self, request, primary_carer, patient, is_carer=False):
         self.request = request
         self.primary_carer = primary_carer
         self.patient = patient
+        self.is_carer = is_carer
 
     def deactivate_carer(self):
         self.patient.carer = None
@@ -84,11 +86,14 @@ class CarerOperations:
         }
         registry_code = self.patient.rdrf_registry.first().code
         process_notification(registry_code, EventType.CARER_DEACTIVATED, template_data)
-        return render(
-            self.request,
-            "registration/carer_activate_deactivate.html",
-            context={"email": self.primary_carer.email, "status": "deactivated"}
-        )
+        if not self.is_carer:
+            return render(
+                self.request,
+                "registration/carer_activate_deactivate.html",
+                context={"email": self.primary_carer.email, "status": "deactivated"}
+            )
+        else:
+            return HttpResponseRedirect(reverse('patientslisting'))
 
     def activate_carer(self):
         self.patient.carer = CustomUser.objects.get(email=self.primary_carer.email)
@@ -194,3 +199,32 @@ class PatientCarerRegistrationView(LoginRequiredMixin, View):
         # resending email invite for expired carers
         # is the same as registering a carer
         return operations.register_carer()
+
+
+class CarerOperationsView(LoginRequiredMixin, View):
+
+    def get(self, request):
+        if not request.user.is_carer:
+            return HttpResponseForbidden()
+        patients = request.user.patients_in_care.all()
+        primary_carer = PrimaryCarer.objects.get(email=request.user.email)
+        return render(
+            request,
+            "registration/carer_operations.html",
+            context={
+                "carer": primary_carer,
+                "patients": patients
+            }
+        )
+
+    def post(self, request):
+        if not request.user.is_carer:
+            return HttpResponseForbidden()
+        primary_carer = PrimaryCarer.objects.get(email=request.user.email)
+        patient_id = request.POST.get('patient_id', None)
+        if patient_id:
+            patient = Patient.objects.get(pk=patient_id)
+            operations = CarerOperations(request, primary_carer, patient, is_carer=True)
+            return operations.deactivate_carer()
+        else:
+            return HttpResponseRedirect(reverse('patientslisting'))

@@ -13,6 +13,11 @@
     {% endif %}
     {% if request.user.is_carer %}
         <li>
+            <a href="{% url 'carer_operations' %}"><span class="glyphicon glyphicon-user"></span>
+                {% trans 'Carer management' %}
+            </a>
+        </li>
+        <li>
             <a href="{% url 'patientslisting' %}"><span class="glyphicon glyphicon-user"></span>
                 {% trans 'Patients list' %}
             </a>
