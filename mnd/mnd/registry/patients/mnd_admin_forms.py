@@ -131,21 +131,16 @@ class PrimaryCarerForm(PrimaryCarerRegistrationForm):
 
     def set_patient(self, patient):
 
-        def hide_and_disable_field(f):
-            self.fields[f].widget = forms.HiddenInput()
-            self.fields[f].widget.attrs['disabled'] = True
-            self.fields[f].required = False
-
         self.patient = patient
         if self.has_assigned_carer():
             for f in self.fields:
                 if f not in ('relationship', 'relationship_info'):
-                    hide_and_disable_field(f)
+                    self.fields[f].widget.attrs['readonly'] = True
             notification = (
                 _("""You can't change the personal details of the primary carer while it is linked.
                      To unlink the carer please use the Carer Management menu!""")
             )
-            self.fields['relationship'].help_text = mark_safe(f"<span style=\"color:green;\"><strong>{notification} </strong></span>")
+            self.fields['first_name'].help_text = mark_safe(f"<span style=\"color:green;\"><strong>{notification} </strong></span>")
 
     def clean_email(self):
         email = self.cleaned_data['email']
