@@ -146,12 +146,6 @@ class PrimaryCarerForm(PrimaryCarerRegistrationForm):
                      To unlink the carer please use the Carer Management menu!""")
             )
             self.fields['relationship'].help_text = mark_safe(f"<span style=\"color:green;\"><strong>{notification} </strong></span>")
-        elif self.has_carer():
-            hide_and_disable_field('email')
-            notification = (
-                _("You can't change the email address of the primary carer at this time !")
-            )
-            self.fields['first_name'].help_text = mark_safe(f"<span style=\"color:green;\"><strong>{notification} </strong></span>")
 
     def clean_email(self):
         email = self.cleaned_data['email']
