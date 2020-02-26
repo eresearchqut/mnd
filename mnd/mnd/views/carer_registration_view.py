@@ -134,7 +134,7 @@ class CarerOperations:
                 "registration_url": registration_full_url,
                 "patient": self.patient
             }
-            process_notification(registry_code, EventType.NEW_CARER, template_data)
+            process_notification(registry_code, EventType.CARER_INVITED, template_data)
         else:
             template_data = {
                 "primary_carer": self.primary_carer,
