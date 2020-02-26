@@ -117,12 +117,6 @@ class PrimaryCarerForm(PrimaryCarerRegistrationForm):
             'preferred_language', 'interpreter_required', 'same_address', 'address', 'suburb', 'postcode'
         )
 
-    def has_carer(self):
-        instance = getattr(self, 'instance')
-        if instance and self.patient:
-            return CarerRegistration.objects.has_registration_records(instance, self.patient)
-        return False
-
     def has_assigned_carer(self):
         instance = getattr(self, 'instance')
         if instance and self.patient:
@@ -144,7 +138,7 @@ class PrimaryCarerForm(PrimaryCarerRegistrationForm):
 
     def clean_email(self):
         email = self.cleaned_data['email']
-        if self.has_carer():
+        if self.has_assigned_carer():
             instance = getattr(self, 'instance', None)
             if instance and instance.pk:
                 return instance.email
