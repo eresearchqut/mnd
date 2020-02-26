@@ -2,7 +2,6 @@ from datetime import timedelta
 import uuid
 
 from django.conf import settings
-from django.forms import ValidationError
 from django.http.response import HttpResponseForbidden
 from django.shortcuts import render, reverse
 from django.utils import timezone
@@ -14,7 +13,6 @@ from rdrf.events.events import EventType
 from rdrf.services.io.notifications.email_notification import process_notification
 
 
-from ..registry.patients.mnd_admin_forms import PrimaryCarerForm
 from registry.groups.models import CustomUser
 from registry.groups.registration.base import BaseRegistration
 from registry.patients.mixins import LoginRequiredMixin
@@ -162,32 +160,20 @@ class PatientCarerRegistrationView(LoginRequiredMixin, View):
         else:
             return _("No primary carer set !")
 
-    def render_form(self, request, form, primary_carer, flags):
-        return render(
-            request,
-            "registration/carer_enrol.html",
-            context={
-                "form": form,
-                "carer": self.primary_carer_str(primary_carer),
-                "flags": flags,
-            }
-        )
-
     def get(self, request):
         if not request.user.is_patient:
             return HttpResponseForbidden()
         patient = request.user.user_object.first()
         primary_carer = PrimaryCarer.get_primary_carer(patient)
         flags = RegistrationFlags(primary_carer, patient)
-        if not flags.can_register:
-            form = PrimaryCarerForm(data=primary_carer.__dict__) if primary_carer else PrimaryCarerForm(data={})
-            if flags.token_already_generated:
-                form.add_error(None, ValidationError(_("A token was already generated for this carer !")))
-            elif flags.no_primary_carer_set:
-                form.add_error(None, ValidationError(_("Primary carer need to be set in order to register it !")))
-        else:
-            form = PrimaryCarerForm(instance=primary_carer)
-        return self.render_form(request, form, primary_carer, flags)
+        return render(
+            request,
+            "registration/carer_enrol.html",
+            context={
+                "carer": self.primary_carer_str(primary_carer),
+                "flags": flags,
+            }
+        )
 
     def post(self, request):
         if not request.user.is_patient:
