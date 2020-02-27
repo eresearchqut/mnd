@@ -3,7 +3,7 @@
 {% load translate %}
 
 {% block content %}
-        <ul>
+    <ul>
         {% for p in patients %}
             <li>
                 <form action="{% url 'carer_operations' %}" method="post">
@@ -12,6 +12,7 @@
                     <h3>Would you like to be deactivated as a carer for {{p.given_names}} {{p.family_name}} ?</h3>
                     <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="form.submit();">{% trans 'Deactivate' %}</button>
                 </form>
-             </li>        
+            </li>
         {% endfor %}
+    </ul>
 {% endblock %}

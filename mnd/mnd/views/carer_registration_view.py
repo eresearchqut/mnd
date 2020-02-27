@@ -90,7 +90,8 @@ class CarerOperations:
         ).update(status=CarerRegistration.DEACTIVATED)
         template_data = {
             "primary_carer": self.primary_carer,
-            "patient": self.patient
+            "patient": self.patient,
+            "user": self.request.user
         }
         registry_code = self.patient.rdrf_registry.first().code
         process_notification(registry_code, EventType.CARER_DEACTIVATED, template_data)
