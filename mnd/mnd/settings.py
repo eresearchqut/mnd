@@ -20,6 +20,8 @@ SEND_ACTIVATION_EMAIL = False
 PROJECT_TITLE = env.get("project_title", "MND")
 PROJECT_TITLE_LINK = "login_router"
 
+PROJECT_LOGO = env.get("project_logo", "images/mnd/MNDR_Logo_transparent.png")
+
 # Registration customisation (if any) goes here
 # REGISTRATION_CLASS = "mnd.custom_registration.CustomRegistration"
 
