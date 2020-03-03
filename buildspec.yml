@@ -156,10 +156,6 @@ phases:
                   "value": "$NEW_RELIC_MONITOR_MODE"
                 },
                 {
-                  "name": "PROJECT_LOGO",
-                  "value": "$PROJECT_LOGO"
-                },
-                {
                   "name": "PROJECT_TITLE",
                   "value": "$PROJECT_TITLE"
                 },
