@@ -2,6 +2,7 @@ from datetime import timedelta
 import uuid
 
 from django.conf import settings
+from django.contrib import messages
 from django.http.response import HttpResponseForbidden, HttpResponseRedirect
 from django.shortcuts import render, reverse
 from django.utils import timezone
@@ -40,12 +41,16 @@ class RegistrationFlags:
         return CarerRegistration.objects.has_registered_carer(self.primary_carer, self.patient)
 
     @cached_property
-    def can_resend_invite(self):
+    def has_expired_registration(self):
         return CarerRegistration.objects.has_expired_registration(self.primary_carer)
 
     @cached_property
     def has_pending_registration(self):
         return CarerRegistration.objects.has_pending_registration(self.primary_carer)
+
+    @cached_property
+    def is_carer_registered(self):
+        return CarerRegistration.objects.is_carer_registered(self.primary_carer)
 
     @cached_property
     def can_register(self):
@@ -71,7 +76,6 @@ class RegistrationFlags:
         if registry:
             return registry.carer_registration_allowed()
         return False
-
 
 
 class CarerOperations:
@@ -123,19 +127,27 @@ class CarerOperations:
         )
 
     def register_carer(self):
+        # TODO patients_in_care isnull shouldn't be needed?
         primary_carer_user = (
             CustomUser.objects
-            .filter(email=self.primary_carer.email, patients_in_care__isnull=False)
+            .filter(username=self.primary_carer.email, patients_in_care__isnull=False)
             .distinct()
             .first()
         )
         registry_code = self.patient.rdrf_registry.first().code
-        reg = CarerRegistration.objects.create(
-            carer=self.primary_carer,
-            patient=self.patient,
-            token=uuid.uuid4(),
-            expires_on=timezone.now() + timedelta(days=settings.ACCOUNT_ACTIVATION_DAYS)
-        )
+
+        reg = CarerRegistration.objects.get_pending_registration(self.primary_carer)
+        if reg is None:
+            reg = CarerRegistration.objects.create(
+                carer=self.primary_carer,
+                patient=self.patient,
+                token=uuid.uuid4(),
+                expires_on=timezone.now() + timedelta(days=settings.ACCOUNT_ACTIVATION_DAYS)
+            )
+        else:
+            reg.expires_on = timezone.now() + timedelta(days=settings.ACCOUNT_ACTIVATION_DAYS)
+            reg.save()
+
         if not primary_carer_user:
             registration_url = reverse('carer_registration', kwargs={"registry_code": registry_code})
             registration_params = f"?token={reg.token}&username={self.primary_carer.email}"
@@ -159,6 +171,8 @@ class CarerOperations:
             reg.status = CarerRegistration.REGISTERED
             reg.save(update_fields=['status', 'registration_ts'])
 
+        # TODO no rendering in any of the operation methods
+        # just put in the right message and return
         return render(
             self.request,
             "registration/carer_enrol_token.html",
@@ -172,7 +186,7 @@ class PatientCarerRegistrationView(LoginRequiredMixin, View):
         if primary_carer:
             return f"{primary_carer.first_name} {primary_carer.last_name} ({primary_carer.email})"
         else:
-            return _("No primary carer set !")
+            return _("unset")
 
     def get(self, request):
         if not request.user.is_patient:
@@ -180,14 +194,8 @@ class PatientCarerRegistrationView(LoginRequiredMixin, View):
         patient = request.user.user_object.first()
         primary_carer = PrimaryCarer.get_primary_carer(patient)
         flags = RegistrationFlags(primary_carer, patient)
-        return render(
-            request,
-            "registration/carer_enrol.html",
-            context={
-                "carer": self.primary_carer_str(primary_carer),
-                "flags": flags,
-            }
-        )
+
+        return self._render(request, patient, primary_carer, flags)
 
     def post(self, request):
         if not request.user.is_patient:
@@ -196,8 +204,8 @@ class PatientCarerRegistrationView(LoginRequiredMixin, View):
         primary_carer = PrimaryCarer.get_primary_carer(patient)
         operations = CarerOperations(request, primary_carer, patient)
         flags = RegistrationFlags(primary_carer, patient)
-        if flags.has_pending_registration:
-            return HttpResponseForbidden()
+        # if flags.has_pending_registration:
+        #    return HttpResponseForbidden()
 
         if flags.can_deactivate:
             return operations.deactivate_carer()
@@ -207,7 +215,23 @@ class PatientCarerRegistrationView(LoginRequiredMixin, View):
 
         # resending email invite for expired carers
         # is the same as registering a carer
-        return operations.register_carer()
+        operations.register_carer()
+
+        messages.success(request, _(f"Email invitation sent to {primary_carer.email}."))
+
+        return self._render(request, patient, primary_carer, flags)
+
+    def _render(self, request, patient, primary_carer, flags):
+        registry = patient.user.registry.first()
+        return render(
+            request,
+            "registration/carer_enrol.html",
+            context={
+                "patient": patient,
+                "registry_code": registry.code,
+                "carer": self.primary_carer_str(primary_carer),
+                "flags": flags,
+                })
 
 
 class CarerOperationsView(LoginRequiredMixin, View):

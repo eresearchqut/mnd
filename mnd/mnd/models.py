@@ -115,10 +115,18 @@ class PreferredContact(models.Model):
 
 
 class CarerRegistrationManager(models.Manager):
+    def _pending_registration_qs(self, primary_carer):
+        return self.filter(carer=primary_carer, expires_on__gte=timezone.now(), status=CarerRegistration.CREATED)
+
+    def get_pending_registration(self, primary_carer):
+        return self._pending_registration_qs(primary_carer).first()
 
     def has_pending_registration(self, primary_carer):
+        return self._pending_registration_qs(primary_carer).exists()
+
+    def is_carer_registered(self, primary_carer):
         return self.filter(
-            carer=primary_carer, expires_on__gte=timezone.now(), status=CarerRegistration.CREATED
+            carer=primary_carer, status=CarerRegistration.REGISTERED
         ).exists()
 
     def has_registered_carer(self, primary_carer, patient):
@@ -132,9 +140,8 @@ class CarerRegistrationManager(models.Manager):
         ).exists()
 
     def has_expired_registration(self, primary_carer):
-        return self.filter(
-            carer=primary_carer, expires_on__lt=timezone.now(), status=CarerRegistration.CREATED,
-        ).exists()
+        last_registration = self.filter(carer=primary_carer, status=CarerRegistration.CREATED).order_by('-expires_on').first()
+        return last_registration is not None and last_registration.expires_on < timezone.now()
 
     def has_registration_records(self, primary_carer, patient):
         pending = self.has_pending_registration(primary_carer)
