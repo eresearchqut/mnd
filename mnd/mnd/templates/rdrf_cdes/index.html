@@ -32,8 +32,10 @@
         <h1>Australian MND Registry</h1>
         <div class="homeButton"><a href="{% url 'two_factor:login' %}?next=/router/"
                                    class="btn btn-primary btn-lg customBtn">LOGIN</a></div>
-        <div class="homeButton"><a href="{% url 'registration_register' registries.0.code %}"
-                                   class="btn btn-success btn-lg customBtn">REGISTER</a></div>
+        {% if registries %}
+          <div class="homeButton"><a href="{% url 'registration_register' registries.0.code %}"
+                                     class="btn btn-success btn-lg customBtn">REGISTER</a></div>
+        {% endif %}
       </div>
     </div>
   </div>
