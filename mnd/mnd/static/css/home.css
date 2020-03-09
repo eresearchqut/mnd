@@ -106,7 +106,6 @@ footer ul {
 @media (max-width: 1279px) {
 
     div.content-pane {
-        background-image: url(../images/mnd/mnd_intro.jpg);
         background-position: right center;
         background-size: 70%;
         background-repeat: no-repeat;
