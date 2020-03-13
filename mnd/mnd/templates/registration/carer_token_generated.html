@@ -1,0 +1,17 @@
+{% extends "registration/carer_operations_base.html" %}
+{% load i18n %}
+{% load translate %}
+
+{% block operation_info %}
+    {% url 'patient_edit' registry_code patient.pk as demographics_page_url %}
+    <p>{% blocktrans %}Your primary carer is <strong>{{carer}}</strong>.{% endblocktrans %}</p>
+    <p>{% trans 'You already invited your primary carer, but they have not registered yet.' %}</p>
+    <p>{% trans 'You can re-send the invitation email below.' %}</p>
+    <br/>
+    <a href="{{demographics_page_url}}"> Back to demographics page </a>
+{% endblock %}
+{% block buttons %}
+    <div class="panel-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="form.submit();">{% trans 'Re-send invitation email' %}</button>
+    </div>
+{% endblock %}
