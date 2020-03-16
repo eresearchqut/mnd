@@ -1,0 +1,9 @@
+{% extends "registration/carer_operations_base.html" %}
+{% load i18n %}
+{% load translate %}
+
+{% block operation_info %}
+    {% url 'patient_edit' registry_code patient.pk as demographics_page_url %}
+    <p>{% trans 'Primary carer details unknown.' %}</p>
+    <p>{% blocktrans %}Please fill in the details of your primary carer on the <a href="{{demographics_page_url}}">Demographics page</a>.{% endblocktrans %}</p>
+{% endblock %}
