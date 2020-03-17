@@ -9,6 +9,7 @@ from django.utils.translation import ugettext as _
 
 from registry.groups.models import CustomUser
 from registry.groups.registration.base import BaseRegistration
+from registry.patients.models import Patient
 
 from rdrf.events.events import EventType
 from rdrf.services.io.notifications.email_notification import process_notification
@@ -153,6 +154,18 @@ class CarerOperations:
         else:
             reg.expires_on = reg.expires_on + timedelta(days=settings.ACCOUNT_ACTIVATION_DAYS)
             reg.save()
+
+        is_inactive_user = primary_carer_user and not primary_carer_user.is_active
+        is_patient = Patient.objects.really_all().filter(email=self.primary_carer.email).exists()
+        if is_patient or is_inactive_user:
+            # If is patient or an inactive user just return success but do not send out emails
+            success_message = _(f"{primary_carer_str(self.primary_carer)} invited!")
+            return CarerOperationResult(
+                context=self._setup_context(),
+                message=success_message,
+                state=self.state.next_state(),
+                operation_result=True
+            )
 
         message = ""
         success = True
