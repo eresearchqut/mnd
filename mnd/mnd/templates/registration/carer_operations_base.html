@@ -1,0 +1,24 @@
+{% extends "rdrf_cdes/base-1-col.html" %}
+{% load i18n %}
+{% load translate %}
+
+{% block content %}
+    <form action="{% url 'patient_carer_registration' %}" method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="panel panel-default">
+                        <div class="panel-heading">
+                            {% trans 'Primary Carer Management' %}
+                        </div>
+                        <div class="panel-body">
+                            {% block operation_info %}
+                            {% endblock %}
+                        </div>
+                        {% block buttons %}
+                        {% endblock %}
+                </div>
+            </div>
+        </div>
+     </form>
+{% endblock %}

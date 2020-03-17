@@ -1,0 +1,31 @@
+{% extends "rdrf_cdes/navbar_links.html" %}
+
+{% load i18n %}
+{% load translate %}
+
+{% block patient_menu %}
+    {% if request.user.is_patient %}
+        <li>
+            <a href="{% url 'patient_carer_registration' %}"><span class="glyphicon glyphicon-user"></span>
+                {% trans 'Carer management' %}
+            </a>
+        </li>
+    {% endif %}
+    {% if request.user.is_carer %}
+        <li>
+            <a href="{% url 'carer_operations' %}"><span class="glyphicon glyphicon-user"></span>
+                {% trans 'Carer management' %}
+            </a>
+        </li>
+    {% endif %}
+{% endblock %}
+
+{% block extra_menu %}
+    {% if request.user.is_carer %}
+        <li>
+            <a href="{% url 'patientslisting' %}"><span class="glyphicon glyphicon-user"></span>
+                {% trans 'Patients list' %}
+            </a>
+        </li>
+    {% endif %}
+{% endblock %}

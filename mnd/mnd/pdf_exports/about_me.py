@@ -1,6 +1,7 @@
 import pycountry
 
 from ..settings import PDF_TEMPLATES_PATH
+from ..models import PrimaryCarerRelationship, PrimaryCarer
 
 
 def _yes_no(input):
@@ -109,7 +110,7 @@ def _generate_preferred_contact_fields(preferred_contact):
     }
 
 
-def _generate_primary_carer_fields(primary_carer, patient_address):
+def _generate_primary_carer_fields(primary_carer, patient, patient_address):
 
     def primary_carer_relationship(primary_carer):
         mapping = {
@@ -119,7 +120,15 @@ def _generate_primary_carer_fields(primary_carer, patient_address):
             'friend': 'Friend',
             'other': 'Other'
         }
-        return mapping.get(primary_carer.relationship, 'Off')
+        relation = (
+            PrimaryCarerRelationship
+            .objects
+            .filter(carer=primary_carer, patient=patient)
+            .first()
+        )
+        if relation:
+            return mapping.get(relation.relationship, 'Off')
+        return 'Off'
 
     def primary_carer_language(code):
         lang = pycountry.languages.get(alpha_2=code)
@@ -162,8 +171,10 @@ def generate_pdf_form_fields(registry, patient):
     data.update(_generate_patient_insurance_fields(patient, insurance))
     preferred_contact = getattr(patient, 'preferred_contact', None)
     data.update(_generate_preferred_contact_fields(preferred_contact))
-    primary_carer = getattr(patient, 'primary_carer', None)
-    data.update(_generate_primary_carer_fields(primary_carer, patient_address))
+    primary_carer = PrimaryCarer.get_primary_carer(patient)
+    data.update(
+        _generate_primary_carer_fields(primary_carer, patient, patient_address)
+    )
 
     # TODO
     # dynamic_data = patient.get_dynamic_data(registry)

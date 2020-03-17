@@ -3,6 +3,7 @@ import pycountry
 from django.db import models
 
 from django.utils.translation import gettext as _
+from django.utils import timezone
 from registry.patients.models import Patient
 
 
@@ -52,6 +53,34 @@ class PatientInsurance(models.Model):
 
 class PrimaryCarer(models.Model):
 
+    @classmethod
+    def get_primary_carer(cls, patient):
+        return patient.primary_carers.first() if patient else None
+
+    LANGUAGE_CHOICES = [
+        (l.alpha_2, l.name) for l in pycountry.languages if hasattr(l, 'alpha_2')
+    ]
+
+    # This is Many to Many as we don't want to add a FK to Patient in TRRF
+    # since TRRF is not aware of this MND specific model
+    patients = models.ManyToManyField(Patient, related_name='primary_carers', through='PrimaryCarerRelationship')
+    first_name = models.CharField(max_length=30)
+    last_name = models.CharField(max_length=30)
+    phone = models.CharField(max_length=30)
+    email = models.EmailField(max_length=30)
+    preferred_language = models.CharField(choices=LANGUAGE_CHOICES, max_length=30, default='en')
+    interpreter_required = models.BooleanField(default=False)
+    same_address = models.BooleanField(default=True)
+    suburb = models.CharField(max_length=50, null=True, blank=True)
+    address = models.TextField(null=True, blank=True)
+    postcode = models.CharField(max_length=20, null=True, blank=True)
+
+    def __str__(self):
+        return "{} {}".format(self.first_name, self.last_name)
+
+
+class PrimaryCarerRelationship(models.Model):
+
     PRIMARY_CARER_RELATIONS = [
         ('', _("Primary carer relationship")),
         ('spouse', _("Spouse")),
@@ -60,27 +89,10 @@ class PrimaryCarer(models.Model):
         ('friend', _("Friend")),
         ('other', _("Other(specify)")),
     ]
-
-    LANGUAGE_CHOICES = [
-        (l.alpha_2, l.name) for l in pycountry.languages if hasattr(l, 'alpha_2')
-    ]
-
-    patient = models.OneToOneField(Patient, related_name='primary_carer', on_delete=models.CASCADE)
-    first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=30)
-    phone = models.CharField(max_length=30)
-    email = models.CharField(max_length=30)
+    carer = models.ForeignKey(PrimaryCarer, related_name='relation', on_delete=models.CASCADE)
+    patient = models.OneToOneField(Patient, related_name='carer_relation', on_delete=models.CASCADE)
     relationship = models.CharField(choices=PRIMARY_CARER_RELATIONS, max_length=30)
     relationship_info = models.CharField(max_length=30, null=True, blank=True)
-    preferred_language = models.CharField(choices=LANGUAGE_CHOICES, max_length=30, default='en')
-    interpreter_required = models.BooleanField(null=False, blank=False, default=False)
-    same_address = models.BooleanField(null=False, blank=False, default=True)
-    suburb = models.CharField(max_length=50, null=True, blank=True)
-    address = models.TextField(null=True, blank=True)
-    postcode = models.CharField(max_length=20, null=True, blank=True)
-
-    def __str__(self):
-        return "{} {}".format(self.first_name, self.last_name)
 
 
 class PreferredContact(models.Model):
@@ -100,3 +112,82 @@ class PreferredContact(models.Model):
     phone = models.CharField(max_length=30, null=True, blank=True)
     email = models.CharField(max_length=30, null=True, blank=True)
     contact_method = models.CharField(choices=CONTACT_METHOD_CHOICES, max_length=30)
+
+
+class CarerRegistrationManager(models.Manager):
+
+    def _pending_registration_qs(self, primary_carer, patient):
+        return self.filter(
+            carer=primary_carer,
+            carer_email=primary_carer.email,
+            patient=patient,
+            expires_on__gte=timezone.now(),
+            status=CarerRegistration.CREATED
+        )
+
+    def get_pending_registration(self, primary_carer, patient):
+        return self._pending_registration_qs(primary_carer, patient).first()
+
+    def has_pending_registration(self, primary_carer, patient):
+        return self._pending_registration_qs(primary_carer, patient).exists()
+
+    def is_carer_registered(self, primary_carer, patient):
+        return self.filter(
+            carer=primary_carer,
+            carer_email=primary_carer.email,
+            patient=patient,
+            status=CarerRegistration.REGISTERED
+        ).exists()
+
+    def has_registered_carer(self, primary_carer, patient):
+        return self.filter(
+            carer=primary_carer,
+            patient=patient,
+            carer_email=primary_carer.email,
+            status=CarerRegistration.REGISTERED
+        ).exists()
+
+    def has_deactivated_carer(self, primary_carer, patient):
+        return self.filter(
+            carer=primary_carer,
+            patient=patient,
+            carer_email=primary_carer.email,
+            status=CarerRegistration.DEACTIVATED
+        ).exists()
+
+    def has_expired_registration(self, primary_carer, patient):
+        last_registration = self.filter(
+            carer=primary_carer,
+            patient=patient,
+            carer_email=primary_carer.email,
+            status=CarerRegistration.CREATED
+        ).order_by('-expires_on').first()
+        return last_registration is not None and last_registration.expires_on < timezone.now()
+
+    def has_registration_records(self, primary_carer, patient):
+        pending = self.has_pending_registration(primary_carer)
+        registered = self.has_registered_carer(primary_carer, patient)
+        deactivated = self.has_deactivated_carer(primary_carer, patient)
+        return pending or deactivated or registered
+
+
+class CarerRegistration(models.Model):
+
+    CREATED = 'created'
+    REGISTERED = 'registered'
+    DEACTIVATED = 'deactivated'
+
+    REGISTRATION_STATUS_CHOICES = [
+        (CREATED, CREATED),
+        (REGISTERED, REGISTERED),
+        (DEACTIVATED, DEACTIVATED),
+    ]
+    carer = models.ForeignKey(PrimaryCarer, on_delete=models.CASCADE)
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
+    carer_email = models.EmailField(max_length=30, default="unset@email.com")
+    token = models.UUIDField()
+    status = models.CharField(choices=REGISTRATION_STATUS_CHOICES, default=CREATED, max_length=16)
+    expires_on = models.DateTimeField()
+    registration_ts = models.DateTimeField(null=True, blank=True)
+
+    objects = CarerRegistrationManager()

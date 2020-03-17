@@ -1,0 +1,15 @@
+{% extends "registration/carer_operations_base.html" %}
+{% load i18n %}
+{% load translate %}
+
+{% block operation_info %}
+    <p>{% blocktrans %}Your primary carer is <strong>{{carer}}</strong>.{% endblocktrans %}</p>
+    <p>{% trans 'Your primary carer <strong>is not registered</strong> in the system.' %}</p>
+    <p>{% trans 'You can invite your carer to register into the system by sending them an email with registration instructions.' %}</p>
+    <p>{% trans 'After completing the registration the carer will have rights to view and edit all your details in the system.' %}</p>
+{% endblock %}
+{% block buttons %}
+    <div class="panel-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="form.submit();">{% trans 'Send invitation email' %}</button>
+    </div>
+{% endblock %}   

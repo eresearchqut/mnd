@@ -1,0 +1,37 @@
+{% extends "rdrf_cdes/base-1-col.html" %}
+{% load i18n %}
+{% load translate %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-default">
+                    <div class="panel-heading">
+                        {% trans 'Primary Carer Management' %}
+                    </div>
+                    <div class="panel-body">
+                        {% if not patients %}
+                            <p>{% trans "You don't have any patients in care currently or you have been deactivated !" %}</p>
+                            <br/>
+                            <p>{% trans "Once your patient reactivates you as a carer you will be able to see/edit the patients's data and deactivate yoursef here !" %}</p>
+                        {% else %}
+                            {% for p in patients %}
+                                <form action="{% url 'carer_operations' %}" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="patient_id" value="{{p.id}}"/>
+                                    <div style="display:inline-block;height:40px;">
+                                        {% blocktrans with full_name=p.display_name%}
+                                            Would you like to be deactivated as a carer for <strong>{{full_name}}</strong>?
+                                        {% endblocktrans %}
+                                    </div>
+                                    <div style="float:right;">
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="form.submit();">{% trans 'Deactivate' %}</button>
+                                    </div>
+                                </form>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
