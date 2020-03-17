@@ -158,8 +158,11 @@ class PrimaryCarerForm(PrimaryCarerRegistrationForm):
             # If a user was created for the carer don't allow the change of email address
             if instance and instance.pk:
                 return instance.email
-        if Patient.objects.filter(email=email).exists():
-            raise forms.ValidationError(_("Incorrect email for carer. A patient with the same email is already registered!"))
+
+        if Patient.objects.really_all().filter(email=email).exists():
+            # Patient with the same email exists. Allow the change here but invites will not be sent out
+            return email
+
         if instance and instance.pk:
             if email != instance.email:
                 # Delete pending carer invites for the old email
