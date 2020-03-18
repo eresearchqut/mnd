@@ -49,11 +49,8 @@ class CarerOperations:
             "carer": _(primary_carer_str(self.primary_carer)),
             "patient": self.patient,
             "registry_code": registry.code if registry else None,
+            "notification_configured": registry.has_email_notification(event_type) if event_type and registry else True
         }
-        if event_type and registry:
-            context.update({
-                'notification_configured': registry.has_email_notification(event_type)
-            })
         if status:
             context.update({'status': status})
         return context
