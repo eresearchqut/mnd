@@ -41,7 +41,7 @@ class MNDCarerRegistrationForm(RegistrationForm):
 
     def clean_token(self):
         token = self.cleaned_data['token']
-        email = self.cleaned_data['email']
+        email = self.cleaned_data['username']
         try:
             uid_token = uuid.UUID(token)
         except ValueError:
