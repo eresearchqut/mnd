@@ -108,8 +108,11 @@ class FormSectionMixin(PatientFormMixin):
         rel_info = form.cleaned_data.get('relationship_info')
         carer = instance or PrimaryCarer.objects.filter(email=email).first()
         if carer:
-            pc, _ = PrimaryCarerRelationship.objects.get_or_create(patient=self.object)
-            pc.carer = carer
+            pc = PrimaryCarerRelationship.objects.filter(patient=self.object).first()
+            if pc is None:
+                pc = PrimaryCarerRelationship.objects.create(patient=self.object, carer=carer)
+            else:
+                pc.carer = carer
             pc.relationship = rel
             pc.relationship_info = rel_info
             pc.save()
