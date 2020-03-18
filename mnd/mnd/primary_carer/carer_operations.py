@@ -5,6 +5,7 @@ import uuid
 from django.conf import settings
 from django.shortcuts import reverse
 from django.utils import timezone
+from django.utils.http import urlencode
 from django.utils.translation import ugettext as _
 
 from registry.groups.models import CustomUser
@@ -171,8 +172,11 @@ class CarerOperations:
         success = True
         if not primary_carer_user:
             registration_url = reverse('carer_registration', kwargs={"registry_code": registry_code})
-            registration_params = f"?token={reg.token}&username={self.primary_carer.email}"
-            registration_full_url = f"{BaseRegistration.get_base_url()}{registration_url}{registration_params}"
+            registration_params = {
+                'token': reg.token,
+                'username': self.primary_carer.email
+            }
+            registration_full_url = f"{BaseRegistration.get_base_url()}{registration_url}?{urlencode(registration_params)}"
 
             template_data = {
                 "primary_carer": self.primary_carer,
