@@ -112,6 +112,10 @@
                 {
                     "name": "TRRF_SOURCE_DIR",
                     "value": "/app/rdrf"
+                },
+                {
+                    "name": "DEFAULT_FROM_EMAIL",
+                    "value": "$DEFAULT_FROM_EMAIL"
                 }
             ],
             "image": "${IMAGE_REPO}:${IMAGE_TAG}",
