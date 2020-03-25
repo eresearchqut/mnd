@@ -1,7 +1,23 @@
-from django import forms
-from django.utils.translation import ugettext as _
+import logging
 
-from mnd.models import PatientInsurance, PrimaryCarer, PreferredContact
+from django import forms
+from django.utils.safestring import mark_safe
+from django.utils.translation import ugettext as _
+from django.utils import timezone
+
+from registry.groups.models import CustomUser
+from registry.patients.models import Patient
+
+from mnd.models import (
+    CarerRegistration,
+    PreferredContact,
+    PatientInsurance,
+    PrimaryCarer,
+    PrimaryCarerRelationship,
+)
+
+
+logger = logging.getLogger(__name__)
 
 
 class PrefixedModelForm(forms.ModelForm):
@@ -78,9 +94,13 @@ class PatientInsuranceForm(PatientInsuranceRegistrationForm):
 
 
 class PrimaryCarerRegistrationForm(PrefixedModelForm):
+
+    relationship = forms.ChoiceField(choices=PrimaryCarerRelationship.PRIMARY_CARER_RELATIONS, required=True)
+    relationship_info = forms.CharField(max_length=30, required=False)
+
     class Meta:
         model = PrimaryCarer
-        fields = ('first_name', 'last_name', 'phone', 'email', 'relationship', 'relationship_info',)
+        fields = ('first_name', 'last_name', 'phone', 'email', 'relationship', 'relationship_info')
 
     def _clean_fields(self):
         required_relationship_info = self.data.get(self.field_name('relationship'), '') == 'other'
@@ -90,11 +110,83 @@ class PrimaryCarerRegistrationForm(PrefixedModelForm):
 
 class PrimaryCarerForm(PrimaryCarerRegistrationForm):
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.patient = None
+
     class Meta:
         model = PrimaryCarer
         fields = PrimaryCarerRegistrationForm.Meta.fields + (
             'preferred_language', 'interpreter_required', 'same_address', 'address', 'suburb', 'postcode'
         )
+
+    def has_assigned_carer(self):
+        instance = getattr(self, 'instance')
+        if instance and self.patient:
+            return CarerRegistration.objects.has_registered_carer(instance, self.patient)
+        return False
+
+    def carer_has_user(self):
+        instance = getattr(self, 'instance')
+        if instance and self.patient:
+            pc = PrimaryCarer.get_primary_carer(self.patient)
+            return CustomUser.objects.filter(username=pc.email, is_active=True).exists() if pc else False
+        return False
+
+    def set_patient(self, patient):
+
+        self.patient = patient
+        if self.carer_has_user():
+            self.fields['email'].widget.attrs.update({
+                'readonly': True,
+                'title': _("You can't edit the carer's email addres once it's registered into the system!"),
+            })
+        if self.has_assigned_carer():
+            for f in self.fields:
+                if f not in ('relationship', 'relationship_info'):
+                    self.fields[f].widget.attrs['readonly'] = True
+            notification = (
+                _("""You can't change the personal details of the primary carer while it is linked.
+                     To unlink the carer please use the Carer Management menu!""")
+            )
+            self.fields['first_name'].help_text = mark_safe(f"<span style=\"color:green;\"><strong>{notification} </strong></span>")
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        instance = getattr(self, 'instance', None)
+        if self.carer_has_user():
+            # If a user was created for the carer don't allow the change of email address
+            if instance and instance.pk:
+                return instance.email
+
+        if Patient.objects.really_all().filter(email=email).exists():
+            # Patient with the same email exists. Allow the change here but invites will not be sent out
+            return email
+
+        if instance and instance.pk:
+            if email != instance.email:
+                # Delete pending carer invites for the old email
+                CarerRegistration.objects.filter(
+                    carer_email=instance.email,
+                    status=CarerRegistration.CREATED,
+                    expires_on__gte=timezone.now()
+                ).delete()
+
+        return email
+
+    def save(self, commit=True):
+        rel = self.cleaned_data.get('relationship')
+        rel_info = self.cleaned_data.get('relationship_info')
+        ret_val = super().save(commit)
+        carer = self.instance or ret_val
+        if self.patient and commit:
+            # There can be only 1 carer per patient from the patient's perspective
+            pc, __ = PrimaryCarerRelationship.objects.get_or_create(patient=self.patient)
+            pc.carer = carer
+            pc.relationship = rel
+            pc.relationship_info = rel_info
+            pc.save()
+        return ret_val
 
 
 class PreferredContactForm(PrefixedModelForm):
