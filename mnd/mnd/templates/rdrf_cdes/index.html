@@ -1,76 +1,77 @@
-{% load static from staticfiles %}
-{% load version_number %}
-{% load i18n %}
-{% load translate %}
 {% load project_title %}
+{% load static from staticfiles %}
+{% load project_title %}
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>{% project_title %}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <title>{% project_title %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-    <!-- stylesheets -->
-    <link rel="stylesheet" type="text/css" href="{% static 'css/compiled/theme.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/vendor/animate.css' %}">
-    <link rel="stylesheet" href="{% static 'bootstrap-3.3.6/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'bootstrap-3.3.6/css/bootstrap-theme.min.css' %}">
+  <link rel="stylesheet" href="{% static 'bootstrap-4.4.1/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'bootstrap-4.4.1/css/bootstrap-grid.min.css' %}">
 
-
-    <!-- javascript -->
-    <script type="text/javascript" src="{% static 'js/vendor/jquery-1.11.3.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'bootstrap-3.3.6/js/bootstrap.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/theme.js' %}"></script>
-
-    <!--[if lt IE 9]>
-      <script type="text/javascript" src="{% static 'js/vendor/html5shiv-3.7.3.min.js' %}"></script>
-    <![endif]-->
+  <script src="{% static 'js/vendor/jquery-3.4.1.min.js' %}"></script>
+  <script src="{% static 'bootstrap-4.4.1/js/bootstrap.bundle.js' %}"></script>
+  <script src="{% static 'bootstrap-4.4.1/js/bootstrap.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'css/home.css' %}">
 </head>
-<body id="home">
-    <header class="navbar navbar-inverse hero" role="banner">
-          <div class="container">
-            <div class="navbar-header">
-                  <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                  </button>
-                  <!--
-                  <a href="{% url 'landing' %}" style="position:absolute; left: 350px;" class="navbar-brand">TRRF {% version_number %}</a>
-                  -->
-                  <img src="{% static 'images/qut/progress.png' %}" style="position:absolute; height: 150px; left: 10px;">
-                  <img src="{% static 'images/qut/nhmrc.png' %}" style="position:absolute; height: 150px; right: 10px;">
-                  <div style="position:absolute; width: 60%; left: 20%; top: 130px;">
-                    <img src="{% static 'images/qut/grid.png' %}" style="width:100%">
-                    <p>&nbsp;</p>
-                    <img src="{% static 'images/qut/partnership.png' %}" style="width:100%">
-                  </div>
-                  <div style="position:absolute; width: 200px; right: 40px; top: 300px;">
-                        <p style="text-align:center;">
-                        <b><font style="font-size:20px; color:#355692">
-                            <a href="{% url 'two_factor:login' %}?next=/router/">{% project_title %} {% trans "Login Here" %}</a>
-                        </font></b>
-                        </p>
-                  </div>
-                  {% if registries %}
-                      {# Show registration link only when there is at least on registry defined to avoid server-side error on url lookup #}
-                      <div style="position:absolute; width: 200px; right: 40px; top: 450px;">
-                            <p style="text-align:center;">
-                            <b><font style="font-size:20px; color:#355692">
-                                <a href="{% url 'registration_register' registries.0.code %}">{% trans "Patient Register Here" %}</a>
-                            </font></b>
-                            </p>
-                            <p style="text-align:center;">
-                              <b><font style="font-size:20px; color:#355692">
-                                  <a href="{% url 'carer_registration' registries.0.code %}">{% trans "Carer Register Here" %}</a>
-                              </font></b>
-                              </p>
-  
-                      </div>
-                  {% endif %}
-            </div>
-          </div>
-    </header>
+
+<body>
+<header>
+  <div class="page-title">
+    <img src="static/images/mnd/MiND_Logo_orange.png" alt="MND Partnership">
+    <span class="d-none d-md-inline-block">{% project_title %}</span>
+  </div>
+  <div class="links d-none d-md-block">
+    <div>
+      <a href="{% url 'two_factor:login' %}?next=/router/"
+         class="btn custom-btn">Login</a>
+    </div>
+    {% if registration_enabled %}
+      <div>
+        <a href="{% url 'registration_register' registry.code %}"
+           class="btn custom-btn">Patient registration</a>
+      </div>
+      <div>
+        <a href="{% url 'carer_registration' registry.code %}"
+           class="btn custom-btn">Carer registration</a>
+      </div>
+    {% endif %}
+  </div>
+</header>
+
+<div class="content">
+  <div class="d-none d-md-block">
+    <img src="{% static 'images/mnd/mnd_intro.jpg' %}" width="100%" alt="MiNDAUS propotional image"/>
+  </div>
+  <div class="mobile-content d-md-none">
+    <br>
+    <h1 class="page-title">{% project_title %}</h1>
+    <div>
+      <a href="{% url 'two_factor:login' %}?next=/router/"
+         class="btn custom-btn">Login</a>
+    </div>
+    {% if registration_enabled %}
+      <div>
+        <a href="{% url 'registration_register' registry.code %}"
+           class="btn custom-btn">Patient registration</a>
+      </div>
+      <div>
+        <a href="{% url 'carer_registration' registry.code %}"
+           class="btn custom-btn">Carer registration</a>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+<footer>
+  <ul>
+    <li>MiNDAUS Registry 2020</li>
+    <li>Powered by the Trial Ready Registry Framework</li>
+  </ul>
+</footer>
 </body>
 </html>
