@@ -1,6 +1,7 @@
 from django.conf.urls import include
 from django.urls import re_path
 
+from .views.mnd_landing_view import LandingView
 from .views.pdf_export_view import pdf_export
 from .views.mnd_patient_view import AddPatientView, PatientEditView
 from .views.mnd_patients_listing import MNDPatientsListingView
@@ -20,5 +21,6 @@ urlpatterns = [
     re_path(r'^carer_operations/?$', CarerOperationsView.as_view(), name="carer_operations"),
     re_path(r"^(?P<registry_code>\w+)/carer_registration/?$", MNDRegistrationView.as_view(), name='carer_registration'),
     re_path(r'^api/v1/', include(('mnd.services.rest.urls.api_urls', 'api_urls'), namespace='v1')),
+    re_path(r'^$', LandingView.as_view(), name='landing'),
     re_path(r'', include(rdrf_urls)),
 ]

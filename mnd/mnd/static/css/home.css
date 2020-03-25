@@ -23,7 +23,7 @@ header {
 }
 
 .page-title {
-  font-size: 20pt;
+  font-size: 16pt;
   font-weight: bold;
 }
 
@@ -48,6 +48,10 @@ header > .links {
 
 header > .links, header .links > div {
   display: inline-block;
+}
+
+header .links > div {
+  margin: 1px;
 }
 
 .content .page-title {

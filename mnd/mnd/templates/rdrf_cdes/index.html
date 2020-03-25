@@ -1,6 +1,8 @@
-<!DOCTYPE html>
+{% load project_title %}
 {% load static from staticfiles %}
 {% load project_title %}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
@@ -21,20 +23,20 @@
 <header>
   <div class="page-title">
     <img src="static/images/mnd/MiND_Logo_orange.png" alt="MND Partnership">
-    <span class="d-none d-md-inline-block">Australian MND Registry</span>
+    <span class="d-none d-md-inline-block">{% project_title %}</span>
   </div>
   <div class="links d-none d-md-block">
     <div>
       <a href="{% url 'two_factor:login' %}?next=/router/"
          class="btn custom-btn">Login</a>
     </div>
-    {% if registries %}
+    {% if registration_enabled %}
       <div>
-        <a href="{% url 'registration_register' registries.0.code %}"
+        <a href="{% url 'registration_register' registry.code %}"
            class="btn custom-btn">Patient registration</a>
       </div>
       <div>
-        <a href="{% url 'registration_register' registries.0.code %}"
+        <a href="{% url 'carer_registration' registry.code %}"
            class="btn custom-btn">Carer registration</a>
       </div>
     {% endif %}
@@ -47,18 +49,18 @@
   </div>
   <div class="mobile-content d-md-none">
     <br>
-    <h1 class="page-title">Australian MND Registry</h1>
+    <h1 class="page-title">{% project_title %}</h1>
     <div>
       <a href="{% url 'two_factor:login' %}?next=/router/"
          class="btn custom-btn">Login</a>
     </div>
-    {% if registries %}
+    {% if registration_enabled %}
       <div>
-        <a href="{% url 'registration_register' registries.0.code %}"
+        <a href="{% url 'registration_register' registry.code %}"
            class="btn custom-btn">Patient registration</a>
       </div>
       <div>
-        <a href="{% url 'registration_register' registries.0.code %}"
+        <a href="{% url 'carer_registration' registry.code %}"
            class="btn custom-btn">Carer registration</a>
       </div>
     {% endif %}
