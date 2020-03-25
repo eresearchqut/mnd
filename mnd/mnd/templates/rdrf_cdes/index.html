@@ -1,43 +1,44 @@
 <!DOCTYPE html>
 {% load static from staticfiles %}
 {% load project_title %}
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
   <title>{% project_title %}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-  <link rel="stylesheet" href="{% static 'css/home.css' %}">
   <link rel="stylesheet" href="{% static 'bootstrap-4.4.1/css/bootstrap.min.css' %}">
   <link rel="stylesheet" href="{% static 'bootstrap-4.4.1/css/bootstrap-grid.min.css' %}">
 
   <script src="{% static 'js/vendor/jquery-3.4.1.min.js' %}"></script>
   <script src="{% static 'bootstrap-4.4.1/js/bootstrap.bundle.js' %}"></script>
   <script src="{% static 'bootstrap-4.4.1/js/bootstrap.js' %}"></script>
-
+  <link rel="stylesheet" href="{% static 'css/home.css' %}">
 </head>
 
 <body>
-<header></header>
-
-<div class="content-pane">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-xl-9 homePromo">
-        <img src="{% static 'images/mnd/mnd_intro.jpg' %}" alt="MiNDAUS propotional image" width="100%" height
-             align="left"/>
-      </div>
-      <div class="col-sm-3">
-        <h1>Australian MND Registry</h1>
-        <div class="homeButton"><a href="{% url 'two_factor:login' %}?next=/router/"
-                                   class="btn btn-primary btn-lg customBtn">LOGIN</a></div>
-        {% if registries %}
-          <div class="homeButton"><a href="{% url 'registration_register' registries.0.code %}"
-                                     class="btn btn-success btn-lg customBtn">REGISTER</a></div>
-        {% endif %}
-      </div>
+<header>
+  <img src="static/images/mnd/MiND_Logo_orange.png" alt="MND Partnership">
+  <span class="page-title d-none d-md-block">Australian MND Registry</span>
+  <div class="links d-none d-md-block">
+    <div class="links">
+      <div class=""><a href="{% url 'two_factor:login' %}?next=/router/"
+                       class="btn btn-primary btn-lg customBtn">LOGIN</a></div>
+      {% if registries %}
+        <div class=""><a href="{% url 'registration_register' registries.0.code %}"
+                         class="btn btn-success btn-lg customBtn">REGISTER</a></div>
+      {% endif %}
     </div>
+  </div>
+</header>
+
+<div class="content">
+  <div class="d-none d-md-block">
+    <img src="{% static 'images/mnd/mnd_intro.jpg' %}" width="100%" alt="MiNDAUS propotional image"/>
+  </div>
+  <div class="d-md-none">
+    <h1>Australian MND Registry</h1>
   </div>
 </div>
 
@@ -47,7 +48,5 @@
     <li>Powered by the Trial Ready Registry Framework</li>
   </ul>
 </footer>
-
 </body>
-
 </html>
