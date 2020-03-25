@@ -22,17 +22,36 @@ header {
   align-items: center;
 }
 
-header > img {
-  height: 100%;
+.page-title {
+  font-size: 20pt;
+  font-weight: bold;
 }
 
 header > .page-title {
-  font-size: 14pt;
-  color: white;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+header > .page-title > img {
+  height: 100%;
+}
+
+header > .page-title > span {
+  color: #f6a015;
+  margin-left: 30px;
+}
+
+header > .links {
+  margin-right: 15px;
 }
 
 header > .links, header .links > div {
   display: inline-block;
+}
+
+.content .page-title {
+  text-align: center;
 }
 
 .content {
@@ -40,26 +59,19 @@ header > .links, header .links > div {
   min-height: 100%;
 }
 
-
-h1 {
-  background-image: url('../images/mnd/h1_image.png');
-  background-position: left center;
-  background-repeat: no-repeat;
-  background-size: 4.5rem;
-  padding-left: 5.8rem;
-  padding-top: 1.4rem;
-  padding-bottom: 1.4rem;
-  font-size: 1.6rem !important;
+.mobile-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.customBtn {
-  width: 8rem !important;
+.mobile-content > div {
+  margin-top: 5px;
 }
 
 footer {
   text-align: center;
   font-weight: bold;
-  font-size: 8pt;
 }
 
 footer ul {
@@ -75,4 +87,12 @@ footer ul {
     width: 100%;
     bottom: 0;
   }
+}
+
+.custom-btn {
+  background-color: #f6a015;
+}
+
+.custom-btn:hover {
+  background-color: #de8d15;
 }

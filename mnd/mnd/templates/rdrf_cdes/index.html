@@ -19,17 +19,25 @@
 
 <body>
 <header>
-  <img src="static/images/mnd/MiND_Logo_orange.png" alt="MND Partnership">
-  <span class="page-title d-none d-md-block">Australian MND Registry</span>
+  <div class="page-title">
+    <img src="static/images/mnd/MiND_Logo_orange.png" alt="MND Partnership">
+    <span class="d-none d-md-inline-block">Australian MND Registry</span>
+  </div>
   <div class="links d-none d-md-block">
-    <div class="links">
-      <div class=""><a href="{% url 'two_factor:login' %}?next=/router/"
-                       class="btn btn-primary btn-lg customBtn">LOGIN</a></div>
-      {% if registries %}
-        <div class=""><a href="{% url 'registration_register' registries.0.code %}"
-                         class="btn btn-success btn-lg customBtn">REGISTER</a></div>
-      {% endif %}
+    <div>
+      <a href="{% url 'two_factor:login' %}?next=/router/"
+         class="btn custom-btn">Login</a>
     </div>
+    {% if registries %}
+      <div>
+        <a href="{% url 'registration_register' registries.0.code %}"
+           class="btn custom-btn">Patient registration</a>
+      </div>
+      <div>
+        <a href="{% url 'registration_register' registries.0.code %}"
+           class="btn custom-btn">Carer registration</a>
+      </div>
+    {% endif %}
   </div>
 </header>
 
@@ -37,8 +45,23 @@
   <div class="d-none d-md-block">
     <img src="{% static 'images/mnd/mnd_intro.jpg' %}" width="100%" alt="MiNDAUS propotional image"/>
   </div>
-  <div class="d-md-none">
-    <h1>Australian MND Registry</h1>
+  <div class="mobile-content d-md-none">
+    <br>
+    <h1 class="page-title">Australian MND Registry</h1>
+    <div>
+      <a href="{% url 'two_factor:login' %}?next=/router/"
+         class="btn custom-btn">Login</a>
+    </div>
+    {% if registries %}
+      <div>
+        <a href="{% url 'registration_register' registries.0.code %}"
+           class="btn custom-btn">Patient registration</a>
+      </div>
+      <div>
+        <a href="{% url 'registration_register' registries.0.code %}"
+           class="btn custom-btn">Carer registration</a>
+      </div>
+    {% endif %}
   </div>
 </div>
 
