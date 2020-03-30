@@ -13,7 +13,7 @@
                         {% if not patients %}
                             <p>{% trans "You don't have any patients in care currently or you have been deactivated !" %}</p>
                             <br/>
-                            <p>{% trans "Once your patient reactivates you as a carer you will be able to see/edit the patients's data and deactivate yoursef here !" %}</p>
+                            <p>{% trans "Once your patient reactivates you as a principal caregiver you will be able to see/edit the patients's data and deactivate yourself here!" %}</p>
                         {% else %}
                             {% for p in patients %}
                                 <form action="{% url 'carer_operations' %}" method="post">
@@ -21,7 +21,7 @@
                                     <input type="hidden" name="patient_id" value="{{p.id}}"/>
                                     <div style="display:inline-block;height:40px;">
                                         {% blocktrans with full_name=p.display_name%}
-                                            Would you like to be deactivated as a carer for <strong>{{full_name}}</strong>?
+                                            Would you like to be deactivated as a principal caregiver for <strong>{{full_name}}</strong>?
                                         {% endblocktrans %}
                                     </div>
                                     <div style="float:right;">
