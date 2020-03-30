@@ -147,7 +147,7 @@ class PrimaryCarerForm(PrimaryCarerRegistrationForm):
                     self.fields[f].widget.attrs['readonly'] = True
             notification = (
                 _("""You can't change the personal details of the principal caregiver while it is linked.
-                     To unlink the carer please use the Carer Management menu!""")
+                     To unlink the principal caregiver please use the Carer Management menu!""")
             )
             self.fields['first_name'].help_text = mark_safe(f"<span style=\"color:green;\"><strong>{notification} </strong></span>")
 
