@@ -3,19 +3,19 @@
 {% load translate %}
 
 {% block operation_info %}
-    <p>{% blocktrans %}Your primary carer is <strong>{{carer}}</strong>.{% endblocktrans %}</p>
-    <p>{% trans 'Your primary carer <strong>is registered</strong> in the system and can view and edit your details.' %}</p>
-    <p>{% trans "You can revoke the primary carer's rights to view and edit your details by deactivating the user." %}</p>
-    <p>{% trans 'In case you would like to change your primary carer you will also have to deactivate the current primary carer first.' %}</p>
+    <p>{% blocktrans %}Your principal caregiver is <strong>{{carer}}</strong>.{% endblocktrans %}</p>
+    <p>{% trans 'Your principal caregiver <strong>is registered</strong> in the system and can view and edit your details.' %}</p>
+    <p>{% trans "You can revoke the principal caregiver's rights to view and edit your details by deactivating the user." %}</p>
+    <p>{% trans 'In case you would like to change your principal caregiver you will also have to deactivate the current principal caregiver first.' %}</p>
     {% if not notification_configured %}
         <div class="alert alert-warning" style="margin-bottom: 0px" role="alert">
-            <p><strong>{% trans 'Email notification for carer deactivation is not set up!' %}</strong></p>
-            <p>{% trans 'The email notification for carer deactivation is not set up or is disabled. The deactivation will be performed but the carer will not get notified.' %}</p>
+            <p><strong>{% trans 'Email notification for principal caregiver deactivation is not set up!' %}</strong></p>
+            <p>{% trans 'The email notification for principal caregiver deactivation is not set up or is disabled. The deactivation will be performed but the caregiver will not get notified.' %}</p>
         </div>
     {% endif %}
 {% endblock %}
 {% block buttons %}
     <div class="panel-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="form.submit();">{% trans 'Deactivate carer' %}</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="form.submit();">{% trans 'Deactivate principal caregiver' %}</button>
     </div>
 {% endblock %}

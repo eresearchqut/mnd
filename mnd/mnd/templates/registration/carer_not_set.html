@@ -4,6 +4,6 @@
 
 {% block operation_info %}
     {% url 'patient_edit' registry_code patient.pk as demographics_page_url %}
-    <p>{% trans 'Primary carer details unknown.' %}</p>
-    <p>{% blocktrans %}Please fill in the details of your primary carer on the <a href="{{demographics_page_url}}">Demographics page</a>.{% endblocktrans %}</p>
+    <p>{% trans 'Principal caregiver details unknown.' %}</p>
+    <p>{% blocktrans %}Please fill in the details of your principal caregiver on the <a href="{{demographics_page_url}}">Demographics page</a>.{% endblocktrans %}</p>
 {% endblock %}

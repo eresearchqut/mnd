@@ -77,7 +77,7 @@ class FormSectionMixin(PatientFormMixin):
                 PatientInsuranceForm, _("Patient Insurance"), "patient_insurance", get_insurance_data(patient), request
             ),
             get_section(
-                PrimaryCarerForm, _("Primary Carer"), "primary_carer", get_primary_carer(patient), request,
+                PrimaryCarerForm, _("Principal caregiver"), "primary_carer", get_primary_carer(patient), request,
                 get_primary_carer_initial_data(patient), patient
             ),
             get_section(

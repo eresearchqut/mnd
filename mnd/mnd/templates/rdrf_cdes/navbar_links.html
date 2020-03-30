@@ -7,14 +7,14 @@
     {% if request.user.is_patient %}
         <li>
             <a href="{% url 'patient_carer_registration' %}"><span class="glyphicon glyphicon-user"></span>
-                {% trans 'Carer management' %}
+                {% trans 'Principal caregiver management' %}
             </a>
         </li>
     {% endif %}
     {% if request.user.is_carer %}
         <li>
             <a href="{% url 'carer_operations' %}"><span class="glyphicon glyphicon-user"></span>
-                {% trans 'Carer management' %}
+                {% trans 'Principal caregiver management' %}
             </a>
         </li>
     {% endif %}
