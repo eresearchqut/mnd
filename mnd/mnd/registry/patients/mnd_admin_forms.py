@@ -139,15 +139,15 @@ class PrimaryCarerForm(PrimaryCarerRegistrationForm):
         if self.carer_has_user():
             self.fields['email'].widget.attrs.update({
                 'readonly': True,
-                'title': _("You can't edit the carer's email addres once it's registered into the system!"),
+                'title': _("You can't edit the principal caregiver's email addres once it's registered into the system!"),
             })
         if self.has_assigned_carer():
             for f in self.fields:
                 if f not in ('relationship', 'relationship_info'):
                     self.fields[f].widget.attrs['readonly'] = True
             notification = (
-                _("""You can't change the personal details of the primary carer while it is linked.
-                     To unlink the carer please use the Carer Management menu!""")
+                _("""You can't change the personal details of the principal caregiver while it is linked.
+                     To unlink the principal caregiver please use the Carer Management menu!""")
             )
             self.fields['first_name'].help_text = mark_safe(f"<span style=\"color:green;\"><strong>{notification} </strong></span>")
 

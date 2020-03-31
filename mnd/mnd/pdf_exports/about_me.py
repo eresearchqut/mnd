@@ -96,7 +96,7 @@ def _generate_preferred_contact_fields(preferred_contact):
             'phone': 'Phone',
             'sms': 'SMS',
             'email': 'Email',
-            'primary_carer': 'Carer'
+            'primary_carer': 'Principal Caregiver',
         }
         return mapping.get(preferred_contact.contact_method, 'Off')
 

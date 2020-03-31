@@ -82,7 +82,7 @@ class PrimaryCarer(models.Model):
 class PrimaryCarerRelationship(models.Model):
 
     PRIMARY_CARER_RELATIONS = [
-        ('', _("Primary carer relationship")),
+        ('', _("Principal Caregiver relationship")),
         ('spouse', _("Spouse")),
         ('child', _("Child")),
         ('sibling', _("Sibling")),
@@ -102,7 +102,7 @@ class PreferredContact(models.Model):
         ('phone', _("Phone")),
         ('sms', _("SMS")),
         ('email', _("Email")),
-        ('primary_carer', _("Primary Carer")),
+        ('primary_carer', _("Principal Caregiver")),
         ('person', _("Nominated person below")),
     ]
 

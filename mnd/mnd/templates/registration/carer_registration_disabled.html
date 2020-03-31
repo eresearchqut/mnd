@@ -5,14 +5,14 @@
 {% block operation_info %}
     {% url 'patient_edit' registry_code patient.pk as demographics_page_url %}
     {% if not carer %}
-        <p>{% trans 'Primary carer details unknown.' %}</p>
-        <p>{% blocktrans %}Please fill in the details of your primary carer on the <a href="{{demographics_page_url}}">Demographics page</a>.{% endblocktrans %}</p>
+        <p>{% trans 'Principal caregiver details unknown.' %}</p>
+        <p>{% blocktrans %}Please fill in the details of your principal caregiver on the <a href="{{demographics_page_url}}">Demographics page</a>.{% endblocktrans %}</p>
     {% else %}
-        <p>{% blocktrans %}Your primary carer is <strong>{{carer}}</strong>.{% endblocktrans %}</p>
+        <p>{% blocktrans %}Your principal caregiver is <strong>{{carer}}</strong>.{% endblocktrans %}</p>
     {% endif %}
     <div class="alert alert-warning" style="margin-bottom: 0px" role="alert">
-        <p><strong>{% trans 'Carer registration disabled!' %}</strong></p>
-        <p>{% trans 'You can only invite your primary carer to use the registry if carer registration is enabled by an administrator.' %}</p>
+        <p><strong>{% trans 'Principal caregiver registration disabled!' %}</strong></p>
+        <p>{% trans 'You can only invite your principal caregiver to use the registry if caregiver registration is enabled by an administrator.' %}</p>
     </div>
     <br/>
     {% if carer %}

@@ -3,18 +3,18 @@
 {% load translate %}
 
 {% block operation_info %}
-    <p>{% blocktrans %}Your primary carer is <strong>{{carer}}</strong>.{% endblocktrans %}</p>
-    <p>{% trans 'Your primary carer <strong>is registered</strong> in the system, but can not view or edit your details.' %}</p>
-    <p>{% trans 'To give you primary carer right to view and edit you details you can activate the carer below.' %}</p>
+    <p>{% blocktrans %}Your principal caregiver is <strong>{{carer}}</strong>.{% endblocktrans %}</p>
+    <p>{% trans 'Your principal caregiver <strong>is registered</strong> in the system, but can not view or edit your details.' %}</p>
+    <p>{% trans 'To give your principal caregiver right to view and edit your details you can activate the caregiver below.' %}</p>
     {% if not notification_configured %}
         <div class="alert alert-warning" style="margin-bottom: 0px" role="alert">
-            <p><strong>{% trans 'Email notification for carer activation is not set up!' %}</strong></p>
-            <p>{% trans 'The email notification for carer activation is not set up or is disabled. The activation will be performed but the carer will not get notified.' %}</p>
+            <p><strong>{% trans 'Email notification for principal caregiver activation is not set up!' %}</strong></p>
+            <p>{% trans 'The email notification for principal caregiver activation is not set up or is disabled. The activation will be performed but the caregiver will not get notified.' %}</p>
         </div>
     {% endif %}
 {% endblock %}
 {% block buttons %}
     <div class="panel-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="form.submit();">{% trans 'Activate carer' %}</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="form.submit();">{% trans 'Activate principal caregiver' %}</button>
     </div>
 {% endblock %}
