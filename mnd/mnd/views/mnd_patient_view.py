@@ -72,6 +72,12 @@ class FormSectionMixin(PatientFormMixin):
                 form_instance.fields['umrn'].label = _("AMNDR / Hospital ID")
                 break
 
+        form_sections.insert(2,
+            get_section(
+                PreferredContactForm, _("Patient Preferred Contact Method "), "preferred_contact", get_preferred_contact(patient), request
+            )
+        )
+
         form_sections.extend([
             get_section(
                 PatientInsuranceForm, _("Patient Insurance"), "patient_insurance", get_insurance_data(patient), request
@@ -80,9 +86,6 @@ class FormSectionMixin(PatientFormMixin):
                 PrimaryCarerForm, _("Principal caregiver"), "primary_carer", get_primary_carer(patient), request,
                 get_primary_carer_initial_data(patient), patient
             ),
-            get_section(
-                PreferredContactForm, _("Preferred Contact"), "preferred_contact", get_preferred_contact(patient), request
-            )
         ])
         return form_sections
 
