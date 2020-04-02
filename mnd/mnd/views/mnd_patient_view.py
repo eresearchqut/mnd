@@ -80,10 +80,10 @@ class FormSectionMixin(PatientFormMixin):
 
         form_sections.extend([
             get_section(
-                PatientInsuranceForm, _("Patient Insurance"), "patient_insurance", get_insurance_data(patient), request
+                PatientInsuranceForm, _("Medicare, Health Insurance and Support details"), "patient_insurance", get_insurance_data(patient), request
             ),
             get_section(
-                PrimaryCarerForm, _("Principal caregiver"), "primary_carer", get_primary_carer(patient), request,
+                PrimaryCarerForm, _("Principal Caregiver"), "primary_carer", get_primary_carer(patient), request,
                 get_primary_carer_initial_data(patient), patient
             ),
         ])
