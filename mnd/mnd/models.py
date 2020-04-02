@@ -2,7 +2,7 @@ import pycountry
 
 from django.db import models
 
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
 from registry.patients.models import Patient
 
@@ -36,16 +36,16 @@ class PatientInsurance(models.Model):
     pension_number = models.CharField(max_length=30, null=True, blank=True)
     private_health_fund = models.CharField(max_length=255, null=True, blank=True)
     private_health_fund_number = models.CharField(max_length=30, null=True, blank=True)
-    ndis_number = models.CharField(max_length=30, null=True, blank=True)
-    ndis_plan_manager = models.CharField(choices=PLAN_MANAGER_CHOICES, max_length=30)
-    ndis_coordinator_first_name = models.CharField(max_length=30, null=True, blank=True)
-    ndis_coordinator_last_name = models.CharField(max_length=30, null=True, blank=True)
-    ndis_coordinator_phone = models.CharField(max_length=30, null=True, blank=True)
-    ndis_coordinator_email = models.CharField(max_length=30, null=True, blank=True)
-    dva_card_number = models.CharField(max_length=30, null=True, blank=True)
-    dva_card_type = models.CharField(choices=DVA_CARD_TYPE_CHOICES, max_length=30, default='')
-    referred_for_mac_care = models.BooleanField(blank=True, null=True)
-    needed_mac_level = models.CharField(choices=CARE_LEVEL_CHOICES, max_length=30, default='')
+    ndis_number = models.CharField(max_length=30, verbose_name=_('NDIS number'), null=True, blank=True)
+    ndis_plan_manager = models.CharField(choices=PLAN_MANAGER_CHOICES, verbose_name=_('NDIS plan manager'), max_length=30)
+    ndis_coordinator_first_name = models.CharField(max_length=30, verbose_name=_('NDIS coordinator first name'), null=True, blank=True)
+    ndis_coordinator_last_name = models.CharField(max_length=30, verbose_name=_('NDIS coordinator last name'), null=True, blank=True)
+    ndis_coordinator_phone = models.CharField(max_length=30, verbose_name=_('NDIS coordinator phone'), null=True, blank=True)
+    ndis_coordinator_email = models.CharField(max_length=30, verbose_name=_('NDIS coordinator email'), null=True, blank=True)
+    dva_card_number = models.CharField(max_length=30, verbose_name=_('DVA card number'), null=True, blank=True)
+    dva_card_type = models.CharField(choices=DVA_CARD_TYPE_CHOICES, verbose_name=_('DVA card type'), max_length=30, default='')
+    referred_for_mac_care = models.BooleanField(verbose_name=_('Referral for My Aged Care (MAC)'), blank=True, null=True)
+    needed_mac_level = models.CharField(choices=CARE_LEVEL_CHOICES, verbose_name=_('Needed My Aged Care (MAC) level'), max_length=30, default='')
     eligible_for_home_care = models.BooleanField(blank=False, null=False, default=False)
     receiving_home_care = models.BooleanField(blank=False, null=False, default=False)
     home_care_level = models.CharField(choices=CARE_LEVEL_CHOICES, max_length=30, default='')
