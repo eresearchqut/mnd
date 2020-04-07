@@ -159,6 +159,10 @@ class PrimaryCarerForm(PrimaryCarerRegistrationForm):
             if instance and instance.pk:
                 return instance.email
 
+        existing_user = CustomUser.objects.filter(username__iexact=email.lower(), is_active=True).first()
+        if existing_user and not existing_user.is_carer:
+            raise forms.ValidationError(_("The email address is already registered into the system"))
+
         if Patient.objects.really_all().filter(email=email).exists():
             # Patient with the same email exists. Allow the change here but invites will not be sent out
             return email

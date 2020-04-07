@@ -5,8 +5,7 @@ from django.forms import ValidationError
 from django.utils.translation import gettext as _
 from django.utils import timezone
 
-from registration.forms import RegistrationForm
-from rdrf.forms.registration_forms import PatientRegistrationForm
+from rdrf.forms.registration_forms import PatientRegistrationForm, RegistrationFormCaseInsensitiveCheck
 
 from ..models import CarerRegistration
 
@@ -15,7 +14,7 @@ class MNDRegistrationForm(PatientRegistrationForm):
     phone_number = None
 
 
-class MNDCarerRegistrationForm(RegistrationForm):
+class MNDCarerRegistrationForm(RegistrationFormCaseInsensitiveCheck):
     placeholders = {
         'username': _("Username"),
         'password1': _("Password"),
@@ -41,11 +40,16 @@ class MNDCarerRegistrationForm(RegistrationForm):
 
     def clean_token(self):
         token = self.cleaned_data['token']
-        email = self.cleaned_data['username']
         try:
             uid_token = uuid.UUID(token)
         except ValueError:
             raise ValidationError(_("Invalid token format !"))
+        return uid_token
+
+    def clean(self):
+        cleaned_data = super().clean()
+        token = cleaned_data['token']
+        email = cleaned_data['email']
         if not CarerRegistration.objects.filter(
             token=token,
             status=CarerRegistration.CREATED,
@@ -53,4 +57,4 @@ class MNDCarerRegistrationForm(RegistrationForm):
             expires_on__gte=timezone.now()
         ).exists():
             raise ValidationError(_("Invalid token !"))
-        return uid_token
+        return cleaned_data
