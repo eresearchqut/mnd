@@ -14,7 +14,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   unixodbc \
   # Builder
   build-essential \
-  git \
   gzip \
   libpcre3-dev \
   libpq-dev \
@@ -66,7 +65,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   # Base
   # TODO check if requirements are needed
   gettext \
-  git \
   libpcre3 \
   libpq5 \
   mime-support \
