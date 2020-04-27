@@ -72,7 +72,8 @@ class FormSectionMixin(PatientFormMixin):
                 form_instance.fields['umrn'].label = _("AMNDR / Hospital ID")
                 break
 
-        form_sections.insert(2,
+        form_sections.insert(
+            2,
             get_section(
                 PreferredContactForm, _("Patient Preferred Contact Method "), "preferred_contact", get_preferred_contact(patient), request
             )
