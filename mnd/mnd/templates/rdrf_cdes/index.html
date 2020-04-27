@@ -1,5 +1,5 @@
-{% load project_title %}
 {% load static from staticfiles %}
+{% load project_logo %}
 {% load project_title %}
 
 <!DOCTYPE html>
@@ -22,7 +22,8 @@
 <body>
 <header>
   <div class="page-title">
-    <img src="static/images/mnd/MiND_Logo_orange.png" alt="MND Partnership">
+    {% project_logo as PL %}
+    <img src="{% static PL %}" alt="MND Partnership">
     <span class="d-none d-md-inline-block">{% project_title %}</span>
   </div>
   <div class="links d-none d-md-block">
