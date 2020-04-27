@@ -1,5 +1,5 @@
 # Container to build our prod image
-FROM python:3.8.0 as builder
+FROM python:3.8 as builder
 
 ENV PYTHONUNBUFFERED 1
 
@@ -50,7 +50,7 @@ WORKDIR /app/rdrf/rdrf/rdrf/frontend
 RUN /docker-entrypoint-node.sh build
 
 # Actual image we are building
-FROM python:3.8.0-slim
+FROM python:3.8-slim
 
 ENV PYTHONUNBUFFERED 1
 
@@ -89,6 +89,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   nodejs \
   unixodbc \
   ssl-cert \
+  libmagic1 \
   pdftk \
   && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
