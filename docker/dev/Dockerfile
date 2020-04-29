@@ -70,6 +70,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   mime-support \
   nodejs \
   unixodbc \
+  libmagic1 \
   pdftk \
   && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
