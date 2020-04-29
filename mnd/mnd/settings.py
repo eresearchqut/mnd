@@ -29,6 +29,9 @@ VERSION = env.get('app_version', '%s (mnd)' % mnd.VERSION)
 
 PDF_TEMPLATES_PATH = f"{os.path.dirname(os.path.dirname(os.path.abspath(__file__)))}/mnd/templates/pdf_export"
 
+# Content Security Policy
+CSP_CHILD_SRC = ["'self'", "https://www.youtube.com"]
+
 # Currently using registration from base TRRF as-is, but keeping these for future reference
 #
 # REGISTRATION_FORM = 'mnd.forms.mnd_registration_form.MNDRegistrationForm'
