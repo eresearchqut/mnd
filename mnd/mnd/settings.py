@@ -36,3 +36,7 @@ CSP_CHILD_SRC = ["'self'", "https://www.youtube.com"]
 #
 # REGISTRATION_FORM = 'mnd.forms.mnd_registration_form.MNDRegistrationForm'
 # REGISTRATION_CLASS = 'mnd.registry.groups.registration.mnd_registration.MNDRegistration'
+
+STRONGHOLD_PUBLIC_URLS += (
+    r'/(?P<registry_code>\w+)/carer_registration/?$',
+)
