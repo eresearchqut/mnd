@@ -8,7 +8,6 @@ from django.utils.decorators import method_decorator
 from django.views import View
 
 
-from registry.patients.mixins import LoginRequiredMixin
 from registry.patients.models import Patient
 
 from mnd.primary_carer.carer_state_machine import get_carer_state, get_current_state
@@ -39,7 +38,7 @@ class PatientCarerRegistrationView(View):
         return self._render(request, result)
 
 
-class CarerOperationsView(LoginRequiredMixin, View):
+class CarerOperationsView(View):
 
     def get(self, request):
         if not request.user.is_carer:
