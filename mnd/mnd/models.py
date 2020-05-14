@@ -58,7 +58,7 @@ class PrimaryCarer(models.Model):
         return patient.primary_carers.first() if patient else None
 
     LANGUAGE_CHOICES = [
-        (l.alpha_2, l.name) for l in pycountry.languages if hasattr(l, 'alpha_2')
+        (lang.alpha_2, lang.name) for lang in pycountry.languages if hasattr(lang, 'alpha_2')
     ]
 
     # This is Many to Many as we don't want to add a FK to Patient in TRRF
