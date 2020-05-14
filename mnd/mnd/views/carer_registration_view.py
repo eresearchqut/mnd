@@ -1,10 +1,8 @@
 import logging
 
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 from django.http.response import HttpResponseForbidden, HttpResponseRedirect
 from django.shortcuts import render, reverse
-from django.utils.decorators import method_decorator
 from django.views import View
 
 
@@ -26,7 +24,6 @@ class PatientCarerRegistrationView(View):
             msg_func(request, result.message)
         return render(request, result.template, result.context)
 
-    @method_decorator(login_required)
     def dispatch(self, request):
         if not request.user.is_patient:
             return HttpResponseForbidden()

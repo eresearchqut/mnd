@@ -1,7 +1,6 @@
 import logging
 import os
 
-from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
 from django.http import FileResponse
 from django.shortcuts import get_object_or_404
@@ -17,7 +16,6 @@ logger = logging.getLogger("registry_log")
 
 
 @require_GET
-@login_required
 def pdf_export(request, registry_code, patient_id):
     registry = get_object_or_404(Registry, code=registry_code)
     patient = get_object_or_permission_denied(Patient, pk=patient_id)
