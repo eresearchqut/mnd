@@ -79,7 +79,7 @@
                 },
                 {
                     "name": "ALLOWED_HOSTS",
-                    "value": "localhost"
+                    "value": "$ALLOWED_HOSTS"
                 },
                 {
                     "name": "IPRESTRICT_IGNORE_PROXY_HEADER",
