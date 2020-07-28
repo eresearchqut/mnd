@@ -131,6 +131,16 @@
                 }
             ],
             "image": "${IMAGE_REPO}:${IMAGE_TAG}",
+            "healthCheck": {
+                "retries": 3,
+                "command": [
+                    "CMD-SHELL",
+                    "curl -k -f https://localhost:$CONTAINER_PORT/health-check || exit 1"
+                ],
+                "timeout": 5,
+                "interval": 10,
+                "startPeriod": 30
+            },
             "logConfiguration": {
                 "logDriver": "awslogs",
                 "options": {
@@ -180,10 +190,10 @@
             ]
         }
     ],
-    "cpu": "1024",
+    "cpu": "$CPU",
     "executionRoleArn": "$EXECUTION_ROLE_ARN",
     "taskRoleArn": "$TASK_ROLE_ARN",
-    "memory": "2048",
+    "memory": "$MEMORY",
     "networkMode": "awsvpc",
     "family": "$TASK_DEF_NAME",
     "requiresCompatibilities": [

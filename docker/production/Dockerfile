@@ -91,6 +91,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   ssl-cert \
   libmagic1 \
   pdftk \
+  curl \
   && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN mkdir -p /requirements/rdrf/
