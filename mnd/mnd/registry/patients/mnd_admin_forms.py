@@ -165,8 +165,12 @@ class PrimaryCarerForm(PrimaryCarerRegistrationForm):
                     status=CarerRegistration.CREATED,
                     expires_on__gte=timezone.now()
                 ).delete()
-
         return email
+
+    def clean(self):
+        # To bypass validate_unique on the model
+        # in case the user enters an existing email address
+        pass
 
     def save(self, commit=True):
         rel = self.cleaned_data.get('relationship')
@@ -184,6 +188,11 @@ class PrimaryCarerForm(PrimaryCarerRegistrationForm):
                 # and for that email address the carer registered already
                 new_carer = PrimaryCarer.objects.filter(email__iexact=email.lower()).first()
                 self.instance.pk = new_carer.pk if new_carer else None
+        else:
+            existing_carer = PrimaryCarer.objects.filter(email__iexact=email).first()
+            if existing_carer:
+                carer_instance_update = True
+                self.instance = existing_carer
         ret_val = super().save(commit)
         carer = ret_val if carer_instance_update else (self.instance or ret_val)
         if self.patient and commit:

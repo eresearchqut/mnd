@@ -82,11 +82,6 @@ class PrimaryCarer(models.Model):
         if self.email:
             self.email = self.email.lower()
 
-    def save(self, *args, **kwargs):
-       existing = PrimaryCarer.objects.filter(email__iexact = self.email.lower()).first()
-       if existing:
-           return existing
-       return super().save(*args, **kwargs)
 
 class PrimaryCarerRelationship(models.Model):
 
