@@ -126,21 +126,8 @@ class PrimaryCarerForm(PrimaryCarerRegistrationForm):
             return CarerRegistration.objects.has_registered_carer(instance, self.patient)
         return False
 
-    def carer_has_user(self):
-        instance = getattr(self, 'instance')
-        if instance and self.patient:
-            pc = PrimaryCarer.get_primary_carer(self.patient)
-            return CustomUser.objects.filter(username=pc.email, is_active=True).exists() if pc else False
-        return False
-
     def set_patient(self, patient):
-
         self.patient = patient
-        if self.carer_has_user():
-            self.fields['email'].widget.attrs.update({
-                'readonly': True,
-                'title': _("You can't edit the principal caregiver's email addres once it's registered into the system!"),
-            })
         if self.has_assigned_carer():
             for f in self.fields:
                 if f not in ('relationship', 'relationship_info'):
@@ -154,10 +141,6 @@ class PrimaryCarerForm(PrimaryCarerRegistrationForm):
     def clean_email(self):
         email = self.cleaned_data['email']
         instance = getattr(self, 'instance', None)
-        if self.carer_has_user():
-            # If a user was created for the carer don't allow the change of email address
-            if instance and instance.pk:
-                return instance.email
 
         existing_user = CustomUser.objects.filter(username__iexact=email.lower(), is_active=True).first()
         if existing_user and not existing_user.is_carer:
@@ -181,8 +164,21 @@ class PrimaryCarerForm(PrimaryCarerRegistrationForm):
     def save(self, commit=True):
         rel = self.cleaned_data.get('relationship')
         rel_info = self.cleaned_data.get('relationship_info')
+        email = self.cleaned_data.get('email')
+        instance = getattr(self, 'instance', None)
+        carer_instance_update = False
+        if instance and instance.pk:
+            db_instance = PrimaryCarer.objects.get(pk=instance.pk)
+            email_changed = db_instance.email != email
+            existing_user = CustomUser.objects.filter(username=db_instance.email, is_active=True).exists()
+            carer_instance_update = email_changed and existing_user
+            if carer_instance_update:
+                # get or create a new primary carer entry if email is changed
+                # and for that email address the carer registered already
+                new_carer = PrimaryCarer.objects.filter(email__iexact=email.lower()).first()
+                self.instance.pk = new_carer.pk if new_carer else None
         ret_val = super().save(commit)
-        carer = self.instance or ret_val
+        carer = ret_val if carer_instance_update else (self.instance or ret_val)
         if self.patient and commit:
             # There can be only 1 carer per patient from the patient's perspective
             pc, __ = PrimaryCarerRelationship.objects.get_or_create(patient=self.patient)
