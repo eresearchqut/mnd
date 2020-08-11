@@ -126,13 +126,6 @@ class PrimaryCarerForm(PrimaryCarerRegistrationForm):
             return CarerRegistration.objects.has_registered_carer(instance, self.patient)
         return False
 
-    def carer_has_user(self):
-        instance = getattr(self, 'instance')
-        if instance and self.patient:
-            pc = PrimaryCarer.get_primary_carer(self.patient)
-            return CustomUser.objects.filter(username=pc.email, is_active=True).exists() if pc else False
-        return False
-
     def set_patient(self, patient):
         self.patient = patient
         if self.has_assigned_carer():
@@ -171,7 +164,7 @@ class PrimaryCarerForm(PrimaryCarerRegistrationForm):
     def save(self, commit=True):
         rel = self.cleaned_data.get('relationship')
         rel_info = self.cleaned_data.get('relationship_info')
-        email = self.cleaned_data['email']
+        email = self.cleaned_data.get('email')
         instance = getattr(self, 'instance', None)
         carer_instance_update = False
         if instance and instance.pk:
