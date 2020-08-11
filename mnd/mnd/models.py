@@ -67,7 +67,7 @@ class PrimaryCarer(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     phone = models.CharField(max_length=30)
-    email = models.EmailField(max_length=30)
+    email = models.EmailField(max_length=30, unique=True)
     preferred_language = models.CharField(choices=LANGUAGE_CHOICES, max_length=30, default='en')
     interpreter_required = models.BooleanField(default=False)
     same_address = models.BooleanField(default=True)
@@ -77,6 +77,10 @@ class PrimaryCarer(models.Model):
 
     def __str__(self):
         return "{} {}".format(self.first_name, self.last_name)
+
+    def clean(self):
+        if self.email:
+            self.email = self.email.lower()
 
 
 class PrimaryCarerRelationship(models.Model):

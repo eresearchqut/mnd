@@ -126,10 +126,6 @@ class FormSectionMixin(PatientFormMixin):
         ret_val = super().all_forms_valid(forms)
         formset_keys = [self.PATIENT_INSURANCE_KEY, self.PRIMARY_CARER_KEY, self.PREFERRED_CONTACT_KEY]
         for key in formset_keys:
-            if key == self.PRIMARY_CARER_KEY:
-                carer_handled = self._handle_primary_carer_relationship(forms[key], None)
-                if carer_handled:
-                    continue
             instance = forms[key].save(commit=False)
             instance.patient = self.object
             instance.save()
