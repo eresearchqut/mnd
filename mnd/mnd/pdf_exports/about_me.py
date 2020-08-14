@@ -3,6 +3,8 @@ import pycountry
 from ..settings import PDF_TEMPLATES_PATH
 from ..models import PrimaryCarerRelationship, PrimaryCarer
 
+from .dynamic_data_fields import generate_dynamic_data_fields
+
 
 def _yes_no(input):
     return "Yes" if input else "No"
@@ -163,6 +165,8 @@ def _generate_primary_carer_fields(primary_carer, patient, patient_address):
     return result
 
 
+
+
 def generate_pdf_form_fields(registry, patient):
     data = _generate_patient_fields(patient)
     patient_address = patient.home_address
@@ -175,9 +179,9 @@ def generate_pdf_form_fields(registry, patient):
     data.update(
         _generate_primary_carer_fields(primary_carer, patient, patient_address)
     )
-
-    # TODO
-    # dynamic_data = patient.get_dynamic_data(registry)
+    data.update(
+        generate_dynamic_data_fields(registry, patient)
+    )
 
     return {k: '' if v is None else v for k, v in data.items()}
 
