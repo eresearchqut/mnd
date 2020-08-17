@@ -165,8 +165,6 @@ def _generate_primary_carer_fields(primary_carer, patient, patient_address):
     return result
 
 
-
-
 def generate_pdf_form_fields(registry, patient):
     data = _generate_patient_fields(patient)
     patient_address = patient.home_address
