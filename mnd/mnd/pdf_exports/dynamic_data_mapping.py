@@ -117,7 +117,7 @@ _single_section_field_mappings = {
     ("mndMouth", "mndMHelp"): "mouth_care",
     ("mndMouth", "mndBrush"): "brush-teeth",
     ("mndMouth", "mndSwabs"): "swabs",
-    # ("mndMouth", "mndXSaliva"): 'Sometimes',
+    ("mndMouth", "mndXSaliva"): "saliva",
     ("mndMouth", "mndManageSaliva"): "checkbox_mappings",
     ("mndMouth", "mndSalivaOther"): "sm_other",
 
