@@ -1,7 +1,7 @@
 import re
 
 # key is (section_code, cde_code), value is pdf form element
-_field_mappings = {
+_single_section_field_mappings = {
     # My legal docs
     ("legalQuestions", "mndACD"): "acd",
     ("legalQuestions", "mndLDocs"): "checkbox_mappings",
@@ -126,10 +126,16 @@ _field_mappings = {
 
     # My medications and allergies
     ("myAllergies", "mndAllergies"): "allergies_text",
-    ("myMedList", "mndDateStarted"): "start_date1",
-    ("myMedList", "mndMedName"): "med_name1",
-    ("myMedList", "mndMedDose"): "med_dose1",
-    ("myMedList", "mndMedPurpose"): "med_use1",
+}
+
+# key is (section_code, cde_code), value is pdf form element
+_multi_section_field_mappings = {
+    # My medications and allergies
+    ("myMedList", "mndDateStarted"): "start_date",
+    ("myMedList", "mndMedName"): "med_name",
+    ("myMedList", "mndMedDose"): "med_dose",
+    ("myMedList", "mndMedPurpose"): "med_use",
+    ("myMedList", "mndMedAdmin"): "med_taken",
     # ("myMedList", "mndMedFreq"): 'Every 12 Hours',
     # ("myMedList", "mndMedOther"): '',
     # ("myMedList", "mndMedTime"): '07:55 AM',
@@ -139,19 +145,17 @@ _field_mappings = {
     # ("myMedList", "mndMedTime5"): '',
     # ("myMedList", "mndMedTime6"): '',
     # ("myMedList", "mndMedTime6Plus"): '',
-    # ("myMedList", "mndMedAdmin"): 'Via Nebuliser',
 
     # My appointments
-    ("mndApptList", "mndAName"): "Name of Team memberRow1",
-    ("mndApptList", "mndApptDate"): "Date of appointmentRow1",
-    ("mndApptList", "mndApptTime"): "TimeRow1",
+    ("mndApptList", "mndAName"): "Name of Team memberRow",
+    ("mndApptList", "mndApptDate"): "Date of appointmentRow",
+    ("mndApptList", "mndApptTime"): "TimeRow",
 
     # My care team
-    ("myCarerDetails", "mndCRole"): "mndCarerProfession1",
-    ("myCarerDetails", "mndCName"): "NameRow1",
-    # ("myCarerDetails", "mndCAddress"): "Address Team Member 1",
-    ("myCarerDetails", "mndCPhone"): "TelephoneRow1",
-    ("myCarerDetails", "mndCEmail"): "EmailRow1",
+    ("myCarerDetails", "mndCRole"): "mndCarerProfession",
+    ("myCarerDetails", "mndCName"): "NameRow",
+    ("myCarerDetails", "mndCPhone"): "TelephoneRow",
+    ("myCarerDetails", "mndCEmail"): "EmailRow",
     # ("myCarerDetails", "mndPrimary"): ["PrimaryContact"],
 }
 
@@ -383,21 +387,33 @@ _checkbox_mapping_cdes = {
 }
 
 
+def _set_data_fields(data, field, cde_code, value):
+    if cde_code in _values_mapping_cdes:
+        mapping_func = _values_mapping_cdes[cde_code]
+        data[field] = mapping_func(value)
+    elif cde_code in _checkbox_mapping_cdes:
+        mappings = _checkbox_mapping_cdes[cde_code]
+        if isinstance(value, list):
+            checkbox_updates = {mappings[v]: "Yes" for v in value if v in mappings}
+        else:
+            checkbox_updates = {mappings[v]: "Yes" for v in [value] if v in mappings}
+        data.update(checkbox_updates)
+    else:
+        data[field] = value
+
+
 def generate_pdf_field_mappings(form_values):
     data = {}
-    for (section_code, cde_code), field in _field_mappings.items():
-        value = form_values[(section_code, cde_code)]
-        if cde_code in _values_mapping_cdes:
-            mapping_func = _values_mapping_cdes[cde_code]
-            data[field] = mapping_func(value)
-        elif cde_code in _checkbox_mapping_cdes:
-            mappings = _checkbox_mapping_cdes[cde_code]
-            if isinstance(value, list):
-                checkbox_updates = {mappings[v]: "Yes" for v in value if v in mappings}
-                data.update(checkbox_updates)
-            else:
-                if value in mappings:
-                    data[mappings[value]] = "Yes"
-        else:
-            data[field] = value
+    for (section_code, cde_code), field in _single_section_field_mappings.items():
+        single_section_key = (section_code, cde_code, 0)
+        value = form_values[single_section_key]
+        _set_data_fields(data, field, cde_code, value)
+
+    for (section_code, cde_code), field in _multi_section_field_mappings.items():
+        for i in range(1, 10):
+            section_key = (section_code, cde_code, i)
+            if section_key in form_values:
+                value = form_values[section_key]
+                _set_data_fields(data, f"{field}{i}", cde_code, value)
+
     return data

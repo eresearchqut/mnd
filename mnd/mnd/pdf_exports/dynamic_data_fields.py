@@ -14,12 +14,13 @@ def _get_form_values(dyn_data):
             if not section_dict["allow_multiple"]:
                 for cde_dict in section_dict["cdes"]:
                     cde_code = cde_dict["code"]
-                    form_values[(section_code, cde_code)] = cde_dict["value"]
+                    form_values[(section_code, cde_code, 0)] = cde_dict["value"]
             else:
                 items = section_dict["cdes"]
-                for cde_dict in items[0]:  # first section from multiple forms
-                    cde_code = cde_dict["code"]
-                    form_values[(section_code, cde_code)] = cde_dict["value"]
+                for idx, section in enumerate(items):
+                    for cde_dict in section:
+                        cde_code = cde_dict["code"]
+                        form_values[(section_code, cde_code, idx + 1)] = cde_dict["value"]
     return form_values
 
 
@@ -31,7 +32,7 @@ def generate_dynamic_data_fields(registry, patient):
             continue
         form_values.update(_get_form_values(dyn_data))
 
-    cde_codes = [code for (__, code) in form_values.keys()]
+    cde_codes = [code for (__, code, __) in form_values.keys()]
     with_pv_groups = CommonDataElement.objects.filter(code__in=cde_codes, pv_group__isnull=False)
     cde_values_mapping = {
         cde.code: cde.pv_group.cde_values_dict for cde in with_pv_groups
@@ -39,10 +40,10 @@ def generate_dynamic_data_fields(registry, patient):
 
     updated_form_values = {}
     for key, value in form_values.items():
-        section, code = key
+        section, code, section_index = key
         if code in cde_values_mapping and value:
             if not isinstance(value, list):
-                updated_form_values[(section, code)] = cde_values_mapping[code].get(value, value)
+                updated_form_values[(section, code, section_index)] = cde_values_mapping[code].get(value, value)
 
     form_values.update(updated_form_values)
 
