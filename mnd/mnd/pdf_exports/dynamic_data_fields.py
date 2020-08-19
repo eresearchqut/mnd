@@ -1,3 +1,4 @@
+import datetime
 import logging
 
 from rdrf.models.definition.models import CommonDataElement
@@ -26,10 +27,18 @@ def _get_form_values(dyn_data):
 
 def generate_dynamic_data_fields(registry, patient):
     form_values = {}
+    max_ts = None
     for context_model in patient.context_models:
         dyn_data = patient.get_dynamic_data(registry, context_id=context_model.id)
         if not dyn_data:
             continue
+        form_ts = dyn_data.get("timestamp", None)
+        if form_ts:
+            as_dt = datetime.datetime.strptime(form_ts[:10], '%Y-%m-%d')
+            if not max_ts:
+                max_ts = as_dt
+            elif as_dt > max_ts:
+                max_ts = as_dt
         form_values.update(_get_form_values(dyn_data))
 
     cde_codes = [code for (__, code, __) in form_values.keys()]
@@ -47,4 +56,7 @@ def generate_dynamic_data_fields(registry, patient):
 
     form_values.update(updated_form_values)
 
-    return generate_pdf_field_mappings(form_values)
+    data = generate_pdf_field_mappings(form_values)
+    if max_ts:
+        data["date_updated_af_date"] = max_ts.strftime("%d/%m/%Y")
+    return data
