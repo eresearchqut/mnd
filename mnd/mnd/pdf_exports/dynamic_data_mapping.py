@@ -1,161 +1,162 @@
 import re
 
-field_mappings = {
+# key is (section_code, cde_code), value is pdf form element
+_field_mappings = {
     # My legal docs
-    ("myLegalDocs", "legalQuestions", "mndACD"): "acd",
-    ("myLegalDocs", "legalQuestions", "mndLDocs"): "checkbox_mappings",
-    ("myLegalDocs", "legalQuestions", "mndDocLocation"): "pDocuments",
+    ("legalQuestions", "mndACD"): "acd",
+    ("legalQuestions", "mndLDocs"): "checkbox_mappings",
+    ("legalQuestions", "mndDocLocation"): "pDocuments",
 
     # My MND
-    ("myMND", "mndType", "mndTypeSelect"): "mndType",
-    ("myMND", "mndType", "mndDiagDate"): "mndDiagDate",
-    ("myMND", "mndType", "mndALSFRSSum"): "alsfrsScore",
-    ("myMND", "mndType", "mndALSTestDate"): "mndTestDate_af_date",
+    ("mndType", "mndTypeSelect"): "mndType",
+    ("mndType", "mndDiagDate"): "mndDiagDate",
+    ("mndType", "mndALSFRSSum"): "alsfrsScore",
+    ("mndType", "mndALSTestDate"): "mndTestDate_af_date",
 
     # My recent symptoms
-    ("mySymptoms", "symptomTypes", "mndSymptomDate"): "mndSymptomsDate_af_date",
-    ("mySymptoms", "symptomTypes", "mndFatigue"): "fatigue",
-    ("mySymptoms", "symptomTypes", "mndPain"): "pain",
-    ("mySymptoms", "symptomTypes", "mndMuscle"): "cramps",
-    ("mySymptoms", "symptomTypes", "mndSaliva"): "saliva",
-    ("mySymptoms", "symptomTypes", "mndConstipation"): "constipation",
-    ("mySymptoms", "symptomTypes", "mndDisSleep"): "dSleep",
-    ("mySymptoms", "symptomTypes", "mndBreath"): "sBreath",
-    ("mySymptoms", "symptomTypes", "mndSpasticity"): "stiffSpas",
-    ("mySymptoms", "symptomTypes", "mndChoking"): "choking",
-    ("mySymptoms", "symptomTypes", "mndDepression"): "depression",
-    ("mySymptoms", "symptomTypes", "mndEmotion"): "emotion",
+    ("symptomTypes", "mndSymptomDate"): "mndSymptomsDate_af_date",
+    ("symptomTypes", "mndFatigue"): "fatigue",
+    ("symptomTypes", "mndPain"): "pain",
+    ("symptomTypes", "mndMuscle"): "cramps",
+    ("symptomTypes", "mndSaliva"): "saliva",
+    ("symptomTypes", "mndConstipation"): "constipation",
+    ("symptomTypes", "mndDisSleep"): "dSleep",
+    ("symptomTypes", "mndBreath"): "sBreath",
+    ("symptomTypes", "mndSpasticity"): "stiffSpas",
+    ("symptomTypes", "mndChoking"): "choking",
+    ("symptomTypes", "mndDepression"): "depression",
+    ("symptomTypes", "mndEmotion"): "emotion",
 
     # My Life History
-    ("myPastLH", "mndHistoryNotes", "mndLHLife"): "life_history",
-    ("myPastLH", "mndHistoryNotes", "mndLHWork"): "work_history",
-    ("myPastLH", "mndHistoryNotes", "mndLHFriends"): "family_friends",
-    ("myPastLH", "mndHistoryNotes", "mndLHDaily"): "daily_routines",
-    ("myPastLH", "mndHistoryNotes", "mndLHHobbies"): "hobbies_text",
-    ("myPastLH", "mndHistoryNotes", "mndLHChat"): "enjoyable_topics",
-    ("myPastLH", "mndHistoryNotes", "mndLHMusic"): "radio_music",
-    ("myPastLH", "mndHistoryNotes", "mndLHTV"): "favourite_tv",
-    ("myPastLH", "mndHistoryNotes", "mndLHFilms"): "favourite_films",
-    ("myPastLH", "mndHistoryNotes", "mndLHBooks"): "favourite_books",
-    ("myPastLH", "mndHistoryNotes", "mndLHSocialMedia"): "favourite_blogs",
-    ("myPastLH", "mndHistoryNotes", "mndLHAnnoyances"): "dislikes_text",
-    ("myPastLH", "mndHistoryNotes", "mndLHWorries"): "worries_text",
-    ("myPastLH", "mndHistoryNotes", "mndLHRemedies"): "anxious_text",
+    ("mndHistoryNotes", "mndLHLife"): "life_history",
+    ("mndHistoryNotes", "mndLHWork"): "work_history",
+    ("mndHistoryNotes", "mndLHFriends"): "family_friends",
+    ("mndHistoryNotes", "mndLHDaily"): "daily_routines",
+    ("mndHistoryNotes", "mndLHHobbies"): "hobbies_text",
+    ("mndHistoryNotes", "mndLHChat"): "enjoyable_topics",
+    ("mndHistoryNotes", "mndLHMusic"): "radio_music",
+    ("mndHistoryNotes", "mndLHTV"): "favourite_tv",
+    ("mndHistoryNotes", "mndLHFilms"): "favourite_films",
+    ("mndHistoryNotes", "mndLHBooks"): "favourite_books",
+    ("mndHistoryNotes", "mndLHSocialMedia"): "favourite_blogs",
+    ("mndHistoryNotes", "mndLHAnnoyances"): "dislikes_text",
+    ("mndHistoryNotes", "mndLHWorries"): "worries_text",
+    ("mndHistoryNotes", "mndLHRemedies"): "anxious_text",
 
     # My Past medical history
-    ("myMedHistory", "mndMHDiagnosis", "mndConditions"): "checkbox_mappings",
-    ("myMedHistory", "mndMHDiagnosis", "mndCondOther"): "mh_other",
+    ("mndMHDiagnosis", "mndConditions"): "checkbox_mappings",
+    ("mndMHDiagnosis", "mndCondOther"): "mh_other",
 
     # My Communication
-    ("myCommunication", "mndComms", "mndComDifficulty"): "commLevel",
-    ("myCommunication", "mndComms", "mndComTechs"): "checkbox_mappings",
-    ("myCommunication", "mndComms", "mndComChairOther"): "commMoreInfo",
+    ("mndComms", "mndComDifficulty"): "commLevel",
+    ("mndComms", "mndComTechs"): "checkbox_mappings",
+    ("mndComms", "mndComChairOther"): "commMoreInfo",
 
     # My positioning
-    ("mndPositioning", "mostComfyPos", "myMostComfy"): "comfy_pos",
-    ("mndPositioning", "inBed", "mndLieFlat"): "lie_flat",
-    ("mndPositioning", "inBed", "mndMove"): "move",
-    ("mndPositioning", "inBed", "mndNeedHelp"): "checkbox_mappings",
-    ("mndPositioning", "inBed", "mndNeedUse"): "checkbox_mappings",
-    ("mndPositioning", "mostComfyPos", "mndComfyOther"): "mndPosOther",
-    ("mndPositioning", "inBed", "mndNotes"): "mndPosED",
-    ("mndPositioning", "mndSitting", "mndChairNeed"): "checkbox_mappings",
-    ("mndPositioning", "mndSitting", "mndChairNotes"): "mndPosSD",
-    ("mndPositioning", "mndSitting", "mndChairMove"): "move_chair",
+    ("mostComfyPos", "myMostComfy"): "comfy_pos",
+    ("mostComfyPos", "mndComfyOther"): "mndPosOther",
+    ("inBed", "mndLieFlat"): "lie_flat",
+    ("inBed", "mndMove"): "move",
+    ("inBed", "mndNeedHelp"): "checkbox_mappings",
+    ("inBed", "mndNeedUse"): "checkbox_mappings",
+    ("inBed", "mndNotes"): "mndPosED",
+    ("mndSitting", "mndChairNeed"): "checkbox_mappings",
+    ("mndSitting", "mndChairNotes"): "mndPosSD",
+    ("mndSitting", "mndChairMove"): "move_chair",
 
     # My breathing
-    ("myBreathing", "mndBreathing", "mndBreathHard"): "bre_trouble",
-    ("myBreathing", "mndBreathing", "mndWhenBreathHard"): "checkbox_mappings",
-    ("myBreathing", "mndBreathing", "mndNIVYN"): "niv",
-    ("myBreathing", "mndBreathing", "mndBreathAssist"): "checkbox_mappings",
-    ("myBreathing", "mndBreathing", "mndBAOther"): "mndBreathingOM",
-    ("myBreathing", "mndBreathing", "mndNIV"): "checkbox_mappings",
-    ("myBreathing", "mndBreathing", "mndNIVUse"): "checkbox_mappings",
+    ("mndBreathing", "mndBreathHard"): "bre_trouble",
+    ("mndBreathing", "mndWhenBreathHard"): "checkbox_mappings",
+    ("mndBreathing", "mndNIVYN"): "niv",
+    ("mndBreathing", "mndBreathAssist"): "checkbox_mappings",
+    ("mndBreathing", "mndBAOther"): "mndBreathingOM",
+    ("mndBreathing", "mndNIV"): "checkbox_mappings",
+    ("mndBreathing", "mndNIVUse"): "checkbox_mappings",
 
     # My eating and drinking needs
-    ("myEatDrink", "mndEating", "mndSwallowD"): "swal",
-    ("myEatDrink", "mndEating", "mndByMouth"): "eat_bm",
-    ("myEatDrink", "mndEating", "mndHelpEat"): "help_ed",
-    ("myEatDrink", "mndEating", "mndACC"): "adapted_cc",
-    ("myEatDrink", "mndEating", "mndFluids"): "fluid_lvl",
-    ("myEatDrink", "mndEating", "mndFoodCon"): "food_lvl",
-    ("myEatDrink", "mndEating", "mndPEG"): "peg",
-    ("myEatDrink", "mndEating", "mndTube"): "checkbox_mappings",
-    ("myEatDrink", "mndEating", "mndTubeDetails"): "ft_details",
-    ("myEatDrink", "mndEating", "mndAvoidFoods"): "checkbox_mappings",
-    ("myEatDrink", "mndEating", "mndGluten"): "gluten_details",
-    ("myEatDrink", "mndEating", "mndDairy"): "dairy_details",
-    ("myEatDrink", "mndEating", "mndPeanuts"): "peanuts_details",
-    ("myEatDrink", "mndEating", "mndSoy"): "soy_details",
-    ("myEatDrink", "mndEating", "mndEggs"): "eggs_details",
-    ("myEatDrink", "mndEating", "mndShell"): "shellfish_details",
-    ("myEatDrink", "mndEating", "mndRed"): "rm_details",
-    ("myEatDrink", "mndEating", "mndWhite"): "wm_details",
-    ("myEatDrink", "mndEating", "mndFish"): "fish_details",
-    ("myEatDrink", "mndEating", "mndFoodPrefer"): "prefer_free-text",
-    ("myEatDrink", "mndEating", "mndAvoidOther"): "avoid_other",
-    # ("myEatDrink", "mndEating", "mndOther"): "",
+    ("mndEating", "mndSwallowD"): "swal",
+    ("mndEating", "mndByMouth"): "eat_bm",
+    ("mndEating", "mndHelpEat"): "help_ed",
+    ("mndEating", "mndACC"): "adapted_cc",
+    ("mndEating", "mndFluids"): "fluid_lvl",
+    ("mndEating", "mndFoodCon"): "food_lvl",
+    ("mndEating", "mndPEG"): "peg",
+    ("mndEating", "mndTube"): "checkbox_mappings",
+    ("mndEating", "mndTubeDetails"): "ft_details",
+    ("mndEating", "mndAvoidFoods"): "checkbox_mappings",
+    ("mndEating", "mndGluten"): "gluten_details",
+    ("mndEating", "mndDairy"): "dairy_details",
+    ("mndEating", "mndPeanuts"): "peanuts_details",
+    ("mndEating", "mndSoy"): "soy_details",
+    ("mndEating", "mndEggs"): "eggs_details",
+    ("mndEating", "mndShell"): "shellfish_details",
+    ("mndEating", "mndRed"): "rm_details",
+    ("mndEating", "mndWhite"): "wm_details",
+    ("mndEating", "mndFish"): "fish_details",
+    ("mndEating", "mndFoodPrefer"): "prefer_free-text",
+    ("mndEating", "mndAvoidOther"): "avoid_other",
+    # ("mndEating", "mndOther"): "",
 
     # My physical ability
-    ("myPhysical", "physicalAbility", "mndWeakness"): "checkbox_mappings",
-    ("myPhysical", "physicalAbility", "mndPhyUse"): "checkbox_mappings",
-    ("myPhysical", "physicalAbility", "mndWalking"): "walk?",
-    # ("myPhysical", "physicalAbility", "mndTransHelp"): "transfer", -> needs to be checkbox in the pdf
-    ("myPhysical", "physicalAbility", "mndMoveAids"): "move-around_fill",
-    ("myPhysical", "physicalAbility", "mndTaskAids"): "do-things_fill",
-    ("myPhysical", "physicalAbility", "mndRestNeeded"): "rest_fill",
+    ("physicalAbility", "mndWeakness"): "checkbox_mappings",
+    ("physicalAbility", "mndPhyUse"): "checkbox_mappings",
+    ("physicalAbility", "mndWalking"): "walk?",
+    # ("physicalAbility", "mndTransHelp"): "transfer", -> needs to be checkbox in the pdf
+    ("physicalAbility", "mndMoveAids"): "move-around_fill",
+    ("physicalAbility", "mndTaskAids"): "do-things_fill",
+    ("physicalAbility", "mndRestNeeded"): "rest_fill",
 
     # My personal care
-    ("myPC", "personalCare", "mndPHygiene"): "hygiene",  # button has lower case "some" option instead of "Some"
-    ("myPC", "personalCare", "mndShower"): "shower",
-    ("myPC", "personalCare", "mndDress"): "dress",
-    ("myPC", "personalCare", "mndToil"): "toilet",
-    ("myPC", "personalCare", "mndCareNeeds"): "personal-care",
+    ("personalCare", "mndPHygiene"): "hygiene",  # button has lower case "some" option instead of "Some"
+    ("personalCare", "mndShower"): "shower",
+    ("personalCare", "mndDress"): "dress",
+    ("personalCare", "mndToil"): "toilet",
+    ("personalCare", "mndCareNeeds"): "personal-care",
 
     # My mouth care and saliva
-    ("myMCare", "mndMouth", "mndMHelp"): "mouth_care",
-    ("myMCare", "mndMouth", "mndBrush"): "brush-teeth",
-    ("myMCare", "mndMouth", "mndSwabs"): "swabs",
-    # ("myMCare", "mndMouth", "mndXSaliva"): 'Sometimes',
-    ("myMCare", "mndMouth", "mndManageSaliva"): "checkbox_mappings",
-    ("myMCare", "mndMouth", "mndSalivaOther"): "sm_other",
+    ("mndMouth", "mndMHelp"): "mouth_care",
+    ("mndMouth", "mndBrush"): "brush-teeth",
+    ("mndMouth", "mndSwabs"): "swabs",
+    # ("mndMouth", "mndXSaliva"): 'Sometimes',
+    ("mndMouth", "mndManageSaliva"): "checkbox_mappings",
+    ("mndMouth", "mndSalivaOther"): "sm_other",
 
     # My emotions
-    ("myEmotions", "mndEmotionCare", "mndEmotionNotes"): "emotions_fill",
+    ("mndEmotionCare", "mndEmotionNotes"): "emotions_fill",
 
     # My medications and allergies
-    ("myMedsNAll", "myAllergies", "mndAllergies"): "allergies_text",
-    ("myMedsNAll", "myMedList", "mndDateStarted"): "start_date1",
-    ("myMedsNAll", "myMedList", "mndMedName"): "med_name1",
-    ("myMedsNAll", "myMedList", "mndMedDose"): "med_dose1",
-    ("myMedsNAll", "myMedList", "mndMedPurpose"): "med_use1",
-    # ("myMedsNAll", "myMedList", "mndMedFreq"): 'Every 12 Hours',
-    # ("myMedsNAll", "myMedList", "mndMedOther"): '',
-    # ("myMedsNAll", "myMedList", "mndMedTime"): '07:55 AM',
-    # ("myMedsNAll", "myMedList", "mndMedTime2"): '07:55 PM',
-    # ("myMedsNAll", "myMedList", "mndMedTime3"): '',
-    # ("myMedsNAll", "myMedList", "mndMedTime4"): '',
-    # ("myMedsNAll", "myMedList", "mndMedTime5"): '',
-    # ("myMedsNAll", "myMedList", "mndMedTime6"): '',
-    # ("myMedsNAll", "myMedList", "mndMedTime6Plus"): '',
-    # ("myMedsNAll", "myMedList", "mndMedAdmin"): 'Via Nebuliser',
+    ("myAllergies", "mndAllergies"): "allergies_text",
+    ("myMedList", "mndDateStarted"): "start_date1",
+    ("myMedList", "mndMedName"): "med_name1",
+    ("myMedList", "mndMedDose"): "med_dose1",
+    ("myMedList", "mndMedPurpose"): "med_use1",
+    # ("myMedList", "mndMedFreq"): 'Every 12 Hours',
+    # ("myMedList", "mndMedOther"): '',
+    # ("myMedList", "mndMedTime"): '07:55 AM',
+    # ("myMedList", "mndMedTime2"): '07:55 PM',
+    # ("myMedList", "mndMedTime3"): '',
+    # ("myMedList", "mndMedTime4"): '',
+    # ("myMedList", "mndMedTime5"): '',
+    # ("myMedList", "mndMedTime6"): '',
+    # ("myMedList", "mndMedTime6Plus"): '',
+    # ("myMedList", "mndMedAdmin"): 'Via Nebuliser',
 
     # My appointments
-    ('myAppointments', 'mndApptList', 'mndAName'): "Name of Team memberRow1",
-    ('myAppointments', 'mndApptList', 'mndApptDate'): "Date of appointmentRow1",
-    ('myAppointments', 'mndApptList', 'mndApptTime'): "TimeRow1",
+    ("mndApptList", "mndAName"): "Name of Team memberRow1",
+    ("mndApptList", "mndApptDate"): "Date of appointmentRow1",
+    ("mndApptList", "mndApptTime"): "TimeRow1",
 
     # My care team
-    ("myCareTeam", "myCarerDetails", "mndCRole"): "mndCarerProfession1",
-    ("myCareTeam", "myCarerDetails", "mndCName"): "NameRow1",
-    # ("myCareTeam", "myCarerDetails", "mndCAddress"): "Address Team Member 1",
-    ("myCareTeam", "myCarerDetails", "mndCPhone"): "TelephoneRow1",
-    ("myCareTeam", "myCarerDetails", "mndCEmail"): "EmailRow1",
-    # ("myCareTeam", "myCarerDetails", "mndPrimary"): ["PrimaryContact"],
+    ("myCarerDetails", "mndCRole"): "mndCarerProfession1",
+    ("myCarerDetails", "mndCName"): "NameRow1",
+    # ("myCarerDetails", "mndCAddress"): "Address Team Member 1",
+    ("myCarerDetails", "mndCPhone"): "TelephoneRow1",
+    ("myCarerDetails", "mndCEmail"): "EmailRow1",
+    # ("myCarerDetails", "mndPrimary"): ["PrimaryContact"],
 }
 
 
-def _value_mapping(input_val):
+def _interval_mapping(input_val):
     if input_val == 0:
         return "none"
     if input_val < 5:
@@ -245,18 +246,18 @@ def _brush_teeth_mapping(input_val):
     return mappings.get(input_val, "")
 
 
-values_mapping_cdes = {
-    "mndFatigue": _value_mapping,
-    "mndPain": _value_mapping,
-    "mndMuscle": _value_mapping,
-    "mndSaliva": _value_mapping,
-    "mndConstipation": _value_mapping,
-    "mndDisSleep": _value_mapping,
-    "mndBreath": _value_mapping,
-    "mndSpasticity": _value_mapping,
-    "mndChoking": _value_mapping,
-    "mndDepression": _value_mapping,
-    "mndEmotion": _value_mapping,
+_values_mapping_cdes = {
+    "mndFatigue": _interval_mapping,
+    "mndPain": _interval_mapping,
+    "mndMuscle": _interval_mapping,
+    "mndSaliva": _interval_mapping,
+    "mndConstipation": _interval_mapping,
+    "mndDisSleep": _interval_mapping,
+    "mndBreath": _interval_mapping,
+    "mndSpasticity": _interval_mapping,
+    "mndChoking": _interval_mapping,
+    "mndDepression": _interval_mapping,
+    "mndEmotion": _interval_mapping,
     "mndComDifficulty": _communication_value_mapping,
     "myMostComfy": _comfy_pos_mapping,
     "mndTypeSelect": _mnd_type_mapping,
@@ -278,7 +279,7 @@ values_mapping_cdes = {
 }
 
 
-checkbox_mapping_cdes = {
+_checkbox_mapping_cdes = {
     "mndConditions": {
         "Asthma": "mh_asthma",
         "Cancer": "mh_cancer",
@@ -380,3 +381,23 @@ checkbox_mapping_cdes = {
         "Wiping Mouth": "smWiping",
     }
 }
+
+
+def generate_pdf_field_mappings(form_values):
+    data = {}
+    for (section_code, cde_code), field in _field_mappings.items():
+        value = form_values[(section_code, cde_code)]
+        if cde_code in _values_mapping_cdes:
+            mapping_func = _values_mapping_cdes[cde_code]
+            data[field] = mapping_func(value)
+        elif cde_code in _checkbox_mapping_cdes:
+            mappings = _checkbox_mapping_cdes[cde_code]
+            if isinstance(value, list):
+                checkbox_updates = {mappings[v]: "Yes" for v in value if v in mappings}
+                data.update(checkbox_updates)
+            else:
+                if value in mappings:
+                    data[mappings[value]] = "Yes"
+        else:
+            data[field] = value
+    return data
