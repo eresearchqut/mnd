@@ -16,6 +16,15 @@ def _yes_no_not_available(input):
     return _yes_no(input)
 
 
+def _gender_mapping(gender):
+    mappings = {
+        "1": "Male",
+        "2": "Female",
+        "3": "Other"
+    }
+    return mappings.get(gender, "Off")
+
+
 def _generate_patient_fields(patient):
     return {
         'pFirstName': patient.given_names,
@@ -25,6 +34,7 @@ def _generate_patient_fields(patient):
         'pPhoneNo': patient.home_phone,
         'pMobile': patient.mobile_phone,
         'pEmail': patient.email,
+        'pGender': _gender_mapping(patient.sex)
     }
 
 
