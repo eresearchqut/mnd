@@ -128,7 +128,7 @@ _single_section_field_mappings = {
     ("myAllergies", "mndAllergies"): "allergies_text",
 }
 
-# key is (section_code, cde_code), value is pdf form element
+# key is (section_code, cde_code), value is pdf form element base (and index is appended..usually from 1 to 9)
 _multi_section_field_mappings = {
     # My medications and allergies
     ("myMedList", "mndDateStarted"): "start_date",
@@ -136,15 +136,7 @@ _multi_section_field_mappings = {
     ("myMedList", "mndMedDose"): "med_dose",
     ("myMedList", "mndMedPurpose"): "med_use",
     ("myMedList", "mndMedAdmin"): "med_taken",
-    # ("myMedList", "mndMedFreq"): 'Every 12 Hours',
-    # ("myMedList", "mndMedOther"): '',
-    # ("myMedList", "mndMedTime"): '07:55 AM',
-    # ("myMedList", "mndMedTime2"): '07:55 PM',
-    # ("myMedList", "mndMedTime3"): '',
-    # ("myMedList", "mndMedTime4"): '',
-    # ("myMedList", "mndMedTime5"): '',
-    # ("myMedList", "mndMedTime6"): '',
-    # ("myMedList", "mndMedTime6Plus"): '',
+    ("myMedList", "mndMedTime"): "med_times",
 
     # My appointments
     ("mndApptList", "mndAName"): "Name of Team memberRow",
@@ -156,8 +148,10 @@ _multi_section_field_mappings = {
     ("myCarerDetails", "mndCName"): "NameRow",
     ("myCarerDetails", "mndCPhone"): "TelephoneRow",
     ("myCarerDetails", "mndCEmail"): "EmailRow",
-    # ("myCarerDetails", "mndPrimary"): ["PrimaryContact"],
 }
+
+_care_team_section = "myCarerDetails"
+_care_team_primary_carer_cde = "mndPrimary"
 
 
 def _interval_mapping(input_val):
@@ -402,6 +396,16 @@ def _set_data_fields(data, field, cde_code, value):
         data[field] = value
 
 
+def _get_primary_carer_section_index(form_values):
+    for section_index in range(1, 10):
+        key = (_care_team_section, _care_team_primary_carer_cde, section_index)
+        if key in form_values:
+            value = form_values[key]
+            if value and value[0] == "PrimaryContact":
+                return section_index
+    return 1
+
+
 def generate_pdf_field_mappings(form_values):
     data = {}
     for (section_code, cde_code), field in _single_section_field_mappings.items():
@@ -409,11 +413,29 @@ def generate_pdf_field_mappings(form_values):
         value = form_values[single_section_key]
         _set_data_fields(data, field, cde_code, value)
 
+    primary_carer_index = _get_primary_carer_section_index(form_values)
+    section_indexes = range(1, 10)
+    carer_indexes = list(range(1, 10))
+    if primary_carer_index != 1:
+        carer_indexes.remove(primary_carer_index)
+        carer_indexes.insert(0, primary_carer_index)
+
     for (section_code, cde_code), field in _multi_section_field_mappings.items():
-        for i in range(1, 10):
-            section_key = (section_code, cde_code, i)
-            if section_key in form_values:
-                value = form_values[section_key]
-                _set_data_fields(data, f"{field}{i}", cde_code, value)
+        indexes = carer_indexes if section_code == _care_team_section else section_indexes
+        for idx, i in enumerate(indexes):
+            indexed_field = f"{field}{idx + 1}"
+            if field == "med_times":
+                # special handling for medicine administration times
+                suffixes = ["", "2", "3", "4", "5", "6", "6Plus"]
+                keys = [(section_code, cde_code + suffix, i) for suffix in suffixes]
+                if any(k in form_values for k in keys):
+                    values = [form_values[k] for k in keys if k in form_values]
+                    value = ", ".join([v for v in values if v])
+                    _set_data_fields(data, indexed_field, cde_code, value)
+            else:
+                section_key = (section_code, cde_code, i)
+                if section_key in form_values:
+                    value = form_values[section_key]
+                    _set_data_fields(data, indexed_field, cde_code, value)
 
     return data

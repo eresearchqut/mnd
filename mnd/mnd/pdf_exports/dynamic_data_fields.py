@@ -47,6 +47,4 @@ def generate_dynamic_data_fields(registry, patient):
 
     form_values.update(updated_form_values)
 
-    logger.info(f"form values= {form_values}")
-
     return generate_pdf_field_mappings(form_values)
