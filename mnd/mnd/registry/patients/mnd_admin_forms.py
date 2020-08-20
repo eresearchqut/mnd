@@ -158,13 +158,10 @@ class PrimaryCarerForm(PrefixedModelForm):
         if instance and instance.pk:
             db_instance = PrimaryCarer.objects.get(pk=instance.pk)
             email_changed = db_instance.email != email
-            existing_user = CustomUser.objects.filter(username=db_instance.email, is_active=True).exists()
-            carer_instance_update = email_changed and existing_user
-            if carer_instance_update:
+            if email_changed:
                 # get or create a new primary carer entry if email is changed
-                # and for that email address the carer registered already
-                new_carer = PrimaryCarer.objects.filter(email__iexact=email.lower()).first()
-                self.instance.pk = new_carer.pk if new_carer else None
+                existing_carer = PrimaryCarer.objects.filter(email__iexact=email.lower()).first()
+                self.instance = existing_carer
         else:
             existing_carer = PrimaryCarer.objects.filter(email__iexact=email).first()
             if existing_carer:
