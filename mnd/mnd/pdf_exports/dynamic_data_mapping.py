@@ -410,8 +410,9 @@ def generate_pdf_field_mappings(form_values):
     data = {}
     for (section_code, cde_code), field in _single_section_field_mappings.items():
         single_section_key = (section_code, cde_code, 0)
-        value = form_values[single_section_key]
-        _set_data_fields(data, field, cde_code, value)
+        if single_section_key in form_values:
+            value = form_values[single_section_key]
+            _set_data_fields(data, field, cde_code, value)
 
     primary_carer_index = _get_primary_carer_section_index(form_values)
     section_indexes = range(1, 10)
