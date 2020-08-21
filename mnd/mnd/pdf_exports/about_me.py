@@ -3,6 +3,8 @@ import pycountry
 from ..settings import PDF_TEMPLATES_PATH
 from ..models import PrimaryCarerRelationship, PrimaryCarer
 
+from .dynamic_data_fields import generate_dynamic_data_fields
+
 
 def _yes_no(input):
     return "Yes" if input else "No"
@@ -14,6 +16,15 @@ def _yes_no_not_available(input):
     return _yes_no(input)
 
 
+def _gender_mapping(gender):
+    mappings = {
+        "1": "Male",
+        "2": "Female",
+        "3": "Other"
+    }
+    return mappings.get(gender, "Off")
+
+
 def _generate_patient_fields(patient):
     return {
         'pFirstName': patient.given_names,
@@ -23,6 +34,7 @@ def _generate_patient_fields(patient):
         'pPhoneNo': patient.home_phone,
         'pMobile': patient.mobile_phone,
         'pEmail': patient.email,
+        'pGender': _gender_mapping(patient.sex)
     }
 
 
@@ -175,12 +187,12 @@ def generate_pdf_form_fields(registry, patient):
     data.update(
         _generate_primary_carer_fields(primary_carer, patient, patient_address)
     )
-
-    # TODO
-    # dynamic_data = patient.get_dynamic_data(registry)
+    data.update(
+        generate_dynamic_data_fields(registry, patient)
+    )
 
     return {k: '' if v is None else v for k, v in data.items()}
 
 
 def get_pdf_template():
-    return f"{PDF_TEMPLATES_PATH}/About me and MND_Interactive_v5a.pdf"
+    return f"{PDF_TEMPLATES_PATH}/MiNDAUS About Me and MND Form Final.pdf"
