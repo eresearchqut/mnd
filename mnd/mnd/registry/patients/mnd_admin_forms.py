@@ -155,18 +155,16 @@ class PrimaryCarerForm(PrefixedModelForm):
         email = self.cleaned_data.get('email')
         instance = getattr(self, 'instance', None)
         carer_instance_update = False
-        if instance and instance.pk:
-            db_instance = PrimaryCarer.objects.get(pk=instance.pk)
-            email_changed = db_instance.email != email
-            if email_changed:
-                # get or create a new primary carer entry if email is changed
-                existing_carer = PrimaryCarer.objects.filter(email__iexact=email.lower()).first()
-                self.instance = existing_carer
-        else:
-            existing_carer = PrimaryCarer.objects.filter(email__iexact=email).first()
+        if 'email' in self.changed_data:
+            existing_carer = PrimaryCarer.objects.filter(email__iexact=email.lower()).first()
             if existing_carer:
                 carer_instance_update = True
                 self.instance = existing_carer
+            elif instance:
+                # if email is changed and does not point to
+                # an existing carer then force creation of a new entry
+                self.instance.pk = None
+
         ret_val = super().save(commit)
         carer = ret_val if carer_instance_update else (self.instance or ret_val)
         if self.patient and commit:
