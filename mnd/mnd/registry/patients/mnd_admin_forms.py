@@ -84,20 +84,38 @@ class PatientInsuranceForm(PrefixedModelForm):
 
 class PrimaryCarerForm(PrefixedModelForm):
 
-    relationship = forms.ChoiceField(choices=PrimaryCarerRelationship.PRIMARY_CARER_RELATIONS, required=True)
+    relationship = forms.ChoiceField(
+        choices=PrimaryCarerRelationship.PRIMARY_CARER_RELATIONS, required=True,
+        widget=forms.widgets.RadioSelect
+    )
     relationship_info = forms.CharField(max_length=30, required=False)
+    interpreter_required = forms.BooleanField(
+        widget=forms.widgets.RadioSelect(choices=[(True, 'Yes'), (False, 'No')]),
+        required=False
+    )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.patient = None
+
+    @staticmethod
+    def _is_valid_phone(phone_no):
+        return phone_no and all(c.isdigit() for c in phone_no)
 
     class Meta:
         model = PrimaryCarer
         fields = (
             'first_name', 'last_name', 'phone', 'email', 'relationship', 'relationship_info',
             'preferred_language', 'interpreter_required', 'same_address', 'address',
-            'suburb', 'postcode'
+            'suburb', 'postcode', 'is_emergency_contact', 'em_contact_first_name',
+            'em_contact_last_name', 'em_contact_phone'
         )
+        labels = {
+            'is_emergency_contact': _('Is the primary carer the emergency contact number'),
+            'em_contact_first_name': _('Emergency contact first name'),
+            'em_contact_last_name': _('Emergency contact last name'),
+            'em_contact_phone': _('Emergency contact phone'),
+        }
 
     def _clean_fields(self):
         required_relationship_info = self.data.get(self.field_name('relationship'), '') == 'other'
@@ -121,6 +139,16 @@ class PrimaryCarerForm(PrefixedModelForm):
                      To unlink the principal caregiver please use the Carer Management menu!""")
             )
             self.fields['first_name'].help_text = mark_safe(f"<span style=\"color:green;\"><strong>{notification} </strong></span>")
+
+    def clean_em_contact_phone(self):
+        em_contact_phone = self.cleaned_data['em_contact_phone']
+        if not self._is_valid_phone(em_contact_phone):
+            raise forms.ValidationError(_("The emergency contact phone should contain digits only"))
+
+    def clean__phone(self):
+        phone = self.cleaned_data['phone']
+        if not self._is_valid_phone(phone):
+            raise forms.ValidationError(_("The phone number should contain digits only"))
 
     def clean_email(self):
         email = self.cleaned_data['email']

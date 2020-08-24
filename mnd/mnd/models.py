@@ -74,6 +74,10 @@ class PrimaryCarer(models.Model):
     suburb = models.CharField(max_length=50, null=True, blank=True)
     address = models.TextField(null=True, blank=True)
     postcode = models.CharField(max_length=20, null=True, blank=True)
+    is_emergency_contact = models.BooleanField(default=False)
+    em_contact_first_name = models.CharField(max_length=30, null=True, blank=True)
+    em_contact_last_name = models.CharField(max_length=30, null=True, blank=True)
+    em_contact_phone = models.CharField(max_length=30, null=True, blank=True)
 
     def __str__(self):
         return "{} {}".format(self.first_name, self.last_name)
