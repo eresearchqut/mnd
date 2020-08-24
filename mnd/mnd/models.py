@@ -49,6 +49,10 @@ class PatientInsurance(models.Model):
     eligible_for_home_care = models.BooleanField(blank=False, null=False, default=False)
     receiving_home_care = models.BooleanField(blank=False, null=False, default=False)
     home_care_level = models.CharField(choices=CARE_LEVEL_CHOICES, max_length=30, default='')
+    main_hospital = models.CharField(max_length=255, null=True, blank=True)
+    main_hospital_mrn = models.CharField(max_length=32, null=True, blank=True)
+    secondary_hospital = models.CharField(max_length=255, null=True, blank=True)
+    secondary_hospital_mrn = models.CharField(max_length=32, null=True, blank=True)
 
 
 class PrimaryCarer(models.Model):

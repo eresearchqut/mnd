@@ -33,11 +33,12 @@ class PatientInsuranceForm(PrefixedModelForm):
     class Meta:
         model = PatientInsurance
         fields = (
+            'main_hospital', 'main_hospital_mrn', 'secondary_hospital', 'secondary_hospital_mrn',
             'medicare_number', 'pension_number', 'private_health_fund', 'private_health_fund_number',
             'ndis_number', 'ndis_plan_manager', 'ndis_coordinator_first_name',
             'ndis_coordinator_last_name', 'ndis_coordinator_phone', 'ndis_coordinator_email',
             'dva_card_number', 'dva_card_type', 'referred_for_mac_care',
-            'needed_mac_level', 'eligible_for_home_care', 'receiving_home_care', 'home_care_level'
+            'needed_mac_level', 'eligible_for_home_care', 'receiving_home_care', 'home_care_level',
         )
         labels = {
             'ndis_number': _('NDIS number'),
@@ -52,7 +53,11 @@ class PatientInsuranceForm(PrefixedModelForm):
             'needed_mac_level': _("What MAC level were you assessed as needing?"),
             'eligible_for_home_care': _("Eligible for a Community home care package?"),
             'receiving_home_care': _("Are you receiving a community home care package?"),
-            'home_care_level': _("Home care package level")
+            'home_care_level': _("Home care package level"),
+            'main_hospital': _("Main Hospital attended for MND"),
+            'main_hospital_mrn': _("Medical record number (MRN)"),
+            'secondary_hospital': _("Secondary Hospital/Health Service"),
+            'secondary_hospital_mrn': _("Medical record number (MRN)"),
         }
 
     def _clean_fields(self):
