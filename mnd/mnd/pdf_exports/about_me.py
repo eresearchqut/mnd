@@ -34,7 +34,8 @@ def _generate_patient_fields(patient):
         'pPhoneNo': patient.home_phone,
         'pMobile': patient.mobile_phone,
         'pEmail': patient.email,
-        'pGender': _gender_mapping(patient.sex)
+        'pGender': _gender_mapping(patient.sex),
+        'pMainHospital': patient.umrn,
     }
 
 
@@ -61,12 +62,13 @@ def _generate_patient_address_fields(patient_address):
 def _generate_patient_insurance_fields(patient, insurance):
 
     def ndis_plan_manager(input):
-        return input.capitalize() if input else ''
-
-    def ndis_full_name(insurance):
-        fn = insurance.ndis_coordinator_first_name
-        ln = insurance.ndis_coordinator_last_name
-        return ' '.join(n for n in (fn, ln) if n)
+        mappings = {
+            'self': 'Self',
+            'agency': 'Agency',
+            '': 'Off',
+            'other': 'Plan Managed'
+        }
+        return mappings.get(input, 'Off')
 
     if not insurance:
         return {}
@@ -76,8 +78,9 @@ def _generate_patient_insurance_fields(patient, insurance):
         'pMedicare': insurance.medicare_number,
         'pNDIS': _yes_no(patient.age >= 65),
         'pNDISNumber': insurance.ndis_number,
-        'pNDISPM': ndis_plan_manager(insurance.ndis_plan_manager),
-        'NDISName': ndis_full_name(insurance),
+        'pNDISPM': 'Self' if insurance.ndis_number else 'Off',
+        'pNDISmgmt': ndis_plan_manager(insurance.ndis_plan_manager),
+        'NDISFirstName': insurance.ndis_coordinator_first_name,
         'NDISPhone': insurance.ndis_coordinator_phone,
         'NDISEmail': insurance.ndis_coordinator_email,
         'pPrivateHealth': _yes_no(insurance.private_health_fund),
