@@ -36,7 +36,7 @@ class PatientInsurance(models.Model):
     pension_number = models.CharField(max_length=30, null=True, blank=True)
     private_health_fund = models.CharField(max_length=255, null=True, blank=True)
     private_health_fund_number = models.CharField(max_length=30, null=True, blank=True)
-    ndis_number = models.CharField(max_length=30, verbose_name=_('NDIS number'), null=True, blank=True)
+    ndis_number = models.CharField(max_length=30, verbose_name=_('NDIS number'), null=True, blank=True, help_text=_('10 digits'))
     ndis_plan_manager = models.CharField(choices=PLAN_MANAGER_CHOICES, verbose_name=_('NDIS plan manager'), max_length=30)
     ndis_coordinator_first_name = models.CharField(max_length=30, verbose_name=_('NDIS coordinator first name'), null=True, blank=True)
     ndis_coordinator_last_name = models.CharField(max_length=30, verbose_name=_('NDIS coordinator last name'), null=True, blank=True)
@@ -50,9 +50,9 @@ class PatientInsurance(models.Model):
     receiving_home_care = models.BooleanField(blank=False, null=False, default=False)
     home_care_level = models.CharField(choices=CARE_LEVEL_CHOICES, max_length=30, default='')
     main_hospital = models.CharField(max_length=255, null=True, blank=True)
-    main_hospital_mrn = models.CharField(max_length=32, null=True, blank=True)
+    main_hospital_mrn = models.CharField(max_length=32, null=True, blank=True, help_text=_('At your main hospital attended for MND, if known'))
     secondary_hospital = models.CharField(max_length=255, null=True, blank=True)
-    secondary_hospital_mrn = models.CharField(max_length=32, null=True, blank=True)
+    secondary_hospital_mrn = models.CharField(max_length=32, null=True, blank=True, help_text=_('At your secondary hospital / health service  if known'))
 
 
 class PrimaryCarer(models.Model):
@@ -94,7 +94,7 @@ class PrimaryCarer(models.Model):
 class PrimaryCarerRelationship(models.Model):
 
     PRIMARY_CARER_RELATIONS = [
-        ('', _("Principal Caregiver relationship")),
+        ('', _("None")),
         ('spouse', _("Spouse")),
         ('child', _("Child")),
         ('sibling', _("Sibling")),

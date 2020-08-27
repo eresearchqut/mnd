@@ -60,6 +60,13 @@ class PatientInsuranceForm(PrefixedModelForm):
             'secondary_hospital_mrn': _("Medical record number (MRN)"),
         }
 
+    def clean_ndis_number(self):
+        ndis_number = self.cleaned_data['ndis_number']
+        digits_only = ndis_number and all(c.isdigit() for c in ndis_number)
+        if ndis_number and (not digits_only or len(ndis_number) != 10):
+            raise forms.ValidationError(_("NDIS number should contain 10 digits"))
+        return ndis_number
+
     def _clean_fields(self):
         health_fund_set = self.data.get(self.field_name('private_health_fund'), '') != ''
         self.fields['private_health_fund'].required = health_fund_set
@@ -105,7 +112,7 @@ class PrimaryCarerForm(PrefixedModelForm):
 
     @staticmethod
     def _is_valid_phone(phone_no):
-        return phone_no and all(c.isdigit() for c in phone_no)
+        return not phone_no or (phone_no and all(c.isdigit() for c in phone_no))
 
     class Meta:
         model = PrimaryCarer
@@ -149,11 +156,13 @@ class PrimaryCarerForm(PrefixedModelForm):
         em_contact_phone = self.cleaned_data['em_contact_phone']
         if not self._is_valid_phone(em_contact_phone):
             raise forms.ValidationError(_("The emergency contact phone should contain digits only"))
+        return em_contact_phone
 
     def clean__phone(self):
         phone = self.cleaned_data['phone']
         if not self._is_valid_phone(phone):
             raise forms.ValidationError(_("The phone number should contain digits only"))
+        return phone
 
     def clean_email(self):
         email = self.cleaned_data['email']

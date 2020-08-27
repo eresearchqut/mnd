@@ -54,7 +54,7 @@
             }
         });
 
-        $("#id_primary_carer-relationship").change(function() {
+        $("[name='primary_carer-relationship']").change(function() {
             if (this.value.trim() == "other") {
                 show($('#id_primary_carer-relationship_info'), extraRequiredFn);
             } else {
@@ -120,6 +120,19 @@
             }
         });
 
+        $("#id_primary_carer-is_emergency_contact").change(function(){
+            var selectors = [
+                $("#id_primary_carer-em_contact_first_name"),
+                $("#id_primary_carer-em_contact_last_name"),
+                $("#id_primary_carer-em_contact_phone")
+            ];
+            if (this.checked) {
+                hideSelectors(selectors, extraHideFn);
+            } else {
+                showSelectors(selectors, noopFn);
+            }
+        });
+
         $("#id_preferred_contact-contact_method").trigger("change");
         $("#id_patient_insurance-private_health_fund").trigger("change");
         $("#id_patient_insurance-ndis_number").trigger("change");
@@ -130,6 +143,7 @@
         $("#id_patient_insurance-eligible_for_home_care").trigger("change");
         $("#id_patient_insurance-receiving_home_care").trigger("change");
         $("#id_primary_carer-same_address").trigger("change");
+        $("#id_primary_carer-is_emergency_contact").trigger("change");
 
     });
 </script>
