@@ -76,7 +76,7 @@ def _generate_patient_insurance_fields(patient, insurance):
     result = {
         'pPension': insurance.pension_number,
         'pMedicare': insurance.medicare_number,
-        'pNDIS': _yes_no(patient.age >= 65),
+        'pNDIS': 'Yes' if insurance.ndis_number else 'Off',
         'pNDISNumber': insurance.ndis_number,
         'pNDISPM': 'Self' if insurance.ndis_number else 'Off',
         'pNDISmgmt': ndis_plan_manager(insurance.ndis_plan_manager),
