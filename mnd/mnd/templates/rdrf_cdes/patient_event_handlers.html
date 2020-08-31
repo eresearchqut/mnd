@@ -21,75 +21,91 @@
 
         var NULLABLE_BOOL_FIELD_YES = "true"
 
-        $("#id_preferred_contact-contact_method").change(function() {
+        $("input[name='preferred_contact-contact_method']").change(function() {
             var selectors = [
                 $("#id_preferred_contact-first_name"),
                 $("#id_preferred_contact-last_name"),
                 $("#id_preferred_contact-phone"),
                 $("#id_preferred_contact-email")
             ];
-            if (this.value == "person") {
+            if (this.value.trim() == "person") {
                 showSelectors(selectors, extraRequiredFn);
             } else {
                 hideSelectors(selectors, extraHideFn);
             }
         });
 
-        $("#id_patient_insurance-private_health_fund").change(function() {
-            if (this.value == "") {
-                hide($("#id_patient_insurance-private_health_fund_number"), extraHideFn);
-            } else {
+        $("input[name='patient_insurance-has_private_health_fund']").change(function() {
+            var checkedValue = $("input[name='patient_insurance-has_private_health_fund']:checked").val();
+            if (checkedValue.toLowerCase() == NULLABLE_BOOL_FIELD_YES.toLowerCase()) {
+                show($("#id_patient_insurance-private_health_fund"), extraRequiredFn);
                 show($("#id_patient_insurance-private_health_fund_number"), extraRequiredFn);
-            }
-        });
-
-        $("#id_patient_insurance-ndis_number").change(function() {
-            if (this.value == "") {
-                hide($("#id_patient_insurance-ndis_plan_manager"), extraHideFn);
-                hide($("#id_patient_insurance-ndis_coordinator_first_name"), extraHideFn);
-                hide($("#id_patient_insurance-ndis_coordinator_last_name"), extraHideFn);
-                hide($("#id_patient_insurance-ndis_coordinator_phone"), extraHideFn);
             } else {
-                show($("#id_patient_insurance-ndis_plan_manager"), extraRequiredFn);
+                hide($("#id_patient_insurance-private_health_fund"), extraHideFn);
+                hide($("#id_patient_insurance-private_health_fund_number"), extraHideFn);
             }
         });
 
-        $("[name='primary_carer-relationship']").change(function() {
-            if (this.value.trim() == "other") {
+        $("input[name='patient_insurance-is_ndis_participant']").change(function() {
+            var checkedValue = $("input[name='patient_insurance-is_ndis_participant']:checked").val();
+            if (checkedValue.toLowerCase() != NULLABLE_BOOL_FIELD_YES.toLowerCase()) {
+                hide($("#id_patient_insurance-ndis_number"), extraHideFn);
+                hide($("input[name='patient_insurance-ndis_plan_manager']"), noopFn);
+            } else {
+                show($("#id_patient_insurance-ndis_number"), extraRequiredFn);
+                show($("input[name='patient_insurance-ndis_plan_manager']"), noopFn);
+            }
+        });
+
+        $("input[name='primary_carer-relationship']").change(function() {
+            var checkedValue = $("input[name='primary_carer-relationship']:checked").val();
+            if (checkedValue == "other") {
                 show($('#id_primary_carer-relationship_info'), extraRequiredFn);
             } else {
                 hide($('#id_primary_carer-relationship_info'), extraHideFn);
             }
         });
 
-        $("#id_patient_insurance-ndis_plan_manager").change(function() {
+        $("input[name='patient_insurance-ndis_plan_manager']").change(function() {
             var selectors = [
                 $("#id_patient_insurance-ndis_coordinator_first_name"),
                 $("#id_patient_insurance-ndis_coordinator_last_name"),
-                $("#id_patient_insurance-ndis_coordinator_phone")
+                $("#id_patient_insurance-ndis_coordinator_phone"),
+                $("#id_patient_insurance-ndis_coordinator_email")
             ];
-            if (this.value == "other") {
+            var checkedValue = $("input[name='patient_insurance-ndis_plan_manager']:checked").val();            
+            if (checkedValue == "other") {
                 showSelectors(selectors, extraRequiredFn);
             } else {
                 hideSelectors(selectors, extraHideFn);
             }
         });
 
-        $("#id_patient_insurance-dva_card_number").change(function() {
-            if (this.value.trim() == "") {
-                hide($("#id_patient_insurance-dva_card_type"), extraHideFn);
+        $("input[name='patient_insurance-has_dva_card']").change(function() {
+            var checkedValue = $("input[name='patient_insurance-has_dva_card']:checked").val();
+            if (checkedValue.toLowerCase() != NULLABLE_BOOL_FIELD_YES.toLocaleLowerCase()) {
+                hide($("#id_patient_insurance-dva_card_number"), extraHideFn);
+                hide($("#id_patient_insurance-dva_card_type"), noopFn);
             } else {
-                show($("#id_patient_insurance-dva_card_type"), extraRequiredFn);
+                show($("#id_patient_insurance-dva_card_number"), extraRequiredFn);
+                show($("#id_patient_insurance-dva_card_type"), noopFn);
+            }
+        });
+        $("input[name='patient_insurance-ndis_plan_manager']").change(function() {
+            var selectors = [
+                $("#id_patient_insurance-ndis_coordinator_first_name"),
+                $("#id_patient_insurance-ndis_coordinator_last_name"),
+                $("#id_patient_insurance-ndis_coordinator_phone"),
+                $("#id_patient_insurance-ndis_coordinator_email")
+            ];
+            var checkedValue = $("input[name='patient_insurance-ndis_plan_manager']:checked").val();         
+            if (checkedValue == "other") {
+                showSelectors(selectors, extraRequiredFn);
+            } else {
+                hideSelectors(selectors, extraHideFn);
             }
         });
 
-        $("#id_patient_insurance-referred_for_mac_care").change(function() {
-            if (this.value.trim() != NULLABLE_BOOL_FIELD_YES) {
-                hide($("#id_patient_insurance-needed_mac_level"), extraHideFn);
-            } else {
-                show($("#id_patient_insurance-needed_mac_level"), extraRequiredFn);
-            }
-        });
 
         $("#id_patient_insurance-eligible_for_home_care").change(function() {
             if (this.checked) {
@@ -101,9 +117,9 @@
 
         $("#id_patient_insurance-receiving_home_care").change(function() {
             if (this.checked) {
-                show($("#id_patient_insurance-home_care_level"), extraRequiredFn);
+                show($("#id_patient_insurance-home_care_level"), noopFn);
             } else {
-                hide($("#id_patient_insurance-home_care_level"), extraHideFn);
+                hide($("#id_patient_insurance-home_care_level"), noopFn);
             }
         });
 
@@ -133,17 +149,27 @@
             }
         });
 
-        $("#id_preferred_contact-contact_method").trigger("change");
-        $("#id_patient_insurance-private_health_fund").trigger("change");
-        $("#id_patient_insurance-ndis_number").trigger("change");
-        $("#id_primary_carer-relationship").trigger("change");
-        $("#id_patient_insurance-ndis_plan_manager").trigger("change");
-        $("#id_patient_insurance-dva_card_number").trigger("change");
+        $("input[name='primary_carer-interpreter_required']").change(function () {
+            var checkedValue = $("input[name='primary_carer-interpreter_required']:checked").val();
+            if (checkedValue.toLowerCase() == NULLABLE_BOOL_FIELD_YES.toLowerCase()) {
+                show($("#id_primary_carer-preferred_language"), extraRequiredFn);
+            } else {
+                hide($("#id_primary_carer-preferred_language"), extraRequiredFn);
+            }
+        });
+
+        $("input[name='preferred_contact-contact_method']").trigger("change");
+        $("input[name='patient_insurance-has_private_health_fund']").trigger("change");
+        $("input[name='patient_insurance-is_ndis_participant']").trigger("change");
+        $("input[name='primary_carer-relationship']").trigger("change");
+        $("input[name='patient_insurance-ndis_plan_manager']").trigger("change");
+        $("input[name='patient_insurance-has_dva_card']").trigger("change");
         $("#id_patient_insurance-referred_for_mac_care").trigger("change");
         $("#id_patient_insurance-eligible_for_home_care").trigger("change");
         $("#id_patient_insurance-receiving_home_care").trigger("change");
         $("#id_primary_carer-same_address").trigger("change");
         $("#id_primary_carer-is_emergency_contact").trigger("change");
+        $("input[name='primary_carer-interpreter_required']").trigger("change");
 
     });
 </script>

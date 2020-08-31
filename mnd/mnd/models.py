@@ -10,21 +10,19 @@ from registry.patients.models import Patient
 class PatientInsurance(models.Model):
 
     PLAN_MANAGER_CHOICES = [
-        ('', _("NDIS Plan Manager")),
         ('self', _("Self")),
         ('agency', _("Agency")),
         ('other', _("Other")),
     ]
 
     DVA_CARD_TYPE_CHOICES = [
-        ('', _("DVA card type")),
+        ('', _("N/A")),
         ('Gold', _("Gold")),
         ('White', _("White")),
-        ('ppbc', _('Repatriation Pharmaceutical Benefits Card'))
+        ('ppbc', _("RPB"))
     ]
 
     CARE_LEVEL_CHOICES = [
-        ('', _("Care level")),
         ('one', _("One")),
         ('two', _("Two")),
         ('three', _("Three")),
@@ -34,14 +32,18 @@ class PatientInsurance(models.Model):
     patient = models.OneToOneField(Patient, related_name='insurance_data', on_delete=models.CASCADE)
     medicare_number = models.CharField(max_length=30, null=True, blank=True)
     pension_number = models.CharField(max_length=30, null=True, blank=True)
+    has_private_health_fund = models.BooleanField(blank=False, null=False, default=False)
     private_health_fund = models.CharField(max_length=255, null=True, blank=True)
     private_health_fund_number = models.CharField(max_length=30, null=True, blank=True)
+    is_ndis_participant = models.BooleanField(blank=False, null=False, default=False, verbose_name=_("Are you currently an NDIS participant?"))
     ndis_number = models.CharField(max_length=30, verbose_name=_('NDIS number'), null=True, blank=True, help_text=_('10 digits'))
+    is_ndis_eligible = models.BooleanField(blank=False, null=False, default=False, verbose_name=_("Are you eligible for the NDIS (under 65)?"))
     ndis_plan_manager = models.CharField(choices=PLAN_MANAGER_CHOICES, verbose_name=_('NDIS plan manager'), max_length=30)
     ndis_coordinator_first_name = models.CharField(max_length=30, verbose_name=_('NDIS coordinator first name'), null=True, blank=True)
     ndis_coordinator_last_name = models.CharField(max_length=30, verbose_name=_('NDIS coordinator last name'), null=True, blank=True)
     ndis_coordinator_phone = models.CharField(max_length=30, verbose_name=_('NDIS coordinator phone'), null=True, blank=True)
     ndis_coordinator_email = models.CharField(max_length=30, verbose_name=_('NDIS coordinator email'), null=True, blank=True)
+    has_dva_card = models.BooleanField(blank=False, null=False, default=False, verbose_name=_('Do you have a DVA card?'))
     dva_card_number = models.CharField(max_length=30, verbose_name=_('DVA card number'), null=True, blank=True)
     dva_card_type = models.CharField(choices=DVA_CARD_TYPE_CHOICES, verbose_name=_('DVA card type'), max_length=30, default='')
     referred_for_mac_care = models.BooleanField(verbose_name=_('Referral for My Aged Care (MAC)'), blank=True, null=True)
@@ -110,11 +112,11 @@ class PrimaryCarerRelationship(models.Model):
 class PreferredContact(models.Model):
 
     CONTACT_METHOD_CHOICES = [
-        ('', _("Preferred contact method")),
         ('phone', _("Phone")),
         ('sms', _("SMS")),
         ('email', _("Email")),
-        ('primary_carer', _("Principal Caregiver")),
+        ('primary_carer', _("Phone my Principal Caregiver")),
+        ('emergency_contact', _("Phone my Emergency Contact")),
         ('person', _("Nominated person below")),
     ]
 
