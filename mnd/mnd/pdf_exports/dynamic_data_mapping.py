@@ -101,7 +101,7 @@ _single_section_field_mappings = {
     ("physicalAbility", "mndWeakness"): "checkbox_mappings",
     ("physicalAbility", "mndPhyUse"): "checkbox_mappings",
     ("physicalAbility", "mndWalking"): "walk?",
-    # ("physicalAbility", "mndTransHelp"): "transfer", -> needs to be checkbox in the pdf
+    ("physicalAbility", "mndTransHelp"): "checkbox_mappings",
     ("physicalAbility", "mndMoveAids"): "move-around_fill",
     ("physicalAbility", "mndTaskAids"): "do-things_fill",
     ("physicalAbility", "mndRestNeeded"): "rest_fill",
@@ -369,6 +369,12 @@ _checkbox_mapping_cdes = {
         "Arm/Wrist Splints": "aw_splints",
         "Leg/Foot Splints": "lf_splints",
         "Head/Neck Support": "hn_support",
+    },
+    "mndTransHelp": {
+        "Not Needed": "not_needed",
+        "Bed": "Bed",
+        "A Chair": "chair",
+        "Toilet": "toilettransfer",
     },
     "mndManageSaliva": {
         "Medication": "sm_meds",

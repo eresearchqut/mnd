@@ -198,4 +198,4 @@ def generate_pdf_form_fields(registry, patient):
 
 
 def get_pdf_template():
-    return f"{PDF_TEMPLATES_PATH}/MiNDAUS About Me and MND Form Final.pdf"
+    return f"{PDF_TEMPLATES_PATH}/MiNDAUS About Me and MND Form v9.pdf"
