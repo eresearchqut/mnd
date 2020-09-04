@@ -125,7 +125,7 @@ _single_section_field_mappings = {
     ("mndEmotionCare", "mndEmotionNotes"): "emotions_fill",
 
     # My medications and allergies
-    ("myAllergies", "mndAllergies"): "allergies_text",
+    ("myAllergies", "mndAllergies"): ("allergies_text", "MedicationAllergies")
 }
 
 # key is (section_code, cde_code), value is pdf form element base (and index is appended..usually from 1 to 9)
@@ -418,11 +418,15 @@ def generate_pdf_field_mappings(form_values):
         single_section_key = (section_code, cde_code, 0)
         if single_section_key in form_values:
             value = form_values[single_section_key]
-            _set_data_fields(data, field, cde_code, value)
+            if isinstance(field, tuple):
+                for f in field:
+                    _set_data_fields(data, f, cde_code, value)
+            else:
+                _set_data_fields(data, field, cde_code, value)
 
     primary_carer_index = _get_primary_carer_section_index(form_values)
     section_indexes = range(1, 10)
-    carer_indexes = list(range(1, 10))
+    carer_indexes = list(range(1, 14))
     if primary_carer_index != 1:
         carer_indexes.remove(primary_carer_index)
         carer_indexes.insert(0, primary_carer_index)
@@ -444,5 +448,8 @@ def generate_pdf_field_mappings(form_values):
                 if section_key in form_values:
                     value = form_values[section_key]
                     _set_data_fields(data, indexed_field, cde_code, value)
+                else:
+                    # Default to empty values for non existing indexed values
+                    _set_data_fields(data, indexed_field, cde_code, '')
 
     return data
