@@ -7,6 +7,7 @@ from .views.mnd_patient_view import AddPatientView, PatientEditView
 from .views.mnd_patients_listing import MNDPatientsListingView
 from .views.carer_registration_view import CarerOperationsView, PatientCarerRegistrationView
 from .views.mnd_registration_view import MNDRegistrationView
+from mnd.integration.mims import mims_view
 from rdrf.urls import urlpatterns as rdrf_urlpatterns
 
 rdrf_urls = [p for p in rdrf_urlpatterns if not getattr(p, 'app_name', None) == 'api_urls']
@@ -21,6 +22,7 @@ urlpatterns = [
     re_path(r'^carer_operations/?$', CarerOperationsView.as_view(), name='carer_operations'),
     re_path(r'^(?P<registry_code>\w+)/carer_registration/?$', MNDRegistrationView.as_view(), name='carer_registration'),
     re_path(r'^api/v1/', include(('mnd.services.rest.urls.api_urls', 'api_urls'), namespace='v1')),
+    re_path(r'^mims/brand_search', mims_view.brand_seach, name='mims_brand_search'),
     re_path(r'^$', LandingView.as_view(), name='landing'),
     re_path(r'', include(rdrf_urls)),
 ]
