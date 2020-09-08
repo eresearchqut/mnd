@@ -73,7 +73,7 @@ class PatientInsuranceForm(PrefixedModelForm):
     home_care_level = forms.ChoiceField(
         choices=PatientInsurance.CARE_LEVEL_CHOICES,
         widget=widgets.RadioSelect,
-        label=_("Home care package level")
+        label=_("What level package are you receiving")
     )
 
     class Meta:
@@ -88,13 +88,15 @@ class PatientInsuranceForm(PrefixedModelForm):
             'needed_mac_level', 'eligible_for_home_care', 'receiving_home_care', 'home_care_level',
         )
         labels = {
+            'private_health_fund': _('Name of Private Health fund'),
+            'private_health_fund_number': _('Private Health Fund number'),
             'ndis_number': _('NDIS number'),
-            'ndis_coordinator_first_name': _('NDIS Coordinator first name'),
-            'ndis_coordinator_last_name': _('NDIS Coordinator last name'),
-            'ndis_coordinator_phone': _('NDIS Coordinator phone'),
-            'ndis_coordinator_email': _('NDIS Coordinator email'),
+            'ndis_coordinator_first_name': _('NDIS support coordinator first name'),
+            'ndis_coordinator_last_name': _('NDIS support coordinator last name'),
+            'ndis_coordinator_phone': _('NDIS support coordinator phone'),
+            'ndis_coordinator_email': _('NDIS support coordinator email'),
             'dva_card_number': _("DVA card number"),
-            'eligible_for_home_care': _("Eligible for a Community home care package?"),
+            'eligible_for_home_care': _("Have you been assessed as being eligible for a community home care package?"),
             'receiving_home_care': _("Are you receiving a community home care package?"),
             'main_hospital': _("Main Hospital attended for MND"),
             'main_hospital_mrn': _("Medical record number (MRN)"),
