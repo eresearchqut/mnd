@@ -28,7 +28,8 @@
                 $("#id_preferred_contact-phone"),
                 $("#id_preferred_contact-email")
             ];
-            if (this.value.trim() == "person") {
+            var checkedValue = $("input[name='preferred_contact-contact_method']:checked").val();
+            if (checkedValue !== undefined && checkedValue.trim() == "person") {
                 showSelectors(selectors, extraRequiredFn);
             } else {
                 hideSelectors(selectors, extraHideFn);
@@ -37,7 +38,7 @@
 
         $("input[name='patient_insurance-has_private_health_fund']").change(function() {
             var checkedValue = $("input[name='patient_insurance-has_private_health_fund']:checked").val();
-            if (checkedValue.toLowerCase() == NULLABLE_BOOL_FIELD_YES.toLowerCase()) {
+            if (checkedValue !== undefined && checkedValue.toLowerCase() == NULLABLE_BOOL_FIELD_YES.toLowerCase()) {
                 show($("#id_patient_insurance-private_health_fund"), extraRequiredFn);
                 show($("#id_patient_insurance-private_health_fund_number"), extraRequiredFn);
             } else {
@@ -48,18 +49,18 @@
 
         $("input[name='patient_insurance-is_ndis_participant']").change(function() {
             var checkedValue = $("input[name='patient_insurance-is_ndis_participant']:checked").val();
-            if (checkedValue.toLowerCase() != NULLABLE_BOOL_FIELD_YES.toLowerCase()) {
-                hide($("#id_patient_insurance-ndis_number"), extraHideFn);
-                hide($("input[name='patient_insurance-ndis_plan_manager']"), noopFn);
-            } else {
+            if (checkedValue !== undefined && checkedValue.toLowerCase() == NULLABLE_BOOL_FIELD_YES.toLowerCase()) {
                 show($("#id_patient_insurance-ndis_number"), extraRequiredFn);
                 show($("input[name='patient_insurance-ndis_plan_manager']"), noopFn);
+            } else {
+                hide($("#id_patient_insurance-ndis_number"), extraHideFn);
+                hide($("input[name='patient_insurance-ndis_plan_manager']"), noopFn);
             }
         });
 
         $("input[name='primary_carer-relationship']").change(function() {
             var checkedValue = $("input[name='primary_carer-relationship']:checked").val();
-            if (checkedValue == "other") {
+            if (checkedValue !== undefined && checkedValue == "other") {
                 show($('#id_primary_carer-relationship_info'), extraRequiredFn);
             } else {
                 hide($('#id_primary_carer-relationship_info'), extraHideFn);
@@ -74,7 +75,7 @@
                 $("#id_patient_insurance-ndis_coordinator_email")
             ];
             var checkedValue = $("input[name='patient_insurance-ndis_plan_manager']:checked").val();            
-            if (checkedValue == "other") {
+            if (checkedValue !== undefined && checkedValue == "other") {
                 showSelectors(selectors, extraRequiredFn);
             } else {
                 hideSelectors(selectors, extraHideFn);
@@ -83,12 +84,12 @@
 
         $("input[name='patient_insurance-has_dva_card']").change(function() {
             var checkedValue = $("input[name='patient_insurance-has_dva_card']:checked").val();
-            if (checkedValue.toLowerCase() != NULLABLE_BOOL_FIELD_YES.toLocaleLowerCase()) {
-                hide($("#id_patient_insurance-dva_card_number"), extraHideFn);
-                hide($("#id_patient_insurance-dva_card_type"), noopFn);
-            } else {
+            if (checkedValue !== undefined && checkedValue.toLowerCase() == NULLABLE_BOOL_FIELD_YES.toLocaleLowerCase()) {
                 show($("#id_patient_insurance-dva_card_number"), extraRequiredFn);
                 show($("#id_patient_insurance-dva_card_type"), noopFn);
+            } else {
+                hide($("#id_patient_insurance-dva_card_number"), extraHideFn);
+                hide($("#id_patient_insurance-dva_card_type"), noopFn);
             }
         });
         $("input[name='patient_insurance-ndis_plan_manager']").change(function() {
@@ -99,7 +100,7 @@
                 $("#id_patient_insurance-ndis_coordinator_email")
             ];
             var checkedValue = $("input[name='patient_insurance-ndis_plan_manager']:checked").val();         
-            if (checkedValue == "other") {
+            if (checkedValue !== undefined && checkedValue == "other") {
                 showSelectors(selectors, extraRequiredFn);
             } else {
                 hideSelectors(selectors, extraHideFn);
@@ -151,7 +152,7 @@
 
         $("input[name='primary_carer-interpreter_required']").change(function () {
             var checkedValue = $("input[name='primary_carer-interpreter_required']:checked").val();
-            if (checkedValue.toLowerCase() == NULLABLE_BOOL_FIELD_YES.toLowerCase()) {
+            if (checkedValue !== undefined && checkedValue.toLowerCase() == NULLABLE_BOOL_FIELD_YES.toLowerCase()) {
                 show($("#id_primary_carer-preferred_language"), extraRequiredFn);
             } else {
                 hide($("#id_primary_carer-preferred_language"), extraRequiredFn);
