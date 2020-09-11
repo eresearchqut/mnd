@@ -10,6 +10,12 @@ def _yes_no(input):
     return "Yes" if input else "No"
 
 
+def _yes_no_off(input):
+    if input is None:
+        return "Off"
+    return "Yes" if input else "No"
+
+
 def _yes_no_not_available(input):
     if input is None:
         return "NA"
@@ -35,7 +41,6 @@ def _generate_patient_fields(patient):
         'pMobile': patient.mobile_phone,
         'pEmail': patient.email,
         'pGender': _gender_mapping(patient.sex),
-        'pMainHospital': patient.umrn,
     }
 
 
@@ -76,9 +81,9 @@ def _generate_patient_insurance_fields(patient, insurance):
     result = {
         'pPension': insurance.pension_number,
         'pMedicare': insurance.medicare_number,
-        'pNDIS': 'Yes' if insurance.ndis_number else 'Off',
+        'pNDIS': _yes_no(insurance.is_ndis_eligible),
         'pNDISNumber': insurance.ndis_number,
-        'pNDISPM': 'Self' if insurance.ndis_number else 'Off',
+        'pNDISPM': 'Self' if insurance.is_ndis_participant else 'Off',
         'pNDISmgmt': ndis_plan_manager(insurance.ndis_plan_manager),
         'NDISFirstName': insurance.ndis_coordinator_first_name,
         'NDISPhone': insurance.ndis_coordinator_phone,
@@ -90,6 +95,10 @@ def _generate_patient_insurance_fields(patient, insurance):
         'comHCPLevel': insurance.needed_mac_level,
         'recHCP': _yes_no(insurance.receiving_home_care),
         'recHCPLevel': insurance.home_care_level,
+        'pMainHospital': insurance.main_hospital,
+        'pMainHospitalMRN': insurance.main_hospital_mrn,
+        'pSecondaryHospital': insurance.secondary_hospital,
+        'pSecondaryHospitalMRN': insurance.secondary_hospital_mrn,
     }
     if insurance.private_health_fund:
         result.update({
@@ -111,7 +120,7 @@ def _generate_preferred_contact_fields(preferred_contact):
             'phone': 'Phone',
             'sms': 'SMS',
             'email': 'Email',
-            'primary_carer': 'Principal Caregiver',
+            'primary_carer': 'Carer',
         }
         return mapping.get(preferred_contact.contact_method, 'Off')
 
@@ -172,7 +181,7 @@ def _generate_primary_carer_fields(primary_carer, patient, patient_address):
         'p2Phone': primary_carer.phone,
         'p2Lang': primary_carer_language(primary_carer.preferred_language),
         'same_address': primary_carer.same_address,
-        'p2Interpreter': _yes_no(primary_carer.interpreter_required),
+        'p2Interpreter': _yes_no_off(primary_carer.interpreter_required),
     }
     result.update(primary_carer_address(primary_carer, patient_address))
     return result

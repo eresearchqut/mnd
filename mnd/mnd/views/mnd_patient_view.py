@@ -1,9 +1,10 @@
 from django.utils.translation import ugettext as _
 
+from rdrf.helpers.constants import PATIENT_PERSONAL_DETAILS_SECTION_NAME
 from rdrf.views.patient_view import (
     PatientFormMixin, AddPatientView as ParentAddPatientView, PatientEditView as ParentEditPatientView
 )
-
+from rdrf.helpers.form_section_helper import DemographicsSectionFieldBuilder
 
 from ..registry.patients.mnd_admin_forms import PatientInsuranceForm, PrimaryCarerForm, PreferredContactForm
 from ..models import PrimaryCarer, PrimaryCarerRelationship
@@ -54,18 +55,49 @@ def get_preferred_contact(patient):
     return getattr(patient, 'preferred_contact', None)
 
 
+class MNDSectionFieldBuilder(DemographicsSectionFieldBuilder):
+
+    def get_personal_detail_fields(self, registry_code):
+        personal_fields = [
+            "family_name",
+            "given_names",
+            "maiden_name",
+            "umrn",
+            "date_of_birth",
+            "place_of_birth",
+            "date_of_migration",
+            "country_of_birth",
+            "ethnic_origin",
+            "sex",
+            "living_status",
+        ]
+        return (_(PATIENT_PERSONAL_DETAILS_SECTION_NAME), personal_fields)
+
+    def get_contact_details_fields(self):
+        contact_details_fields = [
+            "home_phone",
+            "mobile_phone",
+            "work_phone",
+            "email",
+        ]
+        return _("Contact Details"), contact_details_fields
+
+
 class FormSectionMixin(PatientFormMixin):
 
     PATIENT_INSURANCE_KEY = "patient_insurance_form"
     PRIMARY_CARER_KEY = "primary_carer_form"
     PREFERRED_CONTACT_KEY = "preferred_contact_form"
 
-    def get_form_sections(self, user, request, patient, registry, registry_code, patient_form,
-                          patient_address_form, patient_doctor_form, patient_relative_form):
+    def get_form_sections(self, user, request, patient, registry, patient_form,
+                          patient_address_form, patient_doctor_form, patient_relative_form,
+                          builder):
 
+        mnd_builder = MNDSectionFieldBuilder()
         form_sections = super().get_form_sections(
-            user, request, patient, registry, registry_code, patient_form,
-            patient_address_form, patient_doctor_form, patient_relative_form
+            user, request, patient, registry, patient_form,
+            patient_address_form, patient_doctor_form, patient_relative_form,
+            mnd_builder
         )
         for form_instance, __ in form_sections:
             if 'umrn' in form_instance.fields:
@@ -74,6 +106,11 @@ class FormSectionMixin(PatientFormMixin):
 
         form_sections.insert(
             2,
+            (patient_form, (mnd_builder.get_contact_details_fields(), ))
+        )
+
+        form_sections.insert(
+            3,
             get_section(
                 PreferredContactForm, _("Patient Preferred Contact Method "), "preferred_contact", get_preferred_contact(patient), request
             )

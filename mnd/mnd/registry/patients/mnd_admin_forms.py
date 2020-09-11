@@ -8,6 +8,8 @@ from django.utils import timezone
 from registry.groups.models import CustomUser
 from registry.patients.models import Patient
 
+from rdrf.forms.widgets import widgets
+
 from mnd.models import (
     CarerRegistration,
     PreferredContact,
@@ -28,49 +30,105 @@ class PrefixedModelForm(forms.ModelForm):
 
 class PatientInsuranceForm(PrefixedModelForm):
 
-    _NULLABLE_BOOL_FIELD_YES = "2"
+    has_private_health_fund = forms.BooleanField(widget=widgets.RadioSelect(
+        choices=[(True, 'Yes'), (False, 'No')]),
+        required=False,
+        label=_('Do you have a private health fund?')
+    )
+    is_ndis_participant = forms.BooleanField(
+        widget=widgets.RadioSelect(choices=[(True, 'Yes'), (False, 'No')]),
+        required=False,
+        label=_('Are you currently an NDIS participant?')
+    )
+    is_ndis_eligible = forms.BooleanField(widget=widgets.RadioSelect(
+        choices=[(True, 'Yes'), (False, 'No')]),
+        required=False,
+        label=_('Are you eligible for the NDIS (under 65)?')
+    )
+    has_dva_card = forms.BooleanField(
+        widget=widgets.RadioSelect(choices=[(True, 'Yes'), (False, 'No')]),
+        required=False,
+        label=_("Do you have a DVA card?")
+    )
+    ndis_plan_manager = forms.ChoiceField(
+        choices=PatientInsurance.PLAN_MANAGER_CHOICES, required=False,
+        widget=widgets.RadioSelect,
+        label=_('NDIS Plan Manager')
+    )
+    dva_card_type = forms.ChoiceField(
+        choices=PatientInsurance.DVA_CARD_TYPE_CHOICES, required=False,
+        widget=widgets.RadioSelect,
+        label=_("DVA card type"),
+    )
+    referred_for_mac_care = forms.BooleanField(
+        widget=widgets.RadioSelect(choices=[(True, 'Yes'), (False, 'No')]),
+        required=False,
+        label=_("Have you been referred for aged care support services via My Aged Care (MAC)?"),
+    )
+    needed_mac_level = forms.ChoiceField(
+        choices=PatientInsurance.CARE_LEVEL_CHOICES,
+        widget=widgets.RadioSelect,
+        label=_("What MAC level were you assessed as needing?")
+    )
+    home_care_level = forms.ChoiceField(
+        choices=PatientInsurance.CARE_LEVEL_CHOICES,
+        widget=widgets.RadioSelect,
+        label=_("What level package are you receiving")
+    )
 
     class Meta:
         model = PatientInsurance
         fields = (
-            'medicare_number', 'pension_number', 'private_health_fund', 'private_health_fund_number',
-            'ndis_number', 'ndis_plan_manager', 'ndis_coordinator_first_name',
+            'main_hospital', 'main_hospital_mrn', 'secondary_hospital', 'secondary_hospital_mrn',
+            'medicare_number', 'pension_number', 'has_private_health_fund',
+            'private_health_fund', 'private_health_fund_number', 'is_ndis_participant',
+            'is_ndis_eligible', 'ndis_number', 'ndis_plan_manager', 'ndis_coordinator_first_name',
             'ndis_coordinator_last_name', 'ndis_coordinator_phone', 'ndis_coordinator_email',
-            'dva_card_number', 'dva_card_type', 'referred_for_mac_care',
-            'needed_mac_level', 'eligible_for_home_care', 'receiving_home_care', 'home_care_level'
+            'has_dva_card', 'dva_card_number', 'dva_card_type', 'referred_for_mac_care',
+            'needed_mac_level', 'eligible_for_home_care', 'receiving_home_care', 'home_care_level',
         )
         labels = {
+            'private_health_fund': _('Name of Private Health fund'),
+            'private_health_fund_number': _('Private Health Fund number'),
             'ndis_number': _('NDIS number'),
-            'ndis_plan_manager': _('NDIS Plan Manager'),
-            'ndis_coordinator_first_name': _('NDIS Coordinator first name'),
-            'ndis_coordinator_last_name': _('NDIS Coordinator last name'),
-            'ndis_coordinator_phone': _('NDIS Coordinator phone'),
-            'ndis_coordinator_email': _('NDIS Coordinator email'),
+            'ndis_coordinator_first_name': _('NDIS support coordinator first name'),
+            'ndis_coordinator_last_name': _('NDIS support coordinator last name'),
+            'ndis_coordinator_phone': _('NDIS support coordinator phone'),
+            'ndis_coordinator_email': _('NDIS support coordinator email'),
             'dva_card_number': _("DVA card number"),
-            'dva_card_type': _("DVA card type"),
-            'referred_for_mac_care': _("Have you been referred for aged care via My Aged Care (MAC)?"),
-            'needed_mac_level': _("What MAC level were you assessed as needing?"),
-            'eligible_for_home_care': _("Eligible for a Community home care package?"),
+            'eligible_for_home_care': _("Have you been assessed as being eligible for a community home care package?"),
             'receiving_home_care': _("Are you receiving a community home care package?"),
-            'home_care_level': _("Home care package level")
+            'main_hospital': _("Main Hospital attended for MND"),
+            'main_hospital_mrn': _("Medical record number (MRN)"),
+            'secondary_hospital': _("Secondary Hospital/Health Service"),
+            'secondary_hospital_mrn': _("Medical record number (MRN)"),
         }
 
+    def clean_ndis_number(self):
+        ndis_number = self.cleaned_data['ndis_number']
+        digits_only = ndis_number and all(c.isdigit() for c in ndis_number)
+        if ndis_number and (not digits_only or len(ndis_number) != 10):
+            raise forms.ValidationError(_("NDIS number should contain 10 digits"))
+        return ndis_number
+
     def _clean_fields(self):
-        health_fund_set = self.data.get(self.field_name('private_health_fund'), '') != ''
-        self.fields['private_health_fund'].required = health_fund_set
-        self.fields['private_health_fund_number'].required = health_fund_set
-        ndis_number_set = self.data.get(self.field_name('ndis_number'), '') != ''
-        self.fields['ndis_plan_manager'].required = ndis_number_set
+        has_private_health_fund = self.data.get(self.field_name('has_private_health_fund'), '') == 'True'
+        self.fields['private_health_fund'].required = has_private_health_fund
+        self.fields['private_health_fund_number'].required = has_private_health_fund
+        is_ndis_participant = self.data.get(self.field_name('is_ndis_participant'), '') == 'True'
+        self.fields['ndis_number'].required = is_ndis_participant
+        self.fields['ndis_plan_manager'].required = is_ndis_participant
         ndis_coordinator_info = [
             'ndis_coordinator_first_name', 'ndis_coordinator_last_name', 'ndis_coordinator_phone',
             'ndis_coordinator_email'
         ]
         coordinator_required_data = self.data.get(self.field_name('ndis_plan_manager'), '') == 'other'
         for f in ndis_coordinator_info:
-            self.fields[f].required = coordinator_required_data and ndis_number_set
-        dva_card_number_set = self.data.get(self.field_name('dva_card_number'), '') != ''
-        self.fields['dva_card_type'].required = dva_card_number_set
-        referred_for_mac_care_set = self.data.get(self.field_name('referred_for_mac_care'), '') != self._NULLABLE_BOOL_FIELD_YES
+            self.fields[f].required = coordinator_required_data and is_ndis_participant
+        has_dva_card = self.data.get(self.field_name('has_dva_card'), '') != ''
+        self.fields['dva_card_number'].required = has_dva_card
+        self.fields['dva_card_type'].required = has_dva_card
+        referred_for_mac_care_set = self.data.get(self.field_name('referred_for_mac_care'), '') == 'True'
         self.fields['needed_mac_level'].required = not referred_for_mac_care_set
         eligible_for_home_care = self.data.get(self.field_name('eligible_for_home_care'), '') == 'on'
         if not eligible_for_home_care:
@@ -84,24 +142,44 @@ class PatientInsuranceForm(PrefixedModelForm):
 
 class PrimaryCarerForm(PrefixedModelForm):
 
-    relationship = forms.ChoiceField(choices=PrimaryCarerRelationship.PRIMARY_CARER_RELATIONS, required=True)
+    relationship = forms.ChoiceField(
+        choices=PrimaryCarerRelationship.PRIMARY_CARER_RELATIONS, required=True,
+        widget=widgets.RadioSelect
+    )
     relationship_info = forms.CharField(max_length=30, required=False)
+    interpreter_required = forms.BooleanField(
+        widget=widgets.RadioSelect(choices=[(True, 'Yes'), (False, 'No')]),
+        required=False
+    )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.patient = None
 
+    @staticmethod
+    def _is_valid_phone(phone_no):
+        return not phone_no or (phone_no and all(c.isdigit() for c in phone_no))
+
     class Meta:
         model = PrimaryCarer
         fields = (
             'first_name', 'last_name', 'phone', 'email', 'relationship', 'relationship_info',
-            'preferred_language', 'interpreter_required', 'same_address', 'address',
-            'suburb', 'postcode'
+            'interpreter_required', 'preferred_language', 'same_address', 'address',
+            'suburb', 'postcode', 'is_emergency_contact', 'em_contact_first_name',
+            'em_contact_last_name', 'em_contact_phone'
         )
+        labels = {
+            'is_emergency_contact': _('Is the primary carer the emergency contact number'),
+            'em_contact_first_name': _('Emergency contact first name'),
+            'em_contact_last_name': _('Emergency contact last name'),
+            'em_contact_phone': _('Emergency contact phone'),
+        }
 
     def _clean_fields(self):
         required_relationship_info = self.data.get(self.field_name('relationship'), '') == 'other'
         self.fields['relationship_info'].required = required_relationship_info
+        interpreter_required = self.data.get(self.field_name('interpreter_required'), '') == 'True'
+        self.fields['preferred_language'].required = interpreter_required
         super()._clean_fields()
 
     def has_assigned_carer(self):
@@ -121,6 +199,18 @@ class PrimaryCarerForm(PrefixedModelForm):
                      To unlink the principal caregiver please use the Carer Management menu!""")
             )
             self.fields['first_name'].help_text = mark_safe(f"<span style=\"color:green;\"><strong>{notification} </strong></span>")
+
+    def clean_em_contact_phone(self):
+        em_contact_phone = self.cleaned_data['em_contact_phone']
+        if not self._is_valid_phone(em_contact_phone):
+            raise forms.ValidationError(_("The emergency contact phone should contain digits only"))
+        return em_contact_phone
+
+    def clean__phone(self):
+        phone = self.cleaned_data['phone']
+        if not self._is_valid_phone(phone):
+            raise forms.ValidationError(_("The phone number should contain digits only"))
+        return phone
 
     def clean_email(self):
         email = self.cleaned_data['email']
@@ -178,6 +268,11 @@ class PrimaryCarerForm(PrefixedModelForm):
 
 
 class PreferredContactForm(PrefixedModelForm):
+    contact_method = forms.ChoiceField(
+        choices=PreferredContact.CONTACT_METHOD_CHOICES, required=True,
+        widget=widgets.RadioSelect
+    )
+
     class Meta:
         model = PreferredContact
         fields = ('contact_method', 'first_name', 'last_name', 'phone', 'email')
