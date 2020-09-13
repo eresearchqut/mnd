@@ -1,6 +1,12 @@
 {% extends "rdrf_cdes/form.html" %}
 
 {% load i18n %}
+{% load static %}
+
+{% block extrastyle %}
+{{ block.super }}
+<script type="text/javascript" src="{% static 'js/extra_lookup.js' %}"></script>
+{% endblock %}
 
 {% block sidebar %}
   {{ block.super }}

@@ -1,4 +1,3 @@
-import base64
 import logging
 import requests
 import time
@@ -90,12 +89,22 @@ class MIMSService:
         resp = requests.get(self._full_url(f"{self.BRAND_URI}/{brand_id}?{fields}"), headers=self._make_auth_header())
         return resp.json()
 
+    def search_product(self, product, page=1, limit=50):
+        params = urllib.parse.urlencode({
+            "term": product,
+            "include": True,
+            "page": page,
+            "limit": limit
+        })
+        resp = requests.get(self._full_url(f"{self.PRODUCT_URI}?{params}"), headers=self._make_auth_header())
+        return resp.json() if resp.status_code == 200 else {}
+
     def get_product_details(self, product_id):
         fields = urllib.parse.urlencode({
-            "fields": "cmis, brand"
+            "fields": "cmis, brand, productName, mimsClasses"
         })
         resp = requests.get(self._full_url(f"{self.PRODUCT_URI}/{product_id}?{fields}"), headers=self._make_auth_header())
-        return resp.json()
+        return resp.json() if resp.status_code == 200 else {}
 
     def get_cmi_details(self, cmi_id):
         resp = requests.get(self._full_url(f"{self.CMI_DETAILS_URI}/{cmi_id}"), headers=self._make_auth_header())
