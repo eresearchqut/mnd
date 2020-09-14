@@ -234,3 +234,13 @@ class MIMSProductCache(models.Model):
             models.Index(fields=['search_term']),
             models.Index(fields=['name']),
         ]
+
+
+class MIMSCmiCache(models.Model):
+    product_id = models.UUIDField(unique=True)
+    product_name = models.CharField(max_length=256, null=True, blank=True)
+    cmi_id = models.UUIDField(null=True, blank=True)
+    cmi_link = models.CharField(max_length=512)
+    has_link = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    expires_on = models.DateTimeField()

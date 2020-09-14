@@ -108,4 +108,6 @@ class MIMSService:
 
     def get_cmi_details(self, cmi_id):
         resp = requests.get(self._full_url(f"{self.CMI_DETAILS_URI}/{cmi_id}"), headers=self._make_auth_header())
-        return resp.json()
+        if resp.status_code == 200:
+            logger.info(f"CMI details for {cmi_id} = {resp.json()}")
+        return resp.json() if resp.status_code == 200 else {}

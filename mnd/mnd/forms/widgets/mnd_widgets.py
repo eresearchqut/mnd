@@ -32,3 +32,31 @@ class ProductLookupWidget(LookupWidget):
                name, value or '', self.SECONDARY_SOURCE,
                name,
                self.SOURCE_URL, self.SECONDARY_SOURCE)
+
+
+class CMILookupWidget(LookupWidget):
+    SOURCE_URL = reverse_lazy('mims_product_search')
+    SECONDARY_SOURCE = reverse_lazy('mims_cmi_details')
+
+    @staticmethod
+    def usable_for_types():
+        return {CDEDataTypes.STRING}
+
+    def render(self, name, value, attrs, renderer=None):
+        return """
+            <input type="text" name="%s_" id="id_%s"/>
+            <input type="hidden" name="%s" id="id_%s_" value="%s"/>
+            <div style="display:none">
+                <a id="id_%s_link" disabled>Medicine information</a>
+            </div>
+            <script type="text/javascript">
+                lookupCMI($("#id_%s"), '%s', '%s', $("#id_%s_link"));
+                $("#id_%s").keyup(function() {
+                    cmiLookup($(this), '%s', '%s', $("#id_%s_link"));
+                });
+            </script>
+        """ % (name, name,
+               name, name, value or '',
+               name,
+               name, value or '', self.SECONDARY_SOURCE, name,
+               name, self.SOURCE_URL, self.SECONDARY_SOURCE, name)
