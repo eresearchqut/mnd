@@ -5,7 +5,7 @@ function lookupValue(element, value, secondary_source, suffixes) {
       element.parent().find(query).val(result.activeIngredient);
       var query = "[id$='" + suffixes[1] + "']";
       element.parent().find(query).val(result.mims);
-      element.val(result.productName);
+      element.val(result.name);
     });
   }
   
