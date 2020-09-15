@@ -1,11 +1,29 @@
+function refreshHtml() {
+  return '<div class="refresh" style="position:absolute;margin-left:-20px;margin-top:7px;">' +
+         '   <i class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></i>' +
+         '</div>';
+}
+
+function addRefreshIcon(element) {
+  if ( !element.parent().find(".refresh").length) {
+    element.before(refreshHtml());
+  }
+}
+
+function removeRefreshIcon(element) {
+  element.parent().find('.refresh').remove();
+}
+
 function lookupValue(element, value, secondary_source, suffixes) {
     var full_query = secondary_source + "?product=" + value;
+    addRefreshIcon(element);
     $.get(full_query, function(result) {
       var query = "[id$='" + suffixes[0] + "']";
       element.parent().find(query).val(result.activeIngredient);
       var query = "[id$='" + suffixes[1] + "']";
       element.parent().find(query).val(result.mims);
       element.val(result.name);
+      removeRefreshIcon(element);
     });
   }
 
@@ -13,12 +31,18 @@ function lookupValue(element, value, secondary_source, suffixes) {
   function dependentLookup(element, source_url, secondary_source, suffixes) {
     element.autocomplete({
       source: source_url,
-      minLength: 1,
+      minLength: 4,
       select: function(event, ui) {
         console.log("Selected", ui);
         element.next().val(ui.item.id);
         lookupValue(element, ui.item.id, secondary_source, suffixes);
-      }
+      },
+      search: function(){
+        addRefreshIcon(element);
+      },
+      response: function(){
+        removeRefreshIcon(element);
+      },
     }).data("ui-autocomplete")._renderItem = function(ul, item) {
       item.value = item.label;
       return $("<li>")
@@ -32,6 +56,7 @@ function lookupValue(element, value, secondary_source, suffixes) {
     target_el.parent().hide();
     target_el.attr("href", "");
     target_el.attr('disabled', '');
+    addRefreshIcon(element);
     $.get(full_query, function(result) {
       if (result.link) {
         target_el.attr("href", result.link);
@@ -40,17 +65,24 @@ function lookupValue(element, value, secondary_source, suffixes) {
         target_el.parent().show();
       }
       element.val(result.name);
+      removeRefreshIcon(element);
     });
   }
 
   function cmiLookup(element, source_url, secondary_source, target_el) {
     element.autocomplete({
       source: source_url,
-      minLength: 1,
+      minLength: 4,
       select: function(event, ui) {
         element.next().val(ui.item.id);
         lookupCMI(element, ui.item.id, secondary_source, target_el);
-      }
+      },
+      search: function(){
+        addRefreshIcon(element);
+      },
+      response: function(){
+        removeRefreshIcon(element);
+      },
     }).data("ui-autocomplete")._renderItem = function(ul, item) {
       item.value = item.label;
       return $("<li>")
