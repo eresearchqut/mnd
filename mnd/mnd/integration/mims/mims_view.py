@@ -48,12 +48,10 @@ def product_details(request):
     product = request.GET.get("product", "")
     resp = {}
     if product:
-        ms = MIMSService()
         cached = get_cache(product)
         if cached and cached.mims:
             return JsonResponse(status=200, data=cached._asdict())
-
-        product_details = ms.get_product_details(product)
+        product_details = MIMSService().get_product_details(product)
         if product_details:
             mims = ", ".join(product_details['mimsClasses'])
             name = product_details.get('productName', '')

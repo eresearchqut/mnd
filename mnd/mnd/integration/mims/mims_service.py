@@ -1,34 +1,11 @@
+from cachetools import TTLCache
 import logging
 import requests
-import time
 import urllib
 
 from django.conf import settings
 
 logger = logging.getLogger(__name__)
-
-
-class TTLCache:
-
-    class ExpiredEntry(KeyError):
-        pass
-
-    def __init__(self, expires_in):
-        self.current = int(time.time())
-        self.expires_at = self.current + expires_in
-        self.store = {}
-
-    def __getitem__(self, name):
-        if name in self.store:
-            current_ts = int(time.time())
-            if current_ts < self.expires_at:
-                return self.store[name]
-            raise TTLCache.ExpiredEntry("Expired !")
-        else:
-            raise KeyError(f"No such key: {name}")
-
-    def __setitem__(self, name, value):
-        self.store[name] = value
 
 
 class MIMSService:
@@ -46,6 +23,7 @@ class MIMSService:
         self.token_cache = None
 
     def _refresh_token(self):
+        self.token_cache = None
         url = self._full_url(self.TOKEN_URI)
         data = {
             "grant_type": "client_credentials",
@@ -54,7 +32,8 @@ class MIMSService:
         }
         resp = requests.post(url, data=data)
         as_json = resp.json()
-        self.token_cache = TTLCache(as_json["expires_in"])
+        expires_in = as_json["expires_in"]
+        self.token_cache = TTLCache(1, expires_in)
         self.token_cache["access_token"] = as_json["access_token"]
 
     def _make_auth_header(self):
@@ -66,7 +45,7 @@ class MIMSService:
                 "api-key": self.api_key,
                 "Authorization": f"Bearer {token}"
             }
-        except TTLCache.ExpiredEntry:
+        except KeyError:
             self._refresh_token()
 
     def _full_url(self, endpoint):

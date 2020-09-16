@@ -1,3 +1,4 @@
+from cachetools import func
 from collections import namedtuple
 from datetime import timedelta
 import logging
@@ -79,6 +80,7 @@ def get_cmi_cache(product_id):
     return CMIInfo(cmi.product_id, cmi.product_name, cmi.cmi_id, cmi.cmi_link, cmi.has_link) if cmi else None
 
 
+@func.ttl_cache(maxsize=1024, ttl=900)
 def search_cache(search_term):
     return [
         ProductInfo(r.product_id, r.name, r.mims_classes, r.active_ingredient)
