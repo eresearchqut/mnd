@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 def product_search(request):
 
     def active_ingredient(result):
-        return ", ".join(result.split("+"))
+        return ", ".join(result.split(" + "))
 
     product = request.GET.get("term", "")
     if product and product.strip() != '' and len(product) >= 4:
