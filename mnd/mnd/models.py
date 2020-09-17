@@ -205,3 +205,8 @@ class CarerRegistration(models.Model):
     registration_ts = models.DateTimeField(null=True, blank=True)
 
     objects = CarerRegistrationManager()
+
+
+class DuplicatePatient(models.Model):
+    patient = models.OneToOneField(Patient, related_name='duplicate_patient', on_delete=models.CASCADE)
+    is_duplicate = models.BooleanField(blank=False, null=False, default=False)

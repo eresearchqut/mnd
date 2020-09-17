@@ -16,6 +16,7 @@ from mnd.models import (
     PatientInsurance,
     PrimaryCarer,
     PrimaryCarerRelationship,
+    DuplicatePatient,
 )
 
 
@@ -285,3 +286,12 @@ class PreferredContactForm(PrefixedModelForm):
             for f in required_fields:
                 self.fields[f].required = True
         super()._clean_fields()
+
+
+class DuplicatePatientForm(PrefixedModelForm):
+    is_duplicate = forms.BooleanField(label=_("Mark this patient as a potential duplicate"), required=False)
+
+    class Meta:
+        model = DuplicatePatient
+        fields = ('is_duplicate',)
+

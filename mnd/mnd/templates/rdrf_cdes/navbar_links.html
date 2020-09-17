@@ -28,4 +28,11 @@
             </a>
         </li>
     {% endif %}
+    {% if request.user.is_superuser %}
+        <li>
+            <a href="{% url 'admin:mnd_duplicatepatient_changelist' %}?is_duplicate__exact=1"><span class="glyphicon glyphicon-user"></span>
+                {% trans 'Temporary duplicate Patients' %}
+            </a>
+        </li>
+    {% endif %}
 {% endblock %}
