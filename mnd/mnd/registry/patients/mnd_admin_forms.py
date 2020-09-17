@@ -112,10 +112,11 @@ class PatientInsuranceForm(PrefixedModelForm):
         return ndis_number
 
     def _clean_fields(self):
-        has_private_health_fund = self.data.get(self.field_name('has_private_health_fund'), '') == 'True'
+        radio_yes_value = 'True'
+        has_private_health_fund = self.data.get(self.field_name('has_private_health_fund'), '') == radio_yes_value
         self.fields['private_health_fund'].required = has_private_health_fund
         self.fields['private_health_fund_number'].required = has_private_health_fund
-        is_ndis_participant = self.data.get(self.field_name('is_ndis_participant'), '') == 'True'
+        is_ndis_participant = self.data.get(self.field_name('is_ndis_participant'), '') == radio_yes_value
         self.fields['ndis_number'].required = is_ndis_participant
         self.fields['ndis_plan_manager'].required = is_ndis_participant
         ndis_coordinator_info = [
@@ -125,10 +126,10 @@ class PatientInsuranceForm(PrefixedModelForm):
         coordinator_required_data = self.data.get(self.field_name('ndis_plan_manager'), '') == 'other'
         for f in ndis_coordinator_info:
             self.fields[f].required = coordinator_required_data and is_ndis_participant
-        has_dva_card = self.data.get(self.field_name('has_dva_card'), '') != ''
+        has_dva_card = self.data.get(self.field_name('has_dva_card'), '') == radio_yes_value
         self.fields['dva_card_number'].required = has_dva_card
         self.fields['dva_card_type'].required = has_dva_card
-        referred_for_mac_care_set = self.data.get(self.field_name('referred_for_mac_care'), '') == 'True'
+        referred_for_mac_care_set = self.data.get(self.field_name('referred_for_mac_care'), '') == radio_yes_value
         self.fields['needed_mac_level'].required = not referred_for_mac_care_set
         eligible_for_home_care = self.data.get(self.field_name('eligible_for_home_care'), '') == 'on'
         if not eligible_for_home_care:
