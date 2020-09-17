@@ -46,3 +46,4 @@ MIMS_CLIENT_ID = env.get('mims_client_id', '')
 MIMS_CLIENT_SECRET = env.get('mims_client_secret', '')
 MIMS_ENDPOINT = env.get('mims_endpoint', '')
 EXTRA_WIDGETS = 'mnd.forms.widgets.mnd_widgets'
+

@@ -7,6 +7,7 @@ from .views.mnd_patient_view import AddPatientView, PatientEditView
 from .views.mnd_patients_listing import MNDPatientsListingView
 from .views.carer_registration_view import CarerOperationsView, PatientCarerRegistrationView
 from .views.mnd_registration_view import MNDRegistrationView
+from .views.health_check import health_check
 from mnd.integration.mims import mims_view
 from rdrf.urls import urlpatterns as rdrf_urlpatterns
 
@@ -26,5 +27,6 @@ urlpatterns = [
     re_path(r'^mims/product_details', mims_view.product_details, name='mims_product_details'),
     re_path(r'^mims/cmi_details', mims_view.cmi_details, name='mims_cmi_details'),
     re_path(r'^$', LandingView.as_view(), name='landing'),
+    re_path(r'^health-check/?$', health_check, name='mnd_health_check'),
     re_path(r'', include(rdrf_urls)),
 ]

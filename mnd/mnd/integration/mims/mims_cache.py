@@ -4,6 +4,7 @@ from datetime import timedelta
 import logging
 
 from django.utils import timezone
+from django.db.models import Min
 
 from mnd.models import MIMSCmiCache, MIMSProductCache
 
@@ -27,9 +28,33 @@ def _get_existing_cmis(keys):
     return MIMSCmiCache.objects.filter(product_id__in=keys).values_list('product_id', flat=True)
 
 
+def _min_ts(input_dict):
+    if not input_dict:
+        return _expiring_ts()
+    return input_dict['expires_on__min']
+
+
+@func.ttl_cache(maxsize=1, ttl=3600)
+def _min_product_expiry_ts():
+    return _min_ts(MIMSProductCache.objects.aggregate(Min('expires_on')))
+
+
+@func.ttl_cache(maxsize=1, ttl=3600)
+def _min_cmi_expiry_ts():
+    return _min_ts(MIMSCmiCache.objects.aggregate(Min('expires_on')))
+
+
 def evict_expired_entries():
-    MIMSProductCache.objects.filter(expires_on__lt=timezone.now()).delete()
-    MIMSCmiCache.objects.filter(expires_on__lt=timezone.now()).delete()
+    logger.info("Search for expired MIMS cache entries...")
+    if timezone.now() > _min_product_expiry_ts():
+        product_cache_qs = MIMSProductCache.objects.filter(expires_on__lt=timezone.now())
+        logger.info(f"Evicting {product_cache_qs.count()} product cache entries")
+        product_cache_qs.delete()
+    if timezone.now() > _min_cmi_expiry_ts():
+        cmi_cache_qs = MIMSCmiCache.objects.filter(expires_on__lt=timezone.now())
+        logger.info(f"Evicting {cmi_cache_qs.count()} cmi cache entries")
+        cmi_cache_qs.delete()
+    logger.info("Done")
 
 
 def update_cache(search_term, product_list):
