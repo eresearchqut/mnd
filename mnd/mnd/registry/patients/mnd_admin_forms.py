@@ -298,10 +298,11 @@ class DuplicatePatientForm(PrefixedModelForm):
         fields = ('is_duplicate',)
 
     def save(self, commit=True):
+        ret_value = super().save(commit)
         if 'is_duplicate' in self.changed_data and self.cleaned_data['is_duplicate']:
             patient = self.instance.patient
             registry_code = patient.rdrf_registry.first().code
             process_notification(registry_code, EventType.DUPLICATE_PATIENT_SET,
                                  {"patient": patient})
 
-        return super().save(commit)
+        return ret_value
