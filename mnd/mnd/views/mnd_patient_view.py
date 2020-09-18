@@ -1,6 +1,8 @@
 from django.utils.translation import ugettext as _
 
+from rdrf.events.events import EventType
 from rdrf.helpers.constants import PATIENT_PERSONAL_DETAILS_SECTION_NAME
+from rdrf.services.io.notifications.email_notification import process_notification
 from rdrf.views.patient_view import (
     PatientFormMixin, AddPatientView as ParentAddPatientView, PatientEditView as ParentEditPatientView
 )
@@ -175,6 +177,12 @@ class FormSectionMixin(PatientFormMixin):
             pc.save()
         return carer is not None
 
+    def _handle_duplicate_patients(self, form, instance):
+        if 'is_duplicate' in form.changed_data and form.cleaned_data['is_duplicate']:
+            registry_code = instance.patient.rdrf_registry.first().code
+            process_notification(registry_code, EventType.DUPLICATE_PATIENT_SET,
+                                 {"patient": instance.patient})
+
     def all_forms_valid(self, forms):
         ret_val = super().all_forms_valid(forms)
         formset_keys = [self.PATIENT_INSURANCE_KEY, self.PRIMARY_CARER_KEY, self.PREFERRED_CONTACT_KEY,
@@ -185,6 +193,8 @@ class FormSectionMixin(PatientFormMixin):
             instance.save()
             if key == self.PRIMARY_CARER_KEY:
                 self._handle_primary_carer_relationship(forms[key], instance)
+            elif key == self.DUPLICATE_PATIENT_KEY:
+                self._handle_duplicate_patients(forms[key], instance)
 
         return ret_val
 
