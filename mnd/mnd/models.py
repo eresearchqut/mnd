@@ -218,9 +218,9 @@ class DuplicatePatient(models.Model):
     @staticmethod
     def post_save(**kwargs):
         duplicate_patient = kwargs['instance']
-        registry_code = duplicate_patient.patient.rdrf_registry.first().code
 
         if duplicate_patient.is_duplicate:
+            registry_code = duplicate_patient.patient.rdrf_registry.first().code
             process_notification(registry_code, EventType.DUPLICATE_PATIENT_SET, {"patient": duplicate_patient.patient})
 
 
