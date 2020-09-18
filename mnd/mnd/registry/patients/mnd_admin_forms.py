@@ -294,4 +294,3 @@ class DuplicatePatientForm(PrefixedModelForm):
     class Meta:
         model = DuplicatePatient
         fields = ('is_duplicate',)
-

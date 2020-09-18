@@ -8,7 +8,7 @@ from rdrf.helpers.form_section_helper import DemographicsSectionFieldBuilder
 
 from ..registry.patients.mnd_admin_forms import PatientInsuranceForm, PrimaryCarerForm, PreferredContactForm,\
     DuplicatePatientForm
-from ..models import PrimaryCarer, PrimaryCarerRelationship, DuplicatePatient
+from ..models import PrimaryCarer, PrimaryCarerRelationship
 
 import logging
 logger = logging.getLogger(__name__)
