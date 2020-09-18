@@ -5,6 +5,8 @@ from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
 from django.utils import timezone
 
+from rdrf.events.events import EventType
+from rdrf.services.io.notifications.email_notification import process_notification
 from registry.groups.models import CustomUser
 from registry.patients.models import Patient
 
@@ -294,3 +296,12 @@ class DuplicatePatientForm(PrefixedModelForm):
     class Meta:
         model = DuplicatePatient
         fields = ('is_duplicate',)
+
+    def save(self, commit=True):
+        if 'is_duplicate' in self.changed_data and self.cleaned_data['is_duplicate']:
+            patient = self.instance.patient
+            registry_code = patient.rdrf_registry.first().code
+            process_notification(registry_code, EventType.DUPLICATE_PATIENT_SET,
+                                 {"patient": patient})
+
+        return super().save(commit)

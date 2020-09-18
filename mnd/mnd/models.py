@@ -1,13 +1,10 @@
 import pycountry
 
 from django.db import models
-from django.db.models.signals import post_save
 
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
 
-from rdrf.events.events import EventType
-from rdrf.services.io.notifications.email_notification import process_notification
 from registry.patients.models import Patient
 
 
@@ -214,14 +211,3 @@ class CarerRegistration(models.Model):
 class DuplicatePatient(models.Model):
     patient = models.OneToOneField(Patient, related_name='duplicate_patient', on_delete=models.CASCADE)
     is_duplicate = models.BooleanField(blank=False, null=False, default=False)
-
-    @staticmethod
-    def post_save(**kwargs):
-        duplicate_patient = kwargs['instance']
-
-        if duplicate_patient.is_duplicate:
-            registry_code = duplicate_patient.patient.rdrf_registry.first().code
-            process_notification(registry_code, EventType.DUPLICATE_PATIENT_SET, {"patient": duplicate_patient.patient})
-
-
-post_save.connect(DuplicatePatient.post_save, sender=DuplicatePatient)
