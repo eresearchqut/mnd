@@ -4,6 +4,7 @@ from django.db import models
 
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
+
 from registry.patients.models import Patient
 
 
@@ -205,3 +206,8 @@ class CarerRegistration(models.Model):
     registration_ts = models.DateTimeField(null=True, blank=True)
 
     objects = CarerRegistrationManager()
+
+
+class DuplicatePatient(models.Model):
+    patient = models.OneToOneField(Patient, related_name='duplicate_patient', on_delete=models.CASCADE)
+    is_duplicate = models.BooleanField(blank=False, null=False, default=False)

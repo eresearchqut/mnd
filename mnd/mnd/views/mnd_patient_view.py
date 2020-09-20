@@ -1,12 +1,15 @@
 from django.utils.translation import ugettext as _
 
+from rdrf.events.events import EventType
 from rdrf.helpers.constants import PATIENT_PERSONAL_DETAILS_SECTION_NAME
+from rdrf.services.io.notifications.email_notification import process_notification
 from rdrf.views.patient_view import (
     PatientFormMixin, AddPatientView as ParentAddPatientView, PatientEditView as ParentEditPatientView
 )
 from rdrf.helpers.form_section_helper import DemographicsSectionFieldBuilder
 
-from ..registry.patients.mnd_admin_forms import PatientInsuranceForm, PrimaryCarerForm, PreferredContactForm
+from ..registry.patients.mnd_admin_forms import PatientInsuranceForm, PrimaryCarerForm, PreferredContactForm,\
+    DuplicatePatientForm
 from ..models import PrimaryCarer, PrimaryCarerRelationship
 
 import logging
@@ -39,6 +42,10 @@ def get_insurance_data(patient):
 
 def get_primary_carer(patient):
     return PrimaryCarer.get_primary_carer(patient)
+
+
+def get_duplicate_patient(patient):
+    return getattr(patient, 'duplicate_patient', None)
 
 
 def get_primary_carer_initial_data(patient):
@@ -88,6 +95,7 @@ class FormSectionMixin(PatientFormMixin):
     PATIENT_INSURANCE_KEY = "patient_insurance_form"
     PRIMARY_CARER_KEY = "primary_carer_form"
     PREFERRED_CONTACT_KEY = "preferred_contact_form"
+    DUPLICATE_PATIENT_KEY = "duplicate_patient_form"
 
     def get_form_sections(self, user, request, patient, registry, patient_form,
                           patient_address_form, patient_doctor_form, patient_relative_form,
@@ -125,6 +133,13 @@ class FormSectionMixin(PatientFormMixin):
                 get_primary_carer_initial_data(patient), patient
             ),
         ])
+
+        if user.is_staff:
+            form_sections.append(
+                get_section(
+                    DuplicatePatientForm, _("Potential duplicate"), "duplicate_patient", get_duplicate_patient(patient), request
+                )
+            )
         return form_sections
 
     def get_forms(self, request, registry_model, user, instance=None):
@@ -140,6 +155,9 @@ class FormSectionMixin(PatientFormMixin):
         )
         forms[self.PREFERRED_CONTACT_KEY] = (
             get_form(PreferredContactForm, request, "preferred_contact", get_preferred_contact(instance))
+        )
+        forms[self.DUPLICATE_PATIENT_KEY] = (
+            get_form(DuplicatePatientForm, request, "duplicate_patient", get_duplicate_patient(instance))
         )
         return forms
 
@@ -159,15 +177,24 @@ class FormSectionMixin(PatientFormMixin):
             pc.save()
         return carer is not None
 
+    def _handle_duplicate_patients(self, form, instance):
+        if 'is_duplicate' in form.changed_data and form.cleaned_data['is_duplicate']:
+            registry_code = instance.patient.rdrf_registry.first().code
+            process_notification(registry_code, EventType.DUPLICATE_PATIENT_SET,
+                                 {"patient": instance.patient})
+
     def all_forms_valid(self, forms):
         ret_val = super().all_forms_valid(forms)
-        formset_keys = [self.PATIENT_INSURANCE_KEY, self.PRIMARY_CARER_KEY, self.PREFERRED_CONTACT_KEY]
+        formset_keys = [self.PATIENT_INSURANCE_KEY, self.PRIMARY_CARER_KEY, self.PREFERRED_CONTACT_KEY,
+                        self.DUPLICATE_PATIENT_KEY]
         for key in formset_keys:
             instance = forms[key].save(commit=False)
             instance.patient = self.object
             instance.save()
             if key == self.PRIMARY_CARER_KEY:
                 self._handle_primary_carer_relationship(forms[key], instance)
+            elif key == self.DUPLICATE_PATIENT_KEY:
+                self._handle_duplicate_patients(forms[key], instance)
 
         return ret_val
 
