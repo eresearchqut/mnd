@@ -26,6 +26,7 @@ urlpatterns = [
     re_path(r'^mims/product_search', mims_view.product_search, name='mims_product_search'),
     re_path(r'^mims/product_details', mims_view.product_details, name='mims_product_details'),
     re_path(r'^mims/cmi_details', mims_view.cmi_details, name='mims_cmi_details'),
+    re_path(r'^mims/pdf_info', mims_view.pdf_proxy, name='mims_cmi_pdf'),
     re_path(r'^$', LandingView.as_view(), name='landing'),
     re_path(r'^health-check/?$', health_check, name='mnd_health_check'),
     re_path(r'', include(rdrf_urls)),

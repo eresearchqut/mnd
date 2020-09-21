@@ -95,13 +95,18 @@ def update_cache(search_term, product_list):
     MIMSCmiCache.objects.bulk_create(cmis_to_add)
 
 
-def get_cache(product_id):
+def get_product(product_id):
     result = MIMSProductCache.objects.filter(product_id=product_id).first()
     return ProductInfo(result.product_id, result.name, result.mims_classes, result.active_ingredient) if result else None
 
 
-def get_cmi_cache(product_id):
+def get_cmi_by_product(product_id):
     cmi = MIMSCmiCache.objects.filter(product_id=product_id).first()
+    return CMIInfo(cmi.product_id, cmi.product_name, cmi.cmi_id, cmi.cmi_link, cmi.has_link) if cmi else None
+
+
+def get_cmi_info(cmi_id):
+    cmi = MIMSCmiCache.objects.filter(cmi_id=cmi_id).first()
     return CMIInfo(cmi.product_id, cmi.product_name, cmi.cmi_id, cmi.cmi_link, cmi.has_link) if cmi else None
 
 

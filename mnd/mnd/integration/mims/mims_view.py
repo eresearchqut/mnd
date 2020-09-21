@@ -1,14 +1,16 @@
 import logging
+import requests
 
 
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse, HttpResponseNotFound
+from django.shortcuts import reverse
 from django.views.decorators.http import require_GET
 
 from .mims_service import MIMSService
 from .mims_cache import (
-    CMIInfo, ProductInfo, get_cache, get_cmi_cache,
-    search_cache, update_cache, update_cache_entry,
-    update_cmi_cache
+    CMIInfo, ProductInfo, get_product, get_cmi_by_product,
+    get_cmi_info, search_cache, update_cache,
+    update_cache_entry, update_cmi_cache
 )
 
 logger = logging.getLogger(__name__)
@@ -48,7 +50,7 @@ def product_details(request):
     product = request.GET.get("product", "")
     resp = {}
     if product:
-        cached = get_cache(product)
+        cached = get_product(product)
         if cached and cached.mims:
             return JsonResponse(status=200, data=cached._asdict())
         product_details = MIMSService().get_product_details(product)
@@ -76,14 +78,20 @@ def _handle_cmi_details(mims_service, product_id, product_name, cmi_id):
         return update_cmi_cache(CMIInfo(product_id, product_name, cmi_id, '', False))
 
 
+def with_proxied_link(resp):
+    if 'link' in resp and resp['link']:
+        resp['link'] = f"{reverse('mims_cmi_pdf')}?cmi={resp['cmi_id']}"
+    return resp
+
+
 @require_GET
 def cmi_details(request):
     product = request.GET.get("product", "")
     resp = {}
     if product:
-        cached = get_cmi_cache(product)
+        cached = get_cmi_by_product(product)
         if cached and (cached.link or not cached.has_link):
-            return JsonResponse(status=200, data=cached._asdict())
+            return JsonResponse(status=200, data=with_proxied_link(cached._asdict()))
 
         resp = {}
         ms = MIMSService()
@@ -103,5 +111,19 @@ def cmi_details(request):
                     resp = updated._asdict()
             else:
                 resp = cmi_info._asdict()
+    return JsonResponse(status=200, data=with_proxied_link(resp))
 
-    return JsonResponse(status=200, data=resp)
+
+@require_GET
+def pdf_proxy(request):
+    product = request.GET.get("cmi", "")
+    if product:
+        cached = get_cmi_info(product)
+        if cached and cached.link:
+            resp = requests.get(cached.link)
+            return HttpResponse(
+                content=resp.content,
+                status=resp.status_code,
+                content_type=resp.headers['Content-Type']
+            )
+    return HttpResponseNotFound()
