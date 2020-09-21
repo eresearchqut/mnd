@@ -6,7 +6,8 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('mnd', '0019_mims_product_cache'),
+        ('patients', '0053_patient_carer_link'),
+        ('mnd', '0022_mims_product_cache'),
     ]
 
     operations = [

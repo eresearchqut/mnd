@@ -6,7 +6,8 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('mnd', '0018_primary_carer_email_unique'),
+        ('patients', '0053_patient_carer_link'),
+        ('mnd', '0021_duplicate_patient'),
     ]
 
     operations = [

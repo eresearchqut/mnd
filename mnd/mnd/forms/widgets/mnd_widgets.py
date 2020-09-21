@@ -23,13 +23,18 @@ class ProductLookupWidget(LookupWidget):
             <script type="text/javascript">
                 lookupValue($("#id_%s"), '%s', '%s', ['ingredients', 'mims']);
                 $("#id_%s").keyup(function() {
-                    dependentLookup($(this), '%s', '%s', ['ingredients', 'mims']);
+                    if (!this.value) {
+                        $("[name='%s']").val('');
+                    } else {
+                        dependentLookup($(this), '%s', '%s', ['ingredients', 'mims']);
+                    }
                 });
             </script>
         """ % (name, name,
                name, name, value or '',
                name, name,
                name, value or '', self.SECONDARY_SOURCE,
+               name,
                name,
                self.SOURCE_URL, self.SECONDARY_SOURCE)
 
@@ -52,11 +57,16 @@ class CMILookupWidget(LookupWidget):
             <script type="text/javascript">
                 lookupCMI($("#id_%s"), '%s', '%s', $("#id_%s_link"));
                 $("#id_%s").keyup(function() {
-                    cmiLookup($(this), '%s', '%s', $("#id_%s_link"));
+                    if (!this.value) {
+                        $("[name='%s']").val('');
+                    } else {
+                        cmiLookup($(this), '%s', '%s', $("#id_%s_link"));
+                    }
                 });
             </script>
         """ % (name, name,
                name, name, value or '',
                name,
                name, value or '', self.SECONDARY_SOURCE, name,
+               name,
                name, self.SOURCE_URL, self.SECONDARY_SOURCE, name)
