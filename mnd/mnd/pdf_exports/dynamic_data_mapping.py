@@ -67,6 +67,7 @@ _single_section_field_mappings = {
     # My breathing
     ("mndBreathing", "mndBreathHard"): "bre_trouble",
     ("mndBreathing", "mndWhenBreathHard"): "checkbox_mappings",
+    ("mndBreathing", "mndBreathTracheostomy"): "tracheostomy",
     ("mndBreathing", "mndNIVYN"): "niv",
     ("mndBreathing", "mndBreathAssist"): "checkbox_mappings",
     ("mndBreathing", "mndBAOther"): "mndBreathingOM",
