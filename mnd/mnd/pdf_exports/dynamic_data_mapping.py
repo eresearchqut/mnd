@@ -156,7 +156,7 @@ _care_team_primary_carer_cde = "mndPrimary"
 
 
 def _interval_mapping(input_val):
-    if input_val == 0:
+    if input_val == 0 or input_val == "" or input_val is None:
         return "none"
     if input_val < 5:
         return "mild"
