@@ -171,8 +171,19 @@ def _generate_primary_carer_fields(primary_carer, patient, patient_address):
             'p2Postcode': postcode
         }
 
+    def emergency_contact_details(primary_carer):
+        res = {}
+        if primary_carer.em_contact_first_name:
+            res['p3FName'] = primary_carer.em_contact_first_name
+        if primary_carer.em_contact_last_name:
+            res['p3LName'] = primary_carer.em_contact_last_name
+        if primary_carer.em_contact_phone:
+            res['p3Phone'] = primary_carer.em_contact_phone
+        return res
+
     if not primary_carer:
         return {}
+
     result = {
         'p2Relationship': primary_carer_relationship(primary_carer),
         'p2FName': primary_carer.first_name,
@@ -184,6 +195,7 @@ def _generate_primary_carer_fields(primary_carer, patient, patient_address):
         'p2Interpreter': _yes_no_off(primary_carer.interpreter_required),
     }
     result.update(primary_carer_address(primary_carer, patient_address))
+    result.update(emergency_contact_details(primary_carer))
     return result
 
 
