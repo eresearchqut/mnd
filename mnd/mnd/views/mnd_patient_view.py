@@ -157,6 +157,9 @@ class FormSectionMixin(PatientFormMixin):
 
     def get_forms(self, request, registry_model, user, instance=None):
         forms = super().get_forms(request, registry_model, user, instance)
+        forms[self.PATIENT_LANGUAGE_KEY] = (
+            get_form(PatientLanguageForm, request, "language_info", get_patient_language(instance))
+        )
         forms[self.PATIENT_INSURANCE_KEY] = (
             get_form(PatientInsuranceForm, request, "patient_insurance", get_insurance_data(instance))
         )
@@ -198,8 +201,8 @@ class FormSectionMixin(PatientFormMixin):
 
     def all_forms_valid(self, forms):
         ret_val = super().all_forms_valid(forms)
-        formset_keys = [self.PATIENT_INSURANCE_KEY, self.PRIMARY_CARER_KEY, self.PREFERRED_CONTACT_KEY,
-                        self.DUPLICATE_PATIENT_KEY]
+        formset_keys = [self.PATIENT_LANGUAGE_KEY, self.PATIENT_INSURANCE_KEY, self.PRIMARY_CARER_KEY,
+                        self.PREFERRED_CONTACT_KEY, self.DUPLICATE_PATIENT_KEY]
         for key in formset_keys:
             instance = forms[key].save(commit=False)
             instance.patient = self.object
