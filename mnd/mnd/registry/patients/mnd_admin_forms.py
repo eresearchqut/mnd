@@ -124,7 +124,7 @@ class PatientInsuranceForm(PrefixedModelForm):
             'ndis_coordinator_first_name', 'ndis_coordinator_last_name', 'ndis_coordinator_phone',
             'ndis_coordinator_email'
         ]
-        coordinator_required_data = self.data.get(self.field_name('ndis_plan_manager'), '') == 'other'
+        coordinator_required_data = self.data.get(self.field_name('ndis_plan_manager'), '') in ('agency', 'other')
         for f in ndis_coordinator_info:
             self.fields[f].required = coordinator_required_data and is_ndis_participant
         has_dva_card = self.data.get(self.field_name('has_dva_card'), '') == radio_yes_value
