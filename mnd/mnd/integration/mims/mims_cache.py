@@ -59,7 +59,7 @@ def evict_expired_entries():
 
 def update_cache(search_term, product_list):
     update_dict = {
-        f['id']: ProductInfo(f['id'], f['value'], '', f['activeIngredient']) for f in product_list
+        f.id: ProductInfo(f.id, f.value, '', f.activeIngredient) for f in product_list
     }
     existing = set(str(pid) for pid in _get_existing_products(update_dict.keys()))
     new_entries = {key for key in update_dict.keys() if key not in existing}

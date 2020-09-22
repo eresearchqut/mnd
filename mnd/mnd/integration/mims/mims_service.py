@@ -1,90 +1,110 @@
-from cachetools import TTLCache
+from collections import namedtuple
 import logging
 import requests
-import urllib
 
-from django.conf import settings
+from django.shortcuts import reverse
+
+from .mims_api import MIMSApi
+from .mims_cache import (
+    CMIInfo, ProductInfo, get_product, get_cmi_by_product,
+    get_cmi_info, search_cache, update_cache,
+    update_cache_entry, update_cmi_cache
+)
+
+ProductSearchResult = namedtuple('ProductSearchResult', 'id value activeIngredient')
 
 logger = logging.getLogger(__name__)
 
+api = MIMSApi()
 
-class MIMSService:
 
-    TOKEN_URI = "oauth2/v1/token"
-    BRAND_URI = "au/druglist/v1/brands"
-    PRODUCT_URI = "au/druglist/v1/products"
-    CMI_DETAILS_URI = "au/cmi/v1/cmis"
+def mims_product_search(product):
 
-    def __init__(self):
-        self.api_key = settings.MIMS_API_KEY
-        self.client_id = settings.MIMS_CLIENT_ID
-        self.client_secret = settings.MIMS_CLIENT_SECRET
-        self.service_endpoint = settings.MIMS_ENDPOINT
-        self.token_cache = None
+    def active_ingredient(result):
+        return ", ".join(result.split(" + "))
 
-    def _refresh_token(self):
-        self.token_cache = None
-        url = self._full_url(self.TOKEN_URI)
-        data = {
-            "grant_type": "client_credentials",
-            "client_id": self.client_id,
-            "client_secret": self.client_secret
-        }
-        resp = requests.post(url, data=data)
-        as_json = resp.json()
-        expires_in = as_json["expires_in"]
-        self.token_cache = TTLCache(1, expires_in)
-        self.token_cache["access_token"] = as_json["access_token"]
+    if product and product.strip() != '' and len(product) >= 4:
+        cached = search_cache(product)
+        if cached:
+            return [ProductSearchResult(r.id, r.name, r.activeIngredient) for r in cached]
 
-    def _make_auth_header(self):
-        if not self.token_cache:
-            self._refresh_token()
-        try:
-            token = self.token_cache["access_token"]
-            return {
-                "api-key": self.api_key,
-                "Authorization": f"Bearer {token}"
-            }
-        except KeyError:
-            self._refresh_token()
+        result = api.search_product(product)
+        if result:
+            formatted = [
+                ProductSearchResult(r['productId'], r['productName'], active_ingredient(r['activeIngredient']))
+                for r in result
+            ]
+            update_cache(product, formatted)
+            return formatted
+    return []
 
-    def _full_url(self, endpoint):
-        return f"{self.service_endpoint}/{endpoint}"
 
-    def search_brand(self, brand, page=1, limit=50):
-        params = urllib.parse.urlencode({
-            "term": brand,
-            "include": True,
-            "page": page,
-            "limit": limit
-        })
-        resp = requests.get(self._full_url(f"{self.BRAND_URI}?{params}"), headers=self._make_auth_header())
-        return resp.json()
+def mims_product_details(product):
+    resp = {}
+    if product:
+        cached = get_product(product)
+        if cached and cached.mims:
+            return cached._asdict()
+        product_details = api.get_product_details(product)
+        if product_details:
+            mims = ", ".join(product_details['mimsClasses'])
+            name = product_details.get('productName', '')
+            product_info = ProductInfo(product, name, mims, '')
+            resp = update_cache_entry(product_info)._asdict()
+    return resp
 
-    def get_brand_details(self, brand_id):
-        fields = urllib.parse.urlencode({
-            "fields": "products, mimsClasses"
-        })
-        resp = requests.get(self._full_url(f"{self.BRAND_URI}/{brand_id}?{fields}"), headers=self._make_auth_header())
-        return resp.json()
 
-    def search_product(self, product, page=1, limit=50):
-        params = urllib.parse.urlencode({
-            "term": product,
-            "include": True,
-            "page": page,
-            "limit": limit
-        })
-        resp = requests.get(self._full_url(f"{self.PRODUCT_URI}?{params}"), headers=self._make_auth_header())
-        return resp.json() if resp.status_code == 200 else {}
+def _handle_cmi_details(product_id, product_name, cmi_id):
+    cmi_details = api.get_cmi_details(cmi_id)
+    if cmi_details:
+        products = [p for p in cmi_details.get('products', [])]
+        document_link = [
+            d['cmiDocument'] for d in cmi_details['cmiDocuments'] if d['cmiFormat'] in ('pdf', 'reducedpdf')
+        ]
+        if document_link and document_link[0]:
+            for p in products:
+                update_cmi_cache(CMIInfo(p['productId'], p['productName'], cmi_id, document_link[0], True))
+            cmi_info = update_cmi_cache(CMIInfo(product_id, '', cmi_id, document_link[0], True))
+            return cmi_info
+        return update_cmi_cache(CMIInfo(product_id, product_name, cmi_id, '', False))
 
-    def get_product_details(self, product_id):
-        fields = urllib.parse.urlencode({
-            "fields": "cmis, brand, productName, mimsClasses"
-        })
-        resp = requests.get(self._full_url(f"{self.PRODUCT_URI}/{product_id}?{fields}"), headers=self._make_auth_header())
-        return resp.json() if resp.status_code == 200 else {}
 
-    def get_cmi_details(self, cmi_id):
-        resp = requests.get(self._full_url(f"{self.CMI_DETAILS_URI}/{cmi_id}"), headers=self._make_auth_header())
-        return resp.json() if resp.status_code == 200 else {}
+def _with_proxied_link(resp):
+    if 'link' in resp and resp['link']:
+        resp['link'] = f"{reverse('mims_cmi_pdf')}?cmi={resp['cmi_id']}"
+    return resp
+
+
+def mims_cmi_details(product):
+    resp = {}
+    if product:
+        cached = get_cmi_by_product(product)
+        if cached and (cached.link or not cached.has_link):
+            return _with_proxied_link(cached._asdict())
+
+        resp = {}
+        product_details = api.get_product_details(product)
+        if product_details:
+            product_name = product_details.get('productName')
+            cmis = product_details.get('cmis', [])
+            cmi_id = cmis[0]['cmiId'] if cmis else None
+            if cached:
+                cmi_info = CMIInfo(cached.product_id, cached.name, cmi_id, '', cmi_id is not None)
+            else:
+                cmi_info = CMIInfo(product, product_name, cmi_id, '', cmi_id is not None)
+            cmi_info = update_cmi_cache(cmi_info)
+            if cmi_info.cmi_id:
+                updated = _handle_cmi_details(product, product_name, cmi_info.cmi_id)
+                if updated:
+                    resp = updated._asdict()
+            else:
+                resp = cmi_info._asdict()
+    return _with_proxied_link(resp)
+
+
+def fetch_pdf(cmi):
+    if cmi:
+        cached = get_cmi_info(cmi)
+        if cached and cached.link:
+            return requests.get(cached.link)
+    return None
