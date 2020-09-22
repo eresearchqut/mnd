@@ -31,6 +31,11 @@ def _gender_mapping(gender):
     return mappings.get(gender, "Off")
 
 
+def _language_mapping(code):
+    lang = pycountry.languages.get(alpha_2=code)
+    return lang.name if lang else ''
+
+
 def _generate_patient_fields(patient):
     return {
         'pFirstName': patient.given_names,
@@ -134,6 +139,16 @@ def _generate_preferred_contact_fields(preferred_contact):
     }
 
 
+def _generate_language_info_fields(language_info):
+    if not language_info:
+        return {}
+
+    return {
+        'pLang': _language_mapping(language_info.preferred_language),
+        'pInterpreter': _yes_no_off(language_info.interpreter_required),
+    }
+
+
 def _generate_primary_carer_fields(primary_carer, patient, patient_address):
 
     def primary_carer_relationship(primary_carer):
@@ -153,10 +168,6 @@ def _generate_primary_carer_fields(primary_carer, patient, patient_address):
         if relation:
             return mapping.get(relation.relationship, 'Off')
         return 'Off'
-
-    def primary_carer_language(code):
-        lang = pycountry.languages.get(alpha_2=code)
-        return lang.name if lang else ''
 
     def primary_carer_address(primary_carer, patient_address):
         patient_adr = patient_address.address if patient_address else None
@@ -198,7 +209,7 @@ def _generate_primary_carer_fields(primary_carer, patient, patient_address):
         'p2LName': primary_carer.last_name,
         'p2Email': primary_carer.email,
         'p2Phone': primary_carer.phone,
-        'p2Lang': primary_carer_language(primary_carer.preferred_language),
+        'p2Lang': _language_mapping(primary_carer.preferred_language),
         'same_address': primary_carer.same_address,
         'p2Interpreter': _yes_no_off(primary_carer.interpreter_required),
     }
@@ -215,6 +226,8 @@ def generate_pdf_form_fields(registry, patient):
     data.update(_generate_patient_insurance_fields(patient, insurance))
     preferred_contact = getattr(patient, 'preferred_contact', None)
     data.update(_generate_preferred_contact_fields(preferred_contact))
+    language_info = getattr(patient, 'language_info', None)
+    data.update(_generate_language_info_fields(language_info))
     primary_carer = PrimaryCarer.get_primary_carer(patient)
     data.update(
         _generate_primary_carer_fields(primary_carer, patient, patient_address)
