@@ -18,7 +18,7 @@ _single_section_field_mappings = {
     ("symptomTypes", "mndFatigue"): "fatigue",
     ("symptomTypes", "mndPain"): "pain",
     ("symptomTypes", "mndMuscle"): "cramps",
-    ("symptomTypes", "mndSaliva"): "saliva",
+    ("symptomTypes", "mndSaliva"): "excsaliva",
     ("symptomTypes", "mndConstipation"): "constipation",
     ("symptomTypes", "mndDisSleep"): "dSleep",
     ("symptomTypes", "mndBreath"): "sBreath",
@@ -118,7 +118,7 @@ _single_section_field_mappings = {
     ("mndMouth", "mndMHelp"): "mouth_care",
     ("mndMouth", "mndBrush"): "brush-teeth",
     ("mndMouth", "mndSwabs"): "swabs",
-    # ("mndMouth", "mndXSaliva"): "", -> Missing from PDF
+    ("mndMouth", "mndXSaliva"): "saliva",
     ("mndMouth", "mndManageSaliva"): "checkbox_mappings",
     ("mndMouth", "mndSalivaOther"): "sm_other",
 

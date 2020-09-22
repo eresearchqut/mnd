@@ -1031,12 +1031,8 @@ FieldFlags: 49152
 FieldJustification: Left
 FieldStateOption: Sometimes
 FieldStateOption: Never
-FieldStateOption: mild
-FieldStateOption: severe
 FieldStateOption: Always
-FieldStateOption: none
 FieldStateOption: Off
-FieldStateOption: moderate
 ---
 FieldType: Button
 FieldName: commLevel
@@ -3661,3 +3657,13 @@ FieldFlags: 0
 FieldJustification: Left
 FieldStateOption: Yes
 FieldStateOption: Off
+---
+FieldType: Button
+FieldName: excsaliva
+FieldFlags: 49152
+FieldJustification: Left
+FieldStateOption: mild
+FieldStateOption: severe
+FieldStateOption: none
+FieldStateOption: Off
+FieldStateOption: moderate
