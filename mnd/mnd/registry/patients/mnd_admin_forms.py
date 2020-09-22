@@ -17,6 +17,7 @@ from mnd.models import (
     PrimaryCarer,
     PrimaryCarerRelationship,
     DuplicatePatient,
+    PatientLanguage
 )
 
 
@@ -294,3 +295,14 @@ class DuplicatePatientForm(PrefixedModelForm):
     class Meta:
         model = DuplicatePatient
         fields = ('is_duplicate',)
+
+
+class PatientLanguageForm(PrefixedModelForm):
+    interpreter_required = forms.BooleanField(
+        widget=widgets.RadioSelect(choices=[(True, 'Yes'), (False, 'No')]),
+        required=False
+    )
+
+    class Meta:
+        model = PatientLanguage
+        fields = ('interpreter_required', 'preferred_language')

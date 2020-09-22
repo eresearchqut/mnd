@@ -7,6 +7,10 @@ from django.utils import timezone
 
 from registry.patients.models import Patient
 
+LANGUAGE_CHOICES = [
+    (lang.alpha_2, lang.name) for lang in pycountry.languages if hasattr(lang, 'alpha_2')
+]
+
 
 class PatientInsurance(models.Model):
 
@@ -63,10 +67,6 @@ class PrimaryCarer(models.Model):
     @classmethod
     def get_primary_carer(cls, patient):
         return patient.primary_carers.first() if patient else None
-
-    LANGUAGE_CHOICES = [
-        (lang.alpha_2, lang.name) for lang in pycountry.languages if hasattr(lang, 'alpha_2')
-    ]
 
     # This is Many to Many as we don't want to add a FK to Patient in TRRF
     # since TRRF is not aware of this MND specific model
@@ -211,3 +211,9 @@ class CarerRegistration(models.Model):
 class DuplicatePatient(models.Model):
     patient = models.OneToOneField(Patient, related_name='duplicate_patient', on_delete=models.CASCADE)
     is_duplicate = models.BooleanField(blank=False, null=False, default=False)
+
+
+class PatientLanguage(models.Model):
+    patient = models.OneToOneField(Patient, related_name='language_info', on_delete=models.CASCADE)
+    preferred_language = models.CharField(choices=LANGUAGE_CHOICES, max_length=30, default='en')
+    interpreter_required = models.BooleanField(default=False)
