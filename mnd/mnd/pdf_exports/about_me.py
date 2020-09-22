@@ -173,12 +173,20 @@ def _generate_primary_carer_fields(primary_carer, patient, patient_address):
 
     def emergency_contact_details(primary_carer):
         res = {}
-        if primary_carer.em_contact_first_name:
-            res['p3FName'] = primary_carer.em_contact_first_name
-        if primary_carer.em_contact_last_name:
-            res['p3LName'] = primary_carer.em_contact_last_name
-        if primary_carer.em_contact_phone:
-            res['p3Phone'] = primary_carer.em_contact_phone
+        if primary_carer.is_emergency_contact:
+            if primary_carer.first_name:
+                res['p3FName'] = primary_carer.first_name
+            if primary_carer.last_name:
+                res['p3LName'] = primary_carer.last_name
+            if primary_carer.phone:
+                res['p3Phone'] = primary_carer.phone
+        else:
+            if primary_carer.em_contact_first_name:
+                res['p3FName'] = primary_carer.em_contact_first_name
+            if primary_carer.em_contact_last_name:
+                res['p3LName'] = primary_carer.em_contact_last_name
+            if primary_carer.em_contact_phone:
+                res['p3Phone'] = primary_carer.em_contact_phone
         return res
 
     if not primary_carer:
