@@ -1,8 +1,8 @@
 import datetime
 import logging
 
-from rdrf.models.definition.models import CommonDataElement
 from .dynamic_data_mapping import generate_pdf_field_mappings
+from .form_value_resolvers import FormValueResolver
 
 logger = logging.getLogger(__name__)
 
@@ -42,17 +42,14 @@ def generate_dynamic_data_fields(registry, patient):
         form_values.update(_get_form_values(dyn_data))
 
     cde_codes = [code for (__, code, __) in form_values.keys()]
-    with_pv_groups = CommonDataElement.objects.filter(code__in=cde_codes, pv_group__isnull=False)
-    cde_values_mapping = {
-        cde.code: cde.pv_group.cde_values_dict for cde in with_pv_groups
-    }
+    fvr = FormValueResolver(cde_codes)
 
     updated_form_values = {}
     for key, value in form_values.items():
         section, code, section_index = key
-        if code in cde_values_mapping and value:
-            if not isinstance(value, list):
-                updated_form_values[(section, code, section_index)] = cde_values_mapping[code].get(value, value)
+        new_value = fvr.resolve(code, value)
+        if new_value != value:
+            updated_form_values[(section, code, section_index)] = new_value
 
     form_values.update(updated_form_values)
 

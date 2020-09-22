@@ -7,7 +7,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('patients', '0053_patient_carer_link'),
-        ('mnd', '0021_duplicate_patient'),
+        ('mnd', '0022_patientlanguage'),
     ]
 
     operations = [
