@@ -133,9 +133,6 @@ def _generate_preferred_contact_fields(preferred_contact):
         return {}
     return {
         'pPrefered': carer_contact_method(preferred_contact),
-        'p3FName': preferred_contact.first_name,
-        'p3LName': preferred_contact.last_name,
-        'p3Phone': preferred_contact.phone,
     }
 
 
