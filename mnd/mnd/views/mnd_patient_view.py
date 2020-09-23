@@ -8,8 +8,10 @@ from rdrf.views.patient_view import (
 )
 from rdrf.helpers.form_section_helper import DemographicsSectionFieldBuilder
 
-from ..registry.patients.mnd_admin_forms import PatientInsuranceForm, PrimaryCarerForm, PreferredContactForm,\
-    DuplicatePatientForm
+from ..registry.patients.mnd_admin_forms import (
+    PatientInsuranceForm, PrimaryCarerForm, PreferredContactForm,
+    DuplicatePatientForm, PatientLanguageForm
+)
 from ..models import PrimaryCarer, PrimaryCarerRelationship
 
 import logging
@@ -46,6 +48,10 @@ def get_primary_carer(patient):
 
 def get_duplicate_patient(patient):
     return getattr(patient, 'duplicate_patient', None)
+
+
+def get_patient_language(patient):
+    return getattr(patient, 'language_info', None)
 
 
 def get_primary_carer_initial_data(patient):
@@ -96,6 +102,7 @@ class FormSectionMixin(PatientFormMixin):
     PRIMARY_CARER_KEY = "primary_carer_form"
     PREFERRED_CONTACT_KEY = "preferred_contact_form"
     DUPLICATE_PATIENT_KEY = "duplicate_patient_form"
+    PATIENT_LANGUAGE_KEY = "patient_language_form"
 
     def get_form_sections(self, user, request, patient, registry, patient_form,
                           patient_address_form, patient_doctor_form, patient_relative_form,
@@ -114,11 +121,17 @@ class FormSectionMixin(PatientFormMixin):
 
         form_sections.insert(
             2,
+            get_section(
+                PatientLanguageForm, _("Language Info"), "language_info", get_patient_language(patient), request
+            )
+        )
+        form_sections.insert(
+            3,
             (patient_form, (mnd_builder.get_contact_details_fields(), ))
         )
 
         form_sections.insert(
-            3,
+            4,
             get_section(
                 PreferredContactForm, _("Patient Preferred Contact Method "), "preferred_contact", get_preferred_contact(patient), request
             )
@@ -144,6 +157,9 @@ class FormSectionMixin(PatientFormMixin):
 
     def get_forms(self, request, registry_model, user, instance=None):
         forms = super().get_forms(request, registry_model, user, instance)
+        forms[self.PATIENT_LANGUAGE_KEY] = (
+            get_form(PatientLanguageForm, request, "language_info", get_patient_language(instance))
+        )
         forms[self.PATIENT_INSURANCE_KEY] = (
             get_form(PatientInsuranceForm, request, "patient_insurance", get_insurance_data(instance))
         )
@@ -185,8 +201,8 @@ class FormSectionMixin(PatientFormMixin):
 
     def all_forms_valid(self, forms):
         ret_val = super().all_forms_valid(forms)
-        formset_keys = [self.PATIENT_INSURANCE_KEY, self.PRIMARY_CARER_KEY, self.PREFERRED_CONTACT_KEY,
-                        self.DUPLICATE_PATIENT_KEY]
+        formset_keys = [self.PATIENT_LANGUAGE_KEY, self.PATIENT_INSURANCE_KEY, self.PRIMARY_CARER_KEY,
+                        self.PREFERRED_CONTACT_KEY, self.DUPLICATE_PATIENT_KEY]
         for key in formset_keys:
             instance = forms[key].save(commit=False)
             instance.patient = self.object

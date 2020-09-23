@@ -75,7 +75,7 @@
                 $("#id_patient_insurance-ndis_coordinator_email")
             ];
             var checkedValue = $("input[name='patient_insurance-ndis_plan_manager']:checked").val();            
-            if (checkedValue !== undefined && checkedValue == "other") {
+            if (checkedValue !== undefined && (checkedValue == "other" || checkedValue == "agency")) {
                 showSelectors(selectors, extraRequiredFn);
             } else {
                 hideSelectors(selectors, extraHideFn);
@@ -92,21 +92,6 @@
                 hide($("#id_patient_insurance-dva_card_type"), noopFn);
             }
         });
-        $("input[name='patient_insurance-ndis_plan_manager']").change(function() {
-            var selectors = [
-                $("#id_patient_insurance-ndis_coordinator_first_name"),
-                $("#id_patient_insurance-ndis_coordinator_last_name"),
-                $("#id_patient_insurance-ndis_coordinator_phone"),
-                $("#id_patient_insurance-ndis_coordinator_email")
-            ];
-            var checkedValue = $("input[name='patient_insurance-ndis_plan_manager']:checked").val();         
-            if (checkedValue !== undefined && checkedValue == "other") {
-                showSelectors(selectors, extraRequiredFn);
-            } else {
-                hideSelectors(selectors, extraHideFn);
-            }
-        });
-
 
         $("#id_patient_insurance-eligible_for_home_care").change(function() {
             if (this.checked) {

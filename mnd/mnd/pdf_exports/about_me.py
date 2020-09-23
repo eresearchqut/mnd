@@ -31,6 +31,11 @@ def _gender_mapping(gender):
     return mappings.get(gender, "Off")
 
 
+def _language_mapping(code):
+    lang = pycountry.languages.get(alpha_2=code)
+    return lang.name if lang else ''
+
+
 def _generate_patient_fields(patient):
     return {
         'pFirstName': patient.given_names,
@@ -128,9 +133,16 @@ def _generate_preferred_contact_fields(preferred_contact):
         return {}
     return {
         'pPrefered': carer_contact_method(preferred_contact),
-        'p3FName': preferred_contact.first_name,
-        'p3LName': preferred_contact.last_name,
-        'p3Phone': preferred_contact.phone,
+    }
+
+
+def _generate_language_info_fields(language_info):
+    if not language_info:
+        return {}
+
+    return {
+        'pLang': _language_mapping(language_info.preferred_language),
+        'pInterpreter': _yes_no_off(language_info.interpreter_required),
     }
 
 
@@ -154,10 +166,6 @@ def _generate_primary_carer_fields(primary_carer, patient, patient_address):
             return mapping.get(relation.relationship, 'Off')
         return 'Off'
 
-    def primary_carer_language(code):
-        lang = pycountry.languages.get(alpha_2=code)
-        return lang.name if lang else ''
-
     def primary_carer_address(primary_carer, patient_address):
         patient_adr = patient_address.address if patient_address else None
         patient_suburb = patient_address.suburb if patient_address else None
@@ -171,19 +179,39 @@ def _generate_primary_carer_fields(primary_carer, patient, patient_address):
             'p2Postcode': postcode
         }
 
+    def emergency_contact_details(primary_carer):
+        res = {}
+        if primary_carer.is_emergency_contact:
+            if primary_carer.first_name:
+                res['p3FName'] = primary_carer.first_name
+            if primary_carer.last_name:
+                res['p3LName'] = primary_carer.last_name
+            if primary_carer.phone:
+                res['p3Phone'] = primary_carer.phone
+        else:
+            if primary_carer.em_contact_first_name:
+                res['p3FName'] = primary_carer.em_contact_first_name
+            if primary_carer.em_contact_last_name:
+                res['p3LName'] = primary_carer.em_contact_last_name
+            if primary_carer.em_contact_phone:
+                res['p3Phone'] = primary_carer.em_contact_phone
+        return res
+
     if not primary_carer:
         return {}
+
     result = {
         'p2Relationship': primary_carer_relationship(primary_carer),
         'p2FName': primary_carer.first_name,
         'p2LName': primary_carer.last_name,
         'p2Email': primary_carer.email,
         'p2Phone': primary_carer.phone,
-        'p2Lang': primary_carer_language(primary_carer.preferred_language),
+        'p2Lang': _language_mapping(primary_carer.preferred_language),
         'same_address': primary_carer.same_address,
         'p2Interpreter': _yes_no_off(primary_carer.interpreter_required),
     }
     result.update(primary_carer_address(primary_carer, patient_address))
+    result.update(emergency_contact_details(primary_carer))
     return result
 
 
@@ -195,6 +223,8 @@ def generate_pdf_form_fields(registry, patient):
     data.update(_generate_patient_insurance_fields(patient, insurance))
     preferred_contact = getattr(patient, 'preferred_contact', None)
     data.update(_generate_preferred_contact_fields(preferred_contact))
+    language_info = getattr(patient, 'language_info', None)
+    data.update(_generate_language_info_fields(language_info))
     primary_carer = PrimaryCarer.get_primary_carer(patient)
     data.update(
         _generate_primary_carer_fields(primary_carer, patient, patient_address)
