@@ -18,7 +18,7 @@ class ProductLookupWidget(LookupWidget):
             <input type="hidden" name="%s" id="id_%s_" value="%s"/>
             <div>
                 <label>Active ingredients</label><textarea id="id_%s_ingredients" disabled></textarea>
-                <label>Mims classes</label><textarea id="id_%s_mims" disabled> </textarea>
+                <label>Therapeutic classes</label><textarea id="id_%s_mims" disabled> </textarea>
             </div>
             <script type="text/javascript">
                 lookupValue($("#id_%s"), '%s', '%s', ['ingredients', 'mims']);
