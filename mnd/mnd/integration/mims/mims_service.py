@@ -1,6 +1,7 @@
 from collections import namedtuple
 import logging
 import requests
+import uuid
 
 from django.shortcuts import reverse
 
@@ -16,6 +17,14 @@ ProductSearchResult = namedtuple('ProductSearchResult', 'id value activeIngredie
 logger = logging.getLogger(__name__)
 
 api = MIMSApi()
+
+
+def _is_valid_uuid(input_str):
+    try:
+        uuid.UUID(input_str)
+    except Exception:
+        return False
+    return True
 
 
 def mims_product_search(product):
@@ -41,7 +50,7 @@ def mims_product_search(product):
 
 def mims_product_details(product):
     resp = {}
-    if product:
+    if product and _is_valid_uuid(product):
         cached = get_product(product)
         if cached and cached.mims:
             return cached._asdict()
@@ -77,7 +86,7 @@ def _with_proxied_link(resp):
 
 def mims_cmi_details(product):
     resp = {}
-    if product:
+    if product and _is_valid_uuid(product):
         cached = get_cmi_by_product(product)
         if cached and (cached.link or not cached.has_link):
             return _with_proxied_link(cached._asdict())
@@ -103,7 +112,7 @@ def mims_cmi_details(product):
 
 
 def fetch_pdf(cmi):
-    if cmi:
+    if cmi and _is_valid_uuid(cmi):
         cached = get_cmi_info(cmi)
         if cached and cached.link:
             return requests.get(cached.link)
