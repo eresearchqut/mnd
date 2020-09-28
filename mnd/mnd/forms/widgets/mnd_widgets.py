@@ -14,7 +14,7 @@ class ProductLookupWidget(LookupWidget):
 
     def render(self, name, value, attrs, renderer=None):
         return """
-            <input type="text" name="%s_" id="id_%s"/>
+            <input type="text" name="%s_" id="id_%s" class="skip-serialize"/>
             <input type="hidden" name="%s" id="id_%s_" value="%s"/>
             <div>
                 <label>Active ingredients</label><textarea id="id_%s_ingredients" disabled></textarea>
@@ -49,7 +49,7 @@ class CMILookupWidget(LookupWidget):
 
     def render(self, name, value, attrs, renderer=None):
         return """
-            <input type="text" name="%s_" id="id_%s"/>
+            <input type="text" name="%s_" id="id_%s" class="skip-serialize"/>
             <input type="hidden" name="%s" id="id_%s_" value="%s"/>
             <div style="display:none">
                 <a id="id_%s_link" disabled>Medicine information</a>
