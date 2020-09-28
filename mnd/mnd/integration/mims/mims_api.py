@@ -60,9 +60,6 @@ class MIMSApi:
             "limit": limit
         })
         resp = requests.get(self._full_url(f"{self.PRODUCT_URI}?{params}"), headers=self._make_auth_header())
-        if resp.status_code == 204:
-            # No information
-            return {}
         return resp.json() if resp.status_code == 200 else {}
 
     def get_product_details(self, product_id):
