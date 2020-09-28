@@ -9,7 +9,16 @@ from .mims_service import (
 @require_GET
 def product_search(request):
     product = request.GET.get("term", "")
-    result = [r._asdict() for r in mims_product_search(product)]
+    result = []
+    page = 1
+    while page < 10:  # limit response to max 500 records
+        resp, has_next = mims_product_search(product, page)
+        if not resp:
+            break
+        result += [r._asdict() for r in resp]
+        page += 1
+        if not has_next:
+            break
     return JsonResponse(status=200, data=result, safe=False)
 
 

@@ -10,8 +10,9 @@ logger = logging.getLogger(__name__)
 
 class MIMSApi:
 
+    PAGE_SIZE = 50
+
     TOKEN_URI = "oauth2/v1/token"
-    BRAND_URI = "au/druglist/v1/brands"
     PRODUCT_URI = "au/druglist/v1/products"
     CMI_DETAILS_URI = "au/cmi/v1/cmis"
 
@@ -51,24 +52,7 @@ class MIMSApi:
     def _full_url(self, endpoint):
         return f"{self.service_endpoint}/{endpoint}"
 
-    def search_brand(self, brand, page=1, limit=50):
-        params = urllib.parse.urlencode({
-            "term": brand,
-            "include": True,
-            "page": page,
-            "limit": limit
-        })
-        resp = requests.get(self._full_url(f"{self.BRAND_URI}?{params}"), headers=self._make_auth_header())
-        return resp.json()
-
-    def get_brand_details(self, brand_id):
-        fields = urllib.parse.urlencode({
-            "fields": "products, mimsClasses"
-        })
-        resp = requests.get(self._full_url(f"{self.BRAND_URI}/{brand_id}?{fields}"), headers=self._make_auth_header())
-        return resp.json()
-
-    def search_product(self, product, page=1, limit=50):
+    def search_product(self, product, page, limit=PAGE_SIZE):
         params = urllib.parse.urlencode({
             "term": product,
             "include": True,
@@ -76,6 +60,9 @@ class MIMSApi:
             "limit": limit
         })
         resp = requests.get(self._full_url(f"{self.PRODUCT_URI}?{params}"), headers=self._make_auth_header())
+        if resp.status_code == 204:
+            # No information
+            return {}
         return resp.json() if resp.status_code == 200 else {}
 
     def get_product_details(self, product_id):

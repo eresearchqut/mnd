@@ -27,25 +27,27 @@ def _is_valid_uuid(input_str):
     return True
 
 
-def mims_product_search(product):
+def mims_product_search(product, page):
 
     def active_ingredient(result):
         return ", ".join(result.split(" + "))
 
+    has_next = False
     if product and product.strip() != '' and len(product) >= 4:
         cached = search_cache(product)
         if cached:
-            return [ProductSearchResult(r.id, r.name, r.activeIngredient) for r in cached]
+            return [ProductSearchResult(r.id, r.name, r.activeIngredient) for r in cached], has_next
 
-        result = api.search_product(product)
+        result = api.search_product(product, page)
         if result:
+            has_next = len(result) == api.PAGE_SIZE
             formatted = [
                 ProductSearchResult(r['productId'], r['productName'], active_ingredient(r['activeIngredient']))
                 for r in result
             ]
             update_cache(product, formatted)
-            return formatted
-    return []
+            return formatted, has_next
+    return [], has_next
 
 
 def mims_product_details(product):
