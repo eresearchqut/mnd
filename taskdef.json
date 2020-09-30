@@ -186,6 +186,22 @@
                 {
                     "name": "NEW_RELIC_LICENSE_KEY",
                     "valueFrom": "$NEW_RELIC_LICENSE_KEY"
+                },
+                {
+                    "name": "MIMS_API_KEY",
+                    "valueFrom": "$MIMS_API_KEY"
+                },
+                {
+                    "name": "MIMS_CLIENT_ID",
+                    "valueFrom": "$MIMS_CLIENT_ID"
+                },
+                {
+                    "name": "MIMS_CLIENT_SECRET",
+                    "valueFrom": "$MIMS_CLIENT_SECRET"
+                },
+                {
+                    "name": "MIMS_ENDPOINT",
+                    "valueFrom": "$MIMS_ENDPOINT"
                 }
             ]
         }
