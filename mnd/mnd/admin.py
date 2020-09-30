@@ -32,13 +32,13 @@ class DuplicatePatientAdmin(admin.ModelAdmin):
 
 class MIMSProductCacheAdmin(admin.ModelAdmin):
     list_display = ('product_id', 'name', 'created_at', 'expires_on')
-    list_filter = ('name', 'created_at', 'expires_on')
+    list_filter = ('created_at', 'expires_on')
     actions = ['delete_selected']
 
 
 class MIMSCmiCacheAdmin(admin.ModelAdmin):
     list_display = ('product_id', 'product_name', 'cmi_id', 'has_link', 'cmi_link')
-    list_filter = ('product_name', 'cmi_id', 'has_link')
+    list_filter = ('cmi_id', 'has_link')
     actions = ['delete_selected']
 
 
