@@ -13,7 +13,7 @@ function validInput() {
 function invalidInput() {
   return '<div class="invalid" style="position:absolute;margin-left:-20px;margin-top:7px;">' +
          '   <span style="color:red;"><i class="glyphicon glyphicon-exclamation-sign" style="font-size:1.2em;" ' +
-         '         title="Information for this product not found !"></i></span> ' +
+         '         title="Information for this product not found"></i></span> ' +
          '</div>';
 }
 
