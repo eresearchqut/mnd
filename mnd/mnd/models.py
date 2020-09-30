@@ -217,3 +217,30 @@ class PatientLanguage(models.Model):
     patient = models.OneToOneField(Patient, related_name='language_info', on_delete=models.CASCADE)
     preferred_language = models.CharField(choices=LANGUAGE_CHOICES, max_length=30, default='en')
     interpreter_required = models.BooleanField(default=False)
+
+
+class MIMSProductCache(models.Model):
+
+    product_id = models.UUIDField(unique=True)
+    name = models.CharField(max_length=256)
+    active_ingredient = models.TextField()
+    mims_classes = models.TextField()
+    search_term = models.CharField(max_length=32, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    expires_on = models.DateTimeField()
+
+    class Meta:
+        indexes = [
+            models.Index(fields=['search_term']),
+            models.Index(fields=['name']),
+        ]
+
+
+class MIMSCmiCache(models.Model):
+    product_id = models.UUIDField(unique=True)
+    product_name = models.CharField(max_length=256, null=True, blank=True)
+    cmi_id = models.UUIDField(null=True, blank=True)
+    cmi_link = models.CharField(max_length=512)
+    has_link = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    expires_on = models.DateTimeField()

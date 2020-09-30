@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 
-from mnd.models import DuplicatePatient
+from mnd.models import DuplicatePatient, MIMSCmiCache, MIMSProductCache
 
 
 class DuplicatePatientAdmin(admin.ModelAdmin):
@@ -30,4 +30,18 @@ class DuplicatePatientAdmin(admin.ModelAdmin):
         return obj.patient.last_updated_overall_at
 
 
+class MIMSProductCacheAdmin(admin.ModelAdmin):
+    list_display = ('product_id', 'name', 'created_at', 'expires_on')
+    list_filter = ('created_at', 'expires_on')
+    actions = ['delete_selected']
+
+
+class MIMSCmiCacheAdmin(admin.ModelAdmin):
+    list_display = ('product_id', 'product_name', 'cmi_id', 'has_link', 'cmi_link')
+    list_filter = ('cmi_id', 'has_link')
+    actions = ['delete_selected']
+
+
 admin.site.register(DuplicatePatient, DuplicatePatientAdmin)
+admin.site.register(MIMSProductCache, MIMSProductCacheAdmin)
+admin.site.register(MIMSCmiCache, MIMSCmiCacheAdmin)

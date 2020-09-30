@@ -1,6 +1,19 @@
 {% extends "rdrf_cdes/form.html" %}
 
 {% load i18n %}
+{% load static %}
+
+{% block extrastyle %}
+{{ block.super }}
+  <style>
+    .ui-autocomplete {
+        max-height: 250px;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+  </style>
+<script type="text/javascript" src="{% static 'js/extra_lookup.js' %}"></script>
+{% endblock %}
 
 {% block sidebar %}
   {{ block.super }}
