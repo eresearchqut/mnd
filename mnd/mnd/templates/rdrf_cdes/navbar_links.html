@@ -34,5 +34,15 @@
                 {% trans 'Temporary duplicate Patients' %}
             </a>
         </li>
+        <li>
+            <a href="{% url 'admin:mnd_mimsproductcache_changelist' %}"><span class="glyphicon glyphicon-user"></span>
+                {% trans 'MIMS product cache' %}
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'admin:mnd_mimscmicache_changelist' %}"><span class="glyphicon glyphicon-user"></span>
+                {% trans 'MIMS CMI cache' %}
+            </a>
+        </li>
     {% endif %}
 {% endblock %}
