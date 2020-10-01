@@ -116,7 +116,7 @@ class FormSectionMixin(PatientFormMixin):
         )
         for form_instance, __ in form_sections:
             if 'umrn' in form_instance.fields:
-                form_instance.fields['umrn'].label = _("AMNDR / Hospital ID")
+                form_instance.fields['umrn'].label = _("AMNDR")
                 break
 
         form_sections.insert(
