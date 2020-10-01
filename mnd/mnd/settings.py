@@ -3,6 +3,7 @@ import os
 
 from rdrf.settings import *
 import mnd
+from mnd.security.url_whitelist import MND_WHITELISTED_URLS
 
 
 FALLBACK_REGISTRY_CODE = "mnd"
@@ -40,6 +41,8 @@ CSP_CHILD_SRC = ["'self'", "https://www.youtube.com"]
 STRONGHOLD_PUBLIC_URLS += (
     r'/(?P<registry_code>\w+)/carer_registration/?$',
 )
+
+SECURITY_WHITELISTED_URLS += MND_WHITELISTED_URLS
 
 MIMS_API_KEY = env.get('mims_api_key', '')
 MIMS_CLIENT_ID = env.get('mims_client_id', '')
