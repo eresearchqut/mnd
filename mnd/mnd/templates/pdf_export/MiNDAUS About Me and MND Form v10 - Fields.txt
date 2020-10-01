@@ -425,11 +425,6 @@ FieldFlags: 0
 FieldJustification: Left
 ---
 FieldType: Text
-FieldName: p2Phone
-FieldFlags: 0
-FieldJustification: Left
----
-FieldType: Text
 FieldName: p2Email
 FieldNameAlt: p2Email
 FieldFlags: 0
@@ -3667,3 +3662,15 @@ FieldStateOption: severe
 FieldStateOption: none
 FieldStateOption: Off
 FieldStateOption: moderate
+---
+FieldType: Text
+FieldName: p2HomePhone
+FieldNameAlt: p2HomePhone
+FieldFlags: 0
+FieldJustification: Left
+---
+FieldType: Text
+FieldName: p2MobilePhone
+FieldNameAlt: p2MobilePhone
+FieldFlags: 0
+FieldJustification: Left

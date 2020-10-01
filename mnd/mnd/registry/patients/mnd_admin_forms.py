@@ -166,9 +166,9 @@ class PrimaryCarerForm(PrefixedModelForm):
     class Meta:
         model = PrimaryCarer
         fields = (
-            'first_name', 'last_name', 'phone', 'email', 'relationship', 'relationship_info',
-            'interpreter_required', 'preferred_language', 'same_address', 'address',
-            'suburb', 'postcode', 'is_emergency_contact', 'em_contact_first_name',
+            'first_name', 'last_name', 'mobile_phone', 'home_phone', 'email', 'relationship',
+            'relationship_info', 'interpreter_required', 'preferred_language', 'same_address',
+            'address', 'suburb', 'postcode', 'is_emergency_contact', 'em_contact_first_name',
             'em_contact_last_name', 'em_contact_phone'
         )
         labels = {
@@ -209,8 +209,14 @@ class PrimaryCarerForm(PrefixedModelForm):
             raise forms.ValidationError(_("The emergency contact phone should contain digits only"))
         return em_contact_phone
 
-    def clean__phone(self):
-        phone = self.cleaned_data['phone']
+    def clean_home_phone(self):
+        phone = self.cleaned_data['home_phone']
+        if not self._is_valid_phone(phone):
+            raise forms.ValidationError(_("The phone number should contain digits only"))
+        return phone
+
+    def clean_mobile_phone(self):
+        phone = self.cleaned_data['mobile_phone']
         if not self._is_valid_phone(phone):
             raise forms.ValidationError(_("The phone number should contain digits only"))
         return phone
