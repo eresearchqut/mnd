@@ -16,7 +16,7 @@ class ProductLookupWidget(LookupWidget):
         return """
             <input type="text" name="%s_" id="id_%s" class="skip-serialize"/>
             <input type="hidden" name="%s" id="id_%s_" value="%s"/>
-            <div>
+            <div class="product-attributes">
                 <label>Active ingredients</label><textarea id="id_%s_ingredients" disabled></textarea>
                 <label>Therapeutic classes</label><textarea id="id_%s_mims" disabled> </textarea>
             </div>
