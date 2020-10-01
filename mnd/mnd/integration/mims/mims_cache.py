@@ -46,11 +46,11 @@ def _min_cmi_expiry_ts():
 
 def evict_expired_entries():
     logger.info("Search for expired MIMS cache entries...")
-    if timezone.now() > _min_product_expiry_ts():
+    if (min_expiry := _min_product_expiry_ts()) and timezone.now() > min_expiry:
         product_cache_qs = MIMSProductCache.objects.filter(expires_on__lt=timezone.now())
         logger.info(f"Evicting {product_cache_qs.count()} product cache entries")
         product_cache_qs.delete()
-    if timezone.now() > _min_cmi_expiry_ts():
+    if (min_expiry := _min_cmi_expiry_ts()) and timezone.now() > min_expiry:
         cmi_cache_qs = MIMSCmiCache.objects.filter(expires_on__lt=timezone.now())
         logger.info(f"Evicting {cmi_cache_qs.count()} cmi cache entries")
         cmi_cache_qs.delete()
