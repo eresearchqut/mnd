@@ -40,11 +40,15 @@ function removeRefreshIcon(element) {
   element.parent().find('.refresh').remove();
 }
 
+function parseHTML(value) {
+  return $($.parseHTML(value)).text();
+}
+
 function setDependentValues(element, result, suffixes) {
   var query = "[id$='" + suffixes[0] + "']";
-  element.parent().find(query).val(result.activeIngredient || '');
+  element.parent().find(query).val(parseHTML(result.activeIngredient) || '');
   var query = "[id$='" + suffixes[1] + "']";
-  element.parent().find(query).val(result.mims || '');
+  element.parent().find(query).val(parseHTML(result.mims) || '');
   addValidityIcon(element, result.activeIngredient !== undefined);
 }
 
@@ -54,7 +58,7 @@ function lookupValue(element, value, secondary_source, suffixes) {
     addRefreshIcon(element);
     $.get(full_query, function(result) {
       setDependentValues(element, result, suffixes);
-      element.val(result.name || value);
+      element.val(parseHTML(result.name) || value);
       removeRefreshIcon(element);
     });
   }
@@ -76,7 +80,7 @@ function dependentLookup(element, source_url, secondary_source, suffixes) {
     },
     response: function(){
       removeRefreshIcon(element);
-      element.next().val(element.val());
+      element.next().val(parseHTML(element.val()));
       setDependentValues(element, {}, suffixes);
     },
   }).data("ui-autocomplete")._renderItem = function(ul, item) {
