@@ -1,6 +1,7 @@
 from cachetools import func
 from collections import namedtuple
 from datetime import timedelta
+from functools import reduce
 import logging
 
 from django.utils import timezone
@@ -61,9 +62,27 @@ def write_search_results(search_term, products):
 def evict_expired_entries():
     if (min_expiry := _min_product_expiry_ts()) and timezone.now() > min_expiry:
         search_term_qs = MIMSSearchTerm.objects.filter(expires_on__lt=timezone.now())
-        logger.info(f"Evicting {search_term_qs.count()} search term entries")
-        # TODO: check which products can be removed
-        _min_product_expiry_ts.cache_clear()
+        logger.info(f"About to evict {search_term_qs.count()} search term entries")
+        search_term_dict = {
+            s.search_term: set(s.products)
+            for s in search_term_qs
+        }
+        with_common_entries = []
+        for search_term in search_term_dict.keys():
+            search_term_products = search_term_dict[search_term]
+            other_products = [v for k, v in search_term_dict.items() if k != search_term]
+            common_products = reduce(lambda acc, v: acc & v, other_products, search_term_products)
+            if common_products:
+                with_common_entries.append(search_term)
+
+        to_delete = [v for k, v in search_term_dict.items() if k not in with_common_entries]
+        if to_delete:
+            logger.info(f"Found {sum([len(v) for v in to_delete])} products to evict !")
+            for products in to_delete:
+                MIMSProductCache.objects.filter(pk__in=products).delete()
+            _min_product_expiry_ts.cache_clear()
+        else:
+            logger.info("All evictable search terms have common entries. Not evicting product info !")
     if (min_expiry := _min_cmi_expiry_ts()) and timezone.now() > min_expiry:
         cmi_cache_qs = MIMSCmiCache.objects.filter(expires_on__lt=timezone.now())
         logger.info(f"Evicting {cmi_cache_qs.count()} cmi cache entries")
