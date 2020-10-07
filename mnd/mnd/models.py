@@ -1,5 +1,6 @@
 import pycountry
 
+from django.contrib.postgres.fields import ArrayField
 from django.db import models
 
 from django.utils.translation import gettext_lazy as _
@@ -220,19 +221,23 @@ class PatientLanguage(models.Model):
     interpreter_required = models.BooleanField(default=False)
 
 
+class MIMSSearchTerm(models.Model):
+    search_term = models.CharField(max_length=32, null=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    expires_on = models.DateTimeField()
+    products = ArrayField(models.UUIDField(), blank=True)
+
+
 class MIMSProductCache(models.Model):
 
     product_id = models.UUIDField(unique=True)
     name = models.CharField(max_length=256)
     active_ingredient = models.TextField()
     mims_classes = models.TextField()
-    search_term = models.CharField(max_length=32, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    expires_on = models.DateTimeField()
 
     class Meta:
         indexes = [
-            models.Index(fields=['search_term']),
             models.Index(fields=['name']),
         ]
 

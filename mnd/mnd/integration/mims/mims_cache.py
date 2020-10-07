@@ -6,7 +6,7 @@ import logging
 from django.utils import timezone
 from django.db.models import Min
 
-from mnd.models import MIMSCmiCache, MIMSProductCache
+from mnd.models import MIMSCmiCache, MIMSProductCache, MIMSSearchTerm
 
 
 logger = logging.getLogger(__name__)
@@ -36,7 +36,7 @@ def _min_ts(input_dict):
 
 @func.ttl_cache(maxsize=1, ttl=3600)
 def _min_product_expiry_ts():
-    return _min_ts(MIMSProductCache.objects.aggregate(Min('expires_on')))
+    return _min_ts(MIMSSearchTerm.objects.aggregate(Min('expires_on')))
 
 
 @func.ttl_cache(maxsize=1, ttl=3600)
@@ -44,11 +44,25 @@ def _min_cmi_expiry_ts():
     return _min_ts(MIMSCmiCache.objects.aggregate(Min('expires_on')))
 
 
+def write_search_results(search_term, products):
+    existing = MIMSSearchTerm.objects.filter(search_term__iexact=search_term).first()
+    if existing:
+        existing.products = products
+        existing.expires_on = _expiring_ts()
+        existing.save()
+    else:
+        MIMSSearchTerm.objects.create(
+            search_term=search_term,
+            products=products,
+            expires_on=_expiring_ts()
+        )
+
+
 def evict_expired_entries():
     if (min_expiry := _min_product_expiry_ts()) and timezone.now() > min_expiry:
-        product_cache_qs = MIMSProductCache.objects.filter(expires_on__lt=timezone.now())
-        logger.info(f"Evicting {product_cache_qs.count()} product cache entries")
-        product_cache_qs.delete()
+        search_term_qs = MIMSSearchTerm.objects.filter(expires_on__lt=timezone.now())
+        logger.info(f"Evicting {search_term_qs.count()} search term entries")
+        # TODO: check which products can be removed
         _min_product_expiry_ts.cache_clear()
     if (min_expiry := _min_cmi_expiry_ts()) and timezone.now() > min_expiry:
         cmi_cache_qs = MIMSCmiCache.objects.filter(expires_on__lt=timezone.now())
@@ -68,8 +82,6 @@ def update_cache(search_term, product_list):
             product_id=update_dict[key].id,
             name=update_dict[key].name,
             active_ingredient=update_dict[key].activeIngredient,
-            search_term=search_term,
-            expires_on=_expiring_ts()
         ) for key in new_entries
     ]
     MIMSProductCache.objects.bulk_create(to_add)
@@ -78,8 +90,7 @@ def update_cache(search_term, product_list):
         updated_value = update_dict[str(r.product_id)]
         r.active_ingredient = updated_value.activeIngredient
         r.name = updated_value.name
-        r.expires_on = _expiring_ts()
-        r.save(update_fields=['active_ingredient', 'name', 'expires_on'])
+        r.save(update_fields=['active_ingredient', 'name'])
 
     existing_cmis = set(str(pid) for pid in _get_existing_cmis(update_dict.keys()))
     new_cmis = {key for key in update_dict.keys() if key not in existing_cmis}
@@ -110,11 +121,13 @@ def get_cmi_info(cmi_id):
     return CMIInfo(cmi.product_id, cmi.product_name, cmi.cmi_id, cmi.cmi_link, cmi.has_link) if cmi else None
 
 
-@func.ttl_cache(maxsize=1024, ttl=900)
 def search_cache(search_term):
+    result = MIMSSearchTerm.objects.filter(search_term__iexact=search_term).first()
+    if not result:
+        return []
     return [
         ProductInfo(r.product_id, r.name, r.mims_classes, r.active_ingredient)
-        for r in MIMSProductCache.objects.filter(search_term__iexact=search_term).order_by('name')
+        for r in MIMSProductCache.objects.filter(product_id__in=result.products).order_by('name')
     ]
 
 
@@ -125,7 +138,6 @@ def update_cache_entry(product_info):
             'name': product_info.name,
             'active_ingredient': product_info.activeIngredient,
             'mims_classes': product_info.mims,
-            'expires_on': _expiring_ts()
         })
     if not created:
         product.name = product_info.name
@@ -133,7 +145,6 @@ def update_cache_entry(product_info):
             product.active_ingredient = product_info.activeIngredient
         if product_info.mims:
             product.mims_classes = product_info.mims
-        product.expires_on = _expiring_ts()
         product.save()
 
     return ProductInfo(product.product_id, product.name, product.mims_classes, product.active_ingredient)

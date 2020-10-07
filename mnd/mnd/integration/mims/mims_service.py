@@ -9,9 +9,8 @@ from .mims_api import MIMSApi
 from .mims_cache import (
     CMIInfo, ProductInfo, get_product, get_cmi_by_product,
     get_cmi_info, search_cache, update_cache,
-    update_cache_entry, update_cmi_cache
+    update_cache_entry, update_cmi_cache, write_search_results
 )
-
 ProductSearchResult = namedtuple('ProductSearchResult', 'id value activeIngredient')
 
 logger = logging.getLogger(__name__)
@@ -25,6 +24,10 @@ def _is_valid_uuid(input_str):
     except Exception:
         return False
     return True
+
+
+def write_search_term_results(search_term, results):
+    write_search_results(search_term, [psr['id'] for psr in results])
 
 
 def mims_product_search(product, page):

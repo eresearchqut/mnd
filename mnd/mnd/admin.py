@@ -31,8 +31,8 @@ class DuplicatePatientAdmin(admin.ModelAdmin):
 
 
 class MIMSProductCacheAdmin(admin.ModelAdmin):
-    list_display = ('product_id', 'name', 'created_at', 'expires_on')
-    list_filter = ('created_at', 'expires_on')
+    list_display = ('product_id', 'name', 'created_at')
+    list_filter = ('created_at', )
     actions = ['delete_selected']
 
 
