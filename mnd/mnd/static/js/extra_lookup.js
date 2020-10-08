@@ -90,16 +90,16 @@ function dependentLookup(element, source_url, secondary_source, suffixes) {
 }
 
 function hideMedicineInfo(target_el) {
-  target_el.parent().hide();
-  target_el.attr("href", "");
-  target_el.attr('disabled', '');
+  target_el.hide();
+  target_el.empty();
 }
 
-function showMedicineInfo(target_el, link) {
-  target_el.attr("href", link);
-  target_el.attr("target", "_blank");
-  target_el.removeAttr('disabled');
-  target_el.parent().show();
+function showMedicineInfo(target_el) {
+  target_el.show();
+}
+
+function makeCMILink(entry) {
+  return '<span style="margin-right:5px";><a href="' + entry.link + '" target="_blank">' + entry.cmi_name + '</a></span>';
 }
 
 function lookupCMI(element, value, secondary_source, target_el) {
@@ -108,11 +108,19 @@ function lookupCMI(element, value, secondary_source, target_el) {
     hideMedicineInfo(target_el);
     addRefreshIcon(element);
     $.get(full_query, function(result) {
-      result.link ? showMedicineInfo(target_el, result.link): hideMedicineInfo(target_el);
-      element.val(result.name || value);
+      console.log("Result", result);
+      if (result.details && result.details.length) {
+        showMedicineInfo(target_el);
+        $.each(result.details, function(idx, entry) {
+          if (entry.has_link) {
+            target_el.append(makeCMILink(entry));
+          }
+        });
+      }
+      element.val(result.productName || value);
       removeRefreshIcon(element);
-      addValidityIcon(element, result.name !== undefined);
-    });
+      addValidityIcon(element, result.productName !== undefined);
+     });
   }
 }
 

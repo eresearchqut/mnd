@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 
 
 ProductInfo = namedtuple('ProductInfo', 'id name mims activeIngredient')
-CMIInfo = namedtuple('CMIInfo', 'product_id name cmi_id link has_link')
+CMIInfo = namedtuple('CMIInfo', 'product_id name cmi_id cmi_name link has_link')
 
 
 def _expiring_ts():
@@ -111,33 +111,22 @@ def update_cache(search_term, product_list):
         r.name = updated_value.name
         r.save(update_fields=['active_ingredient', 'name'])
 
-    existing_cmis = set(str(pid) for pid in _get_existing_cmis(update_dict.keys()))
-    new_cmis = {key for key in update_dict.keys() if key not in existing_cmis}
-    cmis_to_add = [
-        MIMSCmiCache(
-            product_id=product_id,
-            product_name=update_dict[product_id].name,
-            cmi_id=None,
-            cmi_link='',
-            expires_on=_expiring_ts()
-        ) for product_id in new_cmis
-    ]
-    MIMSCmiCache.objects.bulk_create(cmis_to_add)
-
 
 def get_product(product_id):
     result = MIMSProductCache.objects.filter(product_id=product_id).first()
     return ProductInfo(result.product_id, result.name, result.mims_classes, result.active_ingredient) if result else None
 
 
-def get_cmi_by_product(product_id):
-    cmi = MIMSCmiCache.objects.filter(product_id=product_id).first()
-    return CMIInfo(cmi.product_id, cmi.product_name, cmi.cmi_id, cmi.cmi_link, cmi.has_link) if cmi else None
+def get_cmis_by_product(product_id):
+    cmis = MIMSCmiCache.objects.filter(product_id=product_id)
+    return [
+        CMIInfo(cmi.product_id, cmi.product_name, cmi.cmi_id, cmi.cmi_name, cmi.cmi_link, cmi.has_link) for cmi in cmis
+    ]
 
 
 def get_cmi_info(cmi_id):
     cmi = MIMSCmiCache.objects.filter(cmi_id=cmi_id).first()
-    return CMIInfo(cmi.product_id, cmi.product_name, cmi.cmi_id, cmi.cmi_link, cmi.has_link) if cmi else None
+    return CMIInfo(cmi.product_id, cmi.product_name, cmi.cmi_id, cmi.cmi_name, cmi.cmi_link, cmi.has_link) if cmi else None
 
 
 def search_cache(search_term):
@@ -172,9 +161,10 @@ def update_cache_entry(product_info):
 def update_cmi_cache(cmi_info):
     cmi, created = MIMSCmiCache.objects.get_or_create(
         product_id=cmi_info.product_id,
+        cmi_id=cmi_info.cmi_id,
         defaults={
             'product_name': cmi_info.name,
-            'cmi_id': cmi_info.cmi_id,
+            'cmi_name': cmi_info.cmi_name,
             'cmi_link': cmi_info.link,
             'has_link': cmi_info.has_link,
             'expires_on': _expiring_ts()
@@ -187,6 +177,8 @@ def update_cmi_cache(cmi_info):
             cmi.cmi_id = cmi_info.cmi_id
         if cmi_info.link:
             cmi.cmi_link = cmi_info.link
+        if cmi_info.cmi_name:
+            cmi.cmi_name = cmi_info.cmi_name
         cmi.has_link = cmi_info.has_link
         cmi.save()
-    return CMIInfo(cmi.product_id, cmi.product_name, cmi.cmi_id, cmi.cmi_link, cmi.has_link)
+    return CMIInfo(cmi.product_id, cmi.product_name, cmi.cmi_id, cmi.cmi_name, cmi.cmi_link, cmi.has_link)

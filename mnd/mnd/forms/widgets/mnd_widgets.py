@@ -51,16 +51,15 @@ class CMILookupWidget(LookupWidget):
         return """
             <input type="text" name="%s_" id="id_%s" class="skip-serialize"/>
             <input type="hidden" name="%s" id="id_%s_" value="%s"/>
-            <div style="display:none">
-                <a id="id_%s_link" disabled>Medicine information</a>
+            <div style="display:none" id="id_%s_med_info">
             </div>
             <script type="text/javascript">
-                lookupCMI($("#id_%s"), '%s', '%s', $("#id_%s_link"));
+                lookupCMI($("#id_%s"), '%s', '%s', $("#id_%s_med_info"));
                 $("#id_%s").keyup(function() {
                     if (!this.value) {
                         $("[name='%s']").val('');
                     } else {
-                        cmiLookup($(this), '%s', '%s', $("#id_%s_link"));
+                        cmiLookup($(this), '%s', '%s', $("#id_%s_med_info"));
                     }
                 });
             </script>

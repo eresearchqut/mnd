@@ -243,10 +243,14 @@ class MIMSProductCache(models.Model):
 
 
 class MIMSCmiCache(models.Model):
-    product_id = models.UUIDField(unique=True)
+    product_id = models.UUIDField(null=False, blank=False)
     product_name = models.CharField(max_length=256, null=True, blank=True)
-    cmi_id = models.UUIDField(null=True, blank=True)
+    cmi_id = models.UUIDField(null=False, blank=False)
+    cmi_name = models.CharField(max_length=128, default='No name')
     cmi_link = models.CharField(max_length=512)
     has_link = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     expires_on = models.DateTimeField()
+
+    class Meta:
+        unique_together = ("product_id", "cmi_id")
