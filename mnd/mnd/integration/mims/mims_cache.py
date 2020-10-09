@@ -131,7 +131,7 @@ def get_cmi_info(cmi_id):
 
 
 def search_cache(search_term):
-    result = MIMSSearchTerm.objects.filter(search_term__iexact=search_term).first()
+    result = MIMSSearchTerm.objects.filter(search_term__iexact=search_term, expires_on__gte=timezone.now()).first()
     if not result:
         return []
     return [
