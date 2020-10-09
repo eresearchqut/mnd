@@ -48,9 +48,10 @@ def _min_cmi_expiry_ts():
 def write_search_results(search_term, products):
     existing = MIMSSearchTerm.objects.filter(search_term__iexact=search_term).first()
     if existing:
-        existing.products = products
-        existing.expires_on = _expiring_ts()
-        existing.save()
+        if existing.expires_on <= timezone.now():
+            existing.products = products
+            existing.expires_on = _expiring_ts()
+            existing.save()
     else:
         MIMSSearchTerm.objects.create(
             search_term=search_term,
