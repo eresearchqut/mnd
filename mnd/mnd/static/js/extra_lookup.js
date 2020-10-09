@@ -99,8 +99,7 @@ function showMedicineInfo(target_el) {
 }
 
 function makeCMILink(entry) {
-  var shortName = entry.cmi_name.length > 10 ? entry.cmi_name.substring(0, 10) + "..." : entry.cmi_name;
-  return '<a class="btn btn-info" style="margin-top:5px; margin-right:10px" href="' + entry.link + '" target="_blank" title="' + entry.cmi_name + '">' + shortName + '</a>';
+  return '<a class="btn btn-info btn-xs" style="margin-top:5px; margin-right:10px" href="' + entry.link + '" target="_blank">' + entry.cmi_name + '</a>';
 }
 
 function lookupCMI(element, value, secondary_source, target_el) {
