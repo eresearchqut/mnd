@@ -118,7 +118,7 @@ function lookupCMI(element, value, secondary_source, target_el) {
           }
         });
       }
-      element.val(result.productName || value);
+      element.val(parseHTML(result.productName || value));
       removeRefreshIcon(element);
       addValidityIcon(element, result.productName !== undefined);
      });
