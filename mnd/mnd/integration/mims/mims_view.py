@@ -1,4 +1,5 @@
 from django.http import HttpResponse, JsonResponse, HttpResponseNotFound
+from django.utils.translation import gettext as _
 from django.views.decorators.http import require_GET
 
 from .mims_service import (
@@ -42,7 +43,7 @@ def pdf_proxy(request):
     cmi = request.GET.get("cmi", "")
     resp = fetch_pdf(cmi)
     if not resp:
-        return HttpResponseNotFound()
+        return HttpResponseNotFound(_("Consumer medicine information PDF not found"))
     return HttpResponse(
         content=resp.content,
         status=resp.status_code,
