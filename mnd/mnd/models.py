@@ -235,6 +235,7 @@ class MIMSProductCache(models.Model):
     active_ingredient = models.TextField()
     mims_classes = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
+    ref_count = models.IntegerField(null=False, blank=False, default=1)
 
     class Meta:
         indexes = [

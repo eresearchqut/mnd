@@ -1,11 +1,10 @@
 from cachetools import func
 from collections import namedtuple
 from datetime import timedelta
-from functools import reduce
 import logging
 
 from django.utils import timezone
-from django.db.models import Min
+from django.db.models import F, Min
 
 from mnd.models import MIMSCmiCache, MIMSProductCache, MIMSSearchTerm
 
@@ -36,7 +35,7 @@ def _min_ts(input_dict):
 
 
 @func.ttl_cache(maxsize=1, ttl=3600)
-def _min_product_expiry_ts():
+def _min_search_expiry_ts():
     return _min_ts(MIMSSearchTerm.objects.aggregate(Min('expires_on')))
 
 
@@ -61,29 +60,16 @@ def write_search_results(search_term, products):
 
 
 def evict_expired_entries():
-    if (min_expiry := _min_product_expiry_ts()) and timezone.now() > min_expiry:
+    if (min_expiry := _min_search_expiry_ts()) and timezone.now() > min_expiry:
         search_term_qs = MIMSSearchTerm.objects.filter(expires_on__lt=timezone.now())
         logger.info(f"About to evict {search_term_qs.count()} search term entries")
-        search_term_dict = {
-            s.search_term: set(s.products)
-            for s in search_term_qs
-        }
-        with_common_entries = []
-        for search_term in search_term_dict.keys():
-            search_term_products = search_term_dict[search_term]
-            other_products = [v for k, v in search_term_dict.items() if k != search_term]
-            common_products = reduce(lambda acc, v: acc & v, other_products, search_term_products)
-            if common_products:
-                with_common_entries.append(search_term)
-
-        to_delete = [v for k, v in search_term_dict.items() if k not in with_common_entries]
-        if to_delete:
-            logger.info(f"Found {sum([len(v) for v in to_delete])} products to evict !")
-            for products in to_delete:
-                MIMSProductCache.objects.filter(pk__in=products).delete()
-            _min_product_expiry_ts.cache_clear()
-        else:
-            logger.info("All evictable search terms have common entries. Not evicting product info !")
+        for st in search_term_qs:
+            MIMSProductCache.objects.filter(product_id__in=st.products).update(ref_count=F('ref_count') - 1)
+        search_term_qs.delete()
+        products_to_delete = MIMSProductCache.objects.filter(ref_count__lte=0)
+        logger.info(f"Deleting {products_to_delete.count()} products with no references")
+        products_to_delete.delete()
+        _min_search_expiry_ts.cache_clear()
     if (min_expiry := _min_cmi_expiry_ts()) and timezone.now() > min_expiry:
         cmi_cache_qs = MIMSCmiCache.objects.filter(expires_on__lt=timezone.now())
         logger.info(f"Evicting {cmi_cache_qs.count()} cmi cache entries")
@@ -110,7 +96,8 @@ def update_cache(search_term, product_list):
         updated_value = update_dict[str(r.product_id)]
         r.active_ingredient = updated_value.activeIngredient
         r.name = updated_value.name
-        r.save(update_fields=['active_ingredient', 'name'])
+        r.ref_count = r.ref_count + 1
+        r.save(update_fields=['active_ingredient', 'name', 'ref_count'])
 
 
 def get_product(product_id):
