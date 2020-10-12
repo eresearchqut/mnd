@@ -40,11 +40,15 @@ function removeRefreshIcon(element) {
   element.parent().find('.refresh').remove();
 }
 
+function parseHTML(value) {
+  return $($.parseHTML(value)).text();
+}
+
 function setDependentValues(element, result, suffixes) {
   var query = "[id$='" + suffixes[0] + "']";
-  element.parent().find(query).val(result.activeIngredient || '');
+  element.parent().find(query).val(parseHTML(result.activeIngredient) || '');
   var query = "[id$='" + suffixes[1] + "']";
-  element.parent().find(query).val(result.mims || '');
+  element.parent().find(query).val(parseHTML(result.mims) || '');
   addValidityIcon(element, result.activeIngredient !== undefined);
 }
 
@@ -54,7 +58,7 @@ function lookupValue(element, value, secondary_source, suffixes) {
     addRefreshIcon(element);
     $.get(full_query, function(result) {
       setDependentValues(element, result, suffixes);
-      element.val(result.name || value);
+      element.val(parseHTML(result.name) || value);
       removeRefreshIcon(element);
     });
   }
@@ -76,7 +80,7 @@ function dependentLookup(element, source_url, secondary_source, suffixes) {
     },
     response: function(){
       removeRefreshIcon(element);
-      element.next().val(element.val());
+      element.next().val(parseHTML(element.val()));
       setDependentValues(element, {}, suffixes);
     },
   }).data("ui-autocomplete")._renderItem = function(ul, item) {
@@ -86,16 +90,16 @@ function dependentLookup(element, source_url, secondary_source, suffixes) {
 }
 
 function hideMedicineInfo(target_el) {
-  target_el.parent().hide();
-  target_el.attr("href", "");
-  target_el.attr('disabled', '');
+  target_el.hide();
+  target_el.empty();
 }
 
-function showMedicineInfo(target_el, link) {
-  target_el.attr("href", link);
-  target_el.attr("target", "_blank");
-  target_el.removeAttr('disabled');
-  target_el.parent().show();
+function showMedicineInfo(target_el) {
+  target_el.show();
+}
+
+function makeCMILink(entry) {
+  return '<a class="btn btn-info btn-xs" style="margin-top:5px; margin-right:10px" href="' + entry.link + '" target="_blank">' + entry.cmi_name + '</a>';
 }
 
 function lookupCMI(element, value, secondary_source, target_el) {
@@ -104,11 +108,18 @@ function lookupCMI(element, value, secondary_source, target_el) {
     hideMedicineInfo(target_el);
     addRefreshIcon(element);
     $.get(full_query, function(result) {
-      result.link ? showMedicineInfo(target_el, result.link): hideMedicineInfo(target_el);
-      element.val(result.name || value);
+      if (result.details && result.details.length) {
+        showMedicineInfo(target_el);
+        $.each(result.details, function(idx, entry) {
+          if (entry.has_link) {
+            target_el.append(makeCMILink(entry));
+          }
+        });
+      }
+      element.val(parseHTML(result.productName || value));
       removeRefreshIcon(element);
-      addValidityIcon(element, result.name !== undefined);
-    });
+      addValidityIcon(element, result.productName !== undefined);
+     });
   }
 }
 

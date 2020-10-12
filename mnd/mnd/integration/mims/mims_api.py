@@ -31,11 +31,14 @@ class MIMSApi:
             "client_id": self.client_id,
             "client_secret": self.client_secret
         }
-        resp = requests.post(url, data=data)
-        as_json = resp.json()
-        expires_in = as_json["expires_in"]
-        self.token_cache = TTLCache(1, expires_in)
-        self.token_cache["access_token"] = as_json["access_token"]
+        try:
+            resp = requests.post(url, data=data)
+            as_json = resp.json()
+            expires_in = as_json["expires_in"]
+            self.token_cache = TTLCache(1, expires_in)
+            self.token_cache["access_token"] = as_json["access_token"]
+        except requests.exceptions.RequestException as e:
+            logger.exception("Exception while refreshing token", e)
 
     def _make_auth_header(self):
         if not self.token_cache:
@@ -59,16 +62,28 @@ class MIMSApi:
             "page": page,
             "limit": limit
         })
-        resp = requests.get(self._full_url(f"{self.PRODUCT_URI}?{params}"), headers=self._make_auth_header())
-        return resp.json() if resp.status_code == 200 else {}
+        try:
+            resp = requests.get(self._full_url(f"{self.PRODUCT_URI}?{params}"), headers=self._make_auth_header())
+            return resp.json() if resp.status_code == 200 else {}
+        except requests.exceptions.RequestException as e:
+            logger.exception("Exception while searching for products", e)
+            return {}
 
     def get_product_details(self, product_id):
         fields = urllib.parse.urlencode({
             "fields": "cmis, brand, productName, mimsClasses"
         })
-        resp = requests.get(self._full_url(f"{self.PRODUCT_URI}/{product_id}?{fields}"), headers=self._make_auth_header())
-        return resp.json() if resp.status_code == 200 else {}
+        try:
+            resp = requests.get(self._full_url(f"{self.PRODUCT_URI}/{product_id}?{fields}"), headers=self._make_auth_header())
+            return resp.json() if resp.status_code == 200 else {}
+        except requests.exceptions.RequestException as e:
+            logger.exception("Exception while fetching product details", e)
+            return {}
 
     def get_cmi_details(self, cmi_id):
-        resp = requests.get(self._full_url(f"{self.CMI_DETAILS_URI}/{cmi_id}"), headers=self._make_auth_header())
-        return resp.json() if resp.status_code == 200 else {}
+        try:
+            resp = requests.get(self._full_url(f"{self.CMI_DETAILS_URI}/{cmi_id}"), headers=self._make_auth_header())
+            return resp.json() if resp.status_code == 200 else {}
+        except requests.exceptions.RequestException as e:
+            logger.exception("Exception while getting cmi details", e)
+            return {}

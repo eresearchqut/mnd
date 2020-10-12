@@ -1,8 +1,10 @@
 from django.http import HttpResponse, JsonResponse, HttpResponseNotFound
+from django.utils.translation import gettext as _
 from django.views.decorators.http import require_GET
 
 from .mims_service import (
-    fetch_pdf, mims_cmi_details, mims_product_details, mims_product_search
+    fetch_pdf, mims_cmi_details, mims_product_details, mims_product_search,
+    write_search_term_results
 )
 
 
@@ -19,6 +21,8 @@ def product_search(request):
         page += 1
         if not has_next:
             break
+    if result:
+        write_search_term_results(product, result)
     return JsonResponse(status=200, data=result, safe=False)
 
 
@@ -39,7 +43,7 @@ def pdf_proxy(request):
     cmi = request.GET.get("cmi", "")
     resp = fetch_pdf(cmi)
     if not resp:
-        return HttpResponseNotFound()
+        return HttpResponseNotFound(_("Consumer medicine information PDF not found"))
     return HttpResponse(
         content=resp.content,
         status=resp.status_code,
