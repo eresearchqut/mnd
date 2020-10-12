@@ -108,7 +108,6 @@ function lookupCMI(element, value, secondary_source, target_el) {
     hideMedicineInfo(target_el);
     addRefreshIcon(element);
     $.get(full_query, function(result) {
-      console.log("Result", result);
       if (result.details && result.details.length) {
         showMedicineInfo(target_el);
         $.each(result.details, function(idx, entry) {
