@@ -52,3 +52,4 @@ EXTRA_WIDGETS = 'mnd.forms.widgets.mnd_widgets'
 
 QUICKLINKS_CLASS = 'mnd.forms.navigation.quick_links.MNDQuickLinks'
 
+#REGISTRY_FORM_TAGS = (("patient-reported", "Patient-reported"),)
