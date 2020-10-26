@@ -115,9 +115,14 @@ class FormSectionMixin(PatientFormMixin):
             mnd_builder
         )
         for form_instance, __ in form_sections:
-            if 'umrn' in form_instance.fields:
-                form_instance.fields['umrn'].label = _("AMNDR")
-                break
+            if hasattr(form_instance, 'fields'):
+                if 'umrn' in form_instance.fields:
+                    form_instance.fields['umrn'].label = _("AMNDR")
+                if 'registered_clinicians' in form_instance.fields:
+                    form_instance.fields['registered_clinicians'].help_text = _('''
+                    Select clinicians which are able to see your data. You can add/remove
+                    clinicians at any time. If a clinician is removed your data will not be
+                    shared with that clinician anymore''')
 
         form_sections.insert(
             2,
