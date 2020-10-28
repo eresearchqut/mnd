@@ -120,9 +120,10 @@ class FormSectionMixin(PatientFormMixin):
                     form_instance.fields['umrn'].label = _("AMNDR")
                 if 'registered_clinicians' in form_instance.fields:
                     form_instance.fields['registered_clinicians'].help_text = _('''
-                    Select clinicians which are able to see your data. You can add/remove
-                    clinicians at any time. If a clinician is removed your data will not be
-                    shared with that clinician anymore''')
+                    Select the clinicians you wish to share your personal-reported data with. 
+                    To select multiple clinicians, hold the ctrl / cmd key and click. 
+                    If you no longer want to share your personal-reported data, you can remove a clinician at any time.
+                    ''')
 
         form_sections.insert(
             2,
