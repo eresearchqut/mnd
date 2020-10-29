@@ -17,6 +17,5 @@ class MNDFormView(FormView):
             form = get_object_or_permission_denied(RegistryForm, pk=form_id)
             patient = get_object_or_permission_denied(Patient, pk=patient_id)
 
-            # TODO: Use upcoming patient-clinician connection feature
-            if "patient-reported" in form.tags and patient.clinician != request.user:
-                raise PermissionDenied("You must be set as the patient's clinician to access this form")
+            if "patient-reported" in form.tags and request.user not in patient.registered_clinicians.all():
+                raise PermissionDenied("You must be registered as the patient's clinician to access this form")
