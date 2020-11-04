@@ -71,7 +71,7 @@ _single_section_field_mappings = {
     ("mndBreathing", "mndNIVYN"): "niv",
     ("mndBreathing", "mndBreathAssist"): "checkbox_mappings",
     ("mndBreathing", "mndBAOther"): "mndBreathingOM",
-    ("mndBreathing", "mndNIV"): "checkbox_mappings",
+    ("mndBreathing", "mndNIVWhen"): "checkbox_mappings",
     ("mndBreathing", "mndNIVUse"): "checkbox_mappings",
 
     # My eating and drinking needs
@@ -332,7 +332,7 @@ _checkbox_mapping_cdes = {
         "A fan": "fan",
         "Positioning": "bre_pos"
     },
-    "mndNIV": {
+    "mndNIVWhen": {
         "Whenever I sleep": "niv_sleep",
         "When needed": "niv_needed",
         "Most of the time": "niv_mostly",
