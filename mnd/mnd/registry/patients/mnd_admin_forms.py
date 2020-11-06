@@ -63,7 +63,6 @@ class PatientInsuranceForm(PrefixedModelForm):
         label=_("DVA card type"),
     )
     referred_for_mac_care = forms.BooleanField(
-        widget=widgets.RadioSelect(choices=[(True, 'Yes'), (False, 'No')]),
         required=False,
         label=_("Have you been referred for aged care support services via My Aged Care (MAC)?"),
     )
@@ -131,8 +130,8 @@ class PatientInsuranceForm(PrefixedModelForm):
         has_dva_card = self.data.get(self.field_name('has_dva_card'), '') == radio_yes_value
         self.fields['dva_card_number'].required = has_dva_card
         self.fields['dva_card_type'].required = has_dva_card
-        referred_for_mac_care_set = self.data.get(self.field_name('referred_for_mac_care'), '') == radio_yes_value
-        self.fields['needed_mac_level'].required = not referred_for_mac_care_set
+        referred_for_mac_care_set = self.data.get(self.field_name('referred_for_mac_care'), '') == 'on'
+        self.fields['needed_mac_level'].required = referred_for_mac_care_set
         eligible_for_home_care = self.data.get(self.field_name('eligible_for_home_care'), '') == 'on'
         if not eligible_for_home_care:
             self.fields['receiving_home_care'].required = False
