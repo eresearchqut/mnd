@@ -93,6 +93,14 @@
             }
         });
 
+        $("#id_patient_insurance-referred_for_mac_care").change(function() {
+            if (this.checked) {
+                show($("#id_patient_insurance-needed_mac_level"), noopFn);
+            } else {
+                hide($("#id_patient_insurance-needed_mac_level"), noopFn);
+            }
+        });
+
         $("#id_patient_insurance-eligible_for_home_care").change(function() {
             if (this.checked) {
                 show($("#id_patient_insurance-receiving_home_care"), noopFn);
