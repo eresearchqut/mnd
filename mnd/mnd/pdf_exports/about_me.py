@@ -186,8 +186,11 @@ def _generate_primary_carer_fields(primary_carer, patient, patient_address):
                 res['p3FName'] = primary_carer.first_name
             if primary_carer.last_name:
                 res['p3LName'] = primary_carer.last_name
-            if primary_carer.phone:
-                res['p3Phone'] = primary_carer.phone
+
+            if primary_carer.mobile_phone:
+                res['p3Phone'] = primary_carer.mobile_phone
+            elif primary_carer.home_phone:
+                res['p3Phone'] = primary_carer.home_phone
         else:
             if primary_carer.em_contact_first_name:
                 res['p3FName'] = primary_carer.em_contact_first_name
