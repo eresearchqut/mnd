@@ -72,12 +72,12 @@ class PrimaryCarer(models.Model):
     # This is Many to Many as we don't want to add a FK to Patient in TRRF
     # since TRRF is not aware of this MND specific model
     patients = models.ManyToManyField(Patient, related_name='primary_carers', through='PrimaryCarerRelationship')
-    first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=30)
-    mobile_phone = models.CharField(max_length=30)
+    first_name = models.CharField(max_length=30, blank=True)
+    last_name = models.CharField(max_length=30, blank=True)
+    mobile_phone = models.CharField(max_length=30, blank=True)
     home_phone = models.CharField(max_length=30, blank=True)
-    email = models.EmailField(max_length=30, unique=True)
-    preferred_language = models.CharField(choices=LANGUAGE_CHOICES, max_length=30, default='en')
+    email = models.EmailField(max_length=30, unique=True, blank=True)
+    preferred_language = models.CharField(choices=LANGUAGE_CHOICES, max_length=30, default='en', blank=True)
     interpreter_required = models.BooleanField(default=False)
     same_address = models.BooleanField(default=True)
     suburb = models.CharField(max_length=50, null=True, blank=True)
