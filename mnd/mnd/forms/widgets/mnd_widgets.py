@@ -51,21 +51,26 @@ class CMILookupWidget(LookupWidget):
         return """
             <input type="text" name="%s_" id="id_%s" class="skip-serialize"/>
             <input type="hidden" name="%s" id="id_%s_" value="%s"/>
-            <div style="display:none" id="id_%s_med_info">
+            <div style="display:none" id="id_%s_med_info" class="med_info">
             </div>
             <script type="text/javascript">
-                lookupCMI($("#id_%s"), '%s', '%s', $("#id_%s_med_info"));
-                $("#id_%s").keyup(function() {
-                    if (!this.value) {
-                        $("[name='%s']").val('');
-                    } else {
-                        cmiLookup($(this), '%s', '%s', $("#id_%s_med_info"));
-                    }
-                });
+                (function() {
+                    var current = $("#id_%s");
+                    var medInfo = $("#id_%s_med_info");
+                    lookupCMI(current, '%s', '%s', medInfo);
+                    current.keyup(function() {
+                        if (!this.value) {
+                            $("[name='%s']").val('');
+                        } else {
+                            cmiLookup($(this), '%s', '%s', $(this).siblings(".med_info"));
+                        }
+                    });
+                })();
             </script>
         """ % (name, name,
                name, name, value or '',
                name,
-               name, value or '', self.SECONDARY_SOURCE, name,
+               name, name,
+               value or '', self.SECONDARY_SOURCE,
                name,
-               name, self.SOURCE_URL, self.SECONDARY_SOURCE, name)
+               self.SOURCE_URL, self.SECONDARY_SOURCE)
