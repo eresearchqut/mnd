@@ -1,5 +1,7 @@
 import re
 
+from mnd.integration.mims.mims_service import mims_product_details
+
 # key is (section_code, cde_code), value is pdf form element
 _single_section_field_mappings = {
     # My legal docs
@@ -245,6 +247,11 @@ def _brush_teeth_mapping(input_val):
     return mappings.get(input_val, "")
 
 
+def _medication_mapping(input_val):
+    product = mims_product_details(input_val)
+    return product.get("name", input_val)
+
+
 _values_mapping_cdes = {
     "mndFatigue": _interval_mapping,
     "mndPain": _interval_mapping,
@@ -275,6 +282,7 @@ _values_mapping_cdes = {
     "mndFish": _avoid_details_mapping,
     "mndWalking": _walk_values_mapping,
     "mndBrush": _brush_teeth_mapping,
+    "mndMedName": _medication_mapping,
 }
 
 
