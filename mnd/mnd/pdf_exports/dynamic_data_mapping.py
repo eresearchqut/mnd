@@ -189,11 +189,14 @@ def _comfy_pos_mapping(input_val):
 
 def _mnd_type_mapping(input_val):
     mappings = {
-        "ALS - Amyotrophic Lateral Sclerosis": "ALS",
-        "PBP - Primary Bulbar Palsy": "PBP",
-        "PLS - Primary Lateral Sclerosis": "PLS",
-        "PMA - Primary Muscular Atrophy": "PMA",
-        "Unsure": "Unsure"
+        "ALS - Bulbar Onset": "ALS Bulbar Onset",
+        "ALS - Cervical Onset": "ALS Cervical Onset",
+        "ALS - Diaphragmatic Onset": "ALS Diaphragmatic Onset",
+        "ALS - Lumbar Onset": "ALS Lumbar Onset",
+        "Flail arm": "Flail arm",
+        "Flail leg": "Flail leg",
+        "PLS (Primary Lateral Sclerosis)": "PLS",
+        "Undifferentiated": "Undifferentiated",
     }
     return mappings.get(input_val, "")
 
