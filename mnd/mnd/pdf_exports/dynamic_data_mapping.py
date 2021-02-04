@@ -155,6 +155,16 @@ _multi_section_field_mappings = {
     ("myCarerDetails", "mndCEmail"): "EmailRow",
 }
 
+# pdf form field can be sourced from the first non-null value in a list of (section_code, cde_code)
+_cascading_section_field_mappings = {
+    "alsfrsScore": [
+        ("myMND", "mndType", "mndALSFRSSum"),
+        ("subsequentVisit", "mndCALC", "mndALSFRS"),
+        ("firstVisit", "mndCALC", "mndALSFRS"),
+        ("alsfrsInstrument", "myALSFRSScoreTotal", "mndALSScore"),
+    ],
+}
+
 _care_team_section = "myCarerDetails"
 _care_team_primary_carer_cde = "mndPrimary"
 
@@ -428,6 +438,8 @@ def _get_primary_carer_section_index(form_values):
 
 def generate_pdf_field_mappings(form_values):
     data = {}
+
+    # Dynamic data tuple -> pdf field
     for (form_code, section_code, cde_code), field in _single_section_field_mappings.items():
         single_section_key = (form_code, section_code, cde_code, 0)
         if single_section_key in form_values:
@@ -438,6 +450,22 @@ def generate_pdf_field_mappings(form_values):
             else:
                 _set_data_fields(data, field, cde_code, value)
 
+    # pdf field -> list of dynamic data tuples
+    for pdf_field, data_keys in _cascading_section_field_mappings.items():
+        for key in data_keys:
+            _, _, cde_code = key
+            single_section_key = (*key, 0)
+            if single_section_key in form_values:
+                value = form_values[single_section_key]
+                if value and value != "0":
+                    if isinstance(pdf_field, tuple):
+                        for field in pdf_field:
+                            _set_data_fields(data, field, cde_code, value)
+                    else:
+                        _set_data_fields(data, pdf_field, cde_code, value)
+                    break
+
+    # Find primary carer's index in care team
     primary_carer_index = _get_primary_carer_section_index(form_values)
     section_indexes = range(1, 10)
     carer_indexes = list(range(1, 14))
@@ -445,6 +473,7 @@ def generate_pdf_field_mappings(form_values):
         carer_indexes.remove(primary_carer_index)
         carer_indexes.insert(0, primary_carer_index)
 
+    # Dynamic data tuple -> indexed pdf fields
     for (section_code, cde_code), field in _multi_section_field_mappings.items():
         indexes = carer_indexes if section_code == _care_team_section else section_indexes
         for idx, i in enumerate(indexes):
