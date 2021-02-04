@@ -126,6 +126,7 @@ _single_section_field_mappings = {
     ("myMedsNAll", "myAllergies", "mndAllergies"): ("allergies_text", "MedicationAllergies"),
 
     # First visit
+    ("firstVisit", "DxDetails", "MNDDiagnosis"): "mndType",
     ("firstVisit", "mndPresentingDetails", "mndDateConfirm"): "mndDiagDate",
 }
 
@@ -194,13 +195,13 @@ def _comfy_pos_mapping(input_val):
 
 def _mnd_type_mapping(input_val):
     mappings = {
-        "ALS - Bulbar Onset": "ALS Bulbar Onset",
-        "ALS - Cervical Onset": "ALS Cervical Onset",
-        "ALS - Diaphragmatic Onset": "ALS Diaphragmatic Onset",
-        "ALS - Lumbar Onset": "ALS Lumbar Onset",
+        "ALS- Bulbar Onset": "ALS Bulbar Onset",
+        "ALS-Cervical Onset": "ALS Cervical Onset",
+        "ALS-Thoracic Diaphragmatic Onset": "ALS Diaphragmatic Onset",
+        "ALS-Lumbar Onset": "ALS Lumbar Onset",
         "Flail arm": "Flail arm",
         "Flail leg": "Flail leg",
-        "PLS (Primary Lateral Sclerosis)": "PLS",
+        "PLS": "PLS",
         "Undifferentiated": "Undifferentiated",
     }
     return mappings.get(input_val, "")
@@ -276,7 +277,7 @@ _values_mapping_cdes = {
     "mndEmotion": _interval_mapping,
     "mndComDifficulty": _communication_value_mapping,
     "myMostComfy": _comfy_pos_mapping,
-    "mndTypeSelect": _mnd_type_mapping,
+    "MNDDiagnosis": _mnd_type_mapping,
     "mndByMouth": _eat_drink_by_mouth_mapping,
     "mndHelpEat": _help_eat_mapppings,
     "mndFluids": _level_mapping,
