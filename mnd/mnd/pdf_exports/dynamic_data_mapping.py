@@ -9,11 +9,6 @@ _single_section_field_mappings = {
     ("myLegalDocs", "legalQuestions", "mndLDocs"): "checkbox_mappings",
     ("myLegalDocs", "legalQuestions", "mndDocLocation"): "pDocuments",
 
-    # My MND
-    ("myMND", "mndType", "mndTypeSelect"): "mndType",
-    ("myMND", "mndType", "mndALSFRSSum"): "alsfrsScore",
-    ("myMND", "mndType", "mndALSTestDate"): "mndTestDate_af_date",
-
     # My recent symptoms
     ("mySymptoms", "symptomTypes", "mndSymptomDate"): "mndSymptomsDate_af_date",
     ("mySymptoms", "symptomTypes", "mndFatigue"): "fatigue",
@@ -159,7 +154,6 @@ _multi_section_field_mappings = {
 # pdf form field can be sourced from the first non-null value in a list of (section_code, cde_code)
 _cascading_section_field_mappings = {
     "alsfrsScore": [
-        ("myMND", "mndType", "mndALSFRSSum"),
         ("subsequentVisit", "mndCALC", "mndALSFRS"),
         ("firstVisit", "mndCALC", "mndALSFRS"),
         ("alsfrsInstrument", "myALSFRSScoreTotal", "mndALSScore"),
