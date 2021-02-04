@@ -74,6 +74,7 @@ _single_section_field_mappings = {
     ("myBreathing", "mndBreathing", "mndBAOther"): "mndBreathingOM",
     ("myBreathing", "mndBreathing", "mndNIVWhen"): "checkbox_mappings",
     ("myBreathing", "mndBreathing", "mndNIVUse"): "checkbox_mappings",
+    ("myBreathing", "mndBreathing", "mndNIVdur"): "mndNIV_Hours_Day",
 
     # My eating and drinking needs
     ("myEatDrink", "mndEating", "mndSwallowD"): "swal",
