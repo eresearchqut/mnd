@@ -448,16 +448,17 @@ def generate_pdf_field_mappings(form_values):
     # pdf field -> list of dynamic data tuples
     for pdf_field, data_keys in _cascading_section_field_mappings.items():
         for key in data_keys:
-            _, _, cde_code = key
+            form_code, section_code, cde_code = key
             single_section_key = (*key, 0)
             if single_section_key in form_values:
                 value = form_values[single_section_key]
                 if value and value != "0":
-                    if isinstance(pdf_field, tuple):
-                        for field in pdf_field:
-                            _set_data_fields(data, field, cde_code, value)
-                    else:
-                        _set_data_fields(data, pdf_field, cde_code, value)
+                    _set_data_fields(data, pdf_field, cde_code, value)
+
+                    # Retrieve matching date value
+                    if pdf_field == "alsfrsScore" and form_code != "alsfrsInstrument":
+                        date_value = form_values[(form_code, "mndPatientInformation", "mndVDate", 0)]
+                        _set_data_fields(data, "mndTestDate_af_date", None, date_value)
                     break
 
     # Find primary carer's index in care team
