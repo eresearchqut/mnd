@@ -146,7 +146,6 @@ class PrimaryCarerForm(PrefixedModelForm):
 
     relationship = forms.ChoiceField(
         choices=PrimaryCarerRelationship.PRIMARY_CARER_RELATIONS, required=False,
-        widget=widgets.RadioSelect
     )
     relationship_info = forms.CharField(max_length=30, required=False)
     interpreter_required = forms.BooleanField(

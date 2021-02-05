@@ -58,9 +58,9 @@
             }
         });
 
-        $("input[name='primary_carer-relationship']").change(function() {
-            var checkedValue = $("input[name='primary_carer-relationship']:checked").val();
-            if (checkedValue !== undefined && checkedValue == "other") {
+        $("select[name='primary_carer-relationship']").change(function() {
+            var value = $("select[name='primary_carer-relationship']").val();
+            if (value === "other") {
                 show($('#id_primary_carer-relationship_info'), extraRequiredFn);
             } else {
                 hide($('#id_primary_carer-relationship_info'), extraHideFn);
@@ -155,7 +155,7 @@
         $("input[name='preferred_contact-contact_method']").trigger("change");
         $("input[name='patient_insurance-has_private_health_fund']").trigger("change");
         $("input[name='patient_insurance-is_ndis_participant']").trigger("change");
-        $("input[name='primary_carer-relationship']").trigger("change");
+        $("select[name='primary_carer-relationship']").trigger("change");
         $("input[name='patient_insurance-ndis_plan_manager']").trigger("change");
         $("input[name='patient_insurance-has_dva_card']").trigger("change");
         $("#id_patient_insurance-referred_for_mac_care").trigger("change");
