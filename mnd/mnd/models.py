@@ -99,7 +99,7 @@ class PrimaryCarer(models.Model):
 class PrimaryCarerRelationship(models.Model):
 
     PRIMARY_CARER_RELATIONS = [
-        ('', _("None")),
+        ('', ''),
         ('spouse', _("Spouse")),
         ('child', _("Child")),
         ('sibling', _("Sibling")),
