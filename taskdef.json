@@ -204,6 +204,22 @@
                     "valueFrom": "$MIMS_ENDPOINT"
                 }
             ]
+        },
+        {
+            "name": "xray-daemon",
+            "image": "amazon/aws-xray-daemon",
+            "cpu": 32,
+            "memoryReservation": 256,
+            "portMappings" : [
+                {
+                    "containerPort": 2000,
+                    "protocol": "udp"
+                },
+                {
+                    "containerPort": 2000,
+                    "protocol": "tcp"
+                }
+            ]
         }
     ],
     "cpu": "$CPU",
