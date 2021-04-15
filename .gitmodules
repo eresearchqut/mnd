@@ -1,4 +1,4 @@
 [submodule "rdrf"]
 	path = rdrf
-	url = ../trrf
+	url = ../trrf.git
 	branch = next_release
