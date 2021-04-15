@@ -118,11 +118,21 @@ class FormSectionMixin(PatientFormMixin):
             if hasattr(form_instance, 'fields'):
                 if 'umrn' in form_instance.fields:
                     form_instance.fields['umrn'].label = _("AMNDR")
+                if 'working_groups' in form_instance.fields:
+                    form_instance.fields['working_groups'].help_text = _('''
+                    Your working group is related to the clinic you share your data regarding clinical visits with.
+                     If you remove a working group, your clinic may no longer be able to view or capture information
+                     about you in the registry. To add an additional clinic, hold the ctrl / cmd key and select a
+                     clinic, or contact your current clinic for assistance.
+                    ''')
                 if 'registered_clinicians' in form_instance.fields:
                     form_instance.fields['registered_clinicians'].help_text = _('''
-                    Select the clinicians you wish to share your personal-reported data with.
-                     To select multiple clinicians, hold the ctrl / cmd key and click.
-                     If you no longer want to share your personal-reported data, you can remove a clinician at any time.
+                    Your clinician will always see your clinical visit data if you remain in the clinic working group.
+                     If you would like to share your personal-reported data with your clinician as well,
+                     select your clinician from the above list. To select multiple clinicians,
+                     hold the ctrl / cmd key and click.
+                     You can remove a clinician at any time to stop sharing your personal data,
+                     this will not effect your clinical visit data.
                     ''')
 
         form_sections.insert(
