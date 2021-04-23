@@ -153,7 +153,7 @@ def get_current_state(primary_carer, patient):
     registration_enabled = rf.registration_allowed
     if not registration_enabled:
         return CarerRegistrationDisabled(primary_carer, patient)
-    if not primary_carer:
+    if not primary_carer or not primary_carer.email:
         return CarerNotSetForPatient(primary_carer, patient)
     if rf.has_pending_registration:
         return CarerTokenGenerated(primary_carer, patient)
