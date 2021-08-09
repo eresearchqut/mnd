@@ -1,6 +1,7 @@
 import logging
 
 from django.core.exceptions import PermissionDenied
+from django.utils.translation import ugettext as _
 
 from rdrf.models.definition.models import RegistryForm
 from rdrf.security.security_checks import get_object_or_permission_denied
@@ -18,4 +19,4 @@ class MNDFormView(FormView):
             patient = get_object_or_permission_denied(Patient, pk=patient_id)
 
             if "patient-reported" in form.tags and request.user not in patient.registered_clinicians.all():
-                raise PermissionDenied("You must be registered as the patient's clinician to access this form")
+                raise PermissionDenied(_("You must be registered as the patient's clinician to access this form"))
