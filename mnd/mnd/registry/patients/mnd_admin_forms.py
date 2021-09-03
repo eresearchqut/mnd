@@ -63,6 +63,7 @@ class PatientInsuranceForm(PrefixedModelForm):
         label=_("DVA card type"),
     )
     referred_for_mac_care = forms.BooleanField(
+        widget=widgets.RadioSelect(choices=[(True, 'Yes'), (False, 'No')]),
         required=False,
         label=_("Have you been referred for aged care support services via My Aged Care (MAC)?"),
     )
@@ -70,6 +71,16 @@ class PatientInsuranceForm(PrefixedModelForm):
         choices=PatientInsurance.CARE_LEVEL_CHOICES,
         widget=widgets.RadioSelect,
         label=_("What MAC level were you assessed as needing?")
+    )
+    eligible_for_home_care = forms.BooleanField(
+        widget=widgets.RadioSelect(choices=[(True, 'Yes'), (False, 'No')]),
+        required=False,
+        label=_("Have you been assessed as being eligible for a community home care package?")
+    )
+    receiving_home_care = forms.BooleanField(
+        widget=widgets.RadioSelect(choices=[(True, 'Yes'), (False, 'No')]),
+        required=False,
+        label=_("Are you receiving a community home care package?")
     )
     home_care_level = forms.ChoiceField(
         choices=PatientInsurance.CARE_LEVEL_CHOICES,
@@ -97,8 +108,6 @@ class PatientInsuranceForm(PrefixedModelForm):
             'ndis_coordinator_phone': _('NDIS support coordinator phone'),
             'ndis_coordinator_email': _('NDIS support coordinator email'),
             'dva_card_number': _("DVA card number"),
-            'eligible_for_home_care': _("Have you been assessed as being eligible for a community home care package?"),
-            'receiving_home_care': _("Are you receiving a community home care package?"),
             'main_hospital': _("Main Hospital attended for MND"),
             'main_hospital_mrn': _("Medical record number (MRN)"),
             'secondary_hospital': _("Secondary Hospital/Health Service"),
