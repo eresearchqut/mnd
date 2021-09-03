@@ -59,7 +59,8 @@ def _generate_patient_address_fields(patient_address):
         'AU-TAS': 'TAS',
         'AU-QLD': 'QLD',
         'AU-WA': 'WA',
-        'AU-VIC': 'VIC'
+        'AU-VIC': 'VIC',
+        'AU-NSW': 'NSW'
     }
     return {
         'pSuburb': patient_address.suburb,
@@ -241,4 +242,4 @@ def generate_pdf_form_fields(registry, patient):
 
 
 def get_pdf_template():
-    return f"{PDF_TEMPLATES_PATH}/MiNDAUS About Me and MND Form v11.pdf"
+    return f"{PDF_TEMPLATES_PATH}/MiNDAUS About Me and MND Form v13.pdf"

@@ -270,9 +270,10 @@ FieldType: Choice
 FieldName: pPHList
 FieldNameAlt: pPHList
 FieldFlags: 393216
-FieldValue: ACA Health Benefits Fund
-FieldValueDefault: ACA Health Benefits Fund
+FieldValue: None
+FieldValueDefault: None
 FieldJustification: Left
+FieldStateOption: None
 FieldStateOption: ACA Health Benefits Fund
 FieldStateOption: ahm health insurance
 FieldStateOption: Australian Unity Health Limited
@@ -332,6 +333,7 @@ FieldJustification: Left
 ---
 FieldType: Text
 FieldName: NDISFirstName
+FieldNameAlt: NDISName
 FieldFlags: 0
 FieldJustification: Left
 ---
@@ -845,6 +847,7 @@ FieldStateOption: TAS
 FieldStateOption: QLD
 FieldStateOption: VIC
 FieldStateOption: WA
+FieldStateOption: NSW
 ---
 FieldType: Button
 FieldName: pInterpreter
@@ -3673,5 +3676,11 @@ FieldStateOption: PLS
 ---
 FieldType: Text
 FieldName: mndNIV_Hours_Day
+FieldFlags: 0
+FieldJustification: Left
+---
+FieldType: Text
+FieldName: NDISLastName
+FieldNameAlt: NDISName
 FieldFlags: 0
 FieldJustification: Left
