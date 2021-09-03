@@ -154,11 +154,14 @@ _multi_section_field_mappings = {
 
 # pdf form field can be sourced from the first non-null value in a list of (section_code, cde_code)
 _cascading_section_field_mappings = {
-    "alsfrsScore": [
-        ("subsequentVisit", "mndCALC", "mndALSFRS"),
-        ("firstVisit", "mndCALC", "mndALSFRS"),
-        ("alsfrsInstrument", "myALSFRSScoreTotal", "mndALSScore"),
-    ],
+    "alsfrsScore": {
+        "hierarchy": [
+            ("subsequentVisit", "mndCALC", "mndALSFRS"),
+            ("firstVisit", "mndCALC", "mndALSFRS"),
+            ("alsfrsInstrument", "myALSFRSScoreTotal", "mndALSScore"),
+        ],
+        "default": ("mndCALC", "0")
+    },
 }
 
 _care_team_section = "myCarerDetails"
@@ -447,13 +450,15 @@ def generate_pdf_field_mappings(form_values):
                 _set_data_fields(data, field, cde_code, value)
 
     # pdf field -> list of dynamic data tuples
-    for pdf_field, data_keys in _cascading_section_field_mappings.items():
+    for pdf_field, field_config in _cascading_section_field_mappings.items():
+        data_keys = field_config["hierarchy"]
+        default_code, default_value = field_config["default"]
         for key in data_keys:
             form_code, section_code, cde_code = key
             single_section_key = (*key, 0)
             if single_section_key in form_values:
                 value = form_values[single_section_key]
-                if value and value != "0":
+                if value:
                     _set_data_fields(data, pdf_field, cde_code, value)
 
                     # Retrieve matching date value
@@ -461,6 +466,8 @@ def generate_pdf_field_mappings(form_values):
                         date_value = form_values[(form_code, "mndPatientInformation", "mndVDate", 0)]
                         _set_data_fields(data, "mndTestDate_af_date", None, date_value)
                     break
+        else:
+            _set_data_fields(data, pdf_field, default_code, default_value)
 
     # Find primary carer's index in care team
     primary_carer_index = _get_primary_carer_section_index(form_values)
