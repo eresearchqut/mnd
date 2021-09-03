@@ -92,6 +92,7 @@ def _generate_patient_insurance_fields(patient, insurance):
         'pNDISPM': 'Self' if insurance.is_ndis_participant else 'Off',
         'pNDISmgmt': ndis_plan_manager(insurance.ndis_plan_manager),
         'NDISFirstName': insurance.ndis_coordinator_first_name,
+        'NDISLastName': insurance.ndis_coordinator_last_name,
         'NDISPhone': insurance.ndis_coordinator_phone,
         'NDISEmail': insurance.ndis_coordinator_email,
         'pPrivateHealth': _yes_no(insurance.private_health_fund),
