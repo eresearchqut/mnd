@@ -378,7 +378,7 @@ _checkbox_mapping_cdes = {
         "Soy": "soy",
         "Eggs": "eggs",
         "Shellfish": "shellfish",
-        "Read Meat": "red_meat",
+        "Red Meat": "red_meat",
         "White Meat": "white_meat",
         "Fish": "fish",
     },
