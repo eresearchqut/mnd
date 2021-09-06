@@ -59,7 +59,8 @@ def _generate_patient_address_fields(patient_address):
         'AU-TAS': 'TAS',
         'AU-QLD': 'QLD',
         'AU-WA': 'WA',
-        'AU-VIC': 'VIC'
+        'AU-VIC': 'VIC',
+        'AU-NSW': 'NSW'
     }
     return {
         'pSuburb': patient_address.suburb,
@@ -86,26 +87,27 @@ def _generate_patient_insurance_fields(patient, insurance):
     result = {
         'pPension': insurance.pension_number,
         'pMedicare': insurance.medicare_number,
-        'pNDIS': _yes_no(insurance.is_ndis_eligible),
+        'pNDIS': _yes_no_off(insurance.is_ndis_eligible),
         'pNDISNumber': insurance.ndis_number,
         'pNDISPM': 'Self' if insurance.is_ndis_participant else 'Off',
         'pNDISmgmt': ndis_plan_manager(insurance.ndis_plan_manager),
         'NDISFirstName': insurance.ndis_coordinator_first_name,
+        'NDISLastName': insurance.ndis_coordinator_last_name,
         'NDISPhone': insurance.ndis_coordinator_phone,
         'NDISEmail': insurance.ndis_coordinator_email,
-        'pPrivateHealth': _yes_no(insurance.private_health_fund),
-        'pDVACard': _yes_no(insurance.dva_card_number),
+        'pPrivateHealth': _yes_no_off(insurance.has_private_health_fund),
+        'pDVACard': _yes_no_off(insurance.has_dva_card),
         'pMAC': _yes_no_not_available(insurance.referred_for_mac_care),
-        'comHCP': _yes_no(insurance.eligible_for_home_care),
+        'comHCP': _yes_no_off(insurance.eligible_for_home_care),
         'comHCPLevel': insurance.needed_mac_level,
-        'recHCP': _yes_no(insurance.receiving_home_care),
+        'recHCP': _yes_no_off(insurance.receiving_home_care),
         'recHCPLevel': insurance.home_care_level,
         'pMainHospital': insurance.main_hospital,
         'pMainHospitalMRN': insurance.main_hospital_mrn,
         'pSecondaryHospital': insurance.secondary_hospital,
         'pSecondaryHospitalMRN': insurance.secondary_hospital_mrn,
     }
-    if insurance.private_health_fund:
+    if insurance.has_private_health_fund:
         result.update({
             'pPHList': insurance.private_health_fund,
             'pPHNumber': insurance.private_health_fund_number,
@@ -241,4 +243,4 @@ def generate_pdf_form_fields(registry, patient):
 
 
 def get_pdf_template():
-    return f"{PDF_TEMPLATES_PATH}/MiNDAUS About Me and MND Form v11.pdf"
+    return f"{PDF_TEMPLATES_PATH}/MiNDAUS About Me and MND Form v13.pdf"
