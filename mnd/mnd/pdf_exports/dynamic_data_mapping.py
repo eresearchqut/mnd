@@ -133,23 +133,23 @@ _single_section_field_mappings = {
 # key is (section_code, cde_code), value is pdf form element base (and index is appended..usually from 1 to 9)
 _multi_section_field_mappings = {
     # My medications and allergies
-    ("myMedList", "mndDateStarted"): "start_date",
-    ("myMedList", "mndMedName"): "med_name",
-    ("myMedList", "mndMedDose"): "med_dose",
-    ("myMedList", "mndMedPurpose"): "med_use",
-    ("myMedList", "mndMedAdmin"): "med_taken",
-    ("myMedList", "mndMedTime"): "med_times",
+    ("myMedsNAll", "myMedList", "mndDateStarted"): "start_date",
+    ("myMedsNAll", "myMedList", "mndMedName"): "med_name",
+    ("myMedsNAll", "myMedList", "mndMedDose"): "med_dose",
+    ("myMedsNAll", "myMedList", "mndMedPurpose"): "med_use",
+    ("myMedsNAll", "myMedList", "mndMedAdmin"): "med_taken",
+    ("myMedsNAll", "myMedList", "mndMedTime"): "med_times",
 
     # My appointments
-    ("mndApptList", "mndAName"): "Name of Team memberRow",
-    ("mndApptList", "mndApptDate"): "Date of appointmentRow",
-    ("mndApptList", "mndApptTime"): "TimeRow",
+    ("myAppointments", "mndApptList", "mndAName"): "Name of Team memberRow",
+    ("myAppointments", "mndApptList", "mndApptDate"): "Date of appointmentRow",
+    ("myAppointments", "mndApptList", "mndApptTime"): "TimeRow",
 
     # My care team
-    ("myCarerDetails", "mndCRole"): "mndCarerProfession",
-    ("myCarerDetails", "mndCName"): "NameRow",
-    ("myCarerDetails", "mndCPhone"): "TelephoneRow",
-    ("myCarerDetails", "mndCEmail"): "EmailRow",
+    ("myCareTeam", "myCarerDetails", "mndCRole"): "mndCarerProfession",
+    ("myCareTeam", "myCarerDetails", "mndCName"): "NameRow",
+    ("myCareTeam", "myCarerDetails", "mndCPhone"): "TelephoneRow",
+    ("myCareTeam", "myCarerDetails", "mndCEmail"): "EmailRow",
 }
 
 # pdf form field can be sourced from the first non-null value in a list of (section_code, cde_code)
@@ -478,20 +478,20 @@ def generate_pdf_field_mappings(form_values):
         carer_indexes.insert(0, primary_carer_index)
 
     # Dynamic data tuple -> indexed pdf fields
-    for (section_code, cde_code), field in _multi_section_field_mappings.items():
+    for (form_code, section_code, cde_code), field in _multi_section_field_mappings.items():
         indexes = carer_indexes if section_code == _care_team_section else section_indexes
         for idx, i in enumerate(indexes):
             indexed_field = f"{field}{idx + 1}"
             if field == "med_times":
                 # special handling for medicine administration times
                 suffixes = ["", "2", "3", "4", "5", "6", "6Plus"]
-                keys = [(section_code, cde_code + suffix, i) for suffix in suffixes]
+                keys = [(form_code, section_code, cde_code + suffix, i) for suffix in suffixes]
                 if any(k in form_values for k in keys):
                     values = [form_values[k] for k in keys if k in form_values]
                     value = ", ".join([v for v in values if v])
                     _set_data_fields(data, indexed_field, cde_code, value)
             else:
-                section_key = (section_code, cde_code, i)
+                section_key = (form_code, section_code, cde_code, i)
                 if section_key in form_values:
                     value = form_values[section_key]
                     _set_data_fields(data, indexed_field, cde_code, value)
