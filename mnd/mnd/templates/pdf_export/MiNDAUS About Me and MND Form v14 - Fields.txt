@@ -896,9 +896,9 @@ FieldType: Button
 FieldName: pNDISPM
 FieldFlags: 49152
 FieldJustification: Left
+FieldStateOption: No
 FieldStateOption: Off
-FieldStateOption: Agency
-FieldStateOption: Self
+FieldStateOption: Yes
 ---
 FieldType: Button
 FieldName: pMAC

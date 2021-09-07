@@ -89,7 +89,7 @@ def _generate_patient_insurance_fields(patient, insurance):
         'pMedicare': insurance.medicare_number,
         'pNDIS': _yes_no_off(insurance.is_ndis_eligible),
         'pNDISNumber': insurance.ndis_number,
-        'pNDISPM': 'Self' if insurance.is_ndis_participant else 'Off',
+        'pNDISPM': _yes_no_off(insurance.is_ndis_participant),
         'pNDISmgmt': ndis_plan_manager(insurance.ndis_plan_manager),
         'NDISFirstName': insurance.ndis_coordinator_first_name,
         'NDISLastName': insurance.ndis_coordinator_last_name,
@@ -243,4 +243,4 @@ def generate_pdf_form_fields(registry, patient):
 
 
 def get_pdf_template():
-    return f"{PDF_TEMPLATES_PATH}/MiNDAUS About Me and MND Form v13.pdf"
+    return f"{PDF_TEMPLATES_PATH}/MiNDAUS About Me and MND Form v14.pdf"
