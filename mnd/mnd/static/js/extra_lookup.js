@@ -1,18 +1,18 @@
 function refreshHtml() {
   return '<div class="refresh" style="position:absolute;margin-left:-20px;margin-top:7px;">' +
-         '   <i class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></i>' +
+         '   <i class="fa fa-refresh fa-spin"></i>' +
          '</div>';
 }
 
 function validInput() {
   return '<div class="valid" style="position:absolute;margin-left:-20px;margin-top:7px;">' +
-         '   <span style="color:green;"><i class="glyphicon glyphicon-ok-sign" style="font-size:1.2em;"></i></span>' +
+         '   <span style="color:green;"><i class="fa fa-check-circle" style="font-size:1.2em;"></i></span>' +
          '</div>';
 }
 
 function invalidInput() {
   return '<div class="invalid" style="position:absolute;margin-left:-20px;margin-top:7px;">' +
-         '   <span style="color:red;"><i class="glyphicon glyphicon-exclamation-sign" style="font-size:1.2em;" ' +
+         '   <span style="color:red;"><i class="fa fa-exclamation-circle" style="font-size:1.2em;" ' +
          '         title="Information for this product not found"></i></span> ' +
          '</div>';
 }

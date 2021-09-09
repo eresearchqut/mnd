@@ -1,16 +1,16 @@
-<script language="JavaScript">
+<script type="text/javascript">
 
     function extraRequiredFn(selector) {
-        var existing = selector.parents('.form-group').find('label').html();
-        if (!existing.includes("glyphicon-asterisk")) {
-            selector.parents('.form-group')
+        var existing = selector.closest('.row').find('label').html();
+        if (!existing.includes("fa-asterisk")) {
+            selector.closest('.row')
                 .find('label')
-                .html(existing + '<span class="glyphicon glyphicon-asterisk" style="color: red;" aria-hidden="true">');
+                .html(existing + '<span class="fa fa-asterisk" style="color: red;" aria-hidden="true">');
         }
     }
 
     function extraHideFn(selector) {
-        selector.parents('.form-group').find('label').find('span').remove();
+        selector.closest('.row').find('label').find('span').remove();
     }
 
     function noopFn(selector) {
@@ -19,7 +19,7 @@
 
     $(document).ready(function() {
 
-        var NULLABLE_BOOL_FIELD_YES = "true"
+        var NULLABLE_BOOL_FIELD_YES = "true";
 
         $("input[name='preferred_contact-contact_method']").change(function() {
             var selectors = [
