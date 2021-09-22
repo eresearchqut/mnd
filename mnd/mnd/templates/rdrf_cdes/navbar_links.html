@@ -6,14 +6,14 @@
 {% block patient_menu %}
     {% if request.user.is_patient %}
         <li>
-            <a href="{% url 'patient_carer_registration' %}"><span class="glyphicon glyphicon-user"></span>
+            <a class="dropdown-item" href="{% url 'patient_carer_registration' %}"><span class="fa fa-user"></span>
                 {% trans 'Principal caregiver management' %}
             </a>
         </li>
     {% endif %}
     {% if request.user.is_carer %}
         <li>
-            <a href="{% url 'carer_operations' %}"><span class="glyphicon glyphicon-user"></span>
+            <a class="dropdown-item" href="{% url 'carer_operations' %}"><span class="fa fa-user"></span>
                 {% trans 'Principal caregiver management' %}
             </a>
         </li>
@@ -23,19 +23,19 @@
 {% block extra_menu %}
     {% if request.user.is_carer %}
         <li>
-            <a href="{% url 'patientslisting' %}"><span class="glyphicon glyphicon-user"></span>
+            <a class="dropdown-item" href="{% url 'patientslisting' %}"><span class="fa fa-user"></span>
                 {% trans 'Patients list' %}
             </a>
         </li>
     {% endif %}
     {% if request.user.is_staff %}
         <li>
-            <a href="{% url 'admin:groups_customuser_changelist' %}"><span class="glyphicon glyphicon-user"></span>
+            <a class="dropdown-item" href="{% url 'admin:groups_customuser_changelist' %}"><span class="fa fa-user"></span>
                 {% trans 'Users' %}
             </a>
         </li>
         <li>
-            <a href="{% url 'admin:mnd_duplicatepatient_changelist' %}?is_duplicate__exact=1"><span class="glyphicon glyphicon-duplicate"></span>
+            <a class="dropdown-item" href="{% url 'admin:mnd_duplicatepatient_changelist' %}?is_duplicate__exact=1"><span class="fa fa-files-o"></span>
                 {% trans 'Temporary duplicate patients' %}
             </a>
         </li>

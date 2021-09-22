@@ -1,12 +1,11 @@
 function showElement(selector) {
     selector.css('display', 'block');
-    selector.parents('.form-group').css('display', 'block');
+    selector.closest('.row').removeClass('d-none');
 }
 
 function hideElement(selector) {
     selector.css('display', 'none');
-    selector.parents('.form-group').css('display', 'none');
-
+    selector.closest('.row').addClass('d-none');
 }
 
 function makeRequired(selector, extraOpFn) {

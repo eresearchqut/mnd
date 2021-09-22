@@ -6,12 +6,12 @@
     <form action="{% url 'patient_carer_registration' %}" method="post">
         {% csrf_token %}
         <div class="row">
-            <div class="col-md-6 col-md-offset-3">
-                <div class="panel panel-default">
-                        <div class="panel-heading">
+            <div class="col-md-6 offset-md-3">
+                <div class="card">
+                        <div class="card-header">
                             {% trans 'Principal Caregiver Management' %}
                         </div>
-                        <div class="panel-body">
+                        <div class="card-body">
                             {% block operation_info %}
                             {% endblock %}
                         </div>
