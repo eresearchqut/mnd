@@ -27,7 +27,8 @@ def _is_valid_uuid(input_str):
 
 
 def write_search_term_results(search_term, results):
-    write_search_results(search_term, [psr['id'] for psr in results])
+    if len(search_term) <= 32:
+        write_search_results(search_term, [psr['id'] for psr in results])
 
 
 def mims_product_search(product, page):
