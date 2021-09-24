@@ -463,8 +463,8 @@ def generate_pdf_field_mappings(form_values):
 
                     # Retrieve matching date value
                     if pdf_field == "alsfrsScore" and form_code != "alsfrsInstrument":
-                        if date_value := form_values[(form_code, "mndPatientInformation", "mndVDate", 0)]:
-                            _set_data_fields(data, "mndTestDate_af_date", None, date_value)
+                        date_value = form_values[(form_code, "mndPatientInformation", "mndVDate", 0)]
+                        _set_data_fields(data, "mndTestDate_af_date", None, date_value)
                     break
         else:
             _set_data_fields(data, pdf_field, default_code, default_value)
