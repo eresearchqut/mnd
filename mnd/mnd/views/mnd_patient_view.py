@@ -120,16 +120,16 @@ class FormSectionMixin(PatientFormMixin):
                     form_instance.fields['umrn'].label = _("AMNDR")
                 if 'working_groups' in form_instance.fields:
                     form_instance.fields['working_groups'].help_text = _('''
-                    Your working group is related to the clinic you share your data regarding clinical visits with.
-                     If you remove a working group, your clinic may no longer be able to view or capture information
-                     about you in the registry. To add an additional clinic, hold the ctrl / cmd key and select a
-                     clinic, or contact your current clinic for assistance.
+                    Please select the clinic that you attend or will attend.
+                     If you do not attend a clinic, please leave as 'mnd Unallocated'.
+                     Selecting a clinic means that your clinic can view and collect your clinical information.
+                     To add an additional clinic, hold the ctrl / cmd key and select a clinic,
+                     or contact your current clinic for assistance.
                     ''')
                 if 'registered_clinicians' in form_instance.fields:
                     form_instance.fields['registered_clinicians'].help_text = _('''
-                    Your clinician will always see your clinical visit data if you remain in the clinic working group.
-                     If you would like to share your personal-reported data with your clinician as well,
-                     select your clinician from the above list. To select multiple clinicians,
+                    Selecting a clinician from your clinic means that you allow them to see the data
+                     you have entered yourself. To select multiple clinicians,
                      hold the ctrl / cmd key and click.
                      You can remove a clinician at any time to stop sharing your personal data,
                      this will not effect your clinical visit data.
