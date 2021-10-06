@@ -70,7 +70,7 @@ class PatientInsuranceForm(PrefixedModelForm):
     needed_mac_level = forms.ChoiceField(
         choices=PatientInsurance.CARE_LEVEL_CHOICES,
         widget=widgets.RadioSelect,
-        label=_("What MAC level were you assessed as needing?")
+        label=_("What level of Home Care Package were you assessed as needing?")
     )
     eligible_for_home_care = forms.BooleanField(
         widget=widgets.RadioSelect(choices=[(True, 'Yes'), (False, 'No')]),
