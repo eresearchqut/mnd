@@ -117,7 +117,7 @@ class FormSectionMixin(PatientFormMixin):
         for form_instance, __ in form_sections:
             if hasattr(form_instance, 'fields'):
                 if 'umrn' in form_instance.fields:
-                    form_instance.fields['umrn'].label = _("AMNDR")
+                    form_instance.fields['umrn'].label = _("AMNDR ID")
                 if 'working_groups' in form_instance.fields:
                     form_instance.fields['working_groups'].help_text = _('''
                     Please select the clinic that you attend or will attend.

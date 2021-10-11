@@ -39,21 +39,21 @@
         $("input[name='patient_insurance-has_private_health_fund']").change(function() {
             var checkedValue = $("input[name='patient_insurance-has_private_health_fund']:checked").val();
             if (checkedValue !== undefined && checkedValue.toLowerCase() == NULLABLE_BOOL_FIELD_YES.toLowerCase()) {
-                show($("#id_patient_insurance-private_health_fund"), extraRequiredFn);
-                show($("#id_patient_insurance-private_health_fund_number"), extraRequiredFn);
+                show($("#id_patient_insurance-private_health_fund"), noopFn);
+                show($("#id_patient_insurance-private_health_fund_number"), noopFn);
             } else {
-                hide($("#id_patient_insurance-private_health_fund"), extraHideFn);
-                hide($("#id_patient_insurance-private_health_fund_number"), extraHideFn);
+                hide($("#id_patient_insurance-private_health_fund"), noopFn);
+                hide($("#id_patient_insurance-private_health_fund_number"), noopFn);
             }
         });
 
         $("input[name='patient_insurance-is_ndis_participant']").change(function() {
             var checkedValue = $("input[name='patient_insurance-is_ndis_participant']:checked").val();
             if (checkedValue !== undefined && checkedValue.toLowerCase() == NULLABLE_BOOL_FIELD_YES.toLowerCase()) {
-                show($("#id_patient_insurance-ndis_number"), extraRequiredFn);
+                show($("#id_patient_insurance-ndis_number"), noopFn);
                 show($("input[name='patient_insurance-ndis_plan_manager']"), noopFn);
             } else {
-                hide($("#id_patient_insurance-ndis_number"), extraHideFn);
+                hide($("#id_patient_insurance-ndis_number"), noopFn);
                 hide($("input[name='patient_insurance-ndis_plan_manager']"), noopFn);
             }
         });
@@ -76,19 +76,19 @@
             ];
             var checkedValue = $("input[name='patient_insurance-ndis_plan_manager']:checked").val();            
             if (checkedValue !== undefined && (checkedValue == "other" || checkedValue == "agency")) {
-                showSelectors(selectors, extraRequiredFn);
+                showSelectors(selectors, noopFn);
             } else {
-                hideSelectors(selectors, extraHideFn);
+                hideSelectors(selectors, noopFn);
             }
         });
 
         $("input[name='patient_insurance-has_dva_card']").change(function() {
             var checkedValue = $("input[name='patient_insurance-has_dva_card']:checked").val();
             if (checkedValue !== undefined && checkedValue.toLowerCase() == NULLABLE_BOOL_FIELD_YES.toLocaleLowerCase()) {
-                show($("#id_patient_insurance-dva_card_number"), extraRequiredFn);
+                show($("#id_patient_insurance-dva_card_number"), noopFn);
                 show($("#id_patient_insurance-dva_card_type"), noopFn);
             } else {
-                hide($("#id_patient_insurance-dva_card_number"), extraHideFn);
+                hide($("#id_patient_insurance-dva_card_number"), noopFn);
                 hide($("#id_patient_insurance-dva_card_type"), noopFn);
             }
         });

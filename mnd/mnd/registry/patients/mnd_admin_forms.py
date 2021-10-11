@@ -69,6 +69,7 @@ class PatientInsuranceForm(PrefixedModelForm):
     )
     needed_mac_level = forms.ChoiceField(
         choices=PatientInsurance.CARE_LEVEL_CHOICES,
+        required=False,
         widget=widgets.RadioSelect,
         label=_("What level of Home Care Package were you assessed as needing?")
     )
@@ -84,6 +85,7 @@ class PatientInsuranceForm(PrefixedModelForm):
     )
     home_care_level = forms.ChoiceField(
         choices=PatientInsurance.CARE_LEVEL_CHOICES,
+        required=False,
         widget=widgets.RadioSelect,
         label=_("What level package are you receiving")
     )
@@ -120,35 +122,6 @@ class PatientInsuranceForm(PrefixedModelForm):
         if ndis_number and (not digits_only or len(ndis_number) != 10):
             raise forms.ValidationError(_("NDIS number should contain 10 digits"))
         return ndis_number
-
-    def _clean_fields(self):
-        radio_yes_value = 'True'
-        has_private_health_fund = self.data.get(self.field_name('has_private_health_fund'), '') == radio_yes_value
-        self.fields['private_health_fund'].required = has_private_health_fund
-        self.fields['private_health_fund_number'].required = has_private_health_fund
-        is_ndis_participant = self.data.get(self.field_name('is_ndis_participant'), '') == radio_yes_value
-        self.fields['ndis_number'].required = is_ndis_participant
-        self.fields['ndis_plan_manager'].required = is_ndis_participant
-        ndis_coordinator_info = [
-            'ndis_coordinator_first_name', 'ndis_coordinator_last_name', 'ndis_coordinator_phone',
-            'ndis_coordinator_email'
-        ]
-        coordinator_required_data = self.data.get(self.field_name('ndis_plan_manager'), '') in ('agency', 'other')
-        for f in ndis_coordinator_info:
-            self.fields[f].required = coordinator_required_data and is_ndis_participant
-        has_dva_card = self.data.get(self.field_name('has_dva_card'), '') == radio_yes_value
-        self.fields['dva_card_number'].required = has_dva_card
-        self.fields['dva_card_type'].required = has_dva_card
-        referred_for_mac_care_set = self.data.get(self.field_name('referred_for_mac_care'), '') == 'on'
-        self.fields['needed_mac_level'].required = referred_for_mac_care_set
-        eligible_for_home_care = self.data.get(self.field_name('eligible_for_home_care'), '') == 'on'
-        if not eligible_for_home_care:
-            self.fields['receiving_home_care'].required = False
-            self.fields['home_care_level'].required = False
-        receiving_home_care = self.data.get(self.field_name('receiving_home_care'), '') == 'on'
-        self.fields['home_care_level'].required = receiving_home_care
-
-        super()._clean_fields()
 
 
 class PrimaryCarerForm(PrefixedModelForm):
