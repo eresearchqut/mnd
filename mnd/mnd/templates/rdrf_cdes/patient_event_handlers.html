@@ -93,21 +93,12 @@
             }
         });
 
-        $("input[name='patient_insurance-referred_for_mac_care']").change(function() {
-            var checkedValue = $("input[name='patient_insurance-referred_for_mac_care']:checked").val();
+        $("input[name='patient_insurance-eligible_for_home_care']").change(function() {
+            var checkedValue = $("input[name='patient_insurance-eligible_for_home_care']:checked").val();
             if (checkedValue !== undefined && checkedValue.toLowerCase() === NULLABLE_BOOL_FIELD_YES.toLowerCase()) {
                 show($("#id_patient_insurance-needed_mac_level"), noopFn);
             } else {
                 hide($("#id_patient_insurance-needed_mac_level"), noopFn);
-            }
-        });
-
-        $("input[name='patient_insurance-eligible_for_home_care']").change(function() {
-            var checkedValue = $("input[name='patient_insurance-eligible_for_home_care']:checked").val();
-            if (checkedValue !== undefined && checkedValue.toLowerCase() === NULLABLE_BOOL_FIELD_YES.toLowerCase()) {
-                show($("#id_patient_insurance-receiving_home_care"), noopFn);
-            } else {
-                hide($("#id_patient_insurance-receiving_home_care"), noopFn);
             }
         });
 
@@ -161,7 +152,6 @@
         $("select[name='primary_carer-relationship']").trigger("change");
         $("input[name='patient_insurance-ndis_plan_manager']").trigger("change");
         $("input[name='patient_insurance-has_dva_card']").trigger("change");
-        $("input[name='patient_insurance-referred_for_mac_care']").trigger("change");
         $("input[name='patient_insurance-eligible_for_home_care']").trigger("change");
         $("input[name='patient_insurance-receiving_home_care']").trigger("change");
         $("#id_primary_carer-same_address").trigger("change");

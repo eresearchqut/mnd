@@ -99,7 +99,7 @@ class PatientInsuranceForm(PrefixedModelForm):
             'is_ndis_eligible', 'ndis_number', 'ndis_plan_manager', 'ndis_coordinator_first_name',
             'ndis_coordinator_last_name', 'ndis_coordinator_phone', 'ndis_coordinator_email',
             'has_dva_card', 'dva_card_number', 'dva_card_type', 'referred_for_mac_care',
-            'needed_mac_level', 'eligible_for_home_care', 'receiving_home_care', 'home_care_level',
+            'eligible_for_home_care', 'needed_mac_level', 'receiving_home_care', 'home_care_level',
         )
         labels = {
             'private_health_fund': _('Name of Private Health fund'),
