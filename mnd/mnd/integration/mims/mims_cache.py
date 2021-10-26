@@ -64,7 +64,10 @@ def evict_expired_entries():
         search_term_qs = MIMSSearchTerm.objects.filter(expires_on__lt=timezone.now())
         logger.info(f"About to evict {search_term_qs.count()} search term entries")
         for st in search_term_qs:
-            MIMSProductCache.objects.filter(product_id__in=st.products).update(ref_count=F('ref_count') - 1)
+            # Updates are performed individually to prevent deadlocks on start
+            for product in MIMSProductCache.objects.filter(product_id__in=st.products):
+                product.ref_count -= 1
+                product.save(update_fields=["ref_count"])
         search_term_qs.delete()
         products_to_delete = MIMSProductCache.objects.filter(ref_count__lte=0)
         logger.info(f"Deleting {products_to_delete.count()} products with no references")
