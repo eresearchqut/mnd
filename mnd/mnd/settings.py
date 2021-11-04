@@ -12,6 +12,7 @@ LOCALE_PATHS = env.getlist("locale_paths", ['/data/translations/locale'])
 # Adding this project's app first, so that its templates overrides base templates
 INSTALLED_APPS = [
     FALLBACK_REGISTRY_CODE,
+    'django_q'
 ] + INSTALLED_APPS
 
 ROOT_URLCONF = '%s.urls' % FALLBACK_REGISTRY_CODE
@@ -55,3 +56,12 @@ QUICKLINKS_CLASS = 'mnd.forms.navigation.quick_links.MNDQuickLinks'
 REGISTRY_FORM_TAGS = (("patient-reported", "Patient-reported form"),)
 
 ACCOUNT_ACTIVATION_DAYS = 90
+
+Q_CLUSTER = {
+    'workers': 1,
+    'timeout': 60,
+    'retry': 120,
+    'max_attempts': 3,
+    'orm': 'default',
+    'poll': 60,
+}
