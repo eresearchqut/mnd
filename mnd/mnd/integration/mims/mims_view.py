@@ -3,39 +3,31 @@ from django.utils.translation import gettext as _
 from django.views.decorators.http import require_GET
 
 from .mims_service import (
-    fetch_pdf, mims_cmi_details, mims_product_details, mims_product_search,
-    write_search_term_results
+    fetch_pdf, mims_product_cmis, mims_product_details, mims_product_search,
 )
 
 
 @require_GET
 def product_search(request):
     product = request.GET.get("term", "")
-    result = []
-    page = 1
-    while page < 10:  # limit response to max 500 records
-        resp, has_next = mims_product_search(product, page)
-        if not resp:
-            break
-        result += [r._asdict() for r in resp]
-        page += 1
-        if not has_next:
-            break
-    if result:
-        write_search_term_results(product, result)
-    return JsonResponse(status=200, data=result, safe=False)
+    products = [p._asdict() for p in mims_product_search(product)]
+    return JsonResponse(status=200, data=products, safe=False)
 
 
 @require_GET
 def product_details(request):
     product = request.GET.get("product", "")
-    return JsonResponse(status=200, data=mims_product_details(product))
+    product_info = mims_product_details(product)
+    response = product_info._asdict() if product_info else {}
+    return JsonResponse(status=200, data=response)
 
 
 @require_GET
 def cmi_details(request):
     product = request.GET.get("product", "")
-    return JsonResponse(status=200, data=mims_cmi_details(product))
+    product_name, cmis = mims_product_cmis(product)
+    response = {"productName": product_name, "details": [c._asdict() for c in cmis]}
+    return JsonResponse(status=200, data=response)
 
 
 @require_GET

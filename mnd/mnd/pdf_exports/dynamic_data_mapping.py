@@ -263,7 +263,7 @@ def _brush_teeth_mapping(input_val):
 
 def _medication_mapping(input_val):
     product = mims_product_details(input_val)
-    return product.get("name", input_val)
+    return product.name if product else input_val
 
 
 _values_mapping_cdes = {

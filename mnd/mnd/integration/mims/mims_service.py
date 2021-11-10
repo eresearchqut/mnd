@@ -3,15 +3,19 @@ import logging
 import requests
 import uuid
 
+from cache_memoize import cache_memoize
 from django.shortcuts import reverse
 
 from .mims_api import MIMSApi
-from .mims_cache import (
-    CMIInfo, ProductInfo, get_product, get_cmis_by_product,
-    get_cmi_info, search_cache, update_cache,
-    update_cache_entry, update_cmi_cache, write_search_results
-)
+
+MAX_SEARCH_PAGES = 5
+MIN_SEARCH_STRING_LENGTH = 4
+CMI_DOCUMENT_FORMATS = ('pdf', 'reducedpdf')
+CACHE_TIMEOUT = 3600
+
 ProductSearchResult = namedtuple('ProductSearchResult', 'id value activeIngredient')
+ProductInfo = namedtuple('ProductInfo', 'id name mims activeIngredient cmis')
+CMIInfo = namedtuple('CMIInfo', 'cmi_id cmi_name link')
 
 logger = logging.getLogger(__name__)
 
@@ -26,106 +30,74 @@ def _is_valid_uuid(input_str):
     return True
 
 
-def write_search_term_results(search_term, results):
-    if len(search_term) <= 32:
-        write_search_results(search_term, [psr['id'] for psr in results])
+@cache_memoize(CACHE_TIMEOUT)
+def mims_product_search(product):
+    return list(mims_product_iter(product))
 
 
-def mims_product_search(product, page):
-
+def mims_product_iter(product):
     def active_ingredient(result):
         return ", ".join(result.split(" + ")) if result else ''
 
-    has_next = False
-    if product and product.strip() != '' and len(product) >= 4:
-        cached = search_cache(product)
-        if cached:
-            return [ProductSearchResult(r.id, r.name, r.activeIngredient) for r in cached], has_next
-
-        result = api.search_product(product, page)
-        if result:
-            has_next = len(result) == api.PAGE_SIZE
-            formatted = [
-                ProductSearchResult(r['productId'], r['productName'], active_ingredient(r['activeIngredient']))
-                for r in result
-            ]
-            update_cache(product, formatted)
-            return formatted, has_next
-    return [], has_next
+    if product and product.strip() != '' and len(product) >= MIN_SEARCH_STRING_LENGTH:
+        for page in range(1, MAX_SEARCH_PAGES):
+            result = api.search_product(product, page)
+            if not result:
+                break
+            for product in result:
+                yield ProductSearchResult(product['productId'],
+                                          product['productName'],
+                                          active_ingredient(product['activeIngredient']))
+            if len(result) != api.PAGE_SIZE:
+                break
 
 
+@cache_memoize(CACHE_TIMEOUT)
 def mims_product_details(product):
-    resp = {}
     if product and _is_valid_uuid(product):
-        cached = get_product(product)
-        if cached and cached.mims:
-            return cached._asdict()
         product_details = api.get_product_details(product)
         if product_details:
             mims = ", ".join(product_details['mimsClasses'])
             name = product_details.get('productName', '')
-            product_info = ProductInfo(product, name, mims, '')
-            resp = update_cache_entry(product_info)._asdict()
-    return resp
+
+            active_ingredient = next((p.activeIngredient for p in mims_product_iter(name) if p.id == product), None)
+            cmis = product_details.get("cmis", [])
+
+            return ProductInfo(product, name, mims, active_ingredient, cmis)
+    return None
 
 
-def _handle_cmi_details(product_id, product_name, cmi_id):
-    cmi_details = api.get_cmi_details(cmi_id)
+@cache_memoize(CACHE_TIMEOUT)
+def mims_cmi_details(cmi):
+    cmi_details = api.get_cmi_details(cmi)
     if cmi_details:
         cmi_name = cmi_details.get('cmiName')
-        products = [p for p in cmi_details.get('products', [])]
-        document_link = [
-            d['cmiDocument'] for d in cmi_details['cmiDocuments'] if d['cmiFormat'] in ('pdf', 'reducedpdf')
-        ]
-        if document_link and document_link[0]:
-            for p in products:
-                update_cmi_cache(CMIInfo(p['productId'], p['productName'], cmi_id, cmi_name, document_link[0], True))
-            cmi_info = update_cmi_cache(CMIInfo(product_id, '', cmi_id, cmi_name, document_link[0], True))
-            return cmi_info
-        return update_cmi_cache(CMIInfo(product_id, product_name, cmi_id, cmi_name, '', False))
+        document = next((d for d in cmi_details['cmiDocuments'] if d['cmiFormat'] in CMI_DOCUMENT_FORMATS), None)
+
+        return CMIInfo(cmi, cmi_name, document['cmiDocument'])
+    return None
 
 
-def _with_proxied_link(lst):
-    as_dict = [c._asdict() for c in lst]
-    for entry in as_dict:
-        if 'link' in entry and entry['link']:
-            entry['link'] = f"{reverse('mims_cmi_pdf')}?cmi={entry['cmi_id']}"
-    return as_dict
-
-
-def mims_cmi_details(product):
-    resp = {"details": []}
+def mims_product_cmis(product):
+    result = []
+    product_name = None
     if product and _is_valid_uuid(product):
-        cached = get_cmis_by_product(product)
-        if cached and any(c.link or not c.has_link for c in cached):
-            resp['productName'] = cached[0].name
-            resp['details'] = _with_proxied_link(cached)
-            return resp
-
-        product_details = api.get_product_details(product)
-        result = []
+        product_details = mims_product_details(product)
         if product_details:
-            product_name = product_details.get('productName')
-            resp['productName'] = product_name
-            cmis = product_details.get('cmis', [])
-            for cmi in cmis:
-                cmi_id = cmi['cmiId'] if cmis else None
-                if not cmi_id:
-                    continue
-                cmi_name = cmi['cmiName']
-                cmi_info = CMIInfo(product, product_name, cmi_id, cmi_name, '', True)
-                cmi_info = update_cmi_cache(cmi_info)
-                updated = _handle_cmi_details(product, product_name, cmi_info.cmi_id)
-                if updated:
-                    result.append(updated)
-            if result:
-                resp['details'] = _with_proxied_link(result)
-    return resp
+            product_name = product_details.name
+            for cmi in product_details.cmis:
+                cmi_id = cmi['cmiId']
+                if cmi_id:
+                    cmi_details = mims_cmi_details(cmi_id)
+                    if cmi_details:
+                        result.append(cmi_details._replace(link=f"{reverse('mims_cmi_pdf')}?cmi={cmi_id}"))
+
+    return product_name, result
 
 
 def fetch_pdf(cmi):
     if cmi and _is_valid_uuid(cmi):
-        cached = get_cmi_info(cmi)
-        if cached and cached.link:
-            return requests.get(cached.link)
+        details = mims_cmi_details(cmi)
+        if details and details.link:
+            return requests.get(details.link)
     return None

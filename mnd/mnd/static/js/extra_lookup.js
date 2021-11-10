@@ -111,7 +111,7 @@ function lookupCMI(element, value, secondary_source, target_el) {
       if (result.details && result.details.length) {
         showMedicineInfo(target_el);
         $.each(result.details, function(idx, entry) {
-          if (entry.has_link) {
+          if (entry.link) {
             target_el.append(makeCMILink(entry));
           }
         });

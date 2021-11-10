@@ -1,6 +1,5 @@
 import pycountry
 
-from django.contrib.postgres.fields import ArrayField
 from django.db import models
 
 from django.utils.translation import gettext_lazy as _
@@ -219,39 +218,3 @@ class PatientLanguage(models.Model):
     patient = models.OneToOneField(Patient, related_name='language_info', on_delete=models.CASCADE)
     preferred_language = models.CharField(choices=LANGUAGE_CHOICES, max_length=30, default='en')
     interpreter_required = models.BooleanField(default=False)
-
-
-class MIMSSearchTerm(models.Model):
-    search_term = models.CharField(max_length=32, null=False)
-    created_at = models.DateTimeField(auto_now_add=True)
-    expires_on = models.DateTimeField()
-    products = ArrayField(models.UUIDField(), blank=True)
-
-
-class MIMSProductCache(models.Model):
-
-    product_id = models.UUIDField(unique=True)
-    name = models.CharField(max_length=256)
-    active_ingredient = models.TextField()
-    mims_classes = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
-    ref_count = models.IntegerField(null=False, blank=False, default=1)
-
-    class Meta:
-        indexes = [
-            models.Index(fields=['name']),
-        ]
-
-
-class MIMSCmiCache(models.Model):
-    product_id = models.UUIDField(null=False, blank=False)
-    product_name = models.CharField(max_length=256, null=True, blank=True)
-    cmi_id = models.UUIDField(null=False, blank=False)
-    cmi_name = models.CharField(max_length=128, default='No name')
-    cmi_link = models.CharField(max_length=512)
-    has_link = models.BooleanField(default=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    expires_on = models.DateTimeField()
-
-    class Meta:
-        unique_together = ("product_id", "cmi_id")

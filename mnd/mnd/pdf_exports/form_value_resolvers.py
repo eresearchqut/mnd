@@ -1,5 +1,5 @@
 from rdrf.models.definition.models import CommonDataElement
-from ..integration.mims.mims_service import mims_cmi_details, mims_product_details
+from ..integration.mims.mims_service import mims_product_details
 
 
 class FormValueResolver:
@@ -16,11 +16,8 @@ class FormValueResolver:
         if value:
             if code in self.cde_values_mapping and not isinstance(value, list):
                 return self.cde_values_mapping[code].get(value, value)
-            if code in self.mims_products:
-                details = mims_product_details(value)
-                return details.get('name', value)
-            if code in self.mims_cmis:
-                details = mims_cmi_details(value)
-                return details.get('name', value)
+            if code in self.mims_products or code in self.mims_cmis:
+                if details := mims_product_details(value):
+                    return details.name
 
         return value
