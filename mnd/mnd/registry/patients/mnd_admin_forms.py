@@ -119,8 +119,8 @@ class PatientInsuranceForm(PrefixedModelForm):
     def clean_ndis_number(self):
         ndis_number = self.cleaned_data['ndis_number']
         digits_only = ndis_number and all(c.isdigit() for c in ndis_number)
-        if ndis_number and (not digits_only or len(ndis_number) != 10):
-            raise forms.ValidationError(_("NDIS number should contain 10 digits"))
+        if ndis_number and (not digits_only or len(ndis_number) != 9):
+            raise forms.ValidationError(_("NDIS number should contain 9 digits"))
         return ndis_number
 
 

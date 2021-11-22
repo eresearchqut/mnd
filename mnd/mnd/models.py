@@ -41,7 +41,7 @@ class PatientInsurance(models.Model):
     private_health_fund = models.CharField(max_length=255, null=True, blank=True)
     private_health_fund_number = models.CharField(max_length=30, null=True, blank=True)
     is_ndis_participant = models.BooleanField(blank=True, null=True, default=None, verbose_name=_("Are you currently an NDIS participant?"))
-    ndis_number = models.CharField(max_length=30, verbose_name=_('NDIS number'), null=True, blank=True, help_text=_('10 digits'))
+    ndis_number = models.CharField(max_length=30, verbose_name=_('NDIS number'), null=True, blank=True, help_text=_('9 digits'))
     is_ndis_eligible = models.BooleanField(blank=True, null=True, default=None, verbose_name=_("Are you eligible for the NDIS (under 65)?"))
     ndis_plan_manager = models.CharField(choices=PLAN_MANAGER_CHOICES, verbose_name=_('NDIS plan manager'), max_length=30)
     ndis_coordinator_first_name = models.CharField(max_length=30, verbose_name=_('NDIS coordinator first name'), null=True, blank=True)
