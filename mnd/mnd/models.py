@@ -47,7 +47,7 @@ class PatientInsurance(models.Model):
     ndis_coordinator_first_name = models.CharField(max_length=30, verbose_name=_('NDIS coordinator first name'), null=True, blank=True)
     ndis_coordinator_last_name = models.CharField(max_length=30, verbose_name=_('NDIS coordinator last name'), null=True, blank=True)
     ndis_coordinator_phone = models.CharField(max_length=30, verbose_name=_('NDIS coordinator phone'), null=True, blank=True)
-    ndis_coordinator_email = models.CharField(max_length=30, verbose_name=_('NDIS coordinator email'), null=True, blank=True)
+    ndis_coordinator_email = models.CharField(max_length=254, verbose_name=_('NDIS coordinator email'), null=True, blank=True)
     has_dva_card = models.BooleanField(blank=True, null=True, default=None, verbose_name=_('Do you have a DVA card?'))
     dva_card_number = models.CharField(max_length=30, verbose_name=_('DVA card number'), null=True, blank=True)
     dva_card_type = models.CharField(choices=DVA_CARD_TYPE_CHOICES, verbose_name=_('DVA card type'), max_length=30, default='')
