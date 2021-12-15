@@ -1,3 +1,4 @@
+import datetime
 import re
 
 from mnd.integration.mims.mims_service import mims_product_details
@@ -266,6 +267,13 @@ def _medication_mapping(input_val):
     return product.name if product else input_val
 
 
+def _date_mapping(input_val):
+    if input_val:
+        return datetime.datetime.strptime(input_val, "%Y-%m-%d").strftime("%d/%m/%Y")
+    else:
+        return ""
+
+
 _values_mapping_cdes = {
     "mndFatigue": _interval_mapping,
     "mndPain": _interval_mapping,
@@ -297,6 +305,9 @@ _values_mapping_cdes = {
     "mndWalking": _walk_values_mapping,
     "mndBrush": _brush_teeth_mapping,
     "mndMedName": _medication_mapping,
+    "mndDateConfirm": _date_mapping,
+    "mndSymptomDate": _date_mapping,
+    "mndDateStarted": _date_mapping,
 }
 
 
@@ -464,7 +475,7 @@ def generate_pdf_field_mappings(form_values):
                     # Retrieve matching date value
                     if pdf_field == "alsfrsScore" and form_code != "alsfrsInstrument":
                         date_value = form_values[(form_code, "mndPatientInformation", "mndVDate", 0)]
-                        _set_data_fields(data, "mndTestDate_af_date", None, date_value)
+                        _set_data_fields(data, "mndTestDate_af_date", None, _date_mapping(date_value))
                     break
         else:
             _set_data_fields(data, pdf_field, default_code, default_value)
