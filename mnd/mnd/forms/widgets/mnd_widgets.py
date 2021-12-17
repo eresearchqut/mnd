@@ -19,7 +19,7 @@ class ProductLookupWidget(LookupWidget):
         return {CDEDataTypes.LOOKUP}
 
     @staticmethod
-    def report_value(raw_value):
+    def denormalized_value(raw_value):
         return _get_product_name(raw_value)
 
     def render(self, name, value, attrs, renderer=None):
@@ -58,7 +58,7 @@ class CMILookupWidget(LookupWidget):
         return {CDEDataTypes.LOOKUP}
 
     @staticmethod
-    def report_value(raw_value):
+    def denormalized_value(raw_value):
         return _get_product_name(raw_value)
 
     def render(self, name, value, attrs, renderer=None):
