@@ -1,7 +1,13 @@
 from django.urls import reverse_lazy
 
+from mnd.integration.mims.mims_service import mims_product_details
 from rdrf.forms.widgets.widgets import LookupWidget
 from rdrf.helpers.cde_data_types import CDEDataTypes
+
+
+def _get_product_name(raw_value):
+    product = mims_product_details(raw_value)
+    return product.name if product else raw_value
 
 
 class ProductLookupWidget(LookupWidget):
@@ -10,7 +16,11 @@ class ProductLookupWidget(LookupWidget):
 
     @staticmethod
     def usable_for_types():
-        return {CDEDataTypes.STRING}
+        return {CDEDataTypes.LOOKUP}
+
+    @staticmethod
+    def denormalized_value(raw_value):
+        return _get_product_name(raw_value)
 
     def render(self, name, value, attrs, renderer=None):
         return """
@@ -45,7 +55,11 @@ class CMILookupWidget(LookupWidget):
 
     @staticmethod
     def usable_for_types():
-        return {CDEDataTypes.STRING}
+        return {CDEDataTypes.LOOKUP}
+
+    @staticmethod
+    def denormalized_value(raw_value):
+        return _get_product_name(raw_value)
 
     def render(self, name, value, attrs, renderer=None):
         return """
