@@ -1,7 +1,6 @@
 from django.conf.urls import include
 from django.urls import re_path
 
-from .views.mnd_form_view import MNDFormView
 from .views.mnd_landing_view import LandingView
 from .views.pdf_export_view import pdf_export
 from .views.mnd_patient_view import AddPatientView, PatientEditView
@@ -32,11 +31,6 @@ urlpatterns = [
     re_path(r'^mims/product_details', mims_view.product_details, name='mims_product_details'),
     re_path(r'^mims/cmi_details', mims_view.cmi_details, name='mims_cmi_details'),
     re_path(r'^mims/pdf_info', mims_view.pdf_proxy, name='mims_cmi_pdf'),
-
-    re_path(r"^(?P<registry_code>\w+)/forms/(?P<form_id>\w+)/(?P<patient_id>\d+)/(?P<context_id>add)/?$",
-            MNDFormView.as_view(), name='form_add'),
-    re_path(r"^(?P<registry_code>\w+)/forms/(?P<form_id>\w+)/(?P<patient_id>\d+)/(?P<context_id>\d+)?$",
-            MNDFormView.as_view(), name='registry_form'),
 
     re_path(r'^health-check/?$', health_check, name='mnd_health_check'),
     re_path(r'^$', LandingView.as_view(), name='landing'),
