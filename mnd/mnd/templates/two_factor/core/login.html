@@ -1,11 +1,12 @@
 {% extends "two_factor/core/login.html" %}
 
 {% load i18n %}
+{% load static %}
 
 {% block login_footer %}
-<div class="card-footer">
+<div class="card-footer d-flex justify-content-between">
     <a href="{% url 'login_assistance' %}">{% trans "Trouble signing in?" %}</a>
-    <div class="pull-right"><a href="{% url 'registration_register' 'mnd' %}">Register here</a></div>
-    <div class="clearfix"></div>
+    <a href="{% static 'docs/PatientRegistryUserGuideV01.pdf' %}">{% trans "User guide" %}</a>
+    <a href="{% url 'registration_register' 'mnd' %}">{% trans "Register here" %}</a>
 </div>
 {% endblock %}
