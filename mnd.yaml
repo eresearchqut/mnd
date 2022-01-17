@@ -1,4 +1,4 @@
-EXPORT_TIME: '2021-11-15 11:59:05.135022'
+EXPORT_TIME: '2022-01-17 17:23:37.160028'
 EXPORT_TYPE: REGISTRY_PLUS_CDES
 RDRF_VERSION: 1.0.0
 REGISTRY_VERSION: '1.0'
@@ -495,7 +495,7 @@ cdes:
   code: mndALSSaliva
   datatype: range
   desc: ''
-  important: false
+  important: true
   instructions: ''
   is_required: false
   max_length: null
@@ -784,7 +784,7 @@ cdes:
   max_length: null
   max_value: null
   min_value: null
-  name: Turning Bed and adjusting Bed clothes
+  name: Turning in Bed and adjusting Bed clothes
   pattern: ''
   pv_group: bedRating
   questionnaire_text: ''
@@ -2201,7 +2201,7 @@ cdes:
   max_length: null
   max_value: null
   min_value: null
-  name: Do you have Gastrostomy / PEG?
+  name: Is PEG/Gastrostomy the primary method of eating (>50%)?
   pattern: ''
   pv_group: mndYN
   questionnaire_text: ''
@@ -2860,7 +2860,7 @@ cdes:
 - allow_multiple: false
   calculation: ''
   code: mndMedName
-  datatype: string
+  datatype: lookup
   desc: ''
   important: false
   instructions: List your primary/main medication first
@@ -3032,7 +3032,7 @@ cdes:
 - allow_multiple: false
   calculation: ''
   code: mndMedications
-  datatype: string
+  datatype: lookup
   desc: ''
   important: false
   instructions: Type brand name or active ingredient into Medication field to begin
@@ -3222,7 +3222,7 @@ cdes:
   code: mndNoGasCut
   datatype: range
   desc: Without gastrostomy / PEG
-  important: false
+  important: true
   instructions: ''
   is_required: false
   max_length: null
@@ -4240,7 +4240,7 @@ cdes:
 - allow_multiple: false
   calculation: ''
   code: mndTrialDesc
-  datatype: string
+  datatype: range
   desc: ''
   important: true
   instructions: ''
@@ -4250,10 +4250,10 @@ cdes:
   min_value: null
   name: Name of Clinical Trial
   pattern: ''
-  pv_group: null
+  pv_group: mndClinicalTrialNamesPVG
   questionnaire_text: ''
   widget_name: ''
-  widget_settings: ''
+  widget_settings: '{}'
 - allow_multiple: false
   calculation: ''
   code: mndTrialEDate
@@ -4274,8 +4274,8 @@ cdes:
   widget_settings: ''
 - allow_multiple: false
   calculation: ''
-  code: mndTrialParticipant
-  datatype: range
+  code: mndTrialOther
+  datatype: string
   desc: ''
   important: true
   instructions: ''
@@ -4283,7 +4283,26 @@ cdes:
   max_length: null
   max_value: null
   min_value: null
-  name: Clinical trial participation
+  name: If other please specify
+  pattern: ''
+  pv_group: null
+  questionnaire_text: ''
+  widget_name: ''
+  widget_settings: ''
+- allow_multiple: false
+  calculation: ''
+  code: mndTrialParticipant
+  datatype: range
+  desc: ''
+  important: false
+  instructions: Please select whether this patient is currently participating in any
+    research or clinical trial, including SALSA. If yes, it is very important that
+    the name of the trial is recorded below with the date enrolled (if known).
+  is_required: true
+  max_length: null
+  max_value: null
+  min_value: null
+  name: Research and Clinical trial participation
   pattern: ''
   pv_group: mndYN
   questionnaire_text: ''
@@ -4710,7 +4729,7 @@ cdes:
   max_length: null
   max_value: null
   min_value: null
-  name: Father dementia status (patient report)
+  name: Confirmed dementia diagnosis for Father (Patient report)
   pattern: ''
   pv_group: mndYNUNK
   questionnaire_text: ''
@@ -4803,6 +4822,40 @@ cdes:
   widget_settings: ''
 - allow_multiple: false
   calculation: ''
+  code: mndmedicaloth3
+  datatype: string
+  desc: ''
+  important: false
+  instructions: ''
+  is_required: false
+  max_length: null
+  max_value: null
+  min_value: null
+  name: Please Specify
+  pattern: ''
+  pv_group: null
+  questionnaire_text: ''
+  widget_name: ''
+  widget_settings: ''
+- allow_multiple: false
+  calculation: ''
+  code: mndmedicaloth4
+  datatype: string
+  desc: ''
+  important: false
+  instructions: ''
+  is_required: false
+  max_length: null
+  max_value: null
+  min_value: null
+  name: Please Specify
+  pattern: ''
+  pv_group: null
+  questionnaire_text: ''
+  widget_name: ''
+  widget_settings: ''
+- allow_multiple: false
+  calculation: ''
   code: mndmother
   datatype: range
   desc: ''
@@ -4863,7 +4916,7 @@ cdes:
   max_length: null
   max_value: null
   min_value: null
-  name: Mother dementia status (patient report)
+  name: Confirmed dementia diagnosis for Mother (patient report)
   pattern: ''
   pv_group: mndYNUNK
   questionnaire_text: ''
@@ -5185,7 +5238,6 @@ complete_fields:
   - mndCervicalUMN
   - mndcurrentsmoke
   - mndDose
-  - mndDress
   - mndeversmoke
   - mndfather
   - mndfatherdementia
@@ -5647,8 +5699,8 @@ email_notifications:
     description: Duplicate Patient Set
     language: en
     subject: Patient marked as duplicate
-  group_recipient: Notified Admins
-  recipient: null
+  group_recipient: null
+  recipient: catherine.hansen@deakin.edu.au
 - description: new-carer
   disabled: false
   email_from: null
@@ -5683,6 +5735,9 @@ email_notifications:
       <p>Thank you for your registration in the MiNDAUS Registry!</p>
 
       <p>Please click the following activation link to verify your account, or copy and paste into a web browser and log into the registry. This link will expire in 2 days.</p>
+
+      <p><a href=https://researchsurveys.deakin.edu.au/jfe/form/SV_2nLtfvj7DY8uAOq>Please help us by completing a very quick survey about your registration today</a></p>
+      <p>It is anonymous and will help us to develop and improve this service.</p>
 
       <p><a href="{{ activation_url }}">Activation link</a></p>
 
@@ -5825,6 +5880,7 @@ forms:
     nivDate visible if mndNIV == Yes
     fvcDate visible if mndFVC == Yes
     fvcNADate visible if mndFVCYesNA == Yes
+    mndTrialOther visible if mndTrialDesc=="Other"
     mndSleepStudyDate mndSleepDate visible if mndSleepStudy == Yes
     section mndOtherTNTDetails visible if mndOtherTNT == Yes
     mndADOther visible if mndADevices includes Other
@@ -5850,6 +5906,8 @@ forms:
     mndpsychiatricoth visible if mndpsychiatric includes "Other"
     mndmedicaloth1 visible if mndmedical includes "Other1"
     mndmedicaloth2 visible if mndmedical includes "Other2"
+    mndmedicaloth3 visible if mndmedical includes "Other3"
+    mndmedicaloth4 visible if mndmedical includes "Other4"
     mndTelehealthConsultation visible if mndConsultationType=="Telehealth"
   display_name: First Visit
   header: <h1>First Visit</h1>
@@ -5925,6 +5983,8 @@ forms:
     - mndmedical
     - mndmedicaloth1
     - mndmedicaloth2
+    - mndmedicaloth3
+    - mndmedicaloth4
     - mndhighestedu
     - mndoccupation
     extra: null
@@ -6078,7 +6138,7 @@ forms:
     questionnaire_help: ''
   - allow_multiple: false
     code: mndTrialInfo
-    display_name: Clinical Trial Information
+    display_name: Research and Clinical Trial Information
     elements:
     - mndTrialParticipant
     extra: null
@@ -6086,9 +6146,10 @@ forms:
     questionnaire_help: ''
   - allow_multiple: true
     code: mndTrialDetails
-    display_name: Clinical Trial Details (Can Create Multiple)
+    display_name: Research and Clinical Trial Details (Can Create Multiple)
     elements:
     - mndTrialDesc
+    - mndTrialOther
     - mndTrialSDate
     - mndTrialEDate
     extra: null
@@ -6680,6 +6741,7 @@ forms:
     mndTestOthAScore mndTestOthADate visible if mndTestOthA is set
     mndTestOthBScore mndTestOthBDate visible if mndTestOthB is set
     section mndTrialDetails visible if mndTrialParticipant == Yes
+    mndTrialOther visible if mndTrialDesc=="Other"
   display_name: Subsequent Visits
   header: <h2>Subsequent Visits</h2>
   is_questionnaire: false
@@ -6851,7 +6913,7 @@ forms:
     questionnaire_help: ''
   - allow_multiple: false
     code: mndTrialInfo
-    display_name: Clinical Trial Information
+    display_name: Research and Clinical Trial Information
     elements:
     - mndTrialParticipant
     extra: null
@@ -6859,9 +6921,10 @@ forms:
     questionnaire_help: ''
   - allow_multiple: true
     code: mndTrialDetails
-    display_name: Clinical Trial Details (Can Create Multiple)
+    display_name: Research and Clinical Trial Details (Can Create Multiple)
     elements:
     - mndTrialDesc
+    - mndTrialOther
     - mndTrialSDate
     - mndTrialEDate
     extra: null
@@ -8131,8 +8194,9 @@ group_permissions:
     - state
     name: Can view state
 metadata_json: '{"features": ["registration", "contexts", "patients_create_users",
-  "clinicians_need_ethical_clearance", "patient_guid", "clinicians_have_patients"]}'
+  "clinicians_need_ethical_clearance", "patient_guid"]}'
 name: MiNDAUS Registry
+next_of_kin_relationships: []
 patient_data_section: {}
 patient_stage_rules: []
 patient_stages: []
@@ -8835,10 +8899,10 @@ pvgs:
     questionnaire_value: null
     value: 1. Can only sleep sitting up
   - code: '2'
-    desc: Needs extra pillows in order to sleep (more ha 2)
+    desc: Needs extra pillows in order to sleep (more than 2)
     position: 3
     questionnaire_value: null
-    value: 2. Needs extra pillows in order to sleep (more ha 2)
+    value: 2. Needs extra pillows in order to sleep (more than 2)
   - code: '3'
     desc: Some difficult sleeping at night due to shortness of breath, does not routinely
       use more than two pillows
@@ -9167,6 +9231,18 @@ pvgs:
     position: 24
     questionnaire_value: null
     value: Speech Pathologist (Swallowing)
+- code: mndClinicalTrialNamesPVG
+  values:
+  - code: OtherClinicTrialName
+    desc: Other
+    position: null
+    questionnaire_value: Other
+    value: Other
+  - code: SALSATrialName
+    desc: SALSA
+    position: 1
+    questionnaire_value: SALSA
+    value: SALSA
 - code: mndComChoices
   values:
   - code: no difficulty communicating
@@ -9757,6 +9833,16 @@ pvgs:
     value: No formal education
 - code: mndmedical
   values:
+  - code: Other4
+    desc: Other
+    position: 10
+    questionnaire_value: Other
+    value: Other
+  - code: Other3
+    desc: Other
+    position: 9
+    questionnaire_value: Other
+    value: Other
   - code: NA
     desc: N/A
     position: 1
@@ -10021,16 +10107,16 @@ pvgs:
     value: Most of the time
 - code: noGasRating
   values:
+  - code: '1'
+    desc: Food must be cut by someone, but can still feed slowly but by
+    position: 4
+    questionnaire_value: null
+    value: 1. Food must be cut by someone, but can still feed slowly
   - code: '0'
     desc: Needs to be fed
     position: 5
     questionnaire_value: null
     value: 0. Needs to be fed
-  - code: '1'
-    desc: Food must be cut by someone, but can still feed slowly but by
-    position: 4
-    questionnaire_value: null
-    value: 1. Food must be cut by someone, but can still feed slowly but by
   - code: '2'
     desc: Can cut most foods although clumsy and slow; some help needed
     position: 3
