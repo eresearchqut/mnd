@@ -1,4 +1,4 @@
-EXPORT_TIME: '2022-01-17 17:23:37.160028'
+EXPORT_TIME: '2022-01-28 10:04:07.579727'
 EXPORT_TYPE: REGISTRY_PLUS_CDES
 RDRF_VERSION: 1.0.0
 REGISTRY_VERSION: '1.0'
@@ -5458,7 +5458,8 @@ consent_sections:
   section_label: My Data
   validation_rule: ''
 context_form_groups:
-- context_type: F
+- code: CFG2
+  context_type: F
   forms:
   - firstVisit
   - completionForm
@@ -5468,7 +5469,8 @@ context_form_groups:
   naming_scheme: D
   ordering: C
   sort_order: 8
-- context_type: F
+- code: CFG3
+  context_type: F
   forms:
   - myAppointments
   is_default: false
@@ -5477,7 +5479,8 @@ context_form_groups:
   naming_scheme: D
   ordering: C
   sort_order: 7
-- context_type: F
+- code: CFG4
+  context_type: F
   forms:
   - alsfrsInstrument
   - myESS
@@ -5487,7 +5490,8 @@ context_form_groups:
   naming_scheme: D
   ordering: C
   sort_order: 5
-- context_type: F
+- code: CFG5
+  context_type: F
   forms:
   - myCareTeam
   is_default: false
@@ -5496,7 +5500,8 @@ context_form_groups:
   naming_scheme: D
   ordering: C
   sort_order: 6
-- context_type: M
+- code: CFG6
+  context_type: M
   forms:
   - mySymptoms
   is_default: false
@@ -5505,7 +5510,8 @@ context_form_groups:
   naming_scheme: C
   ordering: C
   sort_order: 2
-- context_type: F
+- code: CFG1
+  context_type: F
   forms:
   - myMedHistory
   - myMedsNAll
@@ -5516,7 +5522,8 @@ context_form_groups:
   naming_scheme: D
   ordering: C
   sort_order: 3
-- context_type: F
+- code: CFG7
+  context_type: F
   forms:
   - myLegalDocs
   is_default: false
@@ -5525,7 +5532,8 @@ context_form_groups:
   naming_scheme: D
   ordering: C
   sort_order: 1
-- context_type: F
+- code: CFG8
+  context_type: F
   forms:
   - myCommunication
   - mndPositioning
@@ -5541,7 +5549,8 @@ context_form_groups:
   naming_scheme: D
   ordering: C
   sort_order: 4
-- context_type: M
+- code: CFG9
+  context_type: M
   forms:
   - subsequentVisit
   is_default: false
@@ -5725,7 +5734,32 @@ email_notifications:
     subject: MiNDAUS Caregiver Registration
   group_recipient: null
   recipient: '{{ primary_carer.email }}'
-- description: new-patient
+- description: new-patient-user-added
+  disabled: false
+  email_from: null
+  email_templates:
+  - body: |-
+      <p>Dear {{patient.given_names}} {{patient.family_name|title}},</p>
+
+      <p>Thank you for your registration in the MiNDAUS Registry!</p>
+
+      <p>Please click the following activation link to verify your account, or copy and paste into a web browser and log into the registry. This link will expire in 2 days.</p>
+
+      <p><a href=https://researchsurveys.deakin.edu.au/jfe/form/SV_2nLtfvj7DY8uAOq>Please help us by completing a very quick survey about your registration today</a></p>
+      <p>It is anonymous and will help us to develop and improve this service.</p>
+
+      <p><a href="{{ activation_url }}">Activation link</a></p>
+
+      <p>If needed, we will contact you through your e-mail address {{patient.user.email}}.
+
+      <p>Yours sincerely,<br>
+      The MiNDAUS Registry Team<br>
+    description: New Patient Registered
+    language: en
+    subject: Welcome to the MND Registry
+  group_recipient: null
+  recipient: '{{ patient.user.email }}'
+- description: new-patient-user-registered
   disabled: false
   email_from: null
   email_templates:
