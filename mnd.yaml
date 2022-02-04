@@ -1,4 +1,4 @@
-EXPORT_TIME: '2022-01-28 10:04:07.579727'
+EXPORT_TIME: '2022-02-04 10:50:15.461391'
 EXPORT_TYPE: REGISTRY_PLUS_CDES
 RDRF_VERSION: 1.0.0
 REGISTRY_VERSION: '1.0'
@@ -5458,7 +5458,7 @@ consent_sections:
   section_label: My Data
   validation_rule: ''
 context_form_groups:
-- code: CFG2
+- code: clinicVisitsCFG
   context_type: F
   forms:
   - firstVisit
@@ -5469,7 +5469,7 @@ context_form_groups:
   naming_scheme: D
   ordering: C
   sort_order: 8
-- code: CFG3
+- code: myAppointCFG
   context_type: F
   forms:
   - myAppointments
@@ -5479,7 +5479,7 @@ context_form_groups:
   naming_scheme: D
   ordering: C
   sort_order: 7
-- code: CFG4
+- code: myCalcsCFG
   context_type: F
   forms:
   - alsfrsInstrument
@@ -5490,7 +5490,7 @@ context_form_groups:
   naming_scheme: D
   ordering: C
   sort_order: 5
-- code: CFG5
+- code: myCareTeamCFG
   context_type: F
   forms:
   - myCareTeam
@@ -5500,7 +5500,7 @@ context_form_groups:
   naming_scheme: D
   ordering: C
   sort_order: 6
-- code: CFG6
+- code: myDiaryCFG
   context_type: M
   forms:
   - mySymptoms
@@ -5510,7 +5510,7 @@ context_form_groups:
   naming_scheme: C
   ordering: C
   sort_order: 2
-- code: CFG1
+- code: myJourneyCFG
   context_type: F
   forms:
   - myMedHistory
@@ -5522,7 +5522,7 @@ context_form_groups:
   naming_scheme: D
   ordering: C
   sort_order: 3
-- code: CFG7
+- code: myLegalDocsCFG
   context_type: F
   forms:
   - myLegalDocs
@@ -5532,7 +5532,7 @@ context_form_groups:
   naming_scheme: D
   ordering: C
   sort_order: 1
-- code: CFG8
+- code: myNeedsCFG
   context_type: F
   forms:
   - myCommunication
@@ -5549,7 +5549,7 @@ context_form_groups:
   naming_scheme: D
   ordering: C
   sort_order: 4
-- code: CFG9
+- code: subVisitCFG
   context_type: M
   forms:
   - subsequentVisit
