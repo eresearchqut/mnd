@@ -1,10 +1,8 @@
 import logging
 import os
 
-from django.core.exceptions import PermissionDenied
 from django.http import FileResponse
 from django.shortcuts import get_object_or_404
-from django.utils.translation import ugettext as _
 from django.views.decorators.http import require_GET
 
 from registry.patients.models import Patient
@@ -22,8 +20,6 @@ def pdf_export(request, registry_code, patient_id):
     patient = get_object_or_permission_denied(Patient, pk=patient_id)
 
     security_check_user_patient(request.user, patient)
-    if request.user.is_clinician and request.user not in patient.registered_clinicians.all():
-        raise PermissionDenied(_("You must be registered as the patients clinician to access the pdf"))
 
     filename = f'About Me MND - {patient.display_name}.pdf'
 
