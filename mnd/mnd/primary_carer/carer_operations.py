@@ -8,8 +8,8 @@ from django.utils import timezone
 from django.utils.http import urlencode
 from django.utils.translation import ugettext as _
 
+from rdrf.helpers.utils import make_full_url
 from registry.groups.models import CustomUser
-from registry.groups.registration.base import BaseRegistration
 from registry.patients.models import Patient
 
 from rdrf.events.events import EventType
@@ -173,7 +173,7 @@ class CarerOperations:
                 'token': reg.token,
                 'username': self.primary_carer.email
             }
-            registration_full_url = f"{BaseRegistration.get_base_url()}{registration_url}?{urlencode(registration_params)}"
+            registration_full_url = f"{make_full_url(registration_url)}?{urlencode(registration_params)}"
 
             template_data = {
                 "primary_carer": self.primary_carer,
