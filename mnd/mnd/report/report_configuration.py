@@ -1,129 +1,63 @@
-REPORT_CONFIGURATION = {
-    'demographic_model': {
-        'patient': {
-            'label': "Patient",
-            'fields': {
-                'consent': 'Consent',
-                'consentClinicalTrials': 'Consent Clinical Trials',
-                'consentSentInformation': 'Consent Sent Information',
-                'consentProvidedByParentGuardian': 'Consent Provided By Parent Guardian',
-                'familyName': 'Family Name',
-                'givenNames': 'Given Names',
-                'maidenName': 'Maiden Name',
-                'umrn': 'Umrn',
-                'dateOfBirth': 'Date Of Birth',
-                'dateOfDeath': 'Date Of Death',
-                'placeOfBirth': 'Place Of Birth',
-                'dateOfMigration': 'Date Of Migration',
-                'countryOfBirth': 'Country Of Birth',
-                'ethnicOrigin': 'Ethnic Origin',
-                'sex': 'Sex',
-                'homePhone': 'Home Phone',
-                'mobilePhone': 'Mobile Phone',
-                'workPhone': 'Work Phone',
-                'email': 'Email',
-                'nextOfKinFamilyName': 'Next Of Kin Family Name',
-                'nextOfKinGivenNames': 'Next Of Kin Given Names',
-                'nextOfKinRelationship { relationship }': 'Next Of Kin Relationship',
-                'nextOfKinAddress': 'Next Of Kin Address',
-                'nextOfKinSuburb': 'Next Of Kin Suburb',
-                'nextOfKinState': 'Next Of Kin State',
-                'nextOfKinPostcode': 'Next Of Kin Postcode',
-                'nextOfKinHomePhone': 'Next Of Kin Home Phone',
-                'nextOfKinMobilePhone': 'Next Of Kin Mobile Phone',
-                'nextOfKinWorkPhone': 'Next Of Kin Work Phone',
-                'nextOfKinEmail': 'Next Of Kin Email',
-                'nextOfKinParentPlaceOfBirth': 'Next Of Kin Parent Place Of Birth',
-                'nextOfKinCountry': 'Next Of Kin Country',
-                'inactiveReason': 'Inactive Reason',
-                'livingStatus': 'Living Status',
-                'patientType': 'Patient Type',
-                'isDuplicatePatient': 'Is potential duplicate patient',
-                'preferredContact { contactMethod }': 'Preferred contact method',
-                'primaryCarerRelationship': 'Principal Carer Relationship',
-            }
-        },
-        'patientaddressSet': {
-            'label': 'Patient Address',
-            'multi_field': True,
-            'variant_lookup': 'maxAddressCount',
-            'fields': {
-                'addressType { type }': 'Address Type',
-                'address': 'Street Address',
-                'suburb': 'Suburb',
-                'state': 'State',
-                'postcode': 'Postcode',
-                'country': 'Country'}},
-        'workingGroups': {
-            'label': 'Working Groups',
-            'multi_field': True,
-            'variant_lookup': 'maxWorkingGroupCount',
-            'fields': {
-                'displayName': 'Name'
-            }
-        },
-        'registeredClinicians': {
-            'label': 'Registered Clinicians',
-            'multi_field': True,
-            'variant_lookup': 'maxClinicianCount',
-            'fields': {
-                'firstName': 'First Name',
-                'lastName': 'Last Name',
-                'email': 'Email',
-                'ethicallyCleared': 'Ethically Cleared',
-                'workingGroups': 'Working Groups'
-            }
-        },
-        'primaryCarer': {
-            'label': 'Principal Carer',
-            'multi_field': False,
-            'fields': {
-                'firstName': 'First Name',
-                'lastName': 'Last Name',
-                'mobilePhone': 'Mobile phone',
-                'homePhone': 'Home phone',
-                'email': 'Email',
-                'interpreterRequired': 'Interpreter required',
-                'sameAddress': 'Same address?',
-                'suburb': 'Suburb',
-                'address': 'Address',
-                'postcode': 'Postcode',
-                'isEmergencyContact': 'Is emergency contact',
-                'emContactFirstName': 'Emergency contact first name',
-                'emContactLastName': 'Emergency contact last name',
-                'emContactPhone': 'Emergency contact phone',
-            }
-        },
-        'insuranceData': {
-            'label': 'Medicare, Health insurance and support details',
-            'multi_field': False,
-            'fields': {
-                'mainHospital': 'Main hospital',
-                'mainHospitalMrn': 'Main hospital MRN',
-                'secondaryHospital': 'Secondary hospital',
-                'secondaryHospitalMrn': 'Secondary hospital MRN',
-                'medicareNumber': 'Medicare number',
-                'pensionNumber': 'Pension number',
-                'hasPrivateHealthFund': 'Has private health fund',
-                'privateHealthFund': 'Private health fund',
-                'privateHealthFundNumber': 'Private health fund number',
-                'isNdisParticipant': 'Is NDIS Participant?',
-                'ndisNumber': 'NDIS number',
-                'isNdisEligible': 'Is NDIS Eligible',
-                'ndisPlanManager': 'NDIS plan manager',
-                'ndisCoordinatorFirstName': 'NDIS coordinator first name',
-                'ndisCoordinatorLastName': 'NDIS coordinator last name',
-                'ndisCoordinatorPhone': 'NDIS coordinator phone',
-                'ndisCoordinatorEmail': 'NDIS coordinator email',
-                'hasDvaCard': 'Has DVA card?',
-                'dvaCardNumber': 'DVA card number',
-                'dvaCardType': 'DVA card type',
-                'referredForMacCare': 'Referral for My Aged Care',
-                'neededMacLevel': 'Needed My Aged Care level',
-                'eligibleForHomeCare': 'Eligible for home care',
-                'receivingHomeCare': 'Receiving home care',
-                'homeCareLevel': 'Home care level',
-            }
+from report.report_configuration import REPORT_CONFIGURATION
+
+# Extend Reportable Demographic fields
+REPORT_CONFIGURATION['demographic_model']['patient']['fields'].update({
+    'isDuplicatePatient': 'Is potential duplicate patient',
+    'preferredContact { contactMethod }': 'Preferred contact method',
+    'primaryCarerRelationship': 'Principal Carer Relationship',
+})
+
+# Add extra reportable models for MND
+REPORT_CONFIGURATION['demographic_model'].update({
+    'primaryCarer': {
+        'label': 'Principal Carer',
+        'multi_field': False,
+        'fields': {
+            'firstName': 'First Name',
+            'lastName': 'Last Name',
+            'mobilePhone': 'Mobile phone',
+            'homePhone': 'Home phone',
+            'email': 'Email',
+            'interpreterRequired': 'Interpreter required',
+            'sameAddress': 'Same address?',
+            'suburb': 'Suburb',
+            'address': 'Address',
+            'postcode': 'Postcode',
+            'isEmergencyContact': 'Is emergency contact',
+            'emContactFirstName': 'Emergency contact first name',
+            'emContactLastName': 'Emergency contact last name',
+            'emContactPhone': 'Emergency contact phone',
+        }
+    },
+    'insuranceData': {
+        'label': 'Medicare, Health insurance and support details',
+        'multi_field': False,
+        'fields': {
+            'mainHospital': 'Main hospital',
+            'mainHospitalMrn': 'Main hospital MRN',
+            'secondaryHospital': 'Secondary hospital',
+            'secondaryHospitalMrn': 'Secondary hospital MRN',
+            'medicareNumber': 'Medicare number',
+            'pensionNumber': 'Pension number',
+            'hasPrivateHealthFund': 'Has private health fund',
+            'privateHealthFund': 'Private health fund',
+            'privateHealthFundNumber': 'Private health fund number',
+            'isNdisParticipant': 'Is NDIS Participant?',
+            'ndisNumber': 'NDIS number',
+            'isNdisEligible': 'Is NDIS Eligible',
+            'ndisPlanManager': 'NDIS plan manager',
+            'ndisCoordinatorFirstName': 'NDIS coordinator first name',
+            'ndisCoordinatorLastName': 'NDIS coordinator last name',
+            'ndisCoordinatorPhone': 'NDIS coordinator phone',
+            'ndisCoordinatorEmail': 'NDIS coordinator email',
+            'hasDvaCard': 'Has DVA card?',
+            'dvaCardNumber': 'DVA card number',
+            'dvaCardType': 'DVA card type',
+            'referredForMacCare': 'Referral for My Aged Care',
+            'neededMacLevel': 'Needed My Aged Care level',
+            'eligibleForHomeCare': 'Eligible for home care',
+            'receivingHomeCare': 'Receiving home care',
+            'homeCareLevel': 'Home care level',
         }
     }
-}
+})
