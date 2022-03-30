@@ -45,7 +45,8 @@ REPORT_CONFIGURATION = {
         },
         'patientaddressSet': {
             'label': 'Patient Address',
-            'pivot_field': 'addressType { type }',
+            'multi_field': True,
+            'variant_lookup': 'maxAddressCount',
             'fields': {
                 'addressType { type }': 'Address Type',
                 'address': 'Street Address',
@@ -55,14 +56,27 @@ REPORT_CONFIGURATION = {
                 'country': 'Country'}},
         'workingGroups': {
             'label': 'Working Groups',
-            'pivot_field': 'name',
+            'multi_field': True,
+            'variant_lookup': 'maxWorkingGroupCount',
             'fields': {
                 'displayName': 'Name'
             }
         },
+        'registeredClinicians': {
+            'label': 'Registered Clinicians',
+            'multi_field': True,
+            'variant_lookup': 'maxClinicianCount',
+            'fields': {
+                'firstName': 'First Name',
+                'lastName': 'Last Name',
+                'email': 'Email',
+                'ethicallyCleared': 'Ethically Cleared',
+                'workingGroups': 'Working Groups'
+            }
+        },
         'primaryCarer': {
             'label': 'Principal Carer',
-            'one_to_one': 'True',
+            'multi_field': False,
             'fields': {
                 'firstName': 'First Name',
                 'lastName': 'Last Name',
@@ -82,7 +96,7 @@ REPORT_CONFIGURATION = {
         },
         'insuranceData': {
             'label': 'Medicare, Health insurance and support details',
-            'one_to_one': 'True',
+            'multi_field': False,
             'fields': {
                 'mainHospital': 'Main hospital',
                 'mainHospitalMrn': 'Main hospital MRN',
