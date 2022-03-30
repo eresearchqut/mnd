@@ -1,4 +1,4 @@
-EXPORT_TIME: '2022-02-04 10:50:15.461391'
+EXPORT_TIME: '2022-03-29 13:32:54.914700'
 EXPORT_TYPE: REGISTRY_PLUS_CDES
 RDRF_VERSION: 1.0.0
 REGISTRY_VERSION: '1.0'
@@ -5223,93 +5223,59 @@ complete_fields:
   - cLMNLRB
   - cUMNLRB
   - fvcDate
-  - fvcNADate
   - lLMNLRB
   - lUMNLRB
-  - mndADevices
-  - mndADOther
   - mndALSFRS
-  - mndBed
   - mndBMI
-  - mndBreathing
   - mndBulbarLMN
   - mndBulbarUMN
   - mndCervicalLMN
   - mndCervicalUMN
-  - mndcurrentsmoke
-  - mndDose
-  - mndeversmoke
-  - mndfather
-  - mndfatherdementia
-  - mndFeedingTube
-  - mndFreq
+  - mndDateConfirm
+  - MNDDiagnosis
   - mndFTDate
-  - mndFVC
   - mndFVCLitres
   - mndFVCPredicted
-  - mndFVCYesNA
-  - mndGasCut
-  - mndGastroCLN
   - mndHeight
-  - mndhighestedu
-  - mndImpaired
-  - mndLayBreath
   - mndLowerAnkle
   - mndLowerAnkleR
   - mndLowerKnee
   - mndLowerKneeR
   - mndLumbarLMN
   - mndLumbarUMN
-  - mndmedical
-  - mndMedications
-  - mndMEP
-  - mndMIP
-  - mndmother
-  - mndmotherdementia
   - mndNIV
-  - mndNoGasCut
-  - mndoccupation
-  - mndOtherTNT
-  - mndProsOther
-  - mndProsUsed
-  - mndpsychiatric
-  - mndResp
+  - mndOnset
+  - mndregionbegan
+  - mndregionbeganOth
   - mndRiluzole
-  - mndRiluzoleEDate
   - mndRiluzoleSDate
-  - mndSalivaCLN
-  - mndSleepStudy
   - mndSNIP
-  - mndSpeechCLN
-  - mndStairs
-  - mndSwallow
-  - mndTestAdmin
-  - mndTherapyDesc
-  - mndTherapyEDate
-  - mndTherapySDate
-  - mndTrach
-  - mndTrachNVent
+  - mndSVCLitres
+  - mndSVCPredicted
   - mndTrialParticipant
+  - mndtypedx
   - mndUpperBiceps
-  - mndUpperBicepsR
-  - mndUpperSupinator
-  - mndUpperSupinatorR
   - mndVDate
-  - mndWalk
   - mndWeight
-  - mndWriting
-  - nivDate
-  - trachDate
-  - trachVentDate
   form_name: firstVisit
 consent_configuration:
   consent_locked: true
   esignature: enabled
-consent_rules: []
+consent_rules:
+- capability: see_patient
+  consent_question_code: IhaveRead
+  consent_section_code: 1ReadPDF
+  enabled: true
+  user_group: Patients
+- capability: see_patient
+  consent_question_code: IUnderstand
+  consent_section_code: 1ReadPDF
+  enabled: true
+  user_group: Patients
 consent_sections:
 - applicability_condition: ''
   code: 1ReadPDF
-  information_link: MiNDAUS_Clinical_Reg_National_PICF_template_v1.1.1.pdf
+  information_link: MiNDAUS_Clinical_Reg_National_PICF_template_v1.2.pdf
   information_text: |-
     <h3> <b>Please click 'Consent to All' to agree to all statements outlined in the Participant information sheet.</b></h3>
     <h4>Alternatively, you can select each individual box you agree with below</h4>
@@ -5693,14 +5659,11 @@ email_notifications:
   email_from: null
   email_templates:
   - body: |-
-      <p>A patient ({{patient.display_name}}) has been marked as a potential duplicate in the MiNDAUS registry.</p>
-
+      <p> Dear Data Curator,</br>A patient ({{patient.display_name}}) has been marked as a potential duplicate in the MiNDAUS registry.</p>
       <p>To resolve the issue, please do the following:</p>
 
       <ol>
-      <li>Log in to the registry</li>
-      <li>Click "Temporary duplicate patients" in the navbar menu dropdown</li>
-      <li>Identify any patients that have been marked as duplicates</li>
+      <li>Access this potential duplicate patient here:  {% full_url 'patient_edit' 'mnd' patient.id %}</li>
       <li>Find the corresponding original patient in the registry's patient list, being sure to verify their information matches</li>
       <li>Manually copy the clinical data from the duplicate patient to the original patient</li>
       <li>Delete the duplicate patient</li>
@@ -5759,6 +5722,41 @@ email_notifications:
     subject: Welcome to the MND Registry
   group_recipient: null
   recipient: '{{ patient.user.email }}'
+- description: new-patient-user-added
+  disabled: false
+  email_from: null
+  email_templates:
+  - body: |-
+      <p> Dear Data Curator, </p>
+      <p>This is a notification to advise that  '{{ patient.display_name }}' ({% full_url 'patient_edit' 'mnd' patient.id %})
+      <br>has just been registered for the MiNDAUS Registry by a participating MiNDAUS Clinic staff member.</p>
+
+
+
+      <p>Yours sincerely,<br>
+      The MiNDAUS Registry Team<br> </p>
+    description: Admin Alert - New patient registered (created at clinic)
+    language: en
+    subject: New MiNDAUS Registration - Clinic
+  group_recipient: null
+  recipient: catherine.hansen@deakin.edu.au
+- description: new-patient-user-registered
+  disabled: false
+  email_from: null
+  email_templates:
+  - body: |-
+      <p> Dear Data Curator, </p>
+      <p>This is a notification to advise that  '{{ patient.display_name }}' ({% full_url 'patient_edit' 'mnd' patient.id %})
+      <br> has just registered themselves for the MiNDAUS Registry</p>
+
+
+      <p>Yours sincerely,<br>
+      The MiNDAUS Registry Team<br>
+    description: Admin alert - new patient registered (self)
+    language: en
+    subject: New MiNDAUS Registration - Self
+  group_recipient: null
+  recipient: catherine.hansen@deakin.edu.au
 - description: new-patient-user-registered
   disabled: false
   email_from: null
@@ -6510,6 +6508,8 @@ forms:
   header: |-
     <h2>My Legal Documents</h2>
     <p>I have the following documents in place to help guide professionals about my care and treatment in specific circumstances</p>
+
+    <p>We take your security and privacy very seriously. <a href="https://www.mindaus.org/wp-content/uploads/2021/03/MiNDAUS-Privacy-Policy-v1.0.pdf"> View our Privacy Policy</a></p>
   is_questionnaire: false
   name: myLegalDocs
   position: 0
@@ -7030,8 +7030,8 @@ forms_allowed_groups:
   completionForm:
   - Carer
   - Clinical Staff
+  - Notified Admins
   - Patients
-  - Working Group Curators
   firstVisit:
   - Carer
   - Clinical Staff
@@ -7124,9 +7124,7 @@ forms_allowed_groups:
 forms_readonly_groups:
   alsfrsInstrument:
   - Clinical Staff
-  completionForm:
-  - Carer
-  - Patients
+  completionForm: []
   firstVisit:
   - Carer
   - Patients
@@ -10607,3 +10605,4 @@ working_groups:
 - Brain and Mind Centre, NSW, 007
 - Barwon, Vic, 305
 - Unallocated
+- Concord, NSW, 330

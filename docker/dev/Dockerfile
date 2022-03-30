@@ -14,6 +14,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   unixodbc \
   # Builder
   build-essential \
+  git \
   gzip \
   libpcre3-dev \
   libpq-dev \
@@ -71,6 +72,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   nodejs \
   unixodbc \
   libmagic1 \
+  git \
   pdftk \
   && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
