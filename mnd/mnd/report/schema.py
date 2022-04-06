@@ -4,7 +4,7 @@ import graphene
 from graphene_django import DjangoObjectType
 from mnd.models import PrimaryCarer
 from mnd.models import PrimaryCarerRelationship, PreferredContact, PatientInsurance
-from report.schema.schema import get_patient_fields
+from report.schema import get_patient_fields
 
 logger = logging.getLogger(__name__)
 
