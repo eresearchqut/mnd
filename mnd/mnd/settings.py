@@ -53,3 +53,8 @@ EXTRA_WIDGETS = 'mnd.forms.widgets.mnd_widgets'
 REGISTRY_FORM_TAGS = (("patient-reported", "Patient-reported form"),)
 
 ACCOUNT_ACTIVATION_DAYS = 90
+
+# Reports settings
+SCHEMA_MODULE = 'mnd.report.schema'
+SCHEMA_METHOD_PATIENT_FIELDS = 'get_mnd_patient_fields'
+REPORT_CONFIGURATION = 'mnd.report.report_configuration.REPORT_CONFIGURATION'
