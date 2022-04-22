@@ -57,4 +57,5 @@ ACCOUNT_ACTIVATION_DAYS = 90
 # Reports settings
 SCHEMA_MODULE = 'mnd.report.schema'
 SCHEMA_METHOD_PATIENT_FIELDS = 'get_mnd_patient_fields'
-REPORT_CONFIGURATION = 'mnd.report.report_configuration.REPORT_CONFIGURATION'
+REPORT_CONFIG_MODULE = 'mnd.report.report_configuration'
+REPORT_CONFIG_METHOD_GET = 'get_mnd_configuration'
