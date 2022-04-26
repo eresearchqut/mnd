@@ -12,7 +12,7 @@ def get_mnd_configuration():
     })
 
     # Add extra reportable models for MND
-    mnd_report_configuration.update({
+    mnd_report_configuration['demographic_model'].update({
         'primaryCarer': {
             'label': 'Principal Carer',
             'multi_field': False,
