@@ -1,4 +1,4 @@
-EXPORT_TIME: '2022-04-20 10:20:10.178116'
+EXPORT_TIME: '2022-05-13 11:56:28.177073'
 EXPORT_TYPE: REGISTRY_PLUS_CDES
 RDRF_VERSION: 1.0.0
 REGISTRY_VERSION: '1.0'
@@ -53,7 +53,7 @@ cdes:
   datatype: range
   desc: MND confirmed by
   important: false
-  instructions: ''
+  instructions: If this has occurred since last visit
   is_required: false
   max_length: null
   max_value: null
@@ -94,7 +94,7 @@ cdes:
   max_length: null
   max_value: null
   min_value: null
-  name: Diagnosis
+  name: Please confirm the MND Diagnosis
   pattern: ''
   pv_group: MNDDiagnosis
   questionnaire_text: ''
@@ -210,6 +210,24 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
+- abbreviated_name: med administered via
+  allow_multiple: false
+  calculation: ''
+  code: clinicMedAdminHow
+  datatype: range
+  desc: ''
+  important: false
+  instructions: ''
+  is_required: false
+  max_length: null
+  max_value: null
+  min_value: null
+  name: Administered via
+  pattern: ''
+  pv_group: clinicMedAdmin
+  questionnaire_text: ''
+  widget_name: ''
+  widget_settings: '{}'
 - abbreviated_name: Date of data entry
   allow_multiple: false
   calculation: ''
@@ -283,6 +301,43 @@ cdes:
   questionnaire_text: ''
   widget_name: TextAreaWidget
   widget_settings: ''
+- abbreviated_name: contact email
+  allow_multiple: false
+  calculation: ''
+  code: extVisitContact
+  datatype: string
+  desc: ''
+  important: true
+  instructions: Please provide an email address for someone we can contact if you
+    haven't updated the Registry for 12 months.
+  is_required: false
+  max_length: null
+  max_value: null
+  min_value: null
+  name: Email address of your Contact person
+  pattern: ''
+  pv_group: null
+  questionnaire_text: ''
+  widget_name: ''
+  widget_settings: ''
+- abbreviated_name: Specialist Name
+  allow_multiple: false
+  calculation: ''
+  code: extVisitName
+  datatype: string
+  desc: ''
+  important: true
+  instructions: Please enter the name of the Specialist you saw
+  is_required: false
+  max_length: null
+  max_value: null
+  min_value: null
+  name: Name of Specialist
+  pattern: ''
+  pv_group: null
+  questionnaire_text: ''
+  widget_name: ''
+  widget_settings: ''
 - abbreviated_name: Date feeding tube inserted if known
   allow_multiple: false
   calculation: ''
@@ -302,6 +357,24 @@ cdes:
   questionnaire_text: ''
   widget_name: DateWidget
   widget_settings: ''
+- abbreviated_name: Date form uploaded
+  allow_multiple: false
+  calculation: ''
+  code: formUploadDate
+  datatype: date
+  desc: ''
+  important: false
+  instructions: ''
+  is_required: false
+  max_length: null
+  max_value: null
+  min_value: null
+  name: Date form uploaded
+  pattern: ''
+  pv_group: null
+  questionnaire_text: ''
+  widget_name: DateWidget
+  widget_settings: '{}'
 - abbreviated_name: Date performed
   allow_multiple: false
   calculation: ''
@@ -2560,6 +2633,44 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
+- abbreviated_name: Please specify
+  allow_multiple: false
+  calculation: ''
+  code: mndLDocsOther2
+  datatype: string
+  desc: ''
+  important: false
+  instructions: Please enter the name or names of the Legal Documents you have that
+    are different to those above.
+  is_required: false
+  max_length: null
+  max_value: null
+  min_value: null
+  name: Please specify
+  pattern: ''
+  pv_group: null
+  questionnaire_text: ''
+  widget_name: ''
+  widget_settings: ''
+- abbreviated_name: Please specify
+  allow_multiple: false
+  calculation: ''
+  code: mndLDocsOther3
+  datatype: string
+  desc: ''
+  important: false
+  instructions: Please enter the name or names of the Legal Documents you have that
+    are different to those above.
+  is_required: false
+  max_length: null
+  max_value: null
+  min_value: null
+  name: Please specify
+  pattern: ''
+  pv_group: null
+  questionnaire_text: ''
+  widget_name: ''
+  widget_settings: ''
 - abbreviated_name: Things that annoy me
   allow_multiple: false
   calculation: ''
@@ -5487,6 +5598,62 @@ cdes:
   questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":true}'
+- abbreviated_name: Specialist Contact
+  allow_multiple: false
+  calculation: ''
+  code: mySpecialistContact
+  datatype: string
+  desc: ''
+  important: false
+  instructions: Please enter a contact phone number or email address for your MND
+    Specialist
+  is_required: false
+  max_length: null
+  max_value: null
+  min_value: null
+  name: MND Specialist Contact Details
+  pattern: ''
+  pv_group: null
+  questionnaire_text: ''
+  widget_name: ''
+  widget_settings: ''
+- abbreviated_name: Specialist Name
+  allow_multiple: false
+  calculation: ''
+  code: mySpecialistName
+  datatype: string
+  desc: ''
+  important: false
+  instructions: If you do not attend an MND Clinic, please input the full name of
+    your MND Specialist.
+  is_required: false
+  max_length: null
+  max_value: null
+  min_value: null
+  name: MND Specialist (Treating Neurologist)
+  pattern: ''
+  pv_group: null
+  questionnaire_text: ''
+  widget_name: ''
+  widget_settings: ''
+- abbreviated_name: Specialist Practice
+  allow_multiple: false
+  calculation: ''
+  code: mySpecialistPractice
+  datatype: string
+  desc: ''
+  important: false
+  instructions: Please enter the name and/or address of your MND Specialist's office
+  is_required: false
+  max_length: null
+  max_value: null
+  min_value: null
+  name: MND Specialist Practice details
+  pattern: ''
+  pv_group: null
+  questionnaire_text: ''
+  widget_name: ''
+  widget_settings: ''
 - abbreviated_name: Date commenced
   allow_multiple: false
   calculation: ''
@@ -5583,6 +5750,25 @@ cdes:
   questionnaire_text: ''
   widget_name: DateWidget
   widget_settings: ''
+- abbreviated_name: files uploaded
+  allow_multiple: true
+  calculation: ''
+  code: uploadedForm
+  datatype: file
+  desc: ''
+  important: false
+  instructions: If you are unable to click the 'add/upload' button, please try saving
+    this form first, then uploading a file.
+  is_required: false
+  max_length: null
+  max_value: null
+  min_value: null
+  name: Please select file/s to upload
+  pattern: ''
+  pv_group: null
+  questionnaire_text: ''
+  widget_name: MultipleFileInput
+  widget_settings: '{}'
 - abbreviated_name: If Other Specify
   allow_multiple: false
   calculation: ''
@@ -5662,6 +5848,7 @@ consent_sections:
   information_link: MiNDAUS_Clinical_Reg_National_PICF_template_v1.2.pdf
   information_text: |-
     <h3> <b>Please click 'Consent to All' to agree to all statements outlined in the Participant information sheet.</b></h3>
+
     <h4>Alternatively, you can select each individual box you agree with below</h4>
     <h4><b> In order to use the registry, you must agree to the following:
 
@@ -5670,7 +5857,8 @@ consent_sections:
     </ol></h4>
 
     </br> </b><p>If you decide to withdraw from the registry please contact the Data Curator</p>
-    </br>
+
+    <p><a href="https://www.mindaus.org/wp-content/uploads/2022/05/09124958/UserGuideMindausPatientApril2022PartOneV01.pdf">Registration and Consent User Guide</a> </p></br>
 
     <h4> Participant Information Sheet </h4>
     <p> Please click the link above to view the full Participant Information Sheet, which details all information about participating in the MiNDAUS Clinical & Patient Registry. You can also download and print a copy of this document if required. </p>
@@ -5808,18 +5996,6 @@ consent_sections:
   section_label: My Data
   validation_rule: ''
 context_form_groups:
-- abbreviated_name: Clinical Visits
-  code: clinicVisitsCFG
-  context_type: F
-  forms:
-  - firstVisit
-  - completionForm
-  is_default: false
-  name: Clinical Visits
-  naming_cde_to_use: null
-  naming_scheme: D
-  ordering: C
-  sort_order: 8
 - abbreviated_name: My Appointments
   code: myAppointCFG
   context_type: F
@@ -5830,7 +6006,7 @@ context_form_groups:
   naming_cde_to_use: null
   naming_scheme: D
   ordering: C
-  sort_order: 7
+  sort_order: 8
 - abbreviated_name: My Calculators
   code: myCalcsCFG
   context_type: F
@@ -5853,7 +6029,7 @@ context_form_groups:
   naming_cde_to_use: null
   naming_scheme: D
   ordering: C
-  sort_order: 6
+  sort_order: 7
 - abbreviated_name: My Diary
   code: myDiaryCFG
   context_type: M
@@ -5865,6 +6041,17 @@ context_form_groups:
   naming_scheme: C
   ordering: C
   sort_order: 2
+- abbreviated_name: ext visit CFG
+  code: externalVisitCFG
+  context_type: F
+  forms:
+  - mySpecialistVisitForms
+  is_default: false
+  name: My External Specialist Visits
+  naming_cde_to_use: null
+  naming_scheme: D
+  ordering: C
+  sort_order: 6
 - abbreviated_name: My Journey
   code: myJourneyCFG
   context_type: F
@@ -5907,6 +6094,18 @@ context_form_groups:
   naming_scheme: D
   ordering: C
   sort_order: 4
+- abbreviated_name: Clinical Visits
+  code: clinicVisitsCFG
+  context_type: F
+  forms:
+  - firstVisit
+  - completionForm
+  is_default: false
+  name: Specialist Clinic Visits
+  naming_cde_to_use: null
+  naming_scheme: D
+  ordering: C
+  sort_order: 9
 - abbreviated_name: Subsequent Clinical Visits
   code: subVisitCFG
   context_type: M
@@ -5917,7 +6116,7 @@ context_form_groups:
   naming_cde_to_use: subsequentVisit/mndPatientInformation/mndVDate
   naming_scheme: C
   ordering: C
-  sort_order: 9
+  sort_order: 10
 demographic_fields:
 - field: SECTION:Next of Kin
   groups:
@@ -6085,6 +6284,30 @@ email_notifications:
         </li>
       {% endfor %}
       </ul>
+    description: Admin Alert - Patient has uploaded file to 'External Specialist Visits'
+    language: en
+    subject: Patient File Upload - External Visit
+  group_recipient: null
+  recipient: catherine.hansen@deakin.edu.au
+- description: file-uploaded
+  disabled: false
+  email_from: no-reply@mindaus.org
+  email_templates:
+  - body: |-
+      <p>Files have been uploaded for Patient
+      <a href="{{ patient_url }}">{{patient.display_name}}</a></p>
+
+      <ul>
+      {% for location, filenames in file_info %}
+        <li>{{ location.display_name }}:
+        <ul>
+          {% for filename in filenames %}
+            <li>{{ filename }} </li>
+          {% endfor %}
+        </ul>
+        </li>
+      {% endfor %}
+      </ul>
     description: Admin Alert - new file uploaded to Clinical Visit form
     language: en
     subject: New file upload - Clinical Visit
@@ -6207,7 +6430,9 @@ forms:
     mndNoGasCut visible if gastroQuestion == No
     mndGasCut visible if gastroQuestion == Yes
   display_name: My ALS-FRS Calculator
-  header: <h2>My ALS-FRS Calculator</h2>
+  header: |-
+    <h2>My ALS-FRS Calculator</h2>
+    <p><a href="https://www.mindaus.org/wp-content/uploads/2022/05/09124956/UserGuideMindausPatientApril2022PartTwoV01.pdf">MiNDAUS Registry User Guide</a></p>
   is_questionnaire: false
   name: alsfrsInstrument
   position: 15
@@ -6611,6 +6836,7 @@ forms:
     - mndDoseValue
     - mndDose
     - mndFreq
+    - clinicMedAdminHow
     extra: null
     questionnaire_display_name: ''
     questionnaire_help: ''
@@ -6693,7 +6919,8 @@ forms:
   display_name: My Positioning
   header: |-
     <h2>My Positioning</h2>
-    <p style="font-weight: bold; font-style: italic;">How you position my body is important and may take some time</p>
+    <p>>How my body is positioned is important and may take some time.</p>
+    <p><a href="https://www.mindaus.org/wp-content/uploads/2022/05/09124956/UserGuideMindausPatientApril2022PartTwoV01.pdf">MiNDAUS Registry User Guide</a></p>
   is_questionnaire: false
   name: mndPositioning
   position: 4
@@ -6743,6 +6970,7 @@ forms:
   header: |-
     <h2>My Appointments</h2>
     <p>Please list your upcoming appointments below</p>
+    <p><a href="https://www.mindaus.org/wp-content/uploads/2022/05/09124956/UserGuideMindausPatientApril2022PartTwoV01.pdf">MiNDAUS Registry User Guide</a></p>
   is_questionnaire: false
   name: myAppointments
   position: 0
@@ -6770,8 +6998,9 @@ forms:
   display_name: My Breathing
   header: |-
     <h2>My Breathing</h2>
-    <p style="color: #1F85DE; font-weight: bold;">Please Note: MND can cause respiratory muscle weakness. It may be dangerous to give me Oxygen therapy. Please contact my Primary Carer
-    and/or my Primary Health Contact if unsure.</p>
+    <p><b>Please Note: MND can cause respiratory muscle weakness. It may be dangerous to give me Oxygen therapy. Please contact my Primary Carer
+    and/or my Primary Health Contact if unsure.<b></p>
+    <p><a href="https://www.mindaus.org/wp-content/uploads/2022/05/09124956/UserGuideMindausPatientApril2022PartTwoV01.pdf">MiNDAUS Registry User Guide</a></p>
   is_questionnaire: false
   name: myBreathing
   position: 5
@@ -6803,15 +7032,26 @@ forms:
   display_name: My Care Team
   header: |-
     <h2>My Care Team</h2>
-    <p>These carers and professionals are my regular contacts and know my needs.They can
+    <p>These carers and professionals are my regular contacts and know my needs. They can
     answer queries about my treatment, care and management of symptoms.<p>
-    <p align="center" style="color: #337ab7;">Please let my main professional MND contact know as soon as possible if I am receiving urgent or emergency care. Thank you.</p>
+    <p><a href="https://www.mindaus.org/wp-content/uploads/2022/05/09124956/UserGuideMindausPatientApril2022PartTwoV01.pdf">MiNDAUS Registry User Guide</a></p>
   is_questionnaire: false
   name: myCareTeam
   position: 14
   questionnaire_display_name: ''
   questionnaire_questions: ''
   sections:
+  - abbreviated_name: Specialist Details
+    allow_multiple: false
+    code: myCarerSpecialist
+    display_name: Specialist Details
+    elements:
+    - mySpecialistName
+    - mySpecialistContact
+    - mySpecialistPractice
+    extra: null
+    questionnaire_display_name: ''
+    questionnaire_help: ''
   - abbreviated_name: Care Team Details
     allow_multiple: true
     code: myCarerDetails
@@ -6834,7 +7074,9 @@ forms:
     mndComTechOther visible if mndComTechs includes compWithSwitch
     mndComChairOther visible if mndComTechs includes Other
   display_name: My Communication
-  header: <h2>My Communication</h2>
+  header: |-
+    <h2>My Communication</h2>
+    <p><a href="https://www.mindaus.org/wp-content/uploads/2022/05/09124956/UserGuideMindausPatientApril2022PartTwoV01.pdf">MiNDAUS Registry User Guide</a></p>
   is_questionnaire: false
   name: myCommunication
   position: 3
@@ -6870,7 +7112,9 @@ forms:
     mndAvoidOther mndOther visible if mndAvoidFoods includes Other
     mndTube mndTubeDetails visible if mndPEG == Yes
   display_name: My Eating and Drinking needs
-  header: <h2>My Eating and Drinking needs</h2>
+  header: |-
+    <h2>My Eating and Drinking needs</h2>
+    <p><a href="https://www.mindaus.org/wp-content/uploads/2022/05/09124956/UserGuideMindausPatientApril2022PartTwoV01.pdf">MiNDAUS Registry User Guide</a></p>
   is_questionnaire: false
   name: myEatDrink
   position: 6
@@ -6916,6 +7160,7 @@ forms:
   header: |-
     <h2>My Emotions and Behaviour</h2>
     <p>MND can cause some unexpected symptoms.  The following may help you to understand what is happening if I react in an unexpected way:</p>
+    <p><a href="https://www.mindaus.org/wp-content/uploads/2022/05/09124956/UserGuideMindausPatientApril2022PartTwoV01.pdf">MiNDAUS Registry User Guide</a></p>
   is_questionnaire: false
   name: myEmotions
   position: 10
@@ -6942,6 +7187,7 @@ forms:
     <h3>Epworth Sleepiness Scale (ESS) Score</h3>
     <p>In contrast to just feeling tired, how likely are you to fall asleep in the following circumstances? This relates to your usual way of life at the moment. Even if you have not done any of these recently, try to work out how they would have affected you.</p>
     <p>Use the provided scale to choose the most appropriate number for each situation.</p>
+    <p><a href="https://www.mindaus.org/wp-content/uploads/2022/05/09124956/UserGuideMindausPatientApril2022PartTwoV01.pdf">MiNDAUS Registry User Guide</a></p>
   is_questionnaire: false
   name: myESS
   position: 16
@@ -6977,13 +7223,17 @@ forms:
   - patient-reported
 - abbreviated_name: myLegalDocs
   applicability_condition: ''
-  conditional_rendering_rules: mndDocTypeOther visible if mndLDocs == other
+  conditional_rendering_rules: |-
+    mndDocTypeOther visible if mndLDocs includes "Other"
+    mndLDocsOther2 visible if mndLDocs includes "Other (2)"
+    mndLDocsOther3 visible if mndLDocs includes "Other (3)"
   display_name: My Legal Documents
   header: |-
     <h2>My Legal Documents</h2>
     <p>I have the following documents in place to help guide professionals about my care and treatment in specific circumstances</p>
 
     <p>We take your security and privacy very seriously. <a href="https://www.mindaus.org/wp-content/uploads/2021/03/MiNDAUS-Privacy-Policy-v1.0.pdf"> View our Privacy Policy</a></p>
+    <p><a href="https://www.mindaus.org/wp-content/uploads/2022/05/09124956/UserGuideMindausPatientApril2022PartTwoV01.pdf">MiNDAUS Registry User Guide</a></p>
   is_questionnaire: false
   name: myLegalDocs
   position: 0
@@ -6998,6 +7248,8 @@ forms:
     - mndACD
     - mndLDocs
     - mndDocTypeOther
+    - mndLDocsOther2
+    - mndLDocsOther3
     - mndDocLocation
     - legalDocUpload
     extra: null
@@ -7011,7 +7263,9 @@ forms:
     mndManageSaliva visible if mndXSaliva == Always or mndXSaliva == Sometimes
     mndSalivaOther visible if mndManageSaliva includes Other
   display_name: Mouth Care & Saliva
-  header: <h2>Mouth Care and Saliva Management</h2>
+  header: |-
+    <h2>Mouth Care and Saliva Management</h2>
+    <p><a href="https://www.mindaus.org/wp-content/uploads/2022/05/09124956/UserGuideMindausPatientApril2022PartTwoV01.pdf">MiNDAUS Registry User Guide</a></p>
   is_questionnaire: false
   name: myMCare
   position: 9
@@ -7041,6 +7295,7 @@ forms:
   header: |-
     <h2>My Medical History</h2>
     <p>Please select any of the medical or psychiatric conditions for which you have been diagnosed:</p>
+    <p><a href="https://www.mindaus.org/wp-content/uploads/2022/05/09124956/UserGuideMindausPatientApril2022PartTwoV01.pdf">MiNDAUS Registry User Guide</a></p>
   is_questionnaire: false
   name: myMedHistory
   position: 11
@@ -7071,7 +7326,9 @@ forms:
     mndMedTime2 hidden if mndMedFreq == "Whenever Needed" or mndMedFreq == "Every 2 Hours" or mndMedFreq == "Every Hour" or mndMedFreq == "Other" or mndMedFreq == "Daily"
     mndMedTime hidden if mndMedFreq == "Whenever Needed" or mndMedFreq == "Every 2 Hours" or mndMedFreq == "Every Hour" or mndMedFreq == "Other"
   display_name: My Medications & Allergies
-  header: <h2>My Medications & Allergies</h2>
+  header: |-
+    <h2>My Medications & Allergies</h2>
+    <p><a href="https://www.mindaus.org/wp-content/uploads/2022/05/09124956/UserGuideMindausPatientApril2022PartTwoV01.pdf">MiNDAUS Registry User Guide</a></p>
   is_questionnaire: false
   name: myMedsNAll
   position: 12
@@ -7119,6 +7376,7 @@ forms:
     <h2>My Life History</h2>
     <p>This optional section gives you an opportunity to introduce yourself to someone with as little
     or as much information as you would like to share.</p>
+    <p><a href="https://www.mindaus.org/wp-content/uploads/2022/05/09124956/UserGuideMindausPatientApril2022PartTwoV01.pdf">MiNDAUS Registry User Guide</a></p>
   is_questionnaire: false
   name: myPastLH
   position: 13
@@ -7153,7 +7411,9 @@ forms:
   applicability_condition: ''
   conditional_rendering_rules: ''
   display_name: My Personal Care
-  header: <h2>My Personal Care</h2>
+  header: |-
+    <h2>My Personal Care</h2>
+    <p><a href="https://www.mindaus.org/wp-content/uploads/2022/05/09124956/UserGuideMindausPatientApril2022PartTwoV01.pdf">MiNDAUS Registry User Guide</a></p>
   is_questionnaire: false
   name: myPC
   position: 8
@@ -7175,11 +7435,13 @@ forms:
     questionnaire_help: ''
   tags:
   - patient-reported
-- abbreviated_name: myPhysical
+- abbreviated_name: myPhysicalAbility
   applicability_condition: ''
   conditional_rendering_rules: ''
   display_name: My Physical Ability
-  header: <h2>My Physical Ability</h2>
+  header: |-
+    <h2>My Physical Ability</h2>
+    <p><a href="https://www.mindaus.org/wp-content/uploads/2022/05/09124956/UserGuideMindausPatientApril2022PartTwoV01.pdf">MiNDAUS Registry User Guide</a></p>
   is_questionnaire: false
   name: myPhysical
   position: 7
@@ -7203,14 +7465,62 @@ forms:
     questionnaire_help: ''
   tags:
   - patient-reported
+- abbreviated_name: External Visit
+  applicability_condition: ''
+  conditional_rendering_rules: ''
+  display_name: External Specialist Visits
+  header: |-
+    <h2>Specialist Visit (Neurologist outside a participating site)</h2>
+    <p><strong>This section is for patients who <em>do not see</em> a participating MND Clinic for registry data capture</strong></p>
+    <p>If this is your <strong>first time filling out this section</strong>, download and print <a href="https://www.mindaus.org/wp-content/uploads/2022/05/09124953/MindausFirstVisitCRFExternalNeurologistApril2022V01.pdf">this <strong>first visit</strong> form </a>
+    to have your specialist fill out for you.</p>
+    <p>If this <strong>is not your first time </strong> filling out this section, download and print <a href="https://www.mindaus.org/wp-content/uploads/2022/05/09125011/MindausSubVisitCRFExternalNeurologistApril2022V01-1.pdf">this <strong>subsequent visit</strong> form </a>
+    to have your specialist fill out for you.</p>
+    <p> Once you have seen your MND Specialist, the form that was completed during your visit can be uploaded here. The information collected about you will then be added to the Specialist Clinic Visit</p>
+    <p><a href="https://www.mindaus.org/wp-content/uploads/2022/05/09124956/UserGuideMindausPatientApril2022PartTwoV01.pdf">MiNDAUS Registry User Guide</a></p>
+  is_questionnaire: false
+  name: mySpecialistVisitForms
+  position: 0
+  questionnaire_display_name: ''
+  questionnaire_questions: ''
+  sections:
+  - abbreviated_name: ExtFirst
+    allow_multiple: false
+    code: externalVisitFirstSec
+    display_name: External Specialist Visit - First Visit
+    elements:
+    - extVisitName
+    - extVisitContact
+    - formUploadDate
+    - uploadedForm
+    extra: null
+    questionnaire_display_name: ''
+    questionnaire_help: ''
+  - abbreviated_name: extSubsequent
+    allow_multiple: true
+    code: externalVisitSubSec
+    display_name: External Specialist Visit - Subsequent Visits
+    elements:
+    - extVisitName
+    - extVisitContact
+    - formUploadDate
+    - uploadedForm
+    extra: null
+    questionnaire_display_name: ''
+    questionnaire_help: ''
+  tags:
+  - patient-reported
 - abbreviated_name: mySymptoms
   applicability_condition: ''
   conditional_rendering_rules: ''
   display_name: My Recent Symptoms
   header: |-
     <h2>My Recent Symptoms</h2>
-    <p>Please record your symptoms <em>as they have been over the last two weeks</em></p>
-    <p style="color: red;"><em>&#42;&#42;NOTE:  0 = None; 5 = Moderate; 10 = Severe &#42;&#42;</em></p>
+    <p>Please record your symptoms as they have been over the<strong> last two weeks</strong></p>
+    <p ><em>&#42;&#42;NOTE:  0 = None; 5 = Moderate; 10 = Severe &#42;&#42;</em></p>
+    <p><i>Information for patients:</i><a href="https://www.mndaustralia.org.au/mnd-connect/living-with-mnd"> Living with MND</a> for details on understanding and managing your symptoms.</p>
+    <p><i>Information for health professionals:</i><a href="https://www.nice.org.uk/guidance/NG42/chapter/Recommendations?msclkid=ffd2d0fcc6b811ec9567e3a1eebf3c1d#managing-symptoms"> Managing MND symptoms for Healthcare Professionals</a> and <a href="https://www.mndaustralia.org.au/mnd-connect/for-health-professionals-service-providers/managing-symptoms">MND Australia | Managing Patient Symptoms</a></p>
+    <p><a href="https://www.mindaus.org/wp-content/uploads/2022/05/09124956/UserGuideMindausPatientApril2022PartTwoV01.pdf">MiNDAUS Registry User Guide</a></p>
   is_questionnaire: false
   name: mySymptoms
   position: 2
@@ -7293,6 +7603,20 @@ forms:
     - mndTelehealthConsultation
     extra: null
     questionnaire_display_name: ''
+    questionnaire_help: ''
+  - abbreviated_name: Diagnosis Details
+    allow_multiple: false
+    code: DxDetails
+    display_name: Diagnosis Details
+    elements:
+    - MNDDiagnosis
+    - MNDConfirm
+    - MNDConfirmOth
+    - MultiOpinion
+    - DxTest
+    - DxTestOth
+    extra: null
+    questionnaire_display_name: Diagnosis Details
     questionnaire_help: ''
   - abbreviated_name: Regions affected by MND ALS
     allow_multiple: false
@@ -7447,6 +7771,7 @@ forms:
     - mndDoseValue
     - mndDose
     - mndFreq
+    - clinicMedAdminHow
     extra: null
     questionnaire_display_name: ''
     questionnaire_help: ''
@@ -7541,10 +7866,9 @@ forms_allowed_groups:
   - Patients
   - Working Group Curators
   completionForm:
-  - Carer
   - Clinical Staff
   - Notified Admins
-  - Patients
+  - Working Group Curators
   firstVisit:
   - Carer
   - Clinical Staff
@@ -7623,6 +7947,12 @@ forms_allowed_groups:
   myPhysical:
   - Carer
   - Clinical Staff
+  - Patients
+  - Working Group Curators
+  mySpecialistVisitForms:
+  - Carer
+  - Clinical Staff
+  - Notified Admins
   - Patients
   - Working Group Curators
   mySymptoms:
@@ -7671,6 +8001,10 @@ forms_readonly_groups:
   - Clinical Staff
   myPhysical:
   - Clinical Staff
+  mySpecialistVisitForms:
+  - Clinical Staff
+  - Notified Admins
+  - Working Group Curators
   mySymptoms:
   - Clinical Staff
   subsequentVisit:
@@ -9062,6 +9396,43 @@ pvgs:
     position: 4
     questionnaire_value: null
     value: An electric wheelchair
+- code: clinicMedAdmin
+  values:
+  - code: Topical
+    desc: Topical
+    position: 7
+    questionnaire_value: null
+    value: Topical
+  - code: Rectal
+    desc: Rectal
+    position: 6
+    questionnaire_value: null
+    value: Rectal
+  - code: Sublingual
+    desc: Sublingual
+    position: 5
+    questionnaire_value: null
+    value: Sublingual
+  - code: Inhalation
+    desc: Inhalation
+    position: 4
+    questionnaire_value: null
+    value: Inhalation
+  - code: Injection
+    desc: Injection
+    position: 3
+    questionnaire_value: null
+    value: Injection
+  - code: viaPeg
+    desc: viaPeg
+    position: 2
+    questionnaire_value: null
+    value: via Peg
+  - code: Oral
+    desc: Oral
+    position: 1
+    questionnaire_value: Oral
+    value: Oral
 - code: comTechChoices
   values:
   - code: paperPen
@@ -10047,6 +10418,16 @@ pvgs:
     value: Acute
 - code: mndLDocTypes
   values:
+  - code: Other3
+    desc: Another additional 'Other' response for yet more document entry
+    position: 8
+    questionnaire_value: null
+    value: Other (3)
+  - code: Other2
+    desc: Second 'Other' response for the entry of additional documents
+    position: 7
+    questionnaire_value: null
+    value: Other (2)
   - code: Other
     desc: Other
     position: 6
@@ -10079,6 +10460,21 @@ pvgs:
     value: I have organ and/or tissue donation forms
 - code: mndMedAdminChoices
   values:
+  - code: appliedTopically
+    desc: Applied Topically
+    position: 11
+    questionnaire_value: null
+    value: Applied Topically
+  - code: Rectally
+    desc: Rectally
+    position: 9
+    questionnaire_value: Rectally
+    value: Rectally
+  - code: Via Puffer
+    desc: Via Puffer
+    position: 7
+    questionnaire_value: Via Puffer
+    value: Via Puffer
   - code: Via Mouth
     desc: Via Mouth
     position: 1
@@ -10091,32 +10487,32 @@ pvgs:
     value: Via PEG
   - code: Under Tongue (Sublingual)
     desc: Under Tongue (Sublingual)
-    position: 3
+    position: 8
     questionnaire_value: null
     value: Under Tongue (Sublingual)
   - code: Via Nebuliser
     desc: Via Nebuliser
-    position: 4
+    position: 6
     questionnaire_value: null
     value: Via Nebuliser
   - code: InjectionIV
     desc: Injection - Intravenous
-    position: 6
+    position: 3
     questionnaire_value: null
     value: Injection - Intravenous
   - code: Via Patch
     desc: Via Patch
-    position: 5
+    position: 10
     questionnaire_value: null
     value: Via Patch
   - code: InjectionSC
     desc: Injection - Subcutaneous
-    position: 7
+    position: 4
     questionnaire_value: Injection - Subcutaneous
     value: Injection - Subcutaneous
   - code: InjectionIM
     desc: Injection - Intramuscular
-    position: 8
+    position: 5
     questionnaire_value: Injection - Intramuscular
     value: Injection - Intramuscular
 - code: mndOptions
@@ -11115,7 +11511,6 @@ pvgs:
 reports: []
 reports_v2: []
 splash_screen: <h1>MND Development Registry</h1>
-surveys: []
 working_groups:
 - Sunshine, Qld, 400
 - Royal Brisbane and Women's, Qld, 101
