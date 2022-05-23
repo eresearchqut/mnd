@@ -9073,7 +9073,8 @@ group_permissions:
     - state
     name: Can view state
 metadata_json: '{"features": ["registration", "contexts", "patients_create_users",
-  "clinicians_need_ethical_clearance", "patient_guid", "legacy_reports"]}'
+  "clinicians_need_ethical_clearance", "patient_guid", "legacy_reports",
+  "patient_address_is_mandatory"]}'
 name: MiNDAUS Registry
 next_of_kin_relationships: []
 patient_data_section: {}
