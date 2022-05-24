@@ -1,0 +1,50 @@
+{% extends "rdrf_cdes/patients_listing.html" %}
+
+{% load i18n %}
+{% load static %}
+
+{% block datatables-config %}
+    {{ block.super }}
+    $.extend(dataTablesConfig,
+      {
+        "dom": "B<'row mb-2'><'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+        "buttons": [
+            {
+                extend: 'searchPanes',
+                config: {
+                    cascadePanes: false,
+                    dtOpts: {
+                      select: {
+                        style: "single"
+                      }
+                    },
+                    preSelect: [{
+                        rows: ["{{ living_status_preselect_value }}"],
+                        column: 5
+                    }],
+                    controls: false,
+                    // Note: if setting viewTotal to true preSelect doesn't work on initial page load
+                    // viewTotal: true
+                }
+            }
+        ],
+        "columnDefs": [
+            {
+            searchPanes: {
+                show: true
+            },
+            targets: [5]
+        }],
+        "language": {
+            searchPanes: {
+                collapse: {
+                    0: "{% trans 'Filters (none)' %}",
+                    1: "{% trans 'Filters'%} (%d)"
+                }
+            }
+        },
+      });
+{% endblock %}
+
