@@ -37,7 +37,6 @@ class MNDPatientsListingView(PatientsListingView):
             ColumnFullName(_("Patient"), "patients.can_see_full_name"),
             ColumnDateOfBirth(_("Date of Birth"), "patients.can_see_dob"),
             ColumnCodeField(_("Gender"), "patients.can_see_code_field"),
-            ColumnDiagnosisProgress(_("Overall Form Progress"), "patients.can_see_diagnosis_progress"),
             ColumnDateLastUpdated(_("Date Last Updated"), "patients.can_see_last_updated_at"),
             ColumnLivingStatus(_("Living Status"), "patients.can_see_living_status"),
             ColumnContextMenu(_("Modules"), "patients.can_see_data_modules"),
