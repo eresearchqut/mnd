@@ -1,4 +1,4 @@
-EXPORT_TIME: '2022-05-13 11:56:28.177073'
+EXPORT_TIME: '2022-05-31 15:35:04.072528'
 EXPORT_TYPE: REGISTRY_PLUS_CDES
 RDRF_VERSION: 1.0.0
 REGISTRY_VERSION: '1.0'
@@ -475,8 +475,8 @@ cdes:
   datatype: file
   desc: ''
   important: false
-  instructions: Click "+ Add" to start uploading your files. You can upload multiple
-    legal files if you wish
+  instructions: Please click 'save' to finish uploading your form(s). You can upload
+    multiple legal files if you wish
   is_required: false
   max_length: null
   max_value: null
@@ -2004,7 +2004,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
-- abbreviated_name: As a passenger in a care for an hour without a break
+- abbreviated_name: passenger in car for hour
   allow_multiple: false
   calculation: ''
   code: mndESSPassenger
@@ -2016,7 +2016,7 @@ cdes:
   max_length: null
   max_value: null
   min_value: null
-  name: As a passenger in a care for an hour without a break
+  name: As a passenger in a car for an hour without a break
   pattern: ''
   pv_group: mndDozeRating
   questionnaire_text: ''
@@ -5757,8 +5757,7 @@ cdes:
   datatype: file
   desc: ''
   important: false
-  instructions: If you are unable to click the 'add/upload' button, please try saving
-    this form first, then uploading a file.
+  instructions: Please click 'save' to finish uploading the form
   is_required: false
   max_length: null
   max_value: null
@@ -5788,46 +5787,7 @@ cdes:
   widget_name: ''
   widget_settings: '{}'
 code: mnd
-complete_fields:
-- cdes:
-  - cLMNLRB
-  - cUMNLRB
-  - fvcDate
-  - lLMNLRB
-  - lUMNLRB
-  - mndALSFRS
-  - mndBMI
-  - mndBulbarLMN
-  - mndBulbarUMN
-  - mndCervicalLMN
-  - mndCervicalUMN
-  - mndDateConfirm
-  - MNDDiagnosis
-  - mndFTDate
-  - mndFVCLitres
-  - mndFVCPredicted
-  - mndHeight
-  - mndLowerAnkle
-  - mndLowerAnkleR
-  - mndLowerKnee
-  - mndLowerKneeR
-  - mndLumbarLMN
-  - mndLumbarUMN
-  - mndNIV
-  - mndOnset
-  - mndregionbegan
-  - mndregionbeganOth
-  - mndRiluzole
-  - mndRiluzoleSDate
-  - mndSNIP
-  - mndSVCLitres
-  - mndSVCPredicted
-  - mndTrialParticipant
-  - mndtypedx
-  - mndUpperBiceps
-  - mndVDate
-  - mndWeight
-  form_name: firstVisit
+complete_fields: []
 consent_configuration:
   consent_locked: true
   esignature: enabled
@@ -9073,8 +9033,7 @@ group_permissions:
     - state
     name: Can view state
 metadata_json: '{"features": ["registration", "contexts", "patients_create_users",
-  "clinicians_need_ethical_clearance", "patient_guid", "legacy_reports",
-  "patient_address_is_mandatory"]}'
+  "clinicians_need_ethical_clearance", "patient_guid", "legacy_reports", "patient_address_is_mandatory"]}'
 name: MiNDAUS Registry
 next_of_kin_relationships: []
 patient_data_section: {}
@@ -11526,3 +11485,4 @@ working_groups:
 - Barwon, Vic, 305
 - Unallocated
 - Concord, NSW, 330
+- Bundoora, Vic, 304
