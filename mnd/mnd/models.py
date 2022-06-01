@@ -44,10 +44,10 @@ class PatientInsurance(models.Model):
     ndis_number = models.CharField(max_length=30, verbose_name=_('NDIS number'), null=True, blank=True, help_text=_('9 digits'))
     is_ndis_eligible = models.BooleanField(blank=True, null=True, default=None, verbose_name=_("Are you eligible for the NDIS (under 65)?"))
     ndis_plan_manager = models.CharField(choices=PLAN_MANAGER_CHOICES, verbose_name=_('NDIS plan manager'), max_length=30)
-    ndis_coordinator_first_name = models.CharField(max_length=30, verbose_name=_('NDIS coordinator first name'), null=True, blank=True)
-    ndis_coordinator_last_name = models.CharField(max_length=30, verbose_name=_('NDIS coordinator last name'), null=True, blank=True)
+    ndis_coordinator_first_name = models.CharField(max_length=100, verbose_name=_('NDIS coordinator first name'), null=True, blank=True)
+    ndis_coordinator_last_name = models.CharField(max_length=100, verbose_name=_('NDIS coordinator last name'), null=True, blank=True)
     ndis_coordinator_phone = models.CharField(max_length=30, verbose_name=_('NDIS coordinator phone'), null=True, blank=True)
-    ndis_coordinator_email = models.CharField(max_length=254, verbose_name=_('NDIS coordinator email'), null=True, blank=True)
+    ndis_coordinator_email = models.EmailField(verbose_name=_('NDIS coordinator email'), null=True, blank=True)
     has_dva_card = models.BooleanField(blank=True, null=True, default=None, verbose_name=_('Do you have a DVA card?'))
     dva_card_number = models.CharField(max_length=30, verbose_name=_('DVA card number'), null=True, blank=True)
     dva_card_type = models.CharField(choices=DVA_CARD_TYPE_CHOICES, verbose_name=_('DVA card type'), max_length=30, default='')
@@ -71,11 +71,11 @@ class PrimaryCarer(models.Model):
     # This is Many to Many as we don't want to add a FK to Patient in TRRF
     # since TRRF is not aware of this MND specific model
     patients = models.ManyToManyField(Patient, related_name='primary_carers', through='PrimaryCarerRelationship')
-    first_name = models.CharField(max_length=30, blank=True)
-    last_name = models.CharField(max_length=30, blank=True)
+    first_name = models.CharField(max_length=100, blank=True)
+    last_name = models.CharField(max_length=100, blank=True)
     mobile_phone = models.CharField(max_length=30, blank=True)
     home_phone = models.CharField(max_length=30, blank=True)
-    email = models.EmailField(max_length=30, blank=True)
+    email = models.EmailField(blank=True)
     preferred_language = models.CharField(choices=LANGUAGE_CHOICES, max_length=30, default='en', blank=True)
     interpreter_required = models.BooleanField(default=False)
     same_address = models.BooleanField(default=True)
@@ -83,8 +83,8 @@ class PrimaryCarer(models.Model):
     address = models.TextField(null=True, blank=True)
     postcode = models.CharField(max_length=20, null=True, blank=True)
     is_emergency_contact = models.BooleanField(default=False)
-    em_contact_first_name = models.CharField(max_length=30, null=True, blank=True)
-    em_contact_last_name = models.CharField(max_length=30, null=True, blank=True)
+    em_contact_first_name = models.CharField(max_length=100, null=True, blank=True)
+    em_contact_last_name = models.CharField(max_length=100, null=True, blank=True)
     em_contact_phone = models.CharField(max_length=30, null=True, blank=True)
 
     def __str__(self):
@@ -123,10 +123,10 @@ class PreferredContact(models.Model):
     ]
 
     patient = models.OneToOneField(Patient, related_name='preferred_contact', on_delete=models.CASCADE)
-    first_name = models.CharField(max_length=30, null=True, blank=True)
-    last_name = models.CharField(max_length=30, null=True, blank=True)
+    first_name = models.CharField(max_length=100, null=True, blank=True)
+    last_name = models.CharField(max_length=100, null=True, blank=True)
     phone = models.CharField(max_length=30, null=True, blank=True)
-    email = models.CharField(max_length=30, null=True, blank=True)
+    email = models.EmailField(null=True, blank=True)
     contact_method = models.CharField(choices=CONTACT_METHOD_CHOICES, max_length=30)
 
 
@@ -200,7 +200,7 @@ class CarerRegistration(models.Model):
     ]
     carer = models.ForeignKey(PrimaryCarer, on_delete=models.CASCADE)
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
-    carer_email = models.EmailField(max_length=30, default="unset@email.com")
+    carer_email = models.EmailField(default="unset@email.com")
     token = models.UUIDField()
     status = models.CharField(choices=REGISTRATION_STATUS_CHOICES, default=CREATED, max_length=16)
     expires_on = models.DateTimeField()
