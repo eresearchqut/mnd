@@ -5,46 +5,71 @@
 
 {% block datatables-config %}
     {{ block.super }}
-    $.extend(dataTablesConfig,
-      {
-        "dom": "B<'row mb-2'><'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
-                "<'row'<'col-sm-12'tr>>" +
-                "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
-        "buttons": [
-            {
-                extend: 'searchPanes',
-                config: {
-                    cascadePanes: false,
-                    dtOpts: {
-                      select: {
-                        style: "single"
-                      }
-                    },
-                    preSelect: [{
-                        rows: ["{{ living_status_preselect_value }}"],
-                        column: 5
-                    }],
-                    controls: false,
-                    // Note: if setting viewTotal to true preSelect doesn't work on initial page load
-                    // viewTotal: true
+
+    const find_column_definition = function(column_id) {
+        return columnDefinitions.find((column_def) => column_def.data == column_id)
+    };
+
+    const filter_column_definitions = {
+        'living_status': find_column_definition('living_status')
+    };
+
+    // Determine the current user's filters by removing any null column definitions
+    const user_filters = Object.values(filter_column_definitions).filter(column => column);
+
+    if (user_filters.length > 0) {
+
+        const searchPane_preselects = [];
+        // Preselect the living status filter value if the user has access to this column.
+        if (filter_column_definitions.living_status?.order) {
+            searchPane_preselects.push({
+                rows: ["{{ living_status_preselect_value }}"],
+                column: filter_column_definitions.living_status.order
+            });
+        }
+
+        // Build a list of searchPane targets based on the columns the user has access to.
+        const searchPane_targets = user_filters.map(column => column.order);
+
+        $.extend(dataTablesConfig,
+          {
+            "dom": "B<'row mb-2'><'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
+                    "<'row'<'col-sm-12'tr>>" +
+                    "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+            "deferLoading": null,  // disable deferred loading otherwise preSelect filter doesn't work on initial page load
+            "buttons": [
+                {
+                    extend: 'searchPanes',
+                    config: {
+                        cascadePanes: false,
+                        dtOpts: {
+                          select: {
+                            style: "single"
+                          }
+                        },
+                        preSelect: searchPane_preselects,
+                        controls: false,
+                        // Note: if setting viewTotal to true preSelect doesn't work on initial page load
+                        // viewTotal: true
+                    }
                 }
-            }
-        ],
-        "columnDefs": [
-            {
-            searchPanes: {
-                show: true
+            ],
+            "columnDefs": [
+                {
+                searchPanes: {
+                    show: true
+                },
+                targets: searchPane_targets
+            }],
+            "language": {
+                searchPanes: {
+                    collapse: {
+                        0: "{% trans 'Filters (none)' %}",
+                        1: "{% trans 'Filters'%} (%d)"
+                    }
+                }
             },
-            targets: [5]
-        }],
-        "language": {
-            searchPanes: {
-                collapse: {
-                    0: "{% trans 'Filters (none)' %}",
-                    1: "{% trans 'Filters'%} (%d)"
-                }
-            }
-        },
-      });
+          });
+    }
 {% endblock %}
 
