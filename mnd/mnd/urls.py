@@ -19,7 +19,7 @@ urlpatterns = [
 
     re_path(r'^(?P<registry_code>\w+)/patient/add/?$', AddPatientView.as_view(), name='patient_add'),
     re_path(r'^(?P<registry_code>\w+)/patient/(?P<patient_id>\d+)/edit$', PatientEditView.as_view(), name='patient_edit'),
-    re_path(r'^patientslisting/?', MNDPatientsListingView.as_view(), name='patientslisting'),
+    re_path(r'^(?P<registry_code>\w+)/patientslisting/?', MNDPatientsListingView.as_view(), name='patient_list'),
 
     re_path(r'^patient_carer_registration/?$', PatientCarerRegistrationView.as_view(), name='patient_carer_registration'),
     re_path(r'^carer_operations/?$', CarerOperationsView.as_view(), name='carer_operations'),
