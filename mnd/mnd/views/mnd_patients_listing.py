@@ -16,8 +16,6 @@ from registry.patients.models import LivingStates
 class MNDPatientsListingView(PatientsListingView):
 
     def get_template(self):
-        if not self.registries:
-            return super().get_template()
         return 'rdrf_cdes/mnd_patients_listing.html'
 
     def build_context(self):
@@ -25,8 +23,8 @@ class MNDPatientsListingView(PatientsListingView):
         context['living_status_preselect_value'] = LivingStates.ALIVE
         return context
 
-    def set_parameters(self, request):
-        super().set_parameters(request)
+    def set_parameters(self, request, registry_code):
+        super().set_parameters(request, registry_code)
 
         valid_living_states = {val for val, _ in LivingStates.CHOICES}
         living_status = request.POST.get("searchPanes[living_status][0]")
