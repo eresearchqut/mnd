@@ -4,7 +4,6 @@ from django.urls import re_path
 from .views.mnd_landing_view import LandingView
 from .views.pdf_export_view import pdf_export
 from .views.mnd_patient_view import AddPatientView, PatientEditView
-from .views.mnd_patients_listing import MNDPatientsListingView
 from .views.carer_registration_view import CarerOperationsView, PatientCarerRegistrationView
 from .views.mnd_registration_view import MNDRegistrationView
 from .views.health_check import health_check
@@ -19,7 +18,6 @@ urlpatterns = [
 
     re_path(r'^(?P<registry_code>\w+)/patient/add/?$', AddPatientView.as_view(), name='patient_add'),
     re_path(r'^(?P<registry_code>\w+)/patient/(?P<patient_id>\d+)/edit$', PatientEditView.as_view(), name='patient_edit'),
-    re_path(r'^(?P<registry_code>\w+)/patientslisting/?', MNDPatientsListingView.as_view(), name='patient_list'),
 
     re_path(r'^patient_carer_registration/?$', PatientCarerRegistrationView.as_view(), name='patient_carer_registration'),
     re_path(r'^carer_operations/?$', CarerOperationsView.as_view(), name='carer_operations'),
