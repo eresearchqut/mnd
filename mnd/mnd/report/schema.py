@@ -48,7 +48,8 @@ def get_mnd_patient_fields():
     patient_fields['Meta'].fields.extend(['preferred_contact', 'insurance_data'])
     patient_fields.update({
         "is_duplicate_patient": graphene.String(),
-        "resolve_is_duplicate_patient": lambda patient, info: patient.duplicate_patient.is_duplicate,
+        "resolve_is_duplicate_patient":
+            lambda patient, info: hasattr(patient, "duplicate_patient") and patient.duplicate_patient.is_duplicate,
         "primary_carer": graphene.Field(PrimaryCarerType),
         "resolve_primary_carer": lambda patient, info: patient.primary_carers.first(),
         "primary_carer_relationship": graphene.String(),
