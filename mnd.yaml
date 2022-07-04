@@ -1,4 +1,4 @@
-EXPORT_TIME: '2022-06-24 08:40:25.291383'
+EXPORT_TIME: '2022-07-04 10:02:26.761143'
 EXPORT_TYPE: REGISTRY_PLUS_CDES
 RDRF_VERSION: 1.0.0
 REGISTRY_VERSION: '1.0'
@@ -9056,8 +9056,8 @@ group_permissions:
 metadata_json: '{"features": ["registration", "contexts", "patients_create_users",
   "clinicians_need_ethical_clearance", "patient_guid", "legacy_reports", "patient_address_is_mandatory"],
   "patient_list": {"columns": ["full_name", "date_of_birth", {"code": {"label": "Gender"}},
-  "last_updated_overall_at", "living_status", "modules"], "facets": {"living_status":
-  {"default": "Alive"}}}}'
+  "last_updated_overall_at", "living_status", "modules"], "facets": [{"living_status":
+  {"default": "Alive"}}]}}'
 name: MiNDAUS Registry
 next_of_kin_relationships: []
 patient_data_section: {}
