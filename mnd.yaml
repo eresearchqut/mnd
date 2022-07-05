@@ -1,4 +1,4 @@
-EXPORT_TIME: '2022-07-04 10:02:26.761143'
+EXPORT_TIME: '2022-07-06 07:39:16.949453'
 EXPORT_TYPE: REGISTRY_PLUS_CDES
 RDRF_VERSION: 1.0.0
 REGISTRY_VERSION: '1.0'
@@ -468,7 +468,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
-- abbreviated_name: Upload your legal files
+- abbreviated_name: Legal Doc Upload
   allow_multiple: true
   calculation: ''
   code: legalDocUpload
@@ -524,7 +524,7 @@ cdes:
   questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{}'
-- abbreviated_name: I have an Advanced Care Directive ACD
+- abbreviated_name: ACD YesNo
   allow_multiple: false
   calculation: ''
   code: mndACD
@@ -541,7 +541,7 @@ cdes:
   pv_group: mndYN
   questionnaire_text: ''
   widget_name: RadioSelect
-  widget_settings: '{}'
+  widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Adaptive Device Other
   allow_multiple: false
   calculation: ''
@@ -949,7 +949,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
-- abbreviated_name: Shortness of breath
+- abbreviated_name: Short Breath
   allow_multiple: false
   calculation: ''
   code: mndBreath
@@ -1310,7 +1310,7 @@ cdes:
   questionnaire_text: ''
   widget_name: TextAreaWidget
   widget_settings: '{}'
-- abbreviated_name: Choking sensation
+- abbreviated_name: Choking Sensation
   allow_multiple: false
   calculation: ''
   code: mndChoking
@@ -1436,7 +1436,7 @@ cdes:
   questionnaire_text: ''
   widget_name: TextAreaWidget
   widget_settings: '{}'
-- abbreviated_name: Other Please add below
+- abbreviated_name: Condition Other
   allow_multiple: false
   calculation: ''
   code: mndCondOther
@@ -1454,7 +1454,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
-- abbreviated_name: Medical  Psychiatric Conditions that I have been diagnosed with
+- abbreviated_name: Diagnosed Conditions
   allow_multiple: true
   calculation: ''
   code: mndConditions
@@ -1857,7 +1857,7 @@ cdes:
   questionnaire_text: ''
   widget_name: SliderWidget
   widget_settings: '{"min":"0","max":"10","left_label":"None","right_label":"Severe","step":"1"}'
-- abbreviated_name: These documents are kept
+- abbreviated_name: Doc Location
   allow_multiple: false
   calculation: ''
   code: mndDocLocation
@@ -1875,7 +1875,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
-- abbreviated_name: Other - Please specify
+- abbreviated_name: DocOth1
   allow_multiple: false
   calculation: ''
   code: mndDocTypeOther
@@ -2178,7 +2178,7 @@ cdes:
   questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{}'
-- abbreviated_name: Extremeinappropriate emotions
+- abbreviated_name: Inappropriate Emotion
   allow_multiple: false
   calculation: ''
   code: mndEmotion
@@ -2614,7 +2614,7 @@ cdes:
   questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
-- abbreviated_name: I have any of the following documents
+- abbreviated_name: Docs I Have
   allow_multiple: true
   calculation: ''
   code: mndLDocs
@@ -2632,7 +2632,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
-- abbreviated_name: Please specify
+- abbreviated_name: DocOth2
   allow_multiple: false
   calculation: ''
   code: mndLDocsOther2
@@ -2651,7 +2651,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
-- abbreviated_name: Please specify
+- abbreviated_name: DocOth3
   allow_multiple: false
   calculation: ''
   code: mndLDocsOther3
@@ -3431,7 +3431,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
-- abbreviated_name: Muscle Crampstwitching
+- abbreviated_name: Muscle Cramp Twitch
   allow_multiple: false
   calculation: ''
   code: mndMuscle
@@ -4028,7 +4028,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
-- abbreviated_name: Excessive saliva
+- abbreviated_name: Excessive Saliva
   allow_multiple: false
   calculation: ''
   code: mndSaliva
@@ -4191,7 +4191,7 @@ cdes:
   questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{}'
-- abbreviated_name: Stiffnessspasticity
+- abbreviated_name: Stiffness Spasticity
   allow_multiple: false
   calculation: ''
   code: mndSpasticity
@@ -4362,7 +4362,7 @@ cdes:
   questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
-- abbreviated_name: Date completed
+- abbreviated_name: Date Symptom Capture
   allow_multiple: false
   calculation: ''
   code: mndSymptomDate
@@ -6015,7 +6015,7 @@ context_form_groups:
   naming_scheme: C
   ordering: C
   sort_order: 2
-- abbreviated_name: ext visit CFG
+- abbreviated_name: external visit CFG
   code: externalVisitCFG
   context_type: F
   forms:
@@ -6398,7 +6398,7 @@ email_notifications:
   recipient: '{{ patient.user.email }}'
 form_titles: null
 forms:
-- abbreviated_name: alsfrsInstrument
+- abbreviated_name: MyALSFRSCalc
   applicability_condition: ''
   conditional_rendering_rules: |-
     mndNoGasCut visible if gastroQuestion == No
@@ -6887,7 +6887,7 @@ forms:
     questionnaire_help: ''
   tags:
   - patient-reported
-- abbreviated_name: mndPositioning
+- abbreviated_name: My Positioning
   applicability_condition: ''
   conditional_rendering_rules: mndComfyOther visible if myMostComfy == Other
   display_name: My Positioning
@@ -6937,7 +6937,7 @@ forms:
     questionnaire_help: ''
   tags:
   - patient-reported
-- abbreviated_name: myAppointments
+- abbreviated_name: My Appointments
   applicability_condition: ''
   conditional_rendering_rules: ''
   display_name: Appointment Schedule
@@ -6964,7 +6964,7 @@ forms:
     questionnaire_help: ''
   tags:
   - patient-reported
-- abbreviated_name: myBreathing
+- abbreviated_name: My Breathing
   applicability_condition: ''
   conditional_rendering_rules: |-
     mndNIVWhen mndNIVUse mndNIVdur visible if mndNIVYN == Yes
@@ -7000,7 +7000,7 @@ forms:
     questionnaire_help: ''
   tags:
   - patient-reported
-- abbreviated_name: myCareTeam
+- abbreviated_name: My Care Team
   applicability_condition: ''
   conditional_rendering_rules: ''
   display_name: My Care Team
@@ -7042,7 +7042,7 @@ forms:
     questionnaire_help: ''
   tags:
   - patient-reported
-- abbreviated_name: myCommunication
+- abbreviated_name: My Comms
   applicability_condition: ''
   conditional_rendering_rules: |-
     mndComTechOther visible if mndComTechs includes compWithSwitch
@@ -7071,7 +7071,7 @@ forms:
     questionnaire_help: ''
   tags:
   - patient-reported
-- abbreviated_name: myEatDrink
+- abbreviated_name: My Eat Drink
   applicability_condition: ''
   conditional_rendering_rules: |-
     mndGluten visible if mndAvoidFoods includes Gluten
@@ -7127,7 +7127,7 @@ forms:
     questionnaire_help: ''
   tags:
   - patient-reported
-- abbreviated_name: myEmotions
+- abbreviated_name: My Emotions
   applicability_condition: ''
   conditional_rendering_rules: ''
   display_name: My Emotions / Behaviour
@@ -7152,7 +7152,7 @@ forms:
     questionnaire_help: ''
   tags:
   - patient-reported
-- abbreviated_name: myESS
+- abbreviated_name: My ESS
   applicability_condition: ''
   conditional_rendering_rules: ''
   display_name: My ESS Calculator
@@ -7195,7 +7195,7 @@ forms:
     questionnaire_help: ''
   tags:
   - patient-reported
-- abbreviated_name: myLegalDocs
+- abbreviated_name: My Legal Docs
   applicability_condition: ''
   conditional_rendering_rules: |-
     mndDocTypeOther visible if mndLDocs includes "Other"
@@ -7214,7 +7214,7 @@ forms:
   questionnaire_display_name: ''
   questionnaire_questions: ''
   sections:
-  - abbreviated_name: Legal Documents
+  - abbreviated_name: Docs
     allow_multiple: false
     code: legalQuestions
     display_name: Legal Documents
@@ -7231,7 +7231,7 @@ forms:
     questionnaire_help: ''
   tags:
   - patient-reported
-- abbreviated_name: myMCare
+- abbreviated_name: My Mouth Care
   applicability_condition: ''
   conditional_rendering_rules: |-
     mndManageSaliva visible if mndXSaliva == Always or mndXSaliva == Sometimes
@@ -7262,7 +7262,7 @@ forms:
     questionnaire_help: ''
   tags:
   - patient-reported
-- abbreviated_name: myMedHistory
+- abbreviated_name: My Medical History
   applicability_condition: ''
   conditional_rendering_rules: mndCondOther visible if mndConditions includes Other
   display_name: My Medical History
@@ -7276,7 +7276,7 @@ forms:
   questionnaire_display_name: ''
   questionnaire_questions: ''
   sections:
-  - abbreviated_name: My medical  psychiatric conditions
+  - abbreviated_name: My Health Conditions
     allow_multiple: false
     code: mndMHDiagnosis
     display_name: 'My medical / psychiatric conditions:'
@@ -7288,7 +7288,7 @@ forms:
     questionnaire_help: ''
   tags:
   - patient-reported
-- abbreviated_name: myMedsNAll
+- abbreviated_name: My Meds and Allergies
   applicability_condition: ''
   conditional_rendering_rules: |-
     mndMedOther visible if mndMedFreq == Other
@@ -7342,7 +7342,7 @@ forms:
     questionnaire_help: ''
   tags:
   - patient-reported
-- abbreviated_name: myPastLH
+- abbreviated_name: My Life History
   applicability_condition: ''
   conditional_rendering_rules: ''
   display_name: My Life History
@@ -7381,7 +7381,7 @@ forms:
     questionnaire_help: ''
   tags:
   - patient-reported
-- abbreviated_name: myPC
+- abbreviated_name: My Personal Care
   applicability_condition: ''
   conditional_rendering_rules: ''
   display_name: My Personal Care
@@ -7409,7 +7409,7 @@ forms:
     questionnaire_help: ''
   tags:
   - patient-reported
-- abbreviated_name: myPhysicalAbility
+- abbreviated_name: My Physical Ability
   applicability_condition: ''
   conditional_rendering_rules: ''
   display_name: My Physical Ability
@@ -7484,7 +7484,7 @@ forms:
     questionnaire_help: ''
   tags:
   - patient-reported
-- abbreviated_name: mySymptoms
+- abbreviated_name: My Symptoms
   applicability_condition: ''
   conditional_rendering_rules: ''
   display_name: My Recent Symptoms
@@ -9054,7 +9054,7 @@ group_permissions:
     - state
     name: Can view state
 metadata_json: '{"features": ["registration", "contexts", "patients_create_users",
-  "clinicians_need_ethical_clearance", "patient_guid", "legacy_reports", "patient_address_is_mandatory"],
+  "clinicians_need_ethical_clearance", "patient_guid", "patient_address_is_mandatory"],
   "patient_list": {"columns": ["full_name", "date_of_birth", {"code": {"label": "Gender"}},
   "last_updated_overall_at", "living_status", "modules"], "facets": [{"living_status":
   {"default": "Alive"}}]}}'
