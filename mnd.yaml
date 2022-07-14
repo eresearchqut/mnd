@@ -1,4 +1,4 @@
-EXPORT_TIME: '2022-07-06 07:39:16.949453'
+EXPORT_TIME: '2022-07-15 09:19:25.979000'
 EXPORT_TYPE: REGISTRY_PLUS_CDES
 RDRF_VERSION: 1.0.0
 REGISTRY_VERSION: '1.0'
@@ -301,7 +301,7 @@ cdes:
   questionnaire_text: ''
   widget_name: TextAreaWidget
   widget_settings: ''
-- abbreviated_name: contact email
+- abbreviated_name: Contact Email
   allow_multiple: false
   calculation: ''
   code: extVisitContact
@@ -357,7 +357,7 @@ cdes:
   questionnaire_text: ''
   widget_name: DateWidget
   widget_settings: ''
-- abbreviated_name: Date form uploaded
+- abbreviated_name: Date Form Uploaded
   allow_multiple: false
   calculation: ''
   code: formUploadDate
@@ -506,7 +506,7 @@ cdes:
   questionnaire_text: ''
   widget_name: DateWidget
   widget_settings: ''
-- abbreviated_name: I use adapted cutlery and crockery
+- abbreviated_name: Adaptive Cutlery Crockery
   allow_multiple: false
   calculation: ''
   code: mndACC
@@ -523,7 +523,7 @@ cdes:
   pv_group: mndYN
   questionnaire_text: ''
   widget_name: RadioSelect
-  widget_settings: '{}'
+  widget_settings: '{"force_vertical":false}'
 - abbreviated_name: ACD YesNo
   allow_multiple: false
   calculation: ''
@@ -777,7 +777,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
-- abbreviated_name: Name of Team Member
+- abbreviated_name: Team Member Name
   allow_multiple: false
   calculation: ''
   code: mndAName
@@ -795,7 +795,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
-- abbreviated_name: My Allergies
+- abbreviated_name: Allergies
   allow_multiple: false
   calculation: ''
   code: mndAllergies
@@ -814,7 +814,7 @@ cdes:
   questionnaire_text: ''
   widget_name: TextAreaWidget
   widget_settings: '{}'
-- abbreviated_name: Date of Appointment
+- abbreviated_name: Appoint Date
   allow_multiple: false
   calculation: ''
   code: mndApptDate
@@ -832,7 +832,7 @@ cdes:
   questionnaire_text: ''
   widget_name: DateWidget
   widget_settings: '{}'
-- abbreviated_name: Time
+- abbreviated_name: Appoint Time
   allow_multiple: false
   calculation: ''
   code: mndApptTime
@@ -850,7 +850,7 @@ cdes:
   questionnaire_text: ''
   widget_name: TimeWidget
   widget_settings: '{"format":"12hour"}'
-- abbreviated_name: I avoid the following foods
+- abbreviated_name: Avoid Foods
   allow_multiple: true
   calculation: ''
   code: mndAvoidFoods
@@ -869,7 +869,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
-- abbreviated_name: Other Please Specify
+- abbreviated_name: Avoid Other
   allow_multiple: false
   calculation: ''
   code: mndAvoidOther
@@ -887,7 +887,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
-- abbreviated_name: Other measures that can help
+- abbreviated_name: Breathe Relieve Other
   allow_multiple: false
   calculation: ''
   code: mndBAOther
@@ -967,7 +967,7 @@ cdes:
   questionnaire_text: ''
   widget_name: SliderWidget
   widget_settings: '{"min":"0","max":"10","left_label":"None","right_label":"Severe","step":"1"}'
-- abbreviated_name: The following can help relieve my breathing difficulties
+- abbreviated_name: Breathe relieve
   allow_multiple: true
   calculation: ''
   code: mndBreathAssist
@@ -985,7 +985,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
-- abbreviated_name: I have breathing difficulties
+- abbreviated_name: Breathe Difficult
   allow_multiple: false
   calculation: ''
   code: mndBreathHard
@@ -1002,8 +1002,8 @@ cdes:
   pv_group: mndYN
   questionnaire_text: ''
   widget_name: RadioSelect
-  widget_settings: '{}'
-- abbreviated_name: I have a tracheostomy and need full breathing support at all times
+  widget_settings: '{"force_vertical":false}'
+- abbreviated_name: Breathe Trach
   allow_multiple: false
   calculation: ''
   code: mndBreathTracheostomy
@@ -1039,7 +1039,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
-- abbreviated_name: I like to brush my teeth
+- abbreviated_name: Brush Teeth
   allow_multiple: false
   calculation: ''
   code: mndBrush
@@ -1056,7 +1056,7 @@ cdes:
   pv_group: mndBrushHabit
   questionnaire_text: ''
   widget_name: RadioSelect
-  widget_settings: '{}'
+  widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Bulbar Region-LMN
   allow_multiple: false
   calculation: ''
@@ -1093,7 +1093,7 @@ cdes:
   questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
-- abbreviated_name: I can eat and drink by mouth
+- abbreviated_name: Can By Mouth
   allow_multiple: false
   calculation: ''
   code: mndByMouth
@@ -1165,7 +1165,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
-- abbreviated_name: Telephone
+- abbreviated_name: Phone
   allow_multiple: false
   calculation: ''
   code: mndCPhone
@@ -1201,8 +1201,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
-- abbreviated_name: The following things are important to me when being given personal
-    care
+- abbreviated_name: Important Care
   allow_multiple: false
   calculation: ''
   code: mndCareNeeds
@@ -1274,7 +1273,7 @@ cdes:
   questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
-- abbreviated_name: I need to use
+- abbreviated_name: Need Chair Aid
   allow_multiple: true
   calculation: ''
   code: mndChairNeed
@@ -1292,7 +1291,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
-- abbreviated_name: I am more comfortable when seated if
+- abbreviated_name: Chair Comfy
   allow_multiple: false
   calculation: ''
   code: mndChairNotes
@@ -1346,7 +1345,7 @@ cdes:
   questionnaire_text: MND Clinical Site
   widget_name: ''
   widget_settings: '{}'
-- abbreviated_name: Other Please specify
+- abbreviated_name: Comms Tech Other
   allow_multiple: false
   calculation: ''
   code: mndComChairOther
@@ -1364,7 +1363,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
-- abbreviated_name: I have
+- abbreviated_name: Comms Difficult Level
   allow_multiple: false
   calculation: ''
   code: mndComDifficulty
@@ -1400,7 +1399,7 @@ cdes:
   questionnaire_text: ''
   widget_name: TextAreaWidget
   widget_settings: '{}'
-- abbreviated_name: I communicate using the following techniques or aids
+- abbreviated_name: Comms Technology
   allow_multiple: true
   calculation: ''
   code: mndComTechs
@@ -1418,7 +1417,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
-- abbreviated_name: Other Please explain
+- abbreviated_name: Comfy Other
   allow_multiple: false
   calculation: ''
   code: mndComfyOther
@@ -1730,7 +1729,7 @@ cdes:
   questionnaire_text: ''
   widget_name: DateWidget
   widget_settings: ''
-- abbreviated_name: Dairy Reason
+- abbreviated_name: Why Avoid Dairy
   allow_multiple: false
   calculation: ''
   code: mndDairy
@@ -1747,7 +1746,7 @@ cdes:
   pv_group: avoidReason
   questionnaire_text: ''
   widget_name: RadioSelect
-  widget_settings: '{}'
+  widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Date Confirmed
   allow_multiple: false
   calculation: ''
@@ -1767,7 +1766,7 @@ cdes:
   questionnaire_text: Date MND Confirmed
   widget_name: DateWidget
   widget_settings: '{}'
-- abbreviated_name: Date started
+- abbreviated_name: Date Start
   allow_multiple: false
   calculation: ''
   code: mndDateStarted
@@ -1875,7 +1874,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
-- abbreviated_name: DocOth1
+- abbreviated_name: TypeOth1
   allow_multiple: false
   calculation: ''
   code: mndDocTypeOther
@@ -1949,7 +1948,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
-- abbreviated_name: Dressing
+- abbreviated_name: Dress Help
   allow_multiple: false
   calculation: ''
   code: mndDress
@@ -1985,7 +1984,7 @@ cdes:
   questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":true}'
-- abbreviated_name: Lying down in the afternoon-circumstances permitting
+- abbreviated_name: Lye Down Afternoon
   allow_multiple: false
   calculation: ''
   code: mndESSLying
@@ -2003,7 +2002,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
-- abbreviated_name: passenger in car for hour
+- abbreviated_name: Passenger in Car for Hour
   allow_multiple: false
   calculation: ''
   code: mndESSPassenger
@@ -2021,7 +2020,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
-- abbreviated_name: Sitting inactive in a public place ie Drs meeting cinema
+- abbreviated_name: Sit Inactive Public Place
   allow_multiple: false
   calculation: ''
   code: mndESSPublic
@@ -2070,7 +2069,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
-- abbreviated_name: Sitting and reading
+- abbreviated_name: Sit and Read
   allow_multiple: false
   calculation: ''
   code: mndESSSit
@@ -2088,7 +2087,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
-- abbreviated_name: Sitting and talking to someone
+- abbreviated_name: Sit and Talk
   allow_multiple: false
   calculation: ''
   code: mndESSSitNTalk
@@ -2106,7 +2105,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
-- abbreviated_name: Sitting quietly after a lunch without alcohol
+- abbreviated_name: Sit After Lunch No Alcohol
   allow_multiple: false
   calculation: ''
   code: mndESSSitNoDrink
@@ -2124,7 +2123,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
-- abbreviated_name: Watching television
+- abbreviated_name: Watch TV
   allow_multiple: false
   calculation: ''
   code: mndESSTV
@@ -2142,7 +2141,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
-- abbreviated_name: In a car stopped for a few minutes in traffic
+- abbreviated_name: Stopped in Traffic Few Minutes
   allow_multiple: false
   calculation: ''
   code: mndESSTraffic
@@ -2160,7 +2159,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
-- abbreviated_name: Eggs Reason
+- abbreviated_name: Why Avoid Egg
   allow_multiple: false
   calculation: ''
   code: mndEggs
@@ -2177,7 +2176,7 @@ cdes:
   pv_group: avoidReason
   questionnaire_text: ''
   widget_name: RadioSelect
-  widget_settings: '{}'
+  widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Inappropriate Emotion
   allow_multiple: false
   calculation: ''
@@ -2196,7 +2195,7 @@ cdes:
   questionnaire_text: ''
   widget_name: SliderWidget
   widget_settings: '{"min":"0","max":"10","left_label":"None","right_label":"Severe","step":"1"}'
-- abbreviated_name: My emotions and behaviour
+- abbreviated_name: Emotion Notes
   allow_multiple: false
   calculation: ''
   code: mndEmotionNotes
@@ -2341,7 +2340,7 @@ cdes:
   questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
-- abbreviated_name: Fish Reason
+- abbreviated_name: Why Avoid Fish
   allow_multiple: false
   calculation: ''
   code: mndFish
@@ -2358,8 +2357,8 @@ cdes:
   pv_group: avoidReason
   questionnaire_text: ''
   widget_name: RadioSelect
-  widget_settings: '{}'
-- abbreviated_name: I need my fluids at the following consistency
+  widget_settings: '{"force_vertical":false}'
+- abbreviated_name: Fluid Consistency Need
   allow_multiple: false
   calculation: ''
   code: mndFluids
@@ -2378,7 +2377,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
-- abbreviated_name: I need my food at the following consistency
+- abbreviated_name: Food Consistency Need
   allow_multiple: false
   calculation: ''
   code: mndFoodCon
@@ -2396,7 +2395,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
-- abbreviated_name: I prefer the following foods drinks or supplements
+- abbreviated_name: Food Prefer
   allow_multiple: false
   calculation: ''
   code: mndFoodPrefer
@@ -2468,7 +2467,7 @@ cdes:
   questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
-- abbreviated_name: Gluten Reason
+- abbreviated_name: Why Avoid Gluten
   allow_multiple: false
   calculation: ''
   code: mndGluten
@@ -2485,7 +2484,7 @@ cdes:
   pv_group: avoidReason
   questionnaire_text: ''
   widget_name: RadioSelect
-  widget_settings: '{}'
+  widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Height
   allow_multiple: false
   calculation: ''
@@ -2504,7 +2503,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
-- abbreviated_name: I need help to eat and drink
+- abbreviated_name: Help Eat Drink
   allow_multiple: false
   calculation: ''
   code: mndHelpEat
@@ -2614,7 +2613,7 @@ cdes:
   questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
-- abbreviated_name: Docs I Have
+- abbreviated_name: Type
   allow_multiple: true
   calculation: ''
   code: mndLDocs
@@ -2632,7 +2631,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
-- abbreviated_name: DocOth2
+- abbreviated_name: TypeOth2
   allow_multiple: false
   calculation: ''
   code: mndLDocsOther2
@@ -2651,7 +2650,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
-- abbreviated_name: DocOth3
+- abbreviated_name: TypeOth3
   allow_multiple: false
   calculation: ''
   code: mndLDocsOther3
@@ -2670,7 +2669,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
-- abbreviated_name: Things that annoy me
+- abbreviated_name: Annoys Me
   allow_multiple: false
   calculation: ''
   code: mndLHAnnoyances
@@ -2688,7 +2687,7 @@ cdes:
   questionnaire_text: ''
   widget_name: TextAreaWidget
   widget_settings: '{}'
-- abbreviated_name: My favourite books
+- abbreviated_name: My Books
   allow_multiple: false
   calculation: ''
   code: mndLHBooks
@@ -2706,7 +2705,7 @@ cdes:
   questionnaire_text: ''
   widget_name: TextAreaWidget
   widget_settings: '{}'
-- abbreviated_name: Things that I like hearing someone talk about
+- abbreviated_name: My Talk
   allow_multiple: false
   calculation: ''
   code: mndLHChat
@@ -2724,7 +2723,7 @@ cdes:
   questionnaire_text: ''
   widget_name: TextAreaWidget
   widget_settings: '{}'
-- abbreviated_name: Important Daily Routines
+- abbreviated_name: Daily Routines
   allow_multiple: false
   calculation: ''
   code: mndLHDaily
@@ -2742,7 +2741,7 @@ cdes:
   questionnaire_text: ''
   widget_name: TextAreaWidget
   widget_settings: '{}'
-- abbreviated_name: My favourite films
+- abbreviated_name: My Films
   allow_multiple: false
   calculation: ''
   code: mndLHFilms
@@ -2778,7 +2777,7 @@ cdes:
   questionnaire_text: ''
   widget_name: TextAreaWidget
   widget_settings: '{}'
-- abbreviated_name: Things and hobbies that interest me
+- abbreviated_name: My Interests
   allow_multiple: false
   calculation: ''
   code: mndLHHobbies
@@ -2796,7 +2795,7 @@ cdes:
   questionnaire_text: ''
   widget_name: TextAreaWidget
   widget_settings: '{}'
-- abbreviated_name: My life so far
+- abbreviated_name: My Life
   allow_multiple: false
   calculation: ''
   code: mndLHLife
@@ -2815,7 +2814,7 @@ cdes:
   questionnaire_text: ''
   widget_name: TextAreaWidget
   widget_settings: '{}'
-- abbreviated_name: Music or radio stations that I like to listen to
+- abbreviated_name: My Music
   allow_multiple: false
   calculation: ''
   code: mndLHMusic
@@ -2833,7 +2832,7 @@ cdes:
   questionnaire_text: ''
   widget_name: TextAreaWidget
   widget_settings: '{}'
-- abbreviated_name: Things that make me feel better if I am anxious or upset
+- abbreviated_name: My Calm
   allow_multiple: false
   calculation: ''
   code: mndLHRemedies
@@ -2851,7 +2850,7 @@ cdes:
   questionnaire_text: ''
   widget_name: TextAreaWidget
   widget_settings: '{}'
-- abbreviated_name: My blog or website
+- abbreviated_name: My Internet
   allow_multiple: false
   calculation: ''
   code: mndLHSocialMedia
@@ -2869,7 +2868,7 @@ cdes:
   questionnaire_text: ''
   widget_name: TextAreaWidget
   widget_settings: '{}'
-- abbreviated_name: Television shows I enjoy
+- abbreviated_name: My TV
   allow_multiple: false
   calculation: ''
   code: mndLHTV
@@ -2905,7 +2904,7 @@ cdes:
   questionnaire_text: ''
   widget_name: TextAreaWidget
   widget_settings: '{}'
-- abbreviated_name: Things that worry and upset me
+- abbreviated_name: My Worries
   allow_multiple: false
   calculation: ''
   code: mndLHWorries
@@ -2923,7 +2922,7 @@ cdes:
   questionnaire_text: ''
   widget_name: TextAreaWidget
   widget_settings: '{}'
-- abbreviated_name: Difficult breath lay flat
+- abbreviated_name: Difficult Breath Lay Flat
   allow_multiple: false
   calculation: ''
   code: mndLayBreath
@@ -3085,7 +3084,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
-- abbreviated_name: I need help with mouth care
+- abbreviated_name: Mouth Care Help
   allow_multiple: false
   calculation: ''
   code: mndMHelp
@@ -3102,7 +3101,7 @@ cdes:
   pv_group: mndYN
   questionnaire_text: ''
   widget_name: RadioSelect
-  widget_settings: '{}'
+  widget_settings: '{"force_vertical":false}'
 - abbreviated_name: MIP
   allow_multiple: false
   calculation: ''
@@ -3121,7 +3120,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
-- abbreviated_name: I manage excessive saliva with the following
+- abbreviated_name: Manage Excess Saliva
   allow_multiple: true
   calculation: ''
   code: mndManageSaliva
@@ -3139,7 +3138,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
-- abbreviated_name: I take it as follows
+- abbreviated_name: Med Administration
   allow_multiple: false
   calculation: ''
   code: mndMedAdmin
@@ -3157,7 +3156,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
-- abbreviated_name: Dose
+- abbreviated_name: Med Dose
   allow_multiple: false
   calculation: ''
   code: mndMedDose
@@ -3176,7 +3175,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
-- abbreviated_name: How frequently do you take it
+- abbreviated_name: Med Frequency
   allow_multiple: false
   calculation: ''
   code: mndMedFreq
@@ -3194,7 +3193,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
-- abbreviated_name: Medicine Name
+- abbreviated_name: Med Name
   allow_multiple: false
   calculation: ''
   code: mndMedName
@@ -3231,7 +3230,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
-- abbreviated_name: What it is for
+- abbreviated_name: Med Purpose
   allow_multiple: false
   calculation: ''
   code: mndMedPurpose
@@ -3249,7 +3248,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
-- abbreviated_name: Time 1
+- abbreviated_name: Med Time 1
   allow_multiple: true
   calculation: ''
   code: mndMedTime
@@ -3267,7 +3266,7 @@ cdes:
   questionnaire_text: ''
   widget_name: TimeWidget
   widget_settings: '{"format":"12hour"}'
-- abbreviated_name: Time 2
+- abbreviated_name: Med Time 2
   allow_multiple: true
   calculation: ''
   code: mndMedTime2
@@ -3285,7 +3284,7 @@ cdes:
   questionnaire_text: ''
   widget_name: TimeWidget
   widget_settings: '{"format":"12hour"}'
-- abbreviated_name: Time 3
+- abbreviated_name: Med Time 3
   allow_multiple: true
   calculation: ''
   code: mndMedTime3
@@ -3303,7 +3302,7 @@ cdes:
   questionnaire_text: ''
   widget_name: TimeWidget
   widget_settings: '{"format":"12hour"}'
-- abbreviated_name: Time 4
+- abbreviated_name: Med Time 4
   allow_multiple: true
   calculation: ''
   code: mndMedTime4
@@ -3321,7 +3320,7 @@ cdes:
   questionnaire_text: ''
   widget_name: TimeWidget
   widget_settings: '{"format":"12hour"}'
-- abbreviated_name: Time 5
+- abbreviated_name: Med Time 5
   allow_multiple: true
   calculation: ''
   code: mndMedTime5
@@ -3339,7 +3338,7 @@ cdes:
   questionnaire_text: ''
   widget_name: TimeWidget
   widget_settings: '{"format":"12hour"}'
-- abbreviated_name: Time 6
+- abbreviated_name: Med Time 6
   allow_multiple: true
   calculation: ''
   code: mndMedTime6
@@ -3357,7 +3356,7 @@ cdes:
   questionnaire_text: ''
   widget_name: TimeWidget
   widget_settings: '{"format":"12hour"}'
-- abbreviated_name: Please specify the times you take your medication
+- abbreviated_name: Med When Taken
   allow_multiple: false
   calculation: ''
   code: mndMedTime6Plus
@@ -3395,7 +3394,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ProductLookupWidget
   widget_settings: '{}'
-- abbreviated_name: I can move myself
+- abbreviated_name: Move Self
   allow_multiple: false
   calculation: ''
   code: mndMove
@@ -3412,8 +3411,8 @@ cdes:
   pv_group: mndYN
   questionnaire_text: ''
   widget_name: RadioSelect
-  widget_settings: '{}'
-- abbreviated_name: I use the following equipment to move around
+  widget_settings: '{"force_vertical":false}'
+- abbreviated_name: Move Aids
   allow_multiple: false
   calculation: ''
   code: mndMoveAids
@@ -3503,7 +3502,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
-- abbreviated_name: I use non-invasive ventilation NIV
+- abbreviated_name: Breathe NIV
   allow_multiple: false
   calculation: ''
   code: mndNIVYN
@@ -3521,7 +3520,7 @@ cdes:
   questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
-- abbreviated_name: In the last week Ive used NIV approximately X hours per day
+- abbreviated_name: NIV Use Last Week
   allow_multiple: false
   calculation: ''
   code: mndNIVdur
@@ -3539,7 +3538,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
-- abbreviated_name: I need help to
+- abbreviated_name: Need Help
   allow_multiple: true
   calculation: ''
   code: mndNeedHelp
@@ -3557,7 +3556,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
-- abbreviated_name: I need to use
+- abbreviated_name: Need Aid
   allow_multiple: true
   calculation: ''
   code: mndNeedUse
@@ -3593,7 +3592,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
-- abbreviated_name: I am more comfortable in bed when
+- abbreviated_name: Bed Comfy
   allow_multiple: false
   calculation: ''
   code: mndNotes
@@ -3666,7 +3665,7 @@ cdes:
   questionnaire_text: ''
   widget_name: DateWidget
   widget_settings: '{}'
-- abbreviated_name: Other Reason
+- abbreviated_name: Why Avoid OTher
   allow_multiple: false
   calculation: ''
   code: mndOther
@@ -3683,7 +3682,7 @@ cdes:
   pv_group: avoidReason
   questionnaire_text: ''
   widget_name: RadioSelect
-  widget_settings: '{}'
+  widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Other Family MNDALS
   allow_multiple: false
   calculation: ''
@@ -3720,7 +3719,7 @@ cdes:
   questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
-- abbreviated_name: I use tube feeding PEG
+- abbreviated_name: Use PEG
   allow_multiple: false
   calculation: ''
   code: mndPEG
@@ -3738,7 +3737,7 @@ cdes:
   questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
-- abbreviated_name: Personal Hygiene
+- abbreviated_name: Hygiene Help
   allow_multiple: false
   calculation: ''
   code: mndPHygiene
@@ -3755,7 +3754,7 @@ cdes:
   pv_group: careChoices
   questionnaire_text: ''
   widget_name: RadioSelect
-  widget_settings: '{}'
+  widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Pain
   allow_multiple: false
   calculation: ''
@@ -3774,7 +3773,7 @@ cdes:
   questionnaire_text: ''
   widget_name: SliderWidget
   widget_settings: '{"min":"0","max":"10","left_label":"None","right_label":"Severe","step":"1"}'
-- abbreviated_name: Peanuts Reason
+- abbreviated_name: Why Avoid Peanut
   allow_multiple: false
   calculation: ''
   code: mndPeanuts
@@ -3791,8 +3790,8 @@ cdes:
   pv_group: avoidReason
   questionnaire_text: ''
   widget_name: RadioSelect
-  widget_settings: '{}'
-- abbreviated_name: I use
+  widget_settings: '{"force_vertical":false}'
+- abbreviated_name: Physical Aid
   allow_multiple: true
   calculation: ''
   code: mndPhyUse
@@ -3810,7 +3809,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
-- abbreviated_name: Make this person my primary contact
+- abbreviated_name: Make Primary Contact
   allow_multiple: true
   calculation: ''
   code: mndPrimary
@@ -3864,7 +3863,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
-- abbreviated_name: Red Meat Reason
+- abbreviated_name: Why Avoid Red Meat
   allow_multiple: false
   calculation: ''
   code: mndRed
@@ -3881,7 +3880,7 @@ cdes:
   pv_group: avoidReason
   questionnaire_text: ''
   widget_name: RadioSelect
-  widget_settings: '{}'
+  widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Respiratory Insufficiency
   allow_multiple: false
   calculation: ''
@@ -3900,7 +3899,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
-- abbreviated_name: I need rest when
+- abbreviated_name: Rest Needed
   allow_multiple: false
   calculation: ''
   code: mndRestNeeded
@@ -4064,7 +4063,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
-- abbreviated_name: Other Please Specify
+- abbreviated_name: Manage Excess Saliva Other
   allow_multiple: false
   calculation: ''
   code: mndSalivaOther
@@ -4082,7 +4081,7 @@ cdes:
   questionnaire_text: ''
   widget_name: TextAreaWidget
   widget_settings: '{}'
-- abbreviated_name: Shellfish Reason
+- abbreviated_name: Why Avoid Shellfish
   allow_multiple: false
   calculation: ''
   code: mndShell
@@ -4099,8 +4098,8 @@ cdes:
   pv_group: avoidReason
   questionnaire_text: ''
   widget_name: RadioSelect
-  widget_settings: '{}'
-- abbreviated_name: Showering
+  widget_settings: '{"force_vertical":false}'
+- abbreviated_name: Shower Help
   allow_multiple: false
   calculation: ''
   code: mndShower
@@ -4117,7 +4116,7 @@ cdes:
   pv_group: careChoices
   questionnaire_text: ''
   widget_name: RadioSelect
-  widget_settings: '{}'
+  widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Sleep Study Date
   allow_multiple: false
   calculation: ''
@@ -4173,7 +4172,7 @@ cdes:
   questionnaire_text: ''
   widget_name: DateWidget
   widget_settings: '{}'
-- abbreviated_name: Soy Reason
+- abbreviated_name: Why Avoid Soy
   allow_multiple: false
   calculation: ''
   code: mndSoy
@@ -4190,7 +4189,7 @@ cdes:
   pv_group: avoidReason
   questionnaire_text: ''
   widget_name: RadioSelect
-  widget_settings: '{}'
+  widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Stiffness Spasticity
   allow_multiple: false
   calculation: ''
@@ -4307,7 +4306,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
-- abbreviated_name: I use mouth swabs in addition
+- abbreviated_name: Mouth Swabs
   allow_multiple: false
   calculation: ''
   code: mndSwabs
@@ -4324,7 +4323,7 @@ cdes:
   pv_group: mndYN
   questionnaire_text: ''
   widget_name: RadioSelect
-  widget_settings: '{}'
+  widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Swallowing
   allow_multiple: false
   calculation: ''
@@ -4343,8 +4342,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
-- abbreviated_name: I have made changes to the way I eat or drink because of a change
-    in my swallowing
+- abbreviated_name: Change Due To Swallow
   allow_multiple: false
   calculation: ''
   code: mndSwallowD
@@ -4381,7 +4379,7 @@ cdes:
   questionnaire_text: ''
   widget_name: DateWidget
   widget_settings: '{}'
-- abbreviated_name: I use the following equipment to do things
+- abbreviated_name: Task Aids
   allow_multiple: false
   calculation: ''
   code: mndTaskAids
@@ -4599,7 +4597,7 @@ cdes:
   questionnaire_text: ''
   widget_name: DateWidget
   widget_settings: ''
-- abbreviated_name: Toileting
+- abbreviated_name: Toilet Help
   allow_multiple: false
   calculation: ''
   code: mndToil
@@ -4616,7 +4614,7 @@ cdes:
   pv_group: careChoices
   questionnaire_text: ''
   widget_name: RadioSelect
-  widget_settings: '{}'
+  widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Trach
   allow_multiple: false
   calculation: ''
@@ -4653,7 +4651,7 @@ cdes:
   questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
-- abbreviated_name: I need help to transfer to
+- abbreviated_name: Need Help Transfer
   allow_multiple: true
   calculation: ''
   code: mndTransHelp
@@ -4946,7 +4944,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
-- abbreviated_name: I can walk
+- abbreviated_name: I Can Walk
   allow_multiple: false
   calculation: ''
   code: mndWalking
@@ -4964,7 +4962,7 @@ cdes:
   questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":true}'
-- abbreviated_name: I have weakness in my
+- abbreviated_name: Weakness In
   allow_multiple: true
   calculation: ''
   code: mndWeakness
@@ -5000,7 +4998,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
-- abbreviated_name: I have breathing difficulties when I am
+- abbreviated_name: Breathe Difficult When
   allow_multiple: true
   calculation: ''
   code: mndWhenBreathHard
@@ -5018,7 +5016,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
-- abbreviated_name: White Meat Reason
+- abbreviated_name: Why Avoid White Meat
   allow_multiple: false
   calculation: ''
   code: mndWhite
@@ -5035,7 +5033,7 @@ cdes:
   pv_group: avoidReason
   questionnaire_text: ''
   widget_name: RadioSelect
-  widget_settings: '{}'
+  widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Handwriting
   allow_multiple: false
   calculation: ''
@@ -5054,7 +5052,7 @@ cdes:
   questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
-- abbreviated_name: I have excessive saliva
+- abbreviated_name: Excess Saliva
   allow_multiple: false
   calculation: ''
   code: mndXSaliva
@@ -5071,7 +5069,7 @@ cdes:
   pv_group: mndSalivaFreq
   questionnaire_text: ''
   widget_name: RadioSelect
-  widget_settings: '{}'
+  widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Current smoking status
   allow_multiple: false
   calculation: ''
@@ -5576,7 +5574,7 @@ cdes:
   questionnaire_text: ''
   widget_name: TextAreaWidget
   widget_settings: ''
-- abbreviated_name: My most comfortable position is
+- abbreviated_name: My Most Comfy Pos
   allow_multiple: false
   calculation: ''
   code: myMostComfy
@@ -5764,7 +5762,7 @@ cdes:
   questionnaire_text: ''
   widget_name: DateWidget
   widget_settings: ''
-- abbreviated_name: files uploaded
+- abbreviated_name: Files Uploaded
   allow_multiple: true
   calculation: ''
   code: uploadedForm
@@ -5970,7 +5968,7 @@ consent_sections:
   section_label: My Data
   validation_rule: ''
 context_form_groups:
-- abbreviated_name: My Appointments
+- abbreviated_name: AppCFG
   code: myAppointCFG
   context_type: F
   forms:
@@ -5981,7 +5979,7 @@ context_form_groups:
   naming_scheme: D
   ordering: C
   sort_order: 8
-- abbreviated_name: My Calculators
+- abbreviated_name: CalcCFG
   code: myCalcsCFG
   context_type: F
   forms:
@@ -5993,7 +5991,7 @@ context_form_groups:
   naming_scheme: D
   ordering: C
   sort_order: 5
-- abbreviated_name: My Care Team
+- abbreviated_name: CareCFG
   code: myCareTeamCFG
   context_type: F
   forms:
@@ -6004,7 +6002,7 @@ context_form_groups:
   naming_scheme: D
   ordering: C
   sort_order: 7
-- abbreviated_name: My Diary
+- abbreviated_name: DiaryCFG
   code: myDiaryCFG
   context_type: M
   forms:
@@ -6015,7 +6013,7 @@ context_form_groups:
   naming_scheme: C
   ordering: C
   sort_order: 2
-- abbreviated_name: external visit CFG
+- abbreviated_name: ExtVisCFG
   code: externalVisitCFG
   context_type: F
   forms:
@@ -6026,7 +6024,7 @@ context_form_groups:
   naming_scheme: D
   ordering: C
   sort_order: 6
-- abbreviated_name: My Journey
+- abbreviated_name: JourCFG
   code: myJourneyCFG
   context_type: F
   forms:
@@ -6039,7 +6037,7 @@ context_form_groups:
   naming_scheme: D
   ordering: C
   sort_order: 3
-- abbreviated_name: My Legal Documents
+- abbreviated_name: LegalCFG
   code: myLegalDocsCFG
   context_type: F
   forms:
@@ -6050,7 +6048,7 @@ context_form_groups:
   naming_scheme: D
   ordering: C
   sort_order: 1
-- abbreviated_name: My Needs
+- abbreviated_name: MyNeedCFG
   code: myNeedsCFG
   context_type: F
   forms:
@@ -6398,7 +6396,7 @@ email_notifications:
   recipient: '{{ patient.user.email }}'
 form_titles: null
 forms:
-- abbreviated_name: MyALSFRSCalc
+- abbreviated_name: My ALSFRS
   applicability_condition: ''
   conditional_rendering_rules: |-
     mndNoGasCut visible if gastroQuestion == No
@@ -6887,7 +6885,7 @@ forms:
     questionnaire_help: ''
   tags:
   - patient-reported
-- abbreviated_name: My Positioning
+- abbreviated_name: Position Form
   applicability_condition: ''
   conditional_rendering_rules: mndComfyOther visible if myMostComfy == Other
   display_name: My Positioning
@@ -6911,7 +6909,7 @@ forms:
     extra: null
     questionnaire_display_name: ''
     questionnaire_help: ''
-  - abbreviated_name: When I am in bed
+  - abbreviated_name: When In Bed
     allow_multiple: false
     code: inBed
     display_name: 'When I am in bed:'
@@ -6924,7 +6922,7 @@ forms:
     extra: null
     questionnaire_display_name: ''
     questionnaire_help: ''
-  - abbreviated_name: When sitting I can
+  - abbreviated_name: When Sit
     allow_multiple: false
     code: mndSitting
     display_name: 'When sitting, I can:'
@@ -6937,7 +6935,7 @@ forms:
     questionnaire_help: ''
   tags:
   - patient-reported
-- abbreviated_name: My Appointments
+- abbreviated_name: Appointment Form
   applicability_condition: ''
   conditional_rendering_rules: ''
   display_name: Appointment Schedule
@@ -6951,7 +6949,7 @@ forms:
   questionnaire_display_name: ''
   questionnaire_questions: ''
   sections:
-  - abbreviated_name: List of Appointments
+  - abbreviated_name: List
     allow_multiple: true
     code: mndApptList
     display_name: List of Appointments
@@ -6964,7 +6962,7 @@ forms:
     questionnaire_help: ''
   tags:
   - patient-reported
-- abbreviated_name: My Breathing
+- abbreviated_name: Breathe Form
   applicability_condition: ''
   conditional_rendering_rules: |-
     mndNIVWhen mndNIVUse mndNIVdur visible if mndNIVYN == Yes
@@ -7000,7 +6998,7 @@ forms:
     questionnaire_help: ''
   tags:
   - patient-reported
-- abbreviated_name: My Care Team
+- abbreviated_name: Care Team Form
   applicability_condition: ''
   conditional_rendering_rules: ''
   display_name: My Care Team
@@ -7042,7 +7040,7 @@ forms:
     questionnaire_help: ''
   tags:
   - patient-reported
-- abbreviated_name: My Comms
+- abbreviated_name: Comms Form
   applicability_condition: ''
   conditional_rendering_rules: |-
     mndComTechOther visible if mndComTechs includes compWithSwitch
@@ -7071,7 +7069,7 @@ forms:
     questionnaire_help: ''
   tags:
   - patient-reported
-- abbreviated_name: My Eat Drink
+- abbreviated_name: Eat Drink Form
   applicability_condition: ''
   conditional_rendering_rules: |-
     mndGluten visible if mndAvoidFoods includes Gluten
@@ -7095,7 +7093,7 @@ forms:
   questionnaire_display_name: ''
   questionnaire_questions: ''
   sections:
-  - abbreviated_name: Needs Eating and Drinking
+  - abbreviated_name: My Eat Drink
     allow_multiple: false
     code: mndEating
     display_name: 'Needs: Eating and Drinking'
@@ -7127,7 +7125,7 @@ forms:
     questionnaire_help: ''
   tags:
   - patient-reported
-- abbreviated_name: My Emotions
+- abbreviated_name: Emotion Form
   applicability_condition: ''
   conditional_rendering_rules: ''
   display_name: My Emotions / Behaviour
@@ -7152,7 +7150,7 @@ forms:
     questionnaire_help: ''
   tags:
   - patient-reported
-- abbreviated_name: My ESS
+- abbreviated_name: ESS Form
   applicability_condition: ''
   conditional_rendering_rules: ''
   display_name: My ESS Calculator
@@ -7168,10 +7166,10 @@ forms:
   questionnaire_display_name: ''
   questionnaire_questions: ''
   sections:
-  - abbreviated_name: Situation
+  - abbreviated_name: ESS Situation
     allow_multiple: false
     code: essSituation
-    display_name: Situation
+    display_name: ESS Situation
     elements:
     - mndESSSit
     - mndESSTV
@@ -7195,7 +7193,7 @@ forms:
     questionnaire_help: ''
   tags:
   - patient-reported
-- abbreviated_name: My Legal Docs
+- abbreviated_name: Legal Docs Form
   applicability_condition: ''
   conditional_rendering_rules: |-
     mndDocTypeOther visible if mndLDocs includes "Other"
@@ -7231,7 +7229,7 @@ forms:
     questionnaire_help: ''
   tags:
   - patient-reported
-- abbreviated_name: My Mouth Care
+- abbreviated_name: Mouth Care Form
   applicability_condition: ''
   conditional_rendering_rules: |-
     mndManageSaliva visible if mndXSaliva == Always or mndXSaliva == Sometimes
@@ -7246,7 +7244,7 @@ forms:
   questionnaire_display_name: ''
   questionnaire_questions: ''
   sections:
-  - abbreviated_name: Mouth Care and Saliva Management
+  - abbreviated_name: Mouth and Saliva
     allow_multiple: false
     code: mndMouth
     display_name: Mouth Care and Saliva Management
@@ -7262,7 +7260,7 @@ forms:
     questionnaire_help: ''
   tags:
   - patient-reported
-- abbreviated_name: My Medical History
+- abbreviated_name: Medical History Form
   applicability_condition: ''
   conditional_rendering_rules: mndCondOther visible if mndConditions includes Other
   display_name: My Medical History
@@ -7288,7 +7286,7 @@ forms:
     questionnaire_help: ''
   tags:
   - patient-reported
-- abbreviated_name: My Meds and Allergies
+- abbreviated_name: Meds and Allergies Form
   applicability_condition: ''
   conditional_rendering_rules: |-
     mndMedOther visible if mndMedFreq == Other
@@ -7309,7 +7307,7 @@ forms:
   questionnaire_display_name: ''
   questionnaire_questions: ''
   sections:
-  - abbreviated_name: Medicines I Take
+  - abbreviated_name: My Meds
     allow_multiple: true
     code: myMedList
     display_name: Medicines I Take
@@ -7342,7 +7340,7 @@ forms:
     questionnaire_help: ''
   tags:
   - patient-reported
-- abbreviated_name: My Life History
+- abbreviated_name: Life History Form
   applicability_condition: ''
   conditional_rendering_rules: ''
   display_name: My Life History
@@ -7381,7 +7379,7 @@ forms:
     questionnaire_help: ''
   tags:
   - patient-reported
-- abbreviated_name: My Personal Care
+- abbreviated_name: Personal Care Form
   applicability_condition: ''
   conditional_rendering_rules: ''
   display_name: My Personal Care
@@ -7394,7 +7392,7 @@ forms:
   questionnaire_display_name: ''
   questionnaire_questions: ''
   sections:
-  - abbreviated_name: I need help with
+  - abbreviated_name: Personal Care Assist
     allow_multiple: false
     code: personalCare
     display_name: 'I need help with:'
@@ -7409,10 +7407,10 @@ forms:
     questionnaire_help: ''
   tags:
   - patient-reported
-- abbreviated_name: My Physical Ability
+- abbreviated_name: Physical Ability Form
   applicability_condition: ''
   conditional_rendering_rules: ''
-  display_name: My Physical Ability
+  display_name: My Physical
   header: |-
     <h2>My Physical Ability</h2>
     <p><a href="https://www.mindaus.org/wp-content/uploads/2022/05/09124956/UserGuideMindausPatientApril2022PartTwoV01.pdf">MiNDAUS Registry User Guide</a></p>
@@ -7439,7 +7437,7 @@ forms:
     questionnaire_help: ''
   tags:
   - patient-reported
-- abbreviated_name: External Visit
+- abbreviated_name: External Visit Form
   applicability_condition: ''
   conditional_rendering_rules: ''
   display_name: External Specialist Visits
@@ -7458,7 +7456,7 @@ forms:
   questionnaire_display_name: ''
   questionnaire_questions: ''
   sections:
-  - abbreviated_name: ExtFirst
+  - abbreviated_name: External First
     allow_multiple: false
     code: externalVisitFirstSec
     display_name: External Specialist Visit - First Visit
@@ -7470,7 +7468,7 @@ forms:
     extra: null
     questionnaire_display_name: ''
     questionnaire_help: ''
-  - abbreviated_name: extSubsequent
+  - abbreviated_name: External Subsequent
     allow_multiple: true
     code: externalVisitSubSec
     display_name: External Specialist Visit - Subsequent Visits
@@ -7484,7 +7482,7 @@ forms:
     questionnaire_help: ''
   tags:
   - patient-reported
-- abbreviated_name: My Symptoms
+- abbreviated_name: Symptoms Form
   applicability_condition: ''
   conditional_rendering_rules: ''
   display_name: My Recent Symptoms
@@ -7501,7 +7499,7 @@ forms:
   questionnaire_display_name: ''
   questionnaire_questions: ''
   sections:
-  - abbreviated_name: Symptoms
+  - abbreviated_name: Symp
     allow_multiple: false
     code: symptomTypes
     display_name: Symptoms
@@ -9056,8 +9054,8 @@ group_permissions:
 metadata_json: '{"features": ["registration", "contexts", "patients_create_users",
   "clinicians_need_ethical_clearance", "patient_guid", "patient_address_is_mandatory"],
   "patient_list": {"columns": ["full_name", "date_of_birth", {"code": {"label": "Gender"}},
-  "last_updated_overall_at", "living_status", "modules"], "facets": [{"living_status":
-  {"default": "Alive"}}]}}'
+  "last_updated_overall_at", "modules"], "facets": [{"living_status": {"default":
+  "Alive"}}]}}'
 name: MiNDAUS Registry
 next_of_kin_relationships: []
 patient_data_section: {}
