@@ -1,5 +1,11 @@
+import logging
+
 from rest_framework import serializers
 from rdrf.services.rest.serializers import PatientSerializer
+
+from rdrf.models.definition.models import RegistryForm, RDRFContext, ContextFormGroup
+
+logger = logging.getLogger(__name__)
 
 
 class MNDPatientSerializer(PatientSerializer):
@@ -7,25 +13,32 @@ class MNDPatientSerializer(PatientSerializer):
 
     def get_first_visit(self, obj):
         registries = obj.rdrf_registry.all()
-        target_forms = [
-            form_model
-            for registry_model in registries
-            for form_model in registry_model.forms
-            if form_model.name.lower() == 'firstvisit'
-        ]
-        if not target_forms:
+
+        form_model = RegistryForm.objects.filter(registry__in=registries, name__iexact='firstvisit').first()  # Yuck
+
+        if not form_model:
             return None
-        form_model = target_forms[0]
-        for section_model in form_model.section_models:
-            for cde_model in section_model.cde_models:
-                if cde_model.name.lower() == 'visit date':
-                    try:
-                        return obj.get_form_value(
-                            form_model.registry.code,
-                            form_model.name,
-                            section_model.code,
-                            cde_model.code,
-                            section_model.allow_multiple
-                        )
-                    except KeyError:
-                        return None
+
+        registry = form_model.registry
+        context_form_groups = ContextFormGroup.objects.filter(items__registry_form=form_model)  # Yuck
+
+        cde_lookup_codes = ['mndVDate', 'mndOnset']
+        cde_lookups = {cde.code: (form_model.name, section.code, cde.code)
+                       for section in form_model.section_models
+                       for cde in section.cde_models
+                       if cde.code in cde_lookup_codes}
+
+        contexts = RDRFContext.objects.get_for_patient(obj, registry).filter(context_form_group__in=context_form_groups)
+
+        for context in contexts:
+            lookup_values = {key: obj.get_form_value(registry.code,
+                                                     form_name,
+                                                     section_code,
+                                                     cde_code,
+                                                     context_id=context.id)
+                             for key, (form_name, section_code, cde_code) in cde_lookups.items()}
+
+            # If we found values for any of the lookups, then don't look any further
+            # This assumes all lookup values are in the one context (this may be a bad assumption)
+            if any(lookup_values.values()):
+                return lookup_values
