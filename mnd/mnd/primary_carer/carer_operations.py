@@ -6,7 +6,7 @@ from django.conf import settings
 from django.shortcuts import reverse
 from django.utils import timezone
 from django.utils.http import urlencode
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 from rdrf.helpers.utils import make_full_url
 from registry.groups.models import CustomUser
