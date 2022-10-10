@@ -1,4 +1,4 @@
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 from rdrf.events.events import EventType
 from rdrf.helpers.constants import PATIENT_PERSONAL_DETAILS_SECTION_NAME
