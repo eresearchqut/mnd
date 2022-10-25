@@ -1,11 +1,30 @@
 from cachetools import TTLCache
+import functools
 import logging
 import requests
 import urllib
 
 from django.conf import settings
 
+from mnd.models import MIMSProductCache, MIMSCMICache
+
 logger = logging.getLogger(__name__)
+
+
+def cached_lookup(model):
+    def decorator(fn):
+        @functools.wraps(fn)
+        def wrapper(self, uuid):
+            response = fn(self, uuid)
+            if response:
+                model.objects.update_or_create(uuid=uuid, defaults={'data': response})
+            else:
+                cached_value = model.objects.filter(uuid=uuid).first()
+                if cached_value:
+                    response = cached_value.data
+            return response
+        return wrapper
+    return decorator
 
 
 class MIMSApi:
@@ -69,6 +88,7 @@ class MIMSApi:
             logger.exception("Exception while searching for products", e)
             return {}
 
+    @cached_lookup(MIMSProductCache)
     def get_product_details(self, product_id):
         fields = urllib.parse.urlencode({
             "fields": "cmis, brand, productName, mimsClasses"
@@ -80,6 +100,7 @@ class MIMSApi:
             logger.exception("Exception while fetching product details", e)
             return {}
 
+    @cached_lookup(MIMSCMICache)
     def get_cmi_details(self, cmi_id):
         try:
             resp = requests.get(self._full_url(f"{self.CMI_DETAILS_URI}/{cmi_id}"), headers=self._make_auth_header())

@@ -4,6 +4,7 @@ from django.db import models
 
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
+from simple_history.models import HistoricalRecords
 
 from registry.patients.models import Patient
 
@@ -218,3 +219,19 @@ class PatientLanguage(models.Model):
     patient = models.OneToOneField(Patient, related_name='language_info', on_delete=models.CASCADE)
     preferred_language = models.CharField(choices=LANGUAGE_CHOICES, max_length=30, default='en')
     interpreter_required = models.BooleanField(default=False)
+
+
+class MIMSProductCache(models.Model):
+    uuid = models.UUIDField(unique=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    data = models.JSONField()
+    history = HistoricalRecords()
+
+
+class MIMSCMICache(models.Model):
+    uuid = models.UUIDField(unique=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    data = models.JSONField()
+    history = HistoricalRecords()
