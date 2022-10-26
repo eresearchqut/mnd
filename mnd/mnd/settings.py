@@ -50,6 +50,8 @@ MIMS_CLIENT_SECRET = env.get('mims_client_secret', '')
 MIMS_ENDPOINT = env.get('mims_endpoint', '')
 EXTRA_WIDGETS = 'mnd.forms.widgets.mnd_widgets'
 
+QUICKLINKS_CLASS = 'mnd.forms.navigation.quick_links.MNDQuickLinks'
+
 REGISTRY_FORM_TAGS = (("patient-reported", "Patient-reported form"),)
 
 ACCOUNT_ACTIVATION_DAYS = 90
