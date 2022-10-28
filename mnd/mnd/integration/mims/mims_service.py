@@ -60,7 +60,7 @@ def mims_product_details(product):
             mims = ", ".join(product_details['mimsClasses'])
             name = product_details.get('productName', '')
 
-            active_ingredient = next((p.activeIngredient for p in mims_product_iter(name) if p.id == product), None)
+            active_ingredient = next(iter(product_details["acgs"]), {'acgName': None})['acgName']
             cmis = product_details.get("cmis", [])
 
             return ProductInfo(product, name, mims, active_ingredient, cmis)
