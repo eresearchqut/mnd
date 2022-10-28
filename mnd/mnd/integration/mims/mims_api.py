@@ -91,7 +91,7 @@ class MIMSApi:
     @cached_lookup(MIMSProductCache)
     def get_product_details(self, product_id):
         fields = urllib.parse.urlencode({
-            "fields": "cmis, brand, productName, mimsClasses"
+            "fields": "cmis, brand, productName, mimsClasses, acgs"
         })
         try:
             resp = requests.get(self._full_url(f"{self.PRODUCT_URI}/{product_id}?{fields}"), headers=self._make_auth_header())
