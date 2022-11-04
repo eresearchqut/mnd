@@ -10,8 +10,6 @@ from .views.health_check import health_check
 from mnd.integration.mims import mims_view
 from rdrf.urls import urlpatterns as rdrf_urlpatterns
 
-rdrf_urls = [p for p in rdrf_urlpatterns if not getattr(p, 'app_name', None) == 'api_urls']
-
 # Any custom URLs go here before we include the TRRF urls
 urlpatterns = [
     re_path(r'^pdf/about_me/(?P<registry_code>\w+)/(?P<patient_id>\d+)/?$', pdf_export, name='about_me'),
@@ -23,8 +21,6 @@ urlpatterns = [
     re_path(r'^carer_operations/?$', CarerOperationsView.as_view(), name='carer_operations'),
     re_path(r'^(?P<registry_code>\w+)/carer_registration/?$', MNDRegistrationView.as_view(), name='carer_registration'),
 
-    re_path(r'^api/v1/', include(('mnd.services.rest.urls.api_urls', 'api_urls'), namespace='v1')),
-
     re_path(r'^mims/product_search', mims_view.product_search, name='mims_product_search'),
     re_path(r'^mims/product_details', mims_view.product_details, name='mims_product_details'),
     re_path(r'^mims/cmi_details', mims_view.cmi_details, name='mims_cmi_details'),
@@ -33,5 +29,5 @@ urlpatterns = [
     re_path(r'^health-check/?$', health_check, name='mnd_health_check'),
     re_path(r'^$', LandingView.as_view(), name='landing'),
 
-    re_path(r'', include(rdrf_urls)),
+    re_path(r'', include('rdrf.urls')),
 ]
