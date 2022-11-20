@@ -19,7 +19,7 @@ ROOT_URLCONF = '%s.urls' % FALLBACK_REGISTRY_CODE
 SEND_ACTIVATION_EMAIL = False
 
 PROJECT_TITLE = env.get("project_title", "MiNDAUS Registry")
-PROJECT_TITLE_LINK = {"viewname": "registry", "kwargs": {"registry_code": FALLBACK_REGISTRY_CODE}}
+PROJECT_TITLE_LINK = "login_router"
 
 PROJECT_LOGO = env.get("project_logo", "images/mnd/MiND_Logo_orange.png")
 
