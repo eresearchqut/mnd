@@ -28,7 +28,7 @@
   </div>
   <div class="links d-none d-md-block">
     <div>
-      <a href="{% url 'two_factor:login' %}?next=/{{ registry.code }}/"
+      <a href="{% url 'two_factor:login' %}?next=/router/"
          class="btn custom-btn">Login</a>
     </div>
     {% if registration_enabled %}
