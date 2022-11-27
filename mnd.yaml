@@ -1,4 +1,4 @@
-EXPORT_TIME: '2022-10-26 09:55:21.510203'
+EXPORT_TIME: '2022-11-28 08:02:44.362784'
 EXPORT_TYPE: REGISTRY_PLUS_CDES
 RDRF_VERSION: 1.0.0
 REGISTRY_VERSION: '1.0'
@@ -16,6 +16,7 @@ cdes:
 - abbreviated_name: Diagnosis Tests
   allow_multiple: true
   calculation: ''
+  calculation_query: ''
   code: DxTest
   datatype: range
   desc: Tests to assist with diagnosis
@@ -34,6 +35,7 @@ cdes:
 - abbreviated_name: Diagnosis Tests Other
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: DxTestOth
   datatype: string
   desc: Please specify
@@ -52,6 +54,7 @@ cdes:
 - abbreviated_name: Confirmed By
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: MNDConfirm
   datatype: range
   desc: MND confirmed by
@@ -70,6 +73,7 @@ cdes:
 - abbreviated_name: Please specify
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: MNDConfirmOth
   datatype: string
   desc: Please specify
@@ -88,6 +92,7 @@ cdes:
 - abbreviated_name: Diagnosis
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: MNDDiagnosis
   datatype: range
   desc: ''
@@ -106,6 +111,7 @@ cdes:
 - abbreviated_name: Multi Opinion
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: MultiOpinion
   datatype: range
   desc: ''
@@ -124,6 +130,7 @@ cdes:
 - abbreviated_name: Do Not Contact
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: adminDNC
   datatype: boolean
   desc: ''
@@ -143,6 +150,7 @@ cdes:
 - abbreviated_name: Date of Exclusion
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: alsExcludeDate
   datatype: date
   desc: ''
@@ -162,6 +170,7 @@ cdes:
 - abbreviated_name: Two Week Lead Death Date BiPAP
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: bipapDate
   datatype: date
   desc: ''
@@ -181,6 +190,7 @@ cdes:
 - abbreviated_name: Cervical Region-LMN-LRBoth
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: cLMNLRB
   datatype: range
   desc: ''
@@ -199,6 +209,7 @@ cdes:
 - abbreviated_name: Cervical Region-UMN-LRBoth
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: cUMNLRB
   datatype: range
   desc: ''
@@ -217,6 +228,7 @@ cdes:
 - abbreviated_name: Uploaded CRF
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: caseReportUpload
   datatype: file
   desc: Please scan the form to PDF.
@@ -235,6 +247,7 @@ cdes:
 - abbreviated_name: med administered via
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: clinicMedAdminHow
   datatype: range
   desc: ''
@@ -253,6 +266,7 @@ cdes:
 - abbreviated_name: Date Datacurator Entry
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: dataEntryDate
   datatype: date
   desc: visible only to data curator - allowing them to record differences in data
@@ -272,6 +286,7 @@ cdes:
 - abbreviated_name: Reason Delay
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: dataEntryReason
   datatype: string
   desc: ''
@@ -290,6 +305,7 @@ cdes:
 - abbreviated_name: Two Weeks Lead Death Med Other
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: deathDrugOther
   datatype: string
   desc: ''
@@ -308,6 +324,7 @@ cdes:
 - abbreviated_name: Place of Death Other
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: deathPlaceOther
   datatype: string
   desc: ''
@@ -326,6 +343,7 @@ cdes:
 - abbreviated_name: Contact Email
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: extVisitContact
   datatype: string
   desc: ''
@@ -345,6 +363,7 @@ cdes:
 - abbreviated_name: Specialist Name
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: extVisitName
   datatype: string
   desc: ''
@@ -363,6 +382,7 @@ cdes:
 - abbreviated_name: Two Week Lead Death Date Feed Tube
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: feedTubeDate
   datatype: date
   desc: ''
@@ -382,6 +402,7 @@ cdes:
 - abbreviated_name: Date Form Uploaded
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: formUploadDate
   datatype: date
   desc: ''
@@ -400,6 +421,7 @@ cdes:
 - abbreviated_name: PFT Date
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: fvcDate
   datatype: date
   desc: ''
@@ -419,6 +441,7 @@ cdes:
 - abbreviated_name: Do you have Gastrostomy  PEG
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: gastroQuestion
   datatype: range
   desc: ''
@@ -438,6 +461,7 @@ cdes:
 - abbreviated_name: Lumbar Region-LMN-LRBoth
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: lLMNLRB
   datatype: range
   desc: ''
@@ -456,6 +480,7 @@ cdes:
 - abbreviated_name: Lumbar Region-UMN-LRBoth
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: lUMNLRB
   datatype: range
   desc: ''
@@ -474,6 +499,7 @@ cdes:
 - abbreviated_name: Legal Doc Upload
   allow_multiple: true
   calculation: ''
+  calculation_query: ''
   code: legalDocUpload
   datatype: file
   desc: ''
@@ -493,6 +519,7 @@ cdes:
 - abbreviated_name: Date of last contact
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: lostContactDate
   datatype: date
   desc: ''
@@ -512,6 +539,7 @@ cdes:
 - abbreviated_name: Adaptive Cutlery Crockery
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndACC
   datatype: range
   desc: ''
@@ -530,6 +558,7 @@ cdes:
 - abbreviated_name: ACD YesNo
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndACD
   datatype: range
   desc: ''
@@ -548,6 +577,7 @@ cdes:
 - abbreviated_name: Adaptive Device Other
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndADOther
   datatype: string
   desc: ''
@@ -566,6 +596,7 @@ cdes:
 - abbreviated_name: Adaptive Devices Used
   allow_multiple: true
   calculation: ''
+  calculation_query: ''
   code: mndADevices
   datatype: range
   desc: ''
@@ -584,6 +615,7 @@ cdes:
 - abbreviated_name: Dressing and Hygeine
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndALSDress
   datatype: range
   desc: ''
@@ -620,6 +652,7 @@ cdes:
     var alsFRS = als1 + als2 + als3 + als4 + gastroGate + als6 + als7 + als8 + als9 + als10 + als11 +als12;
 
     context.result = alsFRS || 0;
+  calculation_query: ''
   code: mndALSFRS
   datatype: calculated
   desc: ''
@@ -639,6 +672,7 @@ cdes:
 - abbreviated_name: Salivation
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndALSSaliva
   datatype: range
   desc: ''
@@ -675,6 +709,7 @@ cdes:
     var alsFRS = als1 + als2 + als3 + als4 + gastroGate + als6 + als7 + als8 + als9 + als10 + als11 +als12;
 
     context.result = alsFRS || 0;
+  calculation_query: ''
   code: mndALSScore
   datatype: calculated
   desc: ''
@@ -693,6 +728,7 @@ cdes:
 - abbreviated_name: Behave score
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndALSbehaviour
   datatype: integer
   desc: ''
@@ -711,6 +747,7 @@ cdes:
 - abbreviated_name: ALS-non specific
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndALSnonspecific
   datatype: integer
   desc: ''
@@ -729,6 +766,7 @@ cdes:
 - abbreviated_name: Psychosis score
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndALSpsychotic
   datatype: integer
   desc: ''
@@ -747,6 +785,7 @@ cdes:
 - abbreviated_name: ALS-Specific Score
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndALSspecific
   datatype: integer
   desc: ''
@@ -765,6 +804,7 @@ cdes:
 - abbreviated_name: Total score
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndALStotal
   datatype: integer
   desc: ''
@@ -783,6 +823,7 @@ cdes:
 - abbreviated_name: Team Member Name
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndAName
   datatype: string
   desc: ''
@@ -801,6 +842,7 @@ cdes:
 - abbreviated_name: Allergies
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndAllergies
   datatype: string
   desc: ''
@@ -820,6 +862,7 @@ cdes:
 - abbreviated_name: Appoint Date
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndApptDate
   datatype: date
   desc: ''
@@ -838,6 +881,7 @@ cdes:
 - abbreviated_name: Appoint Time
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndApptTime
   datatype: time
   desc: ''
@@ -856,6 +900,7 @@ cdes:
 - abbreviated_name: Avoid Foods
   allow_multiple: true
   calculation: ''
+  calculation_query: ''
   code: mndAvoidFoods
   datatype: range
   desc: ''
@@ -875,6 +920,7 @@ cdes:
 - abbreviated_name: Avoid Other
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndAvoidOther
   datatype: string
   desc: ''
@@ -893,6 +939,7 @@ cdes:
 - abbreviated_name: Breathe Relieve Other
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndBAOther
   datatype: string
   desc: ''
@@ -919,6 +966,7 @@ cdes:
     var bmi = weight / (height * height);
     var rounded = roundToTwo(bmi);
     context.result = isNaN(rounded) ? "": rounded;
+  calculation_query: ''
   code: mndBMI
   datatype: calculated
   desc: ''
@@ -937,6 +985,7 @@ cdes:
 - abbreviated_name: Turn in Bed and Adjust
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndBed
   datatype: range
   desc: ''
@@ -955,6 +1004,7 @@ cdes:
 - abbreviated_name: Short Breath
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndBreath
   datatype: integer
   desc: ''
@@ -973,6 +1023,7 @@ cdes:
 - abbreviated_name: Breathe relieve
   allow_multiple: true
   calculation: ''
+  calculation_query: ''
   code: mndBreathAssist
   datatype: range
   desc: ''
@@ -991,6 +1042,7 @@ cdes:
 - abbreviated_name: Breathe Difficult
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndBreathHard
   datatype: range
   desc: ''
@@ -1009,6 +1061,7 @@ cdes:
 - abbreviated_name: Breathe Trach
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndBreathTracheostomy
   datatype: range
   desc: ''
@@ -1027,6 +1080,7 @@ cdes:
 - abbreviated_name: Difficulty of Breathing
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndBreathing
   datatype: range
   desc: ''
@@ -1045,6 +1099,7 @@ cdes:
 - abbreviated_name: Brush Teeth
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndBrush
   datatype: range
   desc: ''
@@ -1063,6 +1118,7 @@ cdes:
 - abbreviated_name: Bulbar Region-LMN
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndBulbarLMN
   datatype: range
   desc: ''
@@ -1081,6 +1137,7 @@ cdes:
 - abbreviated_name: Bulbar Region-UMN
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndBulbarUMN
   datatype: range
   desc: ''
@@ -1099,6 +1156,7 @@ cdes:
 - abbreviated_name: Can By Mouth
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndByMouth
   datatype: range
   desc: ''
@@ -1117,6 +1175,7 @@ cdes:
 - abbreviated_name: Address
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndCAddress
   datatype: string
   desc: ''
@@ -1135,6 +1194,7 @@ cdes:
 - abbreviated_name: Email
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndCEmail
   datatype: string
   desc: ''
@@ -1153,6 +1213,7 @@ cdes:
 - abbreviated_name: Name
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndCName
   datatype: string
   desc: ''
@@ -1171,6 +1232,7 @@ cdes:
 - abbreviated_name: Phone
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndCPhone
   datatype: string
   desc: ''
@@ -1189,6 +1251,7 @@ cdes:
 - abbreviated_name: Role
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndCRole
   datatype: range
   desc: ''
@@ -1207,6 +1270,7 @@ cdes:
 - abbreviated_name: Important Care
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndCareNeeds
   datatype: string
   desc: ''
@@ -1225,6 +1289,7 @@ cdes:
 - abbreviated_name: Cervical Region-LMN
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndCervicalLMN
   datatype: range
   desc: ''
@@ -1243,6 +1308,7 @@ cdes:
 - abbreviated_name: Cervical Region-UMN
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndCervicalUMN
   datatype: range
   desc: ''
@@ -1261,6 +1327,7 @@ cdes:
 - abbreviated_name: Move myself in a chair
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndChairMove
   datatype: range
   desc: ''
@@ -1279,6 +1346,7 @@ cdes:
 - abbreviated_name: Need Chair Aid
   allow_multiple: true
   calculation: ''
+  calculation_query: ''
   code: mndChairNeed
   datatype: range
   desc: ''
@@ -1297,6 +1365,7 @@ cdes:
 - abbreviated_name: Chair Comfy
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndChairNotes
   datatype: string
   desc: ''
@@ -1315,6 +1384,7 @@ cdes:
 - abbreviated_name: Choking Sensation
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndChoking
   datatype: integer
   desc: ''
@@ -1333,6 +1403,7 @@ cdes:
 - abbreviated_name: Clinic Site
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndClinicalSite
   datatype: range
   desc: MND Clinical Site
@@ -1351,6 +1422,7 @@ cdes:
 - abbreviated_name: Comms Tech Other
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndComChairOther
   datatype: string
   desc: ''
@@ -1369,6 +1441,7 @@ cdes:
 - abbreviated_name: Comms Difficult Level
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndComDifficulty
   datatype: range
   desc: ''
@@ -1387,6 +1460,7 @@ cdes:
 - abbreviated_name: Additional information Computer with switch
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndComTechOther
   datatype: string
   desc: ''
@@ -1405,6 +1479,7 @@ cdes:
 - abbreviated_name: Comms Technology
   allow_multiple: true
   calculation: ''
+  calculation_query: ''
   code: mndComTechs
   datatype: range
   desc: ''
@@ -1423,6 +1498,7 @@ cdes:
 - abbreviated_name: Comfy Other
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndComfyOther
   datatype: string
   desc: ''
@@ -1441,6 +1517,7 @@ cdes:
 - abbreviated_name: Condition Other
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndCondOther
   datatype: string
   desc: ''
@@ -1459,6 +1536,7 @@ cdes:
 - abbreviated_name: Diagnosed Conditions
   allow_multiple: true
   calculation: ''
+  calculation_query: ''
   code: mndConditions
   datatype: range
   desc: ''
@@ -1477,6 +1555,7 @@ cdes:
 - abbreviated_name: Date of consent
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndConsentDate
   datatype: date
   desc: ''
@@ -1495,6 +1574,7 @@ cdes:
 - abbreviated_name: Constipation
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndConstipation
   datatype: integer
   desc: ''
@@ -1513,6 +1593,7 @@ cdes:
 - abbreviated_name: Consult Type
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndConsultationType
   datatype: range
   desc: ''
@@ -1531,6 +1612,7 @@ cdes:
 - abbreviated_name: Completion Reason
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndDMode
   datatype: range
   desc: ''
@@ -1549,6 +1631,7 @@ cdes:
 - abbreviated_name: Investigator Signature
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndDMode10
   datatype: string
   desc: ''
@@ -1567,6 +1650,7 @@ cdes:
 - abbreviated_name: Sign-Off Date
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndDMode11
   datatype: date
   desc: ''
@@ -1586,6 +1670,7 @@ cdes:
 - abbreviated_name: Data Obtained From
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndDMode2
   datatype: range
   desc: ''
@@ -1604,6 +1689,7 @@ cdes:
 - abbreviated_name: Mode of Death
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndDMode3
   datatype: range
   desc: ''
@@ -1622,6 +1708,7 @@ cdes:
 - abbreviated_name: Related Expected
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndDMode4
   datatype: range
   desc: ''
@@ -1640,6 +1727,7 @@ cdes:
 - abbreviated_name: Place of Death
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndDMode5
   datatype: range
   desc: ''
@@ -1658,6 +1746,7 @@ cdes:
 - abbreviated_name: Two Weeks Lead Death Medication
   allow_multiple: true
   calculation: ''
+  calculation_query: ''
   code: mndDMode6
   datatype: range
   desc: ''
@@ -1676,6 +1765,7 @@ cdes:
 - abbreviated_name: Two Week Lead Death Intervention
   allow_multiple: true
   calculation: ''
+  calculation_query: ''
   code: mndDMode7
   datatype: range
   desc: ''
@@ -1694,6 +1784,7 @@ cdes:
 - abbreviated_name: Comments
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndDMode8
   datatype: string
   desc: ''
@@ -1716,6 +1807,7 @@ cdes:
 - abbreviated_name: Investigator Name
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndDMode9
   datatype: string
   desc: ''
@@ -1734,6 +1826,7 @@ cdes:
 - abbreviated_name: Date of death
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndDOD
   datatype: date
   desc: ''
@@ -1753,6 +1846,7 @@ cdes:
 - abbreviated_name: Why Avoid Dairy
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndDairy
   datatype: range
   desc: ''
@@ -1771,6 +1865,7 @@ cdes:
 - abbreviated_name: Date Confirmed
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndDateConfirm
   datatype: date
   desc: Date MND Confirmed
@@ -1790,6 +1885,7 @@ cdes:
 - abbreviated_name: Date Start
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndDateStarted
   datatype: date
   desc: Date started
@@ -1808,6 +1904,7 @@ cdes:
 - abbreviated_name: Confirm Dementia
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndDemetia
   datatype: range
   desc: ''
@@ -1826,6 +1923,7 @@ cdes:
 - abbreviated_name: Confirm Dementia Other
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndDemetiaOth
   datatype: string
   desc: ''
@@ -1844,6 +1942,7 @@ cdes:
 - abbreviated_name: Depression
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndDepression
   datatype: integer
   desc: ''
@@ -1862,6 +1961,7 @@ cdes:
 - abbreviated_name: Disturbed Sleep
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndDisSleep
   datatype: integer
   desc: ''
@@ -1880,6 +1980,7 @@ cdes:
 - abbreviated_name: Doc Location
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndDocLocation
   datatype: string
   desc: ''
@@ -1898,6 +1999,7 @@ cdes:
 - abbreviated_name: TypeOth1
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndDocTypeOther
   datatype: string
   desc: ''
@@ -1917,6 +2019,7 @@ cdes:
 - abbreviated_name: Dominant Hand
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndDominantHand
   datatype: range
   desc: ''
@@ -1935,6 +2038,7 @@ cdes:
 - abbreviated_name: Dose Unit
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndDose
   datatype: range
   desc: ''
@@ -1953,6 +2057,7 @@ cdes:
 - abbreviated_name: Dose
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndDoseValue
   datatype: float
   desc: ''
@@ -1972,6 +2077,7 @@ cdes:
 - abbreviated_name: Dress Help
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndDress
   datatype: range
   desc: ''
@@ -1990,6 +2096,7 @@ cdes:
 - abbreviated_name: Death Diagnosis
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndDxAtDeath
   datatype: range
   desc: ''
@@ -2008,6 +2115,7 @@ cdes:
 - abbreviated_name: Lye Down Afternoon
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndESSLying
   datatype: range
   desc: ''
@@ -2026,6 +2134,7 @@ cdes:
 - abbreviated_name: Passenger in Car for Hour
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndESSPassenger
   datatype: range
   desc: ''
@@ -2044,6 +2153,7 @@ cdes:
 - abbreviated_name: Sit Inactive Public Place
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndESSPublic
   datatype: range
   desc: ''
@@ -2074,6 +2184,7 @@ cdes:
     var essScore = ess1 + ess2 + ess3 + ess4 + ess5 + ess6 + ess7 + ess8;
 
     context.result = essScore || 0;
+  calculation_query: ''
   code: mndESSScore
   datatype: calculated
   desc: ''
@@ -2093,6 +2204,7 @@ cdes:
 - abbreviated_name: Sit and Read
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndESSSit
   datatype: range
   desc: ''
@@ -2111,6 +2223,7 @@ cdes:
 - abbreviated_name: Sit and Talk
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndESSSitNTalk
   datatype: range
   desc: ''
@@ -2129,6 +2242,7 @@ cdes:
 - abbreviated_name: Sit After Lunch No Alcohol
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndESSSitNoDrink
   datatype: range
   desc: ''
@@ -2147,6 +2261,7 @@ cdes:
 - abbreviated_name: Watch TV
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndESSTV
   datatype: range
   desc: ''
@@ -2165,6 +2280,7 @@ cdes:
 - abbreviated_name: Stopped in Traffic Few Minutes
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndESSTraffic
   datatype: range
   desc: ''
@@ -2183,6 +2299,7 @@ cdes:
 - abbreviated_name: Why Avoid Egg
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndEggs
   datatype: range
   desc: ''
@@ -2201,6 +2318,7 @@ cdes:
 - abbreviated_name: Inappropriate Emotion
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndEmotion
   datatype: integer
   desc: ''
@@ -2219,6 +2337,7 @@ cdes:
 - abbreviated_name: Emotion Notes
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndEmotionNotes
   datatype: string
   desc: ''
@@ -2237,6 +2356,7 @@ cdes:
 - abbreviated_name: Date Feed Tube Insert
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndFTDate
   datatype: date
   desc: ''
@@ -2256,6 +2376,7 @@ cdes:
 - abbreviated_name: PFT
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndFVC
   datatype: range
   desc: ''
@@ -2274,6 +2395,7 @@ cdes:
 - abbreviated_name: FVC Litres L
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndFVCLitres
   datatype: float
   desc: ''
@@ -2292,6 +2414,7 @@ cdes:
 - abbreviated_name: 'FVC Predicted '
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndFVCPredicted
   datatype: integer
   desc: ''
@@ -2310,6 +2433,7 @@ cdes:
 - abbreviated_name: Fatigue
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndFatigue
   datatype: integer
   desc: ''
@@ -2328,6 +2452,7 @@ cdes:
 - abbreviated_name: Feeding Tube Inserted
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndFeedingTube
   datatype: range
   desc: ''
@@ -2346,6 +2471,7 @@ cdes:
 - abbreviated_name: Why Avoid Fish
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndFish
   datatype: range
   desc: ''
@@ -2364,6 +2490,7 @@ cdes:
 - abbreviated_name: Fluid Consistency Need
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndFluids
   datatype: range
   desc: ''
@@ -2383,6 +2510,7 @@ cdes:
 - abbreviated_name: Food Consistency Need
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndFoodCon
   datatype: range
   desc: Using the International Dysphagia Diet Standardisation Initiative levels (http://idds.org)
@@ -2401,6 +2529,7 @@ cdes:
 - abbreviated_name: Food Prefer
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndFoodPrefer
   datatype: string
   desc: ''
@@ -2419,6 +2548,7 @@ cdes:
 - abbreviated_name: Frequency
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndFreq
   datatype: range
   desc: ''
@@ -2437,6 +2567,7 @@ cdes:
 - abbreviated_name: Other medication frequency
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndFreqOther
   datatype: string
   desc: Other (Please specify)
@@ -2455,6 +2586,7 @@ cdes:
 - abbreviated_name: PegGasYes Cut Food
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndGasCut
   datatype: range
   desc: With gastrostomy / PEG
@@ -2473,6 +2605,7 @@ cdes:
 - abbreviated_name: PEGGas more than 50pec
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndGastroCLN
   datatype: range
   desc: ''
@@ -2491,6 +2624,7 @@ cdes:
 - abbreviated_name: Why Avoid Gluten
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndGluten
   datatype: range
   desc: ''
@@ -2509,6 +2643,7 @@ cdes:
 - abbreviated_name: Height
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndHeight
   datatype: float
   desc: ''
@@ -2527,6 +2662,7 @@ cdes:
 - abbreviated_name: Help Eat Drink
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndHelpEat
   datatype: range
   desc: ''
@@ -2545,6 +2681,7 @@ cdes:
 - abbreviated_name: Cognition Affected
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndImpaired
   datatype: range
   desc: ''
@@ -2563,6 +2700,7 @@ cdes:
 - abbreviated_name: Date Inpatient Admit
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndInpatientAdmission
   datatype: date
   desc: ''
@@ -2582,6 +2720,7 @@ cdes:
 - abbreviated_name: Date Inpatient Discharge
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndInpatientDischarge
   datatype: date
   desc: ''
@@ -2601,6 +2740,7 @@ cdes:
 - abbreviated_name: Reason Inpatient
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndInpatientReason
   datatype: range
   desc: ''
@@ -2619,6 +2759,7 @@ cdes:
 - abbreviated_name: Inpatient Since Last Visit
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndInpatientStay
   datatype: range
   desc: ''
@@ -2637,6 +2778,7 @@ cdes:
 - abbreviated_name: Type
   allow_multiple: true
   calculation: ''
+  calculation_query: ''
   code: mndLDocs
   datatype: range
   desc: ''
@@ -2655,6 +2797,7 @@ cdes:
 - abbreviated_name: TypeOth2
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndLDocsOther2
   datatype: string
   desc: ''
@@ -2674,6 +2817,7 @@ cdes:
 - abbreviated_name: TypeOth3
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndLDocsOther3
   datatype: string
   desc: ''
@@ -2693,6 +2837,7 @@ cdes:
 - abbreviated_name: Annoys Me
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndLHAnnoyances
   datatype: string
   desc: ''
@@ -2711,6 +2856,7 @@ cdes:
 - abbreviated_name: My Books
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndLHBooks
   datatype: string
   desc: ''
@@ -2729,6 +2875,7 @@ cdes:
 - abbreviated_name: My Talk
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndLHChat
   datatype: string
   desc: ''
@@ -2747,6 +2894,7 @@ cdes:
 - abbreviated_name: Daily Routines
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndLHDaily
   datatype: string
   desc: ''
@@ -2765,6 +2913,7 @@ cdes:
 - abbreviated_name: My Films
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndLHFilms
   datatype: string
   desc: ''
@@ -2783,6 +2932,7 @@ cdes:
 - abbreviated_name: My Family and Friends
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndLHFriends
   datatype: string
   desc: ''
@@ -2801,6 +2951,7 @@ cdes:
 - abbreviated_name: My Interests
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndLHHobbies
   datatype: string
   desc: ''
@@ -2819,6 +2970,7 @@ cdes:
 - abbreviated_name: My Life
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndLHLife
   datatype: string
   desc: ''
@@ -2838,6 +2990,7 @@ cdes:
 - abbreviated_name: My Music
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndLHMusic
   datatype: string
   desc: ''
@@ -2856,6 +3009,7 @@ cdes:
 - abbreviated_name: My Calm
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndLHRemedies
   datatype: string
   desc: ''
@@ -2874,6 +3028,7 @@ cdes:
 - abbreviated_name: My Internet
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndLHSocialMedia
   datatype: string
   desc: ''
@@ -2892,6 +3047,7 @@ cdes:
 - abbreviated_name: My TV
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndLHTV
   datatype: string
   desc: ''
@@ -2910,6 +3066,7 @@ cdes:
 - abbreviated_name: My Work
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndLHWork
   datatype: string
   desc: ''
@@ -2928,6 +3085,7 @@ cdes:
 - abbreviated_name: My Worries
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndLHWorries
   datatype: string
   desc: ''
@@ -2946,6 +3104,7 @@ cdes:
 - abbreviated_name: Difficult Breath Lay Flat
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndLayBreath
   datatype: range
   desc: ''
@@ -2964,6 +3123,7 @@ cdes:
 - abbreviated_name: I can lie flat
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndLieFlat
   datatype: range
   desc: ''
@@ -2982,6 +3142,7 @@ cdes:
 - abbreviated_name: Lower Limbs-Ankle Left
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndLowerAnkle
   datatype: range
   desc: ''
@@ -3000,6 +3161,7 @@ cdes:
 - abbreviated_name: Lower Limbs-Ankle Right
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndLowerAnkleR
   datatype: range
   desc: ''
@@ -3018,6 +3180,7 @@ cdes:
 - abbreviated_name: Lower Limbs-Knee Left
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndLowerKnee
   datatype: range
   desc: ''
@@ -3036,6 +3199,7 @@ cdes:
 - abbreviated_name: Lower Limbs-Knee Right
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndLowerKneeR
   datatype: range
   desc: ''
@@ -3054,6 +3218,7 @@ cdes:
 - abbreviated_name: Lumbar Region-LMN
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndLumbarLMN
   datatype: range
   desc: ''
@@ -3072,6 +3237,7 @@ cdes:
 - abbreviated_name: Lumbar Region-UMN
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndLumbarUMN
   datatype: range
   desc: ''
@@ -3090,6 +3256,7 @@ cdes:
 - abbreviated_name: MEP
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndMEP
   datatype: integer
   desc: ''
@@ -3108,6 +3275,7 @@ cdes:
 - abbreviated_name: Mouth Care Help
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndMHelp
   datatype: range
   desc: ''
@@ -3126,6 +3294,7 @@ cdes:
 - abbreviated_name: MIP
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndMIP
   datatype: integer
   desc: ''
@@ -3144,6 +3313,7 @@ cdes:
 - abbreviated_name: Manage Excess Saliva
   allow_multiple: true
   calculation: ''
+  calculation_query: ''
   code: mndManageSaliva
   datatype: range
   desc: ''
@@ -3162,6 +3332,7 @@ cdes:
 - abbreviated_name: Med Administration
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndMedAdmin
   datatype: range
   desc: ''
@@ -3180,6 +3351,7 @@ cdes:
 - abbreviated_name: Med Dose
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndMedDose
   datatype: integer
   desc: ''
@@ -3199,6 +3371,7 @@ cdes:
 - abbreviated_name: Med Frequency
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndMedFreq
   datatype: range
   desc: ''
@@ -3217,6 +3390,7 @@ cdes:
 - abbreviated_name: Med Name
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndMedName
   datatype: lookup
   desc: ''
@@ -3235,6 +3409,7 @@ cdes:
 - abbreviated_name: Other
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndMedOther
   datatype: string
   desc: ''
@@ -3254,6 +3429,7 @@ cdes:
 - abbreviated_name: Med Purpose
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndMedPurpose
   datatype: string
   desc: ''
@@ -3272,6 +3448,7 @@ cdes:
 - abbreviated_name: Med Time 1
   allow_multiple: true
   calculation: ''
+  calculation_query: ''
   code: mndMedTime
   datatype: time
   desc: ''
@@ -3290,6 +3467,7 @@ cdes:
 - abbreviated_name: Med Time 2
   allow_multiple: true
   calculation: ''
+  calculation_query: ''
   code: mndMedTime2
   datatype: time
   desc: ''
@@ -3308,6 +3486,7 @@ cdes:
 - abbreviated_name: Med Time 3
   allow_multiple: true
   calculation: ''
+  calculation_query: ''
   code: mndMedTime3
   datatype: time
   desc: ''
@@ -3326,6 +3505,7 @@ cdes:
 - abbreviated_name: Med Time 4
   allow_multiple: true
   calculation: ''
+  calculation_query: ''
   code: mndMedTime4
   datatype: time
   desc: ''
@@ -3344,6 +3524,7 @@ cdes:
 - abbreviated_name: Med Time 5
   allow_multiple: true
   calculation: ''
+  calculation_query: ''
   code: mndMedTime5
   datatype: time
   desc: ''
@@ -3362,6 +3543,7 @@ cdes:
 - abbreviated_name: Med Time 6
   allow_multiple: true
   calculation: ''
+  calculation_query: ''
   code: mndMedTime6
   datatype: time
   desc: ''
@@ -3380,6 +3562,7 @@ cdes:
 - abbreviated_name: Med When Taken
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndMedTime6Plus
   datatype: string
   desc: ''
@@ -3399,6 +3582,7 @@ cdes:
 - abbreviated_name: Med Name
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndMedications
   datatype: lookup
   desc: ''
@@ -3418,6 +3602,7 @@ cdes:
 - abbreviated_name: Move Self
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndMove
   datatype: range
   desc: ''
@@ -3436,6 +3621,7 @@ cdes:
 - abbreviated_name: Move Aids
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndMoveAids
   datatype: string
   desc: ''
@@ -3454,6 +3640,7 @@ cdes:
 - abbreviated_name: Muscle Cramp Twitch
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndMuscle
   datatype: integer
   desc: ''
@@ -3472,6 +3659,7 @@ cdes:
 - abbreviated_name: NIV
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndNIV
   datatype: range
   desc: ''
@@ -3490,6 +3678,7 @@ cdes:
 - abbreviated_name: With NIV I am
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndNIVUse
   datatype: range
   desc: ''
@@ -3508,6 +3697,7 @@ cdes:
 - abbreviated_name: I use NIV
   allow_multiple: true
   calculation: ''
+  calculation_query: ''
   code: mndNIVWhen
   datatype: range
   desc: ''
@@ -3526,6 +3716,7 @@ cdes:
 - abbreviated_name: Breathe NIV
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndNIVYN
   datatype: range
   desc: ''
@@ -3544,6 +3735,7 @@ cdes:
 - abbreviated_name: NIV Use Last Week
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndNIVdur
   datatype: integer
   desc: ''
@@ -3562,6 +3754,7 @@ cdes:
 - abbreviated_name: Need Help
   allow_multiple: true
   calculation: ''
+  calculation_query: ''
   code: mndNeedHelp
   datatype: range
   desc: ''
@@ -3580,6 +3773,7 @@ cdes:
 - abbreviated_name: Need Aid
   allow_multiple: true
   calculation: ''
+  calculation_query: ''
   code: mndNeedUse
   datatype: range
   desc: ''
@@ -3598,6 +3792,7 @@ cdes:
 - abbreviated_name: PegGasNo Cut Food
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndNoGasCut
   datatype: range
   desc: Without gastrostomy / PEG
@@ -3616,6 +3811,7 @@ cdes:
 - abbreviated_name: Bed Comfy
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndNotes
   datatype: string
   desc: ''
@@ -3634,6 +3830,7 @@ cdes:
 - abbreviated_name: SPO2
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndO2
   datatype: integer
   desc: ''
@@ -3652,6 +3849,7 @@ cdes:
 - abbreviated_name: Occupation Other
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndOccupationOther
   datatype: string
   desc: ''
@@ -3670,6 +3868,7 @@ cdes:
 - abbreviated_name: Date Sympt Onset
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndOnset
   datatype: date
   desc: ''
@@ -3689,6 +3888,7 @@ cdes:
 - abbreviated_name: Why Avoid OTher
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndOther
   datatype: range
   desc: ''
@@ -3707,6 +3907,7 @@ cdes:
 - abbreviated_name: Other Family MNDALS
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndOtherFamilyMND
   datatype: range
   desc: ''
@@ -3725,6 +3926,7 @@ cdes:
 - abbreviated_name: Other Therapies
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndOtherTNT
   datatype: range
   desc: ''
@@ -3743,6 +3945,7 @@ cdes:
 - abbreviated_name: Use PEG
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndPEG
   datatype: range
   desc: ''
@@ -3761,6 +3964,7 @@ cdes:
 - abbreviated_name: Hygiene Help
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndPHygiene
   datatype: range
   desc: ''
@@ -3779,6 +3983,7 @@ cdes:
 - abbreviated_name: Pain
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndPain
   datatype: integer
   desc: ''
@@ -3797,6 +4002,7 @@ cdes:
 - abbreviated_name: Why Avoid Peanut
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndPeanuts
   datatype: range
   desc: ''
@@ -3815,6 +4021,7 @@ cdes:
 - abbreviated_name: Physical Aid
   allow_multiple: true
   calculation: ''
+  calculation_query: ''
   code: mndPhyUse
   datatype: range
   desc: ''
@@ -3833,6 +4040,7 @@ cdes:
 - abbreviated_name: Make Primary Contact
   allow_multiple: true
   calculation: ''
+  calculation_query: ''
   code: mndPrimary
   datatype: range
   desc: ''
@@ -3851,6 +4059,7 @@ cdes:
 - abbreviated_name: Health Services Other
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndProsOther
   datatype: string
   desc: ''
@@ -3869,6 +4078,7 @@ cdes:
 - abbreviated_name: Health Services Used
   allow_multiple: true
   calculation: ''
+  calculation_query: ''
   code: mndProsUsed
   datatype: range
   desc: ''
@@ -3887,6 +4097,7 @@ cdes:
 - abbreviated_name: Why Avoid Red Meat
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndRed
   datatype: range
   desc: ''
@@ -3905,6 +4116,7 @@ cdes:
 - abbreviated_name: Respiratory Insufficiency
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndResp
   datatype: range
   desc: ''
@@ -3923,6 +4135,7 @@ cdes:
 - abbreviated_name: Rest Needed
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndRestNeeded
   datatype: string
   desc: ''
@@ -3941,6 +4154,7 @@ cdes:
 - abbreviated_name: Riluzole
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndRiluzole
   datatype: range
   desc: ''
@@ -3959,6 +4173,7 @@ cdes:
 - abbreviated_name: Riluzole End Date
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndRiluzoleEDate
   datatype: date
   desc: ''
@@ -3978,6 +4193,7 @@ cdes:
 - abbreviated_name: Riluzole Start Date
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndRiluzoleSDate
   datatype: date
   desc: ''
@@ -3997,6 +4213,7 @@ cdes:
 - abbreviated_name: SNIP
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndSNIP
   datatype: integer
   desc: ''
@@ -4015,6 +4232,7 @@ cdes:
 - abbreviated_name: SVC Litres L
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndSVCLitres
   datatype: float
   desc: ''
@@ -4033,6 +4251,7 @@ cdes:
 - abbreviated_name: 'SVC Predicted '
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndSVCPredicted
   datatype: integer
   desc: ''
@@ -4051,6 +4270,7 @@ cdes:
 - abbreviated_name: Excessive Saliva
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndSaliva
   datatype: integer
   desc: ''
@@ -4069,6 +4289,7 @@ cdes:
 - abbreviated_name: Salivation
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndSalivaCLN
   datatype: range
   desc: ''
@@ -4087,6 +4308,7 @@ cdes:
 - abbreviated_name: Manage Excess Saliva Other
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndSalivaOther
   datatype: string
   desc: ''
@@ -4105,6 +4327,7 @@ cdes:
 - abbreviated_name: Why Avoid Shellfish
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndShell
   datatype: range
   desc: ''
@@ -4123,6 +4346,7 @@ cdes:
 - abbreviated_name: Shower Help
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndShower
   datatype: range
   desc: ''
@@ -4141,6 +4365,7 @@ cdes:
 - abbreviated_name: Sleep Study Date
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndSleepDate
   datatype: date
   desc: ''
@@ -4160,6 +4385,7 @@ cdes:
 - abbreviated_name: Sleep Study or  Overnight Oximetry
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndSleepStudy
   datatype: range
   desc: ''
@@ -4178,6 +4404,7 @@ cdes:
 - abbreviated_name: Overnight Oximetry Date
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndSleepStudyDate
   datatype: date
   desc: ''
@@ -4196,6 +4423,7 @@ cdes:
 - abbreviated_name: Why Avoid Soy
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndSoy
   datatype: range
   desc: ''
@@ -4214,6 +4442,7 @@ cdes:
 - abbreviated_name: Stiffness Spasticity
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndSpasticity
   datatype: integer
   desc: ''
@@ -4232,6 +4461,7 @@ cdes:
 - abbreviated_name: Speech
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndSpeechCLN
   datatype: range
   desc: ''
@@ -4250,6 +4480,7 @@ cdes:
 - abbreviated_name: Climbing Stairs
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndStairs
   datatype: range
   desc: ''
@@ -4268,49 +4499,84 @@ cdes:
 - abbreviated_name: Survivability
   allow_multiple: false
   calculation: |-
-    function functions() {
-        return {
-            y: function (c) { return 'year' + (c === 1 ? '' : 's'); },
-            m: function (c) { return 'month' + (c === 1 ? '' : 's'); },
-            d: function (c) { return 'day' + (c === 1 ? '' : 's'); }
-        };
+    function pluralise(singular, actual) {
+      return actual + ' ' + singular + (actual > 1 ? 's' : '');
+    }
+
+    function stringify(days, months, years) {
+      var date_string = '';
+
+      if (years > 0) {
+        date_string += pluralise('year', years);
+      }
+
+      if (months > 0) {
+        date_string += (date_string ? ', ' : '') + pluralise('month', months);
+      }
+
+      if (days > 0) {
+        date_string += (date_string ? ', ' : '') + pluralise('day', days);
+      }
+
+      return date_string;
     }
 
     function convert(ms) {
-        var  fn = functions();
-        var days = Math.floor(ms / ( 1000 * 60 * 60 * 24));
-        var months =  Math.floor(days / 30);
-        var years = Math.floor(days/365);
-        var result = "";
-        if (years > 0) {
-          days = days % 30;
-          months = months / 12;
-          if (months > 0) {
-            result = years + " " + fn.y(years) + " " + months + "  " + fn.m(months) + " " + days + " " +fn.d(days);
-          } else {
-            result = years + " " + fn.y(years) +" " + days + " " +fn.d(days);
-          }
-        } else {
-            if (months > 0) {
-                days = days % 30;
-                result = months + "  " + fn.m(months) + " " + days + " " +fn.d(days);
-            } else {
-                result = days + " " + fn.d(days);
-            }
-        }
-        return result;
+      var DAYS_IN_MONTH = 30.47;
+      var DAYS_IN_YEAR = 365;
+      var MONTHS_IN_YEAR = 12;
+      var days = ms/1000/60/60/24;
+      var months = Math.floor(days/DAYS_IN_MONTH);
+      var years = Math.floor(days/DAYS_IN_YEAR);
+
+
+      if (years >=1 ){
+        months = months - (years * MONTHS_IN_YEAR);
+        days = days - (years * DAYS_IN_YEAR);
+      }
+
+      if (months >= 1) {
+        days = days - (months * DAYS_IN_MONTH);
+      }
+
+      days = Math.round(days);
+
+      return stringify(days, months, years);
+
     }
 
     var reason = context.mndDMode;
-    if (reason === "completeReasonChoice2") {
-        var dateOfDeath = context.mndDOD;
-        var patientCreationDate = patient.created_at;
+    var firstVisit = patient.clinicalData.clinicVisitsCFG.firstVisit;
+
+    if (reason === "completeReasonChoice2" && firstVisit) {
+
+      var dateOfDeath = context.mndDOD;
+      var firstVisitDate = firstVisit.mndPresentingDetails.mndOnset;
+
+      if (!firstVisitDate) {
+        firstVisitDate = firstVisit.mndPresentingDetails.mndDateConfirm;
+      }
+
+      if (dateOfDeath && firstVisitDate) {
         var parsedDOD = Date.parse(dateOfDeath.split("-").reverse());
-        var parsedPCD = Date.parse(patientCreationDate.substring(0, 10));
-        var duration = Math.abs((parsedDOD - parsedPCD));
+        var parsedFVD = Date.parse(firstVisitDate.substring(0, 10));
+        var duration = Math.abs(parsedDOD - parsedFVD);
+
         context.result = convert(duration);
-    } else {
-        context.result = "N/A";
+      }
+
+    }
+
+    if (!context.result) {
+      context.result = "N/A";
+    }
+  calculation_query: |-
+    clinicalData {
+      clinicVisitsCFG {
+        firstVisit {
+          mndPresentingDetails { mndOnset mndDateConfirm }
+        }
+      }
     }
   code: mndSurvivability
   datatype: calculated
@@ -4330,6 +4596,7 @@ cdes:
 - abbreviated_name: Mouth Swabs
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndSwabs
   datatype: range
   desc: ''
@@ -4348,6 +4615,7 @@ cdes:
 - abbreviated_name: Swallowing
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndSwallow
   datatype: range
   desc: ''
@@ -4366,6 +4634,7 @@ cdes:
 - abbreviated_name: Change Due To Swallow
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndSwallowD
   datatype: range
   desc: ''
@@ -4384,6 +4653,7 @@ cdes:
 - abbreviated_name: Date Symptom Capture
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndSymptomDate
   datatype: date
   desc: ''
@@ -4403,6 +4673,7 @@ cdes:
 - abbreviated_name: Task Aids
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndTaskAids
   datatype: string
   desc: ''
@@ -4421,6 +4692,7 @@ cdes:
 - abbreviated_name: Telehealth Type
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndTelehealthConsultation
   datatype: range
   desc: ''
@@ -4439,6 +4711,7 @@ cdes:
 - abbreviated_name: ECAS Test Done
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndTestAdmin
   datatype: range
   desc: ''
@@ -4457,6 +4730,7 @@ cdes:
 - abbreviated_name: Cog Test Name Other1
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndTestOthA
   datatype: string
   desc: ''
@@ -4475,6 +4749,7 @@ cdes:
 - abbreviated_name: Cog Test Date Other1
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndTestOthADate
   datatype: date
   desc: ''
@@ -4493,6 +4768,7 @@ cdes:
 - abbreviated_name: Cog Test Score Other1
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndTestOthAScore
   datatype: integer
   desc: ''
@@ -4511,6 +4787,7 @@ cdes:
 - abbreviated_name: Cog Test Name Other2
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndTestOthB
   datatype: string
   desc: ''
@@ -4529,6 +4806,7 @@ cdes:
 - abbreviated_name: Cog Test Date Other2
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndTestOthBDate
   datatype: date
   desc: ''
@@ -4547,6 +4825,7 @@ cdes:
 - abbreviated_name: Cog Test Score Other2
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndTestOthBScore
   datatype: integer
   desc: ''
@@ -4565,6 +4844,7 @@ cdes:
 - abbreviated_name: Other Therapy - Describe
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndTherapyDesc
   datatype: string
   desc: ''
@@ -4583,6 +4863,7 @@ cdes:
 - abbreviated_name: Other Therapy End
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndTherapyEDate
   datatype: date
   desc: ''
@@ -4602,6 +4883,7 @@ cdes:
 - abbreviated_name: Other Therapy Start
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndTherapySDate
   datatype: date
   desc: ''
@@ -4621,6 +4903,7 @@ cdes:
 - abbreviated_name: Toilet Help
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndToil
   datatype: range
   desc: ''
@@ -4639,6 +4922,7 @@ cdes:
 - abbreviated_name: Trach
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndTrach
   datatype: range
   desc: ''
@@ -4657,6 +4941,7 @@ cdes:
 - abbreviated_name: Trach and Vent
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndTrachNVent
   datatype: range
   desc: ''
@@ -4675,6 +4960,7 @@ cdes:
 - abbreviated_name: Need Help Transfer
   allow_multiple: true
   calculation: ''
+  calculation_query: ''
   code: mndTransHelp
   datatype: range
   desc: ''
@@ -4693,6 +4979,7 @@ cdes:
 - abbreviated_name: Research Trial Name
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndTrialDesc
   datatype: range
   desc: ''
@@ -4711,6 +4998,7 @@ cdes:
 - abbreviated_name: Research Trial End Date
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndTrialEDate
   datatype: date
   desc: ''
@@ -4730,6 +5018,7 @@ cdes:
 - abbreviated_name: Research Trial Other
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndTrialOther
   datatype: string
   desc: ''
@@ -4748,6 +5037,7 @@ cdes:
 - abbreviated_name: Research Trial Participation
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndTrialParticipant
   datatype: range
   desc: ''
@@ -4768,6 +5058,7 @@ cdes:
 - abbreviated_name: Research Trial Start Date
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndTrialSDate
   datatype: date
   desc: ''
@@ -4787,6 +5078,7 @@ cdes:
 - abbreviated_name: I use tube feeding
   allow_multiple: true
   calculation: ''
+  calculation_query: ''
   code: mndTube
   datatype: range
   desc: ''
@@ -4805,6 +5097,7 @@ cdes:
 - abbreviated_name: Details of my tube feeding and preferred times of the day
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndTubeDetails
   datatype: string
   desc: ''
@@ -4823,6 +5116,7 @@ cdes:
 - abbreviated_name: Upper Limbs-Biceps Left
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndUpperBiceps
   datatype: range
   desc: ''
@@ -4841,6 +5135,7 @@ cdes:
 - abbreviated_name: Upper Limbs-Biceps Right
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndUpperBicepsR
   datatype: range
   desc: ''
@@ -4859,6 +5154,7 @@ cdes:
 - abbreviated_name: Upper Limbs-Supinator Left
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndUpperSupinator
   datatype: range
   desc: ''
@@ -4877,6 +5173,7 @@ cdes:
 - abbreviated_name: Upper Limbs-Supinator Right
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndUpperSupinatorR
   datatype: range
   desc: ''
@@ -4895,6 +5192,7 @@ cdes:
 - abbreviated_name: Accessed VAD Info
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndVADaccess
   datatype: range
   desc: Has the patient accessed information regarding Voluntary Assisted Dying (VAD)?
@@ -4913,6 +5211,7 @@ cdes:
 - abbreviated_name: Utilised VAD
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndVADutilised
   datatype: range
   desc: Did the patient utilise VAD?
@@ -4931,6 +5230,7 @@ cdes:
 - abbreviated_name: Visit Date
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndVDate
   datatype: date
   desc: ''
@@ -4950,6 +5250,7 @@ cdes:
 - abbreviated_name: Walking
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndWalk
   datatype: range
   desc: ''
@@ -4968,6 +5269,7 @@ cdes:
 - abbreviated_name: I Can Walk
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndWalking
   datatype: range
   desc: ''
@@ -4986,6 +5288,7 @@ cdes:
 - abbreviated_name: Weakness In
   allow_multiple: true
   calculation: ''
+  calculation_query: ''
   code: mndWeakness
   datatype: range
   desc: ''
@@ -5004,6 +5307,7 @@ cdes:
 - abbreviated_name: Weight
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndWeight
   datatype: float
   desc: ''
@@ -5022,6 +5326,7 @@ cdes:
 - abbreviated_name: Breathe Difficult When
   allow_multiple: true
   calculation: ''
+  calculation_query: ''
   code: mndWhenBreathHard
   datatype: range
   desc: ''
@@ -5040,6 +5345,7 @@ cdes:
 - abbreviated_name: Why Avoid White Meat
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndWhite
   datatype: range
   desc: ''
@@ -5058,6 +5364,7 @@ cdes:
 - abbreviated_name: Handwriting
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndWriting
   datatype: range
   desc: ''
@@ -5076,6 +5383,7 @@ cdes:
 - abbreviated_name: Excess Saliva
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndXSaliva
   datatype: range
   desc: ''
@@ -5094,6 +5402,7 @@ cdes:
 - abbreviated_name: Current smoking status
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndcurrentsmoke
   datatype: range
   desc: ''
@@ -5112,6 +5421,7 @@ cdes:
 - abbreviated_name: Ethnicity
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndethnicity
   datatype: range
   desc: ''
@@ -5130,6 +5440,7 @@ cdes:
 - abbreviated_name: Ever smoked
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndeversmoke
   datatype: range
   desc: ''
@@ -5148,6 +5459,7 @@ cdes:
 - abbreviated_name: Status Father
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndfather
   datatype: range
   desc: ''
@@ -5166,6 +5478,7 @@ cdes:
 - abbreviated_name: Age of Father
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndfatherage
   datatype: integer
   desc: ''
@@ -5184,6 +5497,7 @@ cdes:
 - abbreviated_name: Father Death Age
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndfatherdeath
   datatype: integer
   desc: ''
@@ -5202,6 +5516,7 @@ cdes:
 - abbreviated_name: Father Dementia Status
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndfatherdementia
   datatype: range
   desc: ''
@@ -5220,6 +5535,7 @@ cdes:
 - abbreviated_name: Age of Father Unknown NA
   allow_multiple: true
   calculation: ''
+  calculation_query: ''
   code: mndfatherunknown
   datatype: range
   desc: If Age of father at time of clinical visit is unknown or N/A, check this box
@@ -5238,6 +5554,7 @@ cdes:
 - abbreviated_name: Highest Education
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndhighestedu
   datatype: string
   desc: ''
@@ -5256,6 +5573,7 @@ cdes:
 - abbreviated_name: Medical Co-morbidity
   allow_multiple: true
   calculation: ''
+  calculation_query: ''
   code: mndmedical
   datatype: range
   desc: ''
@@ -5274,6 +5592,7 @@ cdes:
 - abbreviated_name: Medical Co-morbidity Other1
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndmedicaloth1
   datatype: string
   desc: ''
@@ -5292,6 +5611,7 @@ cdes:
 - abbreviated_name: Medical Co-morbidity Other2
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndmedicaloth2
   datatype: string
   desc: ''
@@ -5310,6 +5630,7 @@ cdes:
 - abbreviated_name: Medical Co-morbidity Other3
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndmedicaloth3
   datatype: string
   desc: ''
@@ -5328,6 +5649,7 @@ cdes:
 - abbreviated_name: Medical Co-morbidity Other4
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndmedicaloth4
   datatype: string
   desc: ''
@@ -5346,6 +5668,7 @@ cdes:
 - abbreviated_name: Status Mother
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndmother
   datatype: range
   desc: ''
@@ -5364,6 +5687,7 @@ cdes:
 - abbreviated_name: Age of Mother
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndmotherage
   datatype: integer
   desc: ''
@@ -5382,6 +5706,7 @@ cdes:
 - abbreviated_name: Mother Death Age
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndmotherdeath
   datatype: integer
   desc: ''
@@ -5400,6 +5725,7 @@ cdes:
 - abbreviated_name: Mother Dementia Status
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndmotherdementia
   datatype: range
   desc: ''
@@ -5418,6 +5744,7 @@ cdes:
 - abbreviated_name: Age of Mother Unknown NA
   allow_multiple: true
   calculation: ''
+  calculation_query: ''
   code: mndmotherunknown
   datatype: range
   desc: If Age of mother at time of clinical visit is unknown or N/A, check this box
@@ -5436,6 +5763,7 @@ cdes:
 - abbreviated_name: Occupation
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndoccupation
   datatype: range
   desc: ''
@@ -5454,6 +5782,7 @@ cdes:
 - abbreviated_name: Packs x Years
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndpacksxyears
   datatype: float
   desc: ''
@@ -5472,6 +5801,7 @@ cdes:
 - abbreviated_name: Psychiatric Co-morbidity
   allow_multiple: true
   calculation: ''
+  calculation_query: ''
   code: mndpsychiatric
   datatype: range
   desc: ''
@@ -5490,6 +5820,7 @@ cdes:
 - abbreviated_name: Psychiatric Co-morbidity Other
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndpsychiatricoth
   datatype: string
   desc: ''
@@ -5508,6 +5839,7 @@ cdes:
 - abbreviated_name: Region Sympt Began
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndregionbegan
   datatype: range
   desc: Region where symptoms began
@@ -5526,6 +5858,7 @@ cdes:
 - abbreviated_name: Region Sympt Began Other
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndregionbeganOth
   datatype: string
   desc: ''
@@ -5544,6 +5877,7 @@ cdes:
 - abbreviated_name: Located
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndregionbeganloc
   datatype: range
   desc: ''
@@ -5562,6 +5896,7 @@ cdes:
 - abbreviated_name: Diagnosis Type
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mndtypedx
   datatype: range
   desc: Type of MND / Diagnosis
@@ -5580,6 +5915,7 @@ cdes:
 - abbreviated_name: Mode of Death Other
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: modeOfDeathSpecify
   datatype: string
   desc: ''
@@ -5598,6 +5934,7 @@ cdes:
 - abbreviated_name: My Most Comfy Pos
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: myMostComfy
   datatype: range
   desc: ''
@@ -5616,6 +5953,7 @@ cdes:
 - abbreviated_name: Specialist Contact
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mySpecialistContact
   datatype: string
   desc: ''
@@ -5635,6 +5973,7 @@ cdes:
 - abbreviated_name: Specialist Name
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mySpecialistName
   datatype: string
   desc: ''
@@ -5654,6 +5993,7 @@ cdes:
 - abbreviated_name: Specialist Practice
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: mySpecialistPractice
   datatype: string
   desc: ''
@@ -5672,6 +6012,7 @@ cdes:
 - abbreviated_name: NIV Date
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: nivDate
   datatype: date
   desc: ''
@@ -5691,6 +6032,7 @@ cdes:
 - abbreviated_name: Two Week Lead Death Date Oxygen
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: oxyDate
   datatype: date
   desc: ''
@@ -5710,6 +6052,7 @@ cdes:
 - abbreviated_name: Diagnosis Change
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: subDiagnosisConfirm
   datatype: range
   desc: ''
@@ -5728,6 +6071,7 @@ cdes:
 - abbreviated_name: Trach Date
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: trachDate
   datatype: date
   desc: ''
@@ -5748,6 +6092,7 @@ cdes:
 - abbreviated_name: Two Week Lead Death Date Trach
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: trachDeathDate
   datatype: date
   desc: ''
@@ -5767,6 +6112,7 @@ cdes:
 - abbreviated_name: Trach and Vent Date
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: trachVentDate
   datatype: date
   desc: ''
@@ -5786,6 +6132,7 @@ cdes:
 - abbreviated_name: Files Uploaded
   allow_multiple: true
   calculation: ''
+  calculation_query: ''
   code: uploadedForm
   datatype: file
   desc: ''
@@ -5804,6 +6151,7 @@ cdes:
 - abbreviated_name: If Other Specify
   allow_multiple: false
   calculation: ''
+  calculation_query: ''
   code: whomOther
   datatype: string
   desc: ''
@@ -6452,6 +6800,7 @@ forms:
     - mndLayBreath
     - mndResp
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   - abbreviated_name: My ALS-FRS Score
@@ -6461,6 +6810,7 @@ forms:
     elements:
     - mndALSScore
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   tags:
@@ -6509,6 +6859,7 @@ forms:
     - whomOther
     - mndSurvivability
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   - abbreviated_name: Deceased Details
@@ -6530,6 +6881,7 @@ forms:
     - feedTubeDate
     - trachDeathDate
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   - abbreviated_name: Completion Sign-Off
@@ -6545,6 +6897,7 @@ forms:
     - mndDMode10
     - mndDMode11
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   tags: []
@@ -6620,6 +6973,7 @@ forms:
     - mndConsultationType
     - mndTelehealthConsultation
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   - abbreviated_name: Research Trial Involved
@@ -6629,6 +6983,7 @@ forms:
     elements:
     - mndTrialParticipant
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   - abbreviated_name: Research Trial Details
@@ -6641,6 +6996,7 @@ forms:
     - mndTrialSDate
     - mndTrialEDate
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   - abbreviated_name: Diagnosis Details
@@ -6655,6 +7011,7 @@ forms:
     - DxTest
     - DxTestOth
     extra: null
+    header: ''
     questionnaire_display_name: Diagnosis Details
     questionnaire_help: ''
   - abbreviated_name: Presenting Details
@@ -6671,6 +7028,7 @@ forms:
     - mndDateConfirm
     - mndDominantHand
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   - abbreviated_name: Med History
@@ -6703,6 +7061,7 @@ forms:
     - mndoccupation
     - mndOccupationOther
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   - abbreviated_name: Regions Affected
@@ -6721,6 +7080,7 @@ forms:
     - mndLumbarLMN
     - lLMNLRB
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   - abbreviated_name: Reflex Details
@@ -6737,6 +7097,7 @@ forms:
     - mndLowerAnkle
     - mndLowerAnkleR
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   - abbreviated_name: ALSFRS Calc
@@ -6759,6 +7120,7 @@ forms:
     - mndLayBreath
     - mndResp
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   - abbreviated_name: ALSFRS Detail
@@ -6768,6 +7130,7 @@ forms:
     elements:
     - mndALSFRS
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   - abbreviated_name: Cognition
@@ -6791,6 +7154,7 @@ forms:
     - mndTestOthBScore
     - mndTestOthBDate
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   - abbreviated_name: Treatment Details
@@ -6802,6 +7166,7 @@ forms:
     - mndRiluzoleSDate
     - mndRiluzoleEDate
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   - abbreviated_name: Other Treatment Details
@@ -6816,6 +7181,7 @@ forms:
     - mndNIV
     - nivDate
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   - abbreviated_name: Resp Func Tests
@@ -6834,6 +7200,7 @@ forms:
     - mndMEP
     - mndO2
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   - abbreviated_name: Sleep Test Details
@@ -6845,6 +7212,7 @@ forms:
     - mndSleepDate
     - mndSleepStudyDate
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   - abbreviated_name: Medication
@@ -6859,6 +7227,7 @@ forms:
     - mndFreqOther
     - clinicMedAdminHow
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   - abbreviated_name: Other Therapy
@@ -6868,6 +7237,7 @@ forms:
     elements:
     - mndOtherTNT
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   - abbreviated_name: Other Therapy Details
@@ -6879,6 +7249,7 @@ forms:
     - mndTherapySDate
     - mndTherapyEDate
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   - abbreviated_name: Adaptive Device Details
@@ -6889,6 +7260,7 @@ forms:
     - mndADevices
     - mndADOther
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   - abbreviated_name: Nutrition Feed Tube Details
@@ -6899,6 +7271,7 @@ forms:
     - mndFeedingTube
     - mndFTDate
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   - abbreviated_name: Health Service Details
@@ -6909,6 +7282,7 @@ forms:
     - mndProsUsed
     - mndProsOther
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   tags:
@@ -6935,6 +7309,7 @@ forms:
     - myMostComfy
     - mndComfyOther
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   - abbreviated_name: When In Bed
@@ -6948,6 +7323,7 @@ forms:
     - mndNeedUse
     - mndNotes
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   - abbreviated_name: When Sit
@@ -6959,6 +7335,7 @@ forms:
     - mndChairNeed
     - mndChairNotes
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   tags:
@@ -6986,6 +7363,7 @@ forms:
     - mndApptDate
     - mndApptTime
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   tags:
@@ -7022,6 +7400,7 @@ forms:
     - mndBreathAssist
     - mndBAOther
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   tags:
@@ -7050,6 +7429,7 @@ forms:
     - mySpecialistContact
     - mySpecialistPractice
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   - abbreviated_name: Care Team Details
@@ -7064,6 +7444,7 @@ forms:
     - mndCEmail
     - mndPrimary
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   tags:
@@ -7093,6 +7474,7 @@ forms:
     - mndComTechOther
     - mndComChairOther
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   tags:
@@ -7149,6 +7531,7 @@ forms:
     - mndTube
     - mndTubeDetails
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   tags:
@@ -7174,6 +7557,7 @@ forms:
     elements:
     - mndEmotionNotes
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   tags:
@@ -7208,6 +7592,7 @@ forms:
     - mndESSSitNoDrink
     - mndESSTraffic
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   - abbreviated_name: My ESS Score
@@ -7217,6 +7602,7 @@ forms:
     elements:
     - mndESSScore
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   tags:
@@ -7253,6 +7639,7 @@ forms:
     - mndDocLocation
     - legalDocUpload
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   tags:
@@ -7284,6 +7671,7 @@ forms:
     - mndManageSaliva
     - mndSalivaOther
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   tags:
@@ -7310,6 +7698,7 @@ forms:
     - mndConditions
     - mndCondOther
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   tags:
@@ -7355,6 +7744,7 @@ forms:
     - mndMedTime6Plus
     - mndMedAdmin
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   - abbreviated_name: My Allergies
@@ -7364,6 +7754,7 @@ forms:
     elements:
     - mndAllergies
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   tags:
@@ -7403,6 +7794,7 @@ forms:
     - mndLHWorries
     - mndLHRemedies
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   tags:
@@ -7431,6 +7823,7 @@ forms:
     - mndToil
     - mndCareNeeds
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   tags:
@@ -7461,6 +7854,7 @@ forms:
     - mndTaskAids
     - mndRestNeeded
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   tags:
@@ -7494,6 +7888,7 @@ forms:
     - formUploadDate
     - uploadedForm
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   - abbreviated_name: External Subsequent
@@ -7506,6 +7901,7 @@ forms:
     - formUploadDate
     - uploadedForm
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   tags:
@@ -7545,6 +7941,7 @@ forms:
     - mndDepression
     - mndEmotion
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   tags:
@@ -7607,6 +8004,7 @@ forms:
     - mndConsultationType
     - mndTelehealthConsultation
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   - abbreviated_name: Research Trial Involved
@@ -7616,6 +8014,7 @@ forms:
     elements:
     - mndTrialParticipant
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   - abbreviated_name: Research Trial Details
@@ -7628,6 +8027,7 @@ forms:
     - mndTrialSDate
     - mndTrialEDate
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   - abbreviated_name: Dx Details
@@ -7643,6 +8043,7 @@ forms:
     - DxTest
     - DxTestOth
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   - abbreviated_name: Regions Affected
@@ -7661,6 +8062,7 @@ forms:
     - mndLumbarLMN
     - lLMNLRB
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   - abbreviated_name: Reflex Details
@@ -7677,6 +8079,7 @@ forms:
     - mndLowerAnkle
     - mndLowerAnkleR
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   - abbreviated_name: ALSFRS Calc
@@ -7699,6 +8102,7 @@ forms:
     - mndLayBreath
     - mndResp
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   - abbreviated_name: ALSFRS Detail
@@ -7708,6 +8112,7 @@ forms:
     elements:
     - mndALSFRS
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   - abbreviated_name: Cognition
@@ -7731,6 +8136,7 @@ forms:
     - mndTestOthBScore
     - mndTestOthBDate
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   - abbreviated_name: Treatment Details
@@ -7742,6 +8148,7 @@ forms:
     - mndRiluzoleSDate
     - mndRiluzoleEDate
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   - abbreviated_name: Other Treatment Details
@@ -7756,6 +8163,7 @@ forms:
     - mndNIV
     - nivDate
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   - abbreviated_name: Resp Func Tests
@@ -7774,6 +8182,7 @@ forms:
     - mndMEP
     - mndO2
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   - abbreviated_name: Sleep Test Details
@@ -7785,6 +8194,7 @@ forms:
     - mndSleepDate
     - mndSleepStudyDate
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   - abbreviated_name: Medication
@@ -7799,6 +8209,7 @@ forms:
     - mndFreqOther
     - clinicMedAdminHow
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   - abbreviated_name: Other Therapy
@@ -7808,6 +8219,7 @@ forms:
     elements:
     - mndOtherTNT
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   - abbreviated_name: Other Therapy Details
@@ -7819,6 +8231,7 @@ forms:
     - mndTherapySDate
     - mndTherapyEDate
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   - abbreviated_name: Adaptive Device Details
@@ -7829,6 +8242,7 @@ forms:
     - mndADevices
     - mndADOther
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   - abbreviated_name: Nutrition Feed Tube Details
@@ -7839,6 +8253,7 @@ forms:
     - mndFeedingTube
     - mndFTDate
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   - abbreviated_name: Health Service Details
@@ -7849,6 +8264,7 @@ forms:
     - mndProsUsed
     - mndProsOther
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   - abbreviated_name: Inpatient care allow multiple entries
@@ -7861,6 +8277,7 @@ forms:
     - mndInpatientDischarge
     - mndInpatientReason
     extra: null
+    header: ''
     questionnaire_display_name: ''
     questionnaire_help: ''
   tags: []
