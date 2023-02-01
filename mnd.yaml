@@ -1,4 +1,4 @@
-EXPORT_TIME: '2022-11-28 08:02:44.362784'
+EXPORT_TIME: '2023-02-01 11:25:37.888136'
 EXPORT_TYPE: REGISTRY_PLUS_CDES
 RDRF_VERSION: 1.0.0
 REGISTRY_VERSION: '1.0'
@@ -29,7 +29,6 @@ cdes:
   name: Tests to assist with diagnosis
   pattern: ''
   pv_group: DxTestPVG
-  questionnaire_text: Tests to assist with diagnosis
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Diagnosis Tests Other
@@ -48,7 +47,6 @@ cdes:
   name: Please specify
   pattern: ''
   pv_group: null
-  questionnaire_text: Please specify
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: Confirmed By
@@ -67,7 +65,6 @@ cdes:
   name: MND confirmed by
   pattern: ''
   pv_group: MNDConfirmPVG
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":true}'
 - abbreviated_name: Please specify
@@ -86,7 +83,6 @@ cdes:
   name: Please specify
   pattern: ''
   pv_group: null
-  questionnaire_text: Please specify
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: Diagnosis
@@ -105,7 +101,6 @@ cdes:
   name: Please confirm the MND Diagnosis
   pattern: ''
   pv_group: MNDDiagnosis
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":true}'
 - abbreviated_name: Multi Opinion
@@ -124,7 +119,6 @@ cdes:
   name: More than one opinion given?
   pattern: ''
   pv_group: mndYN
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":true}'
 - abbreviated_name: Do Not Contact
@@ -144,7 +138,6 @@ cdes:
   name: Do Not Contact
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Date of Exclusion
@@ -164,7 +157,6 @@ cdes:
   name: Date of Exclusion
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: DateWidget
   widget_settings: ''
 - abbreviated_name: Two Week Lead Death Date BiPAP
@@ -184,7 +176,6 @@ cdes:
   name: Date BiPAP commenced (if known)
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: DateWidget
   widget_settings: ''
 - abbreviated_name: Cervical Region-LMN-LRBoth
@@ -203,7 +194,6 @@ cdes:
   name: Left, Right or Both
   pattern: ''
   pv_group: blLRB
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: Cervical Region-UMN-LRBoth
@@ -222,7 +212,6 @@ cdes:
   name: Left, Right or Both
   pattern: ''
   pv_group: blLRB
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: Uploaded CRF
@@ -241,7 +230,6 @@ cdes:
   name: Please upload a copy of the CRF if applicable
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: med administered via
@@ -260,7 +248,6 @@ cdes:
   name: Administered via
   pattern: ''
   pv_group: clinicMedAdmin
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Date Datacurator Entry
@@ -280,7 +267,6 @@ cdes:
   name: Date of data entry
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: DateWidget
   widget_settings: '{}'
 - abbreviated_name: Reason Delay
@@ -299,7 +285,6 @@ cdes:
   name: (if applicable) Reason for delay?
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: Two Weeks Lead Death Med Other
@@ -318,7 +303,6 @@ cdes:
   name: If Other, Specify
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: TextAreaWidget
   widget_settings: ''
 - abbreviated_name: Place of Death Other
@@ -337,7 +321,6 @@ cdes:
   name: If Other, Specify
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: TextAreaWidget
   widget_settings: ''
 - abbreviated_name: Contact Email
@@ -357,7 +340,6 @@ cdes:
   name: Email address of your Contact person
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: Specialist Name
@@ -376,7 +358,6 @@ cdes:
   name: Name of Specialist
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: Two Week Lead Death Date Feed Tube
@@ -396,7 +377,6 @@ cdes:
   name: Date feeding tube inserted (if known)
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: DateWidget
   widget_settings: ''
 - abbreviated_name: Date Form Uploaded
@@ -415,7 +395,6 @@ cdes:
   name: Date form uploaded
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: DateWidget
   widget_settings: '{}'
 - abbreviated_name: PFT Date
@@ -435,7 +414,6 @@ cdes:
   name: Date performed
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: DateWidget
   widget_settings: ''
 - abbreviated_name: Do you have Gastrostomy  PEG
@@ -455,7 +433,6 @@ cdes:
   name: Do you have Gastrostomy / PEG?
   pattern: ''
   pv_group: mndYN
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Lumbar Region-LMN-LRBoth
@@ -474,7 +451,6 @@ cdes:
   name: Left, Right or Both
   pattern: ''
   pv_group: buLRB
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: Lumbar Region-UMN-LRBoth
@@ -493,7 +469,6 @@ cdes:
   name: Left, Right or Both
   pattern: ''
   pv_group: blLRB
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: Legal Doc Upload
@@ -513,7 +488,6 @@ cdes:
   name: Upload your legal files
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: MultipleFileInput
   widget_settings: '{}'
 - abbreviated_name: Date of last contact
@@ -533,7 +507,6 @@ cdes:
   name: Date of last contact
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: DateWidget
   widget_settings: ''
 - abbreviated_name: Adaptive Cutlery Crockery
@@ -552,7 +525,6 @@ cdes:
   name: I use adapted cutlery and crockery
   pattern: ''
   pv_group: mndYN
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
 - abbreviated_name: ACD YesNo
@@ -571,7 +543,6 @@ cdes:
   name: I have an Advanced Care Directive (ACD)
   pattern: ''
   pv_group: mndYN
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Adaptive Device Other
@@ -590,7 +561,6 @@ cdes:
   name: Please Specify
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: Adaptive Devices Used
@@ -609,7 +579,6 @@ cdes:
   name: Adaptive Devices Used
   pattern: ''
   pv_group: mndADeviceChoice
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: Dressing and Hygeine
@@ -628,7 +597,6 @@ cdes:
   name: Dressing and Hygeine
   pattern: ''
   pv_group: dressRating
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: ALSFRSScore
@@ -666,7 +634,6 @@ cdes:
   name: ALSFRS  Score
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: Salivation
@@ -685,7 +652,6 @@ cdes:
   name: Salivation
   pattern: ''
   pv_group: salivaRating
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: My ALS-FRS Score
@@ -722,7 +688,6 @@ cdes:
   name: My ALS-FRS Score
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: CalculatedFieldWidget
   widget_settings: '{}'
 - abbreviated_name: Behave score
@@ -741,7 +706,6 @@ cdes:
   name: Behavioural score
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: ALS-non specific
@@ -760,7 +724,6 @@ cdes:
   name: ALS-non Specific Score
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Psychosis score
@@ -779,7 +742,6 @@ cdes:
   name: Psychosis score
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: ALS-Specific Score
@@ -798,7 +760,6 @@ cdes:
   name: ALS-Specific Score
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Total score
@@ -817,7 +778,6 @@ cdes:
   name: Total score
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Team Member Name
@@ -836,7 +796,6 @@ cdes:
   name: Name of Team Member
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Allergies
@@ -856,7 +815,6 @@ cdes:
   name: My Allergies
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: TextAreaWidget
   widget_settings: '{}'
 - abbreviated_name: Appoint Date
@@ -875,7 +833,6 @@ cdes:
   name: Date of Appointment
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: DateWidget
   widget_settings: '{}'
 - abbreviated_name: Appoint Time
@@ -894,7 +851,6 @@ cdes:
   name: Time
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: TimeWidget
   widget_settings: '{"format":"12hour"}'
 - abbreviated_name: Avoid Foods
@@ -914,7 +870,6 @@ cdes:
   name: 'I avoid the following foods:'
   pattern: ''
   pv_group: foodTypes
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Avoid Other
@@ -933,7 +888,6 @@ cdes:
   name: Other (Please Specify)
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Breathe Relieve Other
@@ -952,7 +906,6 @@ cdes:
   name: 'Other measures that can help:'
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: BMI
@@ -979,7 +932,6 @@ cdes:
   name: BMI
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: Turn in Bed and Adjust
@@ -998,7 +950,6 @@ cdes:
   name: Turning in Bed and adjusting Bed clothes
   pattern: ''
   pv_group: bedRating
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: Short Breath
@@ -1017,7 +968,6 @@ cdes:
   name: Shortness of breath
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: SliderWidget
   widget_settings: '{"min":"0","max":"10","left_label":"None","right_label":"Severe","step":"1"}'
 - abbreviated_name: Breathe relieve
@@ -1036,7 +986,6 @@ cdes:
   name: 'The following can help relieve my breathing difficulties:'
   pattern: ''
   pv_group: baChoices
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Breathe Difficult
@@ -1055,7 +1004,6 @@ cdes:
   name: I have breathing difficulties
   pattern: ''
   pv_group: mndYN
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Breathe Trach
@@ -1074,7 +1022,6 @@ cdes:
   name: I have a tracheostomy and need full breathing support at all times
   pattern: ''
   pv_group: mndYN
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Difficulty of Breathing
@@ -1093,7 +1040,6 @@ cdes:
   name: Difficulty of Breathing
   pattern: ''
   pv_group: breathRating
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: Brush Teeth
@@ -1112,7 +1058,6 @@ cdes:
   name: 'I like to brush my teeth:'
   pattern: ''
   pv_group: mndBrushHabit
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Bulbar Region-LMN
@@ -1131,7 +1076,6 @@ cdes:
   name: Bulbar Region -  LMN
   pattern: ''
   pv_group: mndYN
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Bulbar Region-UMN
@@ -1150,7 +1094,6 @@ cdes:
   name: Bulbar Region - UMN
   pattern: ''
   pv_group: mndYN
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Can By Mouth
@@ -1169,7 +1112,6 @@ cdes:
   name: I can eat and drink by mouth
   pattern: ''
   pv_group: mndOptions
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":true}'
 - abbreviated_name: Address
@@ -1188,7 +1130,6 @@ cdes:
   name: 'Address:'
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: TextAreaWidget
   widget_settings: '{}'
 - abbreviated_name: Email
@@ -1207,7 +1148,6 @@ cdes:
   name: 'Email:'
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Name
@@ -1226,7 +1166,6 @@ cdes:
   name: 'Name:'
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Phone
@@ -1245,7 +1184,6 @@ cdes:
   name: 'Telephone:'
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Role
@@ -1264,7 +1202,6 @@ cdes:
   name: Role
   pattern: ''
   pv_group: mndCareRoles
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Important Care
@@ -1283,7 +1220,6 @@ cdes:
   name: 'The following things are important to me when being given personal care:'
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: TextAreaWidget
   widget_settings: '{}'
 - abbreviated_name: Cervical Region-LMN
@@ -1302,7 +1238,6 @@ cdes:
   name: Cervical Region - LMN
   pattern: ''
   pv_group: mndYN
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Cervical Region-UMN
@@ -1321,7 +1256,6 @@ cdes:
   name: Cervical Region - UMN
   pattern: ''
   pv_group: mndYN
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Move myself in a chair
@@ -1340,7 +1274,6 @@ cdes:
   name: Move myself in a chair
   pattern: ''
   pv_group: mndYN
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Need Chair Aid
@@ -1359,7 +1292,6 @@ cdes:
   name: 'I need to use:'
   pattern: ''
   pv_group: chairUse
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Chair Comfy
@@ -1378,7 +1310,6 @@ cdes:
   name: 'I am more comfortable when seated if:'
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: TextAreaWidget
   widget_settings: '{}'
 - abbreviated_name: Choking Sensation
@@ -1397,7 +1328,6 @@ cdes:
   name: Choking sensation
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: SliderWidget
   widget_settings: '{"min":"0","max":"10","left_label":"None","right_label":"Severe","step":"1"}'
 - abbreviated_name: Clinic Site
@@ -1416,7 +1346,6 @@ cdes:
   name: MND Clinical Site
   pattern: ''
   pv_group: mndSitesPVG
-  questionnaire_text: MND Clinical Site
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Comms Tech Other
@@ -1435,7 +1364,6 @@ cdes:
   name: Other (Please specify)
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Comms Difficult Level
@@ -1454,7 +1382,6 @@ cdes:
   name: 'I have:'
   pattern: ''
   pv_group: mndComChoices
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":true}'
 - abbreviated_name: Additional information Computer with switch
@@ -1473,7 +1400,6 @@ cdes:
   name: Additional information (Computer with switch)
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: TextAreaWidget
   widget_settings: '{}'
 - abbreviated_name: Comms Technology
@@ -1492,7 +1418,6 @@ cdes:
   name: I communicate using the following techniques or aids
   pattern: ''
   pv_group: comTechChoices
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Comfy Other
@@ -1511,7 +1436,6 @@ cdes:
   name: Other (Please explain)
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: TextAreaWidget
   widget_settings: '{}'
 - abbreviated_name: Condition Other
@@ -1530,7 +1454,6 @@ cdes:
   name: 'Other (Please add below):'
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Diagnosed Conditions
@@ -1549,7 +1472,6 @@ cdes:
   name: 'Medical / Psychiatric Conditions that I have been diagnosed with:'
   pattern: ''
   pv_group: mndConditionChoices
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Date of consent
@@ -1568,7 +1490,6 @@ cdes:
   name: Please enter the date consent was obtained (if consented in clinic)
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: DateWidget
   widget_settings: '{}'
 - abbreviated_name: Constipation
@@ -1587,7 +1508,6 @@ cdes:
   name: Constipation
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: SliderWidget
   widget_settings: '{"min":"0","max":"10","left_label":"None","right_label":"Severe","step":"1"}'
 - abbreviated_name: Consult Type
@@ -1606,7 +1526,6 @@ cdes:
   name: Consultation Type
   pattern: ''
   pv_group: mndConsultationTypePVG
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":true}'
 - abbreviated_name: Completion Reason
@@ -1625,7 +1544,6 @@ cdes:
   name: Reason for Completion
   pattern: ''
   pv_group: completeReasonChoices
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: Investigator Signature
@@ -1644,7 +1562,6 @@ cdes:
   name: Investigator Signature
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: SignatureWidget
   widget_settings: '{}'
 - abbreviated_name: Sign-Off Date
@@ -1664,7 +1581,6 @@ cdes:
   name: Sign-Off Date
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: DateWidget
   widget_settings: ''
 - abbreviated_name: Data Obtained From
@@ -1683,7 +1599,6 @@ cdes:
   name: From whom was this data obtained?
   pattern: ''
   pv_group: whoChoices
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: Mode of Death
@@ -1702,7 +1617,6 @@ cdes:
   name: Mode of Death
   pattern: ''
   pv_group: deathMode
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: Related Expected
@@ -1721,7 +1635,6 @@ cdes:
   name: 'And select one of:'
   pattern: ''
   pv_group: deceasedChoices
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":true}'
 - abbreviated_name: Place of Death
@@ -1740,7 +1653,6 @@ cdes:
   name: Place of death
   pattern: ''
   pv_group: deathPlace
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: Two Weeks Lead Death Medication
@@ -1759,7 +1671,6 @@ cdes:
   name: In the two weeks leading to death, what medications were given?
   pattern: ''
   pv_group: deathMeds
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: Two Week Lead Death Intervention
@@ -1778,7 +1689,6 @@ cdes:
   name: In the two weeks leading to death, were any of these interventions initiated?
   pattern: ''
   pv_group: interventions
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: Comments
@@ -1801,7 +1711,6 @@ cdes:
   name: Comments
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: TextAreaWidget
   widget_settings: ''
 - abbreviated_name: Investigator Name
@@ -1820,7 +1729,6 @@ cdes:
   name: Investigator Name
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: Date of death
@@ -1840,7 +1748,6 @@ cdes:
   name: Date of death
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: DateWidget
   widget_settings: ''
 - abbreviated_name: Why Avoid Dairy
@@ -1859,7 +1766,6 @@ cdes:
   name: 'Dairy (Reason):'
   pattern: ''
   pv_group: avoidReason
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Date Confirmed
@@ -1879,7 +1785,6 @@ cdes:
   name: Date MND Confirmed
   pattern: ''
   pv_group: null
-  questionnaire_text: Date MND Confirmed
   widget_name: DateWidget
   widget_settings: '{}'
 - abbreviated_name: Date Start
@@ -1898,7 +1803,6 @@ cdes:
   name: Date started
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: DateWidget
   widget_settings: '{}'
 - abbreviated_name: Confirm Dementia
@@ -1917,7 +1821,6 @@ cdes:
   name: Confirmation of dementia
   pattern: ''
   pv_group: mndDementiaList
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":true}'
 - abbreviated_name: Confirm Dementia Other
@@ -1936,7 +1839,6 @@ cdes:
   name: Please state
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: Depression
@@ -1955,7 +1857,6 @@ cdes:
   name: Depression
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: SliderWidget
   widget_settings: '{"min":"0","max":"10","left_label":"None","right_label":"Severe","step":"1"}'
 - abbreviated_name: Disturbed Sleep
@@ -1974,7 +1875,6 @@ cdes:
   name: Disturbed Sleep
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: SliderWidget
   widget_settings: '{"min":"0","max":"10","left_label":"None","right_label":"Severe","step":"1"}'
 - abbreviated_name: Doc Location
@@ -1993,7 +1893,6 @@ cdes:
   name: 'These documents are kept:'
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: TypeOth1
@@ -2013,7 +1912,6 @@ cdes:
   name: 'Other - Please specify:'
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: Dominant Hand
@@ -2032,7 +1930,6 @@ cdes:
   name: Dominant Hand
   pattern: ''
   pv_group: mndDominantHandPVG
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":true}'
 - abbreviated_name: Dose Unit
@@ -2051,7 +1948,6 @@ cdes:
   name: Dose (unit of measure)
   pattern: ''
   pv_group: mndDoseChoice
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: Dose
@@ -2071,7 +1967,6 @@ cdes:
   name: Dose
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Dress Help
@@ -2090,7 +1985,6 @@ cdes:
   name: Dressing
   pattern: ''
   pv_group: careChoices
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Death Diagnosis
@@ -2109,7 +2003,6 @@ cdes:
   name: Please confirm diagnosis at time of death
   pattern: ''
   pv_group: MNDDeathDiagnosisPVG
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":true}'
 - abbreviated_name: Lye Down Afternoon
@@ -2128,7 +2021,6 @@ cdes:
   name: Lying down in the afternoon-circumstances permitting
   pattern: ''
   pv_group: mndDozeRating
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Passenger in Car for Hour
@@ -2147,7 +2039,6 @@ cdes:
   name: As a passenger in a car for an hour without a break
   pattern: ''
   pv_group: mndDozeRating
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Sit Inactive Public Place
@@ -2166,7 +2057,6 @@ cdes:
   name: Sitting inactive in a public place (ie, Drs, meeting, cinema)
   pattern: ''
   pv_group: mndDozeRating
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: My ESS Score
@@ -2198,7 +2088,6 @@ cdes:
   name: 'My ESS Score:'
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Sit and Read
@@ -2217,7 +2106,6 @@ cdes:
   name: Sitting and reading
   pattern: ''
   pv_group: mndDozeRating
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Sit and Talk
@@ -2236,7 +2124,6 @@ cdes:
   name: Sitting and talking to someone
   pattern: ''
   pv_group: mndDozeRating
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Sit After Lunch No Alcohol
@@ -2255,7 +2142,6 @@ cdes:
   name: Sitting quietly after a lunch without alcohol
   pattern: ''
   pv_group: mndDozeRating
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Watch TV
@@ -2274,7 +2160,6 @@ cdes:
   name: Watching television
   pattern: ''
   pv_group: mndDozeRating
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Stopped in Traffic Few Minutes
@@ -2293,7 +2178,6 @@ cdes:
   name: In a car, stopped for a few minutes in traffic
   pattern: ''
   pv_group: mndDozeRating
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Why Avoid Egg
@@ -2312,7 +2196,6 @@ cdes:
   name: 'Eggs (Reason):'
   pattern: ''
   pv_group: avoidReason
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Inappropriate Emotion
@@ -2331,7 +2214,6 @@ cdes:
   name: Extreme/inappropriate emotions
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: SliderWidget
   widget_settings: '{"min":"0","max":"10","left_label":"None","right_label":"Severe","step":"1"}'
 - abbreviated_name: Emotion Notes
@@ -2350,9 +2232,26 @@ cdes:
   name: My emotions and behaviour
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: TextAreaWidget
   widget_settings: '{}'
+- abbreviated_name: Other Ethnicity
+  allow_multiple: false
+  calculation: ''
+  calculation_query: ''
+  code: mndEthnicityOther6
+  datatype: string
+  desc: Other (please specify)
+  important: false
+  instructions: ''
+  is_required: false
+  max_length: null
+  max_value: null
+  min_value: null
+  name: Other ethnicity (please specify)
+  pattern: ''
+  pv_group: null
+  widget_name: ''
+  widget_settings: ''
 - abbreviated_name: Date Feed Tube Insert
   allow_multiple: false
   calculation: ''
@@ -2370,7 +2269,6 @@ cdes:
   name: Date of insertion
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: DateWidget
   widget_settings: ''
 - abbreviated_name: PFT
@@ -2389,7 +2287,6 @@ cdes:
   name: Respiratory / Pulmonary Function Tests Done
   pattern: ''
   pv_group: mndYN
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
 - abbreviated_name: FVC Litres L
@@ -2408,7 +2305,6 @@ cdes:
   name: FVC Litres (L)
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: 'FVC Predicted '
@@ -2427,7 +2323,6 @@ cdes:
   name: FVC Predicted (%)
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Fatigue
@@ -2446,7 +2341,6 @@ cdes:
   name: 'Fatigue:'
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: SliderWidget
   widget_settings: '{"min":"0","max":"10","left_label":"None","right_label":"Severe","step":"1"}'
 - abbreviated_name: Feeding Tube Inserted
@@ -2465,7 +2359,6 @@ cdes:
   name: Has a Feeding Tube been inserted?
   pattern: ''
   pv_group: mndYN
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Why Avoid Fish
@@ -2484,7 +2377,6 @@ cdes:
   name: 'Fish (Reason):'
   pattern: ''
   pv_group: avoidReason
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Fluid Consistency Need
@@ -2504,7 +2396,6 @@ cdes:
   name: I need my fluids at the following consistency
   pattern: ''
   pv_group: fluidLevels
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Food Consistency Need
@@ -2523,7 +2414,6 @@ cdes:
   name: 'I need my food at the following consistency:'
   pattern: ''
   pv_group: foodLevels
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Food Prefer
@@ -2542,7 +2432,6 @@ cdes:
   name: 'I prefer the following foods, drinks or supplements:'
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: TextAreaWidget
   widget_settings: '{}'
 - abbreviated_name: Frequency
@@ -2561,7 +2450,6 @@ cdes:
   name: Frequency
   pattern: ''
   pv_group: mndFreqChoice
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: Other medication frequency
@@ -2580,7 +2468,6 @@ cdes:
   name: Other medication frequency
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: PegGasYes Cut Food
@@ -2599,7 +2486,6 @@ cdes:
   name: Cutting Food and Handling Utensils
   pattern: ''
   pv_group: gasCutRating
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: PEGGas more than 50pec
@@ -2618,7 +2504,6 @@ cdes:
   name: Is PEG/Gastrostomy the primary method of eating (>50%)?
   pattern: ''
   pv_group: mndYN
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Why Avoid Gluten
@@ -2637,7 +2522,6 @@ cdes:
   name: 'Gluten (Reason):'
   pattern: ''
   pv_group: avoidReason
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Height
@@ -2656,7 +2540,6 @@ cdes:
   name: Height (in cm)
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Help Eat Drink
@@ -2675,7 +2558,6 @@ cdes:
   name: I need help to eat and drink
   pattern: ''
   pv_group: mndEatHelp
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":true}'
 - abbreviated_name: Cognition Affected
@@ -2694,7 +2576,6 @@ cdes:
   name: Does it seem that cognition is affected?
   pattern: ''
   pv_group: mndYN
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Date Inpatient Admit
@@ -2714,7 +2595,6 @@ cdes:
   name: Date of admission
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: DateWidget
   widget_settings: ''
 - abbreviated_name: Date Inpatient Discharge
@@ -2734,7 +2614,6 @@ cdes:
   name: Date of discharge
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: DateWidget
   widget_settings: ''
 - abbreviated_name: Reason Inpatient
@@ -2753,7 +2632,6 @@ cdes:
   name: Reason for admission
   pattern: ''
   pv_group: mndIPChoice
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Inpatient Since Last Visit
@@ -2772,7 +2650,6 @@ cdes:
   name: Has there been an inpatient stay since last visit?
   pattern: ''
   pv_group: mndYN
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Type
@@ -2791,7 +2668,6 @@ cdes:
   name: I have any of the following documents
   pattern: ''
   pv_group: mndLDocTypes
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: TypeOth2
@@ -2811,7 +2687,6 @@ cdes:
   name: Please specify
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: TypeOth3
@@ -2831,7 +2706,6 @@ cdes:
   name: Please specify
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: Annoys Me
@@ -2850,7 +2724,6 @@ cdes:
   name: 'Things that annoy me:'
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: TextAreaWidget
   widget_settings: '{}'
 - abbreviated_name: My Books
@@ -2869,7 +2742,6 @@ cdes:
   name: 'My favourite books:'
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: TextAreaWidget
   widget_settings: '{}'
 - abbreviated_name: My Talk
@@ -2888,7 +2760,6 @@ cdes:
   name: 'Things that I like hearing someone talk about:'
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: TextAreaWidget
   widget_settings: '{}'
 - abbreviated_name: Daily Routines
@@ -2907,7 +2778,6 @@ cdes:
   name: 'Important Daily Routines:'
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: TextAreaWidget
   widget_settings: '{}'
 - abbreviated_name: My Films
@@ -2926,7 +2796,6 @@ cdes:
   name: 'My favourite films:'
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: TextAreaWidget
   widget_settings: '{}'
 - abbreviated_name: My Family and Friends
@@ -2945,7 +2814,6 @@ cdes:
   name: 'My Family and Friends:'
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: TextAreaWidget
   widget_settings: '{}'
 - abbreviated_name: My Interests
@@ -2964,7 +2832,6 @@ cdes:
   name: 'Things and hobbies that interest me:'
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: TextAreaWidget
   widget_settings: '{}'
 - abbreviated_name: My Life
@@ -2984,7 +2851,6 @@ cdes:
   name: 'My life so far:'
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: TextAreaWidget
   widget_settings: '{}'
 - abbreviated_name: My Music
@@ -3003,7 +2869,6 @@ cdes:
   name: 'Music or radio stations that I like to listen to:'
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: TextAreaWidget
   widget_settings: '{}'
 - abbreviated_name: My Calm
@@ -3022,7 +2887,6 @@ cdes:
   name: 'Things that make me feel better if I am anxious or upset:'
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: TextAreaWidget
   widget_settings: '{}'
 - abbreviated_name: My Internet
@@ -3041,7 +2905,6 @@ cdes:
   name: My blog or website
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: TextAreaWidget
   widget_settings: '{}'
 - abbreviated_name: My TV
@@ -3060,7 +2923,6 @@ cdes:
   name: 'Television shows I enjoy:'
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: TextAreaWidget
   widget_settings: '{}'
 - abbreviated_name: My Work
@@ -3079,7 +2941,6 @@ cdes:
   name: 'My Work:'
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: TextAreaWidget
   widget_settings: '{}'
 - abbreviated_name: My Worries
@@ -3098,7 +2959,6 @@ cdes:
   name: 'Things that worry and upset me:'
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: TextAreaWidget
   widget_settings: '{}'
 - abbreviated_name: Difficult Breath Lay Flat
@@ -3117,7 +2977,6 @@ cdes:
   name: Difficulty of breathing when lying flat
   pattern: ''
   pv_group: layBreathRating
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: I can lie flat
@@ -3136,7 +2995,6 @@ cdes:
   name: I can lie flat
   pattern: ''
   pv_group: mndYN
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{}'
 - abbreviated_name: Lower Limbs-Ankle Left
@@ -3155,7 +3013,6 @@ cdes:
   name: 'Lower Limbs - Ankle: Left'
   pattern: ''
   pv_group: leftSide
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: Lower Limbs-Ankle Right
@@ -3174,7 +3031,6 @@ cdes:
   name: 'Lower Limbs - Ankle: Right'
   pattern: ''
   pv_group: rightSide
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: Lower Limbs-Knee Left
@@ -3193,7 +3049,6 @@ cdes:
   name: 'Lower Limbs - Knee: Left'
   pattern: ''
   pv_group: leftSide
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: Lower Limbs-Knee Right
@@ -3212,7 +3067,6 @@ cdes:
   name: 'Lower Limbs - Knee: Right'
   pattern: ''
   pv_group: rightSide
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: Lumbar Region-LMN
@@ -3231,7 +3085,6 @@ cdes:
   name: Lumbar Region - LMN
   pattern: ''
   pv_group: mndYN
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Lumbar Region-UMN
@@ -3250,7 +3103,6 @@ cdes:
   name: Lumbar Region - UMN
   pattern: ''
   pv_group: mndYN
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
 - abbreviated_name: MEP
@@ -3269,7 +3121,6 @@ cdes:
   name: MEP
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Mouth Care Help
@@ -3288,7 +3139,6 @@ cdes:
   name: 'I need help with mouth care:'
   pattern: ''
   pv_group: mndYN
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
 - abbreviated_name: MIP
@@ -3307,7 +3157,6 @@ cdes:
   name: MIP
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Manage Excess Saliva
@@ -3326,7 +3175,6 @@ cdes:
   name: 'I manage excessive saliva with the following:'
   pattern: ''
   pv_group: mndSalivaMgmt
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Med Administration
@@ -3345,7 +3193,6 @@ cdes:
   name: 'I take it as follows:'
   pattern: ''
   pv_group: mndMedAdminChoices
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Med Dose
@@ -3365,7 +3212,6 @@ cdes:
   name: Dose
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Med Frequency
@@ -3384,7 +3230,6 @@ cdes:
   name: How frequently do you take it?
   pattern: ''
   pv_group: medFrequencyChoices
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Med Name
@@ -3403,7 +3248,6 @@ cdes:
   name: Medicine Name
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: CMILookupWidget
   widget_settings: '{}'
 - abbreviated_name: Other
@@ -3423,7 +3267,6 @@ cdes:
   name: Other
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Med Purpose
@@ -3442,7 +3285,6 @@ cdes:
   name: 'What it is for:'
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Med Time 1
@@ -3461,7 +3303,6 @@ cdes:
   name: Time 1
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: TimeWidget
   widget_settings: '{"format":"12hour"}'
 - abbreviated_name: Med Time 2
@@ -3480,7 +3321,6 @@ cdes:
   name: Time 2
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: TimeWidget
   widget_settings: '{"format":"12hour"}'
 - abbreviated_name: Med Time 3
@@ -3499,7 +3339,6 @@ cdes:
   name: Time 3
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: TimeWidget
   widget_settings: '{"format":"12hour"}'
 - abbreviated_name: Med Time 4
@@ -3518,7 +3357,6 @@ cdes:
   name: Time 4
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: TimeWidget
   widget_settings: '{"format":"12hour"}'
 - abbreviated_name: Med Time 5
@@ -3537,7 +3375,6 @@ cdes:
   name: Time 5
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: TimeWidget
   widget_settings: '{"format":"12hour"}'
 - abbreviated_name: Med Time 6
@@ -3556,7 +3393,6 @@ cdes:
   name: Time 6
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: TimeWidget
   widget_settings: '{"format":"12hour"}'
 - abbreviated_name: Med When Taken
@@ -3576,7 +3412,6 @@ cdes:
   name: Please specify the times you take your medication
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: TextAreaWidget
   widget_settings: '{}'
 - abbreviated_name: Med Name
@@ -3596,7 +3431,6 @@ cdes:
   name: Medications
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ProductLookupWidget
   widget_settings: '{}'
 - abbreviated_name: Move Self
@@ -3615,7 +3449,6 @@ cdes:
   name: I can move myself
   pattern: ''
   pv_group: mndYN
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Move Aids
@@ -3634,7 +3467,6 @@ cdes:
   name: 'I use the following equipment to move around:'
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Muscle Cramp Twitch
@@ -3653,7 +3485,6 @@ cdes:
   name: Muscle Cramps/twitching
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: SliderWidget
   widget_settings: '{"min":"0","max":"10","left_label":"None","right_label":"Severe","step":"1"}'
 - abbreviated_name: NIV
@@ -3672,7 +3503,6 @@ cdes:
   name: Non-invasive ventilation
   pattern: ''
   pv_group: mndYN
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
 - abbreviated_name: With NIV I am
@@ -3691,7 +3521,6 @@ cdes:
   name: 'With NIV, I am:'
   pattern: ''
   pv_group: nivPowerChoices
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":true}'
 - abbreviated_name: I use NIV
@@ -3710,7 +3539,6 @@ cdes:
   name: I use NIV
   pattern: ''
   pv_group: nivUse
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Breathe NIV
@@ -3729,7 +3557,6 @@ cdes:
   name: 'I use non-invasive ventilation (NIV):'
   pattern: ''
   pv_group: mndYN
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
 - abbreviated_name: NIV Use Last Week
@@ -3748,7 +3575,6 @@ cdes:
   name: In the last week, I've used NIV approximately X hours per day
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Need Help
@@ -3767,7 +3593,6 @@ cdes:
   name: 'I need help to:'
   pattern: ''
   pv_group: lieHelp
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Need Aid
@@ -3786,7 +3611,6 @@ cdes:
   name: 'I need to use:'
   pattern: ''
   pv_group: needHelp
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: PegGasNo Cut Food
@@ -3805,7 +3629,6 @@ cdes:
   name: Cutting Food and Handling Utensils
   pattern: ''
   pv_group: noGasRating
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: Bed Comfy
@@ -3824,7 +3647,6 @@ cdes:
   name: 'I am more comfortable in bed when:'
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: TextAreaWidget
   widget_settings: '{}'
 - abbreviated_name: SPO2
@@ -3843,7 +3665,6 @@ cdes:
   name: Oxygen Saturation % (SpO2) on room air
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Occupation Other
@@ -3862,7 +3683,6 @@ cdes:
   name: 'Other - Please specify:'
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: Date Sympt Onset
@@ -3882,7 +3702,6 @@ cdes:
   name: Date of symptom onset
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: DateWidget
   widget_settings: '{}'
 - abbreviated_name: Why Avoid OTher
@@ -3901,7 +3720,6 @@ cdes:
   name: 'Other (Reason):'
   pattern: ''
   pv_group: avoidReason
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Other Family MNDALS
@@ -3920,7 +3738,6 @@ cdes:
   name: Other family members affected by MND/ALS?
   pattern: ''
   pv_group: mndYNUNK
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":true}'
 - abbreviated_name: Other Therapies
@@ -3939,7 +3756,6 @@ cdes:
   name: Other therapies or novel treatments?
   pattern: ''
   pv_group: mndYN
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Use PEG
@@ -3958,7 +3774,6 @@ cdes:
   name: 'I use tube feeding (PEG):'
   pattern: ''
   pv_group: mndYN
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Hygiene Help
@@ -3977,7 +3792,6 @@ cdes:
   name: Personal Hygiene
   pattern: ''
   pv_group: careChoices
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Pain
@@ -3996,7 +3810,6 @@ cdes:
   name: 'Pain:'
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: SliderWidget
   widget_settings: '{"min":"0","max":"10","left_label":"None","right_label":"Severe","step":"1"}'
 - abbreviated_name: Why Avoid Peanut
@@ -4015,7 +3828,6 @@ cdes:
   name: 'Peanuts (Reason):'
   pattern: ''
   pv_group: avoidReason
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Physical Aid
@@ -4034,7 +3846,6 @@ cdes:
   name: 'I use:'
   pattern: ''
   pv_group: walkAids
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Make Primary Contact
@@ -4053,7 +3864,6 @@ cdes:
   name: Make this person my primary contact
   pattern: ''
   pv_group: mndPrimaryPVG
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Health Services Other
@@ -4072,7 +3882,6 @@ cdes:
   name: Please Specify
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: Health Services Used
@@ -4091,7 +3900,6 @@ cdes:
   name: Select Health Care Professionals and Services Currently Used
   pattern: ''
   pv_group: proChoices
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: Why Avoid Red Meat
@@ -4110,7 +3918,6 @@ cdes:
   name: 'Red Meat (Reason):'
   pattern: ''
   pv_group: avoidReason
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Respiratory Insufficiency
@@ -4129,7 +3936,6 @@ cdes:
   name: Respiratory Insufficiency
   pattern: ''
   pv_group: respRating
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: Rest Needed
@@ -4148,7 +3954,6 @@ cdes:
   name: 'I need rest when:'
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: TextAreaWidget
   widget_settings: '{}'
 - abbreviated_name: Riluzole
@@ -4167,7 +3972,6 @@ cdes:
   name: Riluzole
   pattern: ''
   pv_group: mndYN
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Riluzole End Date
@@ -4187,7 +3991,6 @@ cdes:
   name: Riluzole Treatment cessation Date
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: DateWidget
   widget_settings: ''
 - abbreviated_name: Riluzole Start Date
@@ -4207,7 +4010,6 @@ cdes:
   name: Riluzole Treatment commencement date
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: DateWidget
   widget_settings: ''
 - abbreviated_name: SNIP
@@ -4226,7 +4028,6 @@ cdes:
   name: SNIP
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: SVC Litres L
@@ -4245,7 +4046,6 @@ cdes:
   name: SVC Litres (L)
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: 'SVC Predicted '
@@ -4264,7 +4064,6 @@ cdes:
   name: SVC Predicted (%)
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Excessive Saliva
@@ -4283,7 +4082,6 @@ cdes:
   name: Excessive saliva
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: SliderWidget
   widget_settings: '{"min":"0","max":"10","left_label":"None","right_label":"Severe","step":"1"}'
 - abbreviated_name: Salivation
@@ -4302,7 +4100,6 @@ cdes:
   name: Salivation
   pattern: ''
   pv_group: salivaRating
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: Manage Excess Saliva Other
@@ -4321,7 +4118,6 @@ cdes:
   name: Other (Please Specify)
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: TextAreaWidget
   widget_settings: '{}'
 - abbreviated_name: Why Avoid Shellfish
@@ -4340,7 +4136,6 @@ cdes:
   name: 'Shellfish (Reason):'
   pattern: ''
   pv_group: avoidReason
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Shower Help
@@ -4359,7 +4154,6 @@ cdes:
   name: 'Showering:'
   pattern: ''
   pv_group: careChoices
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Sleep Study Date
@@ -4379,7 +4173,6 @@ cdes:
   name: Date of Sleep Study
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: DateWidget
   widget_settings: ''
 - abbreviated_name: Sleep Study or  Overnight Oximetry
@@ -4398,7 +4191,6 @@ cdes:
   name: Sleep Study / Overnight Oximetry
   pattern: ''
   pv_group: mndYN
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Overnight Oximetry Date
@@ -4417,7 +4209,6 @@ cdes:
   name: Date of Overnight Oximetry
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: DateWidget
   widget_settings: '{}'
 - abbreviated_name: Why Avoid Soy
@@ -4436,7 +4227,6 @@ cdes:
   name: 'Soy (Reason):'
   pattern: ''
   pv_group: avoidReason
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Stiffness Spasticity
@@ -4455,7 +4245,6 @@ cdes:
   name: Stiffness/spasticity
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: SliderWidget
   widget_settings: '{"min":"0","max":"10","left_label":"None","right_label":"Severe","step":"1"}'
 - abbreviated_name: Speech
@@ -4474,7 +4263,6 @@ cdes:
   name: Speech
   pattern: ''
   pv_group: speechRating
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: Climbing Stairs
@@ -4493,7 +4281,6 @@ cdes:
   name: Climbing Stairs
   pattern: ''
   pv_group: stairsRating
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: Survivability
@@ -4590,7 +4377,6 @@ cdes:
   name: Survivability
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Mouth Swabs
@@ -4609,7 +4395,6 @@ cdes:
   name: 'I use mouth swabs in addition:'
   pattern: ''
   pv_group: mndYN
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Swallowing
@@ -4628,7 +4413,6 @@ cdes:
   name: Swallowing
   pattern: ''
   pv_group: swallowRating
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: Change Due To Swallow
@@ -4647,7 +4431,6 @@ cdes:
   name: I have made changes to the way I eat or drink because of a change in my swallowing
   pattern: ''
   pv_group: mndYN
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Date Symptom Capture
@@ -4667,7 +4450,6 @@ cdes:
   name: 'Date completed:'
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: DateWidget
   widget_settings: '{}'
 - abbreviated_name: Task Aids
@@ -4686,7 +4468,6 @@ cdes:
   name: 'I use the following equipment to do things:'
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: TextAreaWidget
   widget_settings: '{}'
 - abbreviated_name: Telehealth Type
@@ -4705,7 +4486,6 @@ cdes:
   name: Telehealth Consultation
   pattern: ''
   pv_group: mndTelehealthConsultationPVG
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":true}'
 - abbreviated_name: ECAS Test Done
@@ -4724,7 +4504,6 @@ cdes:
   name: ECAS (Edinburgh Cognitive and Behavioural ALS Screen) test administered?
   pattern: ''
   pv_group: mndYN
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Cog Test Name Other1
@@ -4743,7 +4522,6 @@ cdes:
   name: Other cognitive test administered?
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: Cog Test Date Other1
@@ -4762,7 +4540,6 @@ cdes:
   name: Date administered
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: DateWidget
   widget_settings: '{}'
 - abbreviated_name: Cog Test Score Other1
@@ -4781,7 +4558,6 @@ cdes:
   name: Score
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Cog Test Name Other2
@@ -4800,7 +4576,6 @@ cdes:
   name: Other cognitive test administered?
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: Cog Test Date Other2
@@ -4819,7 +4594,6 @@ cdes:
   name: Date administered
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: DateWidget
   widget_settings: '{}'
 - abbreviated_name: Cog Test Score Other2
@@ -4838,7 +4612,6 @@ cdes:
   name: Score
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Other Therapy - Describe
@@ -4857,7 +4630,6 @@ cdes:
   name: Describe other therapy
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: Other Therapy End
@@ -4877,7 +4649,6 @@ cdes:
   name: End date (if applicable)
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: DateWidget
   widget_settings: ''
 - abbreviated_name: Other Therapy Start
@@ -4897,7 +4668,6 @@ cdes:
   name: Start date
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: DateWidget
   widget_settings: ''
 - abbreviated_name: Toilet Help
@@ -4916,7 +4686,6 @@ cdes:
   name: 'Toileting:'
   pattern: ''
   pv_group: careChoices
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Trach
@@ -4935,7 +4704,6 @@ cdes:
   name: Tracheostomy
   pattern: ''
   pv_group: mndYN
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Trach and Vent
@@ -4954,7 +4722,6 @@ cdes:
   name: Tracheostomy and ventilation
   pattern: ''
   pv_group: mndYN
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Need Help Transfer
@@ -4973,7 +4740,6 @@ cdes:
   name: 'I need help to transfer to:'
   pattern: ''
   pv_group: transferConditions
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Research Trial Name
@@ -4992,7 +4758,6 @@ cdes:
   name: Name of Clinical Trial
   pattern: ''
   pv_group: mndClinicalTrialNamesPVG
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Research Trial End Date
@@ -5012,7 +4777,6 @@ cdes:
   name: End date (if applicable)
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: DateWidget
   widget_settings: ''
 - abbreviated_name: Research Trial Other
@@ -5031,7 +4795,6 @@ cdes:
   name: If other please specify
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: Research Trial Participation
@@ -5052,7 +4815,6 @@ cdes:
   name: Research and Clinical trial participation
   pattern: ''
   pv_group: mndYN
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Research Trial Start Date
@@ -5072,7 +4834,6 @@ cdes:
   name: Start date
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: DateWidget
   widget_settings: ''
 - abbreviated_name: I use tube feeding
@@ -5091,7 +4852,6 @@ cdes:
   name: 'I use tube feeding:'
   pattern: ''
   pv_group: pegReasons
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Details of my tube feeding and preferred times of the day
@@ -5110,7 +4870,6 @@ cdes:
   name: 'Details of my tube feeding and preferred times of the day:'
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: TextAreaWidget
   widget_settings: '{}'
 - abbreviated_name: Upper Limbs-Biceps Left
@@ -5129,7 +4888,6 @@ cdes:
   name: 'Upper Limbs - Biceps: Left'
   pattern: ''
   pv_group: leftSide
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: Upper Limbs-Biceps Right
@@ -5148,7 +4906,6 @@ cdes:
   name: 'Upper Limbs - Biceps: Right'
   pattern: ''
   pv_group: rightSide
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: Upper Limbs-Supinator Left
@@ -5167,7 +4924,6 @@ cdes:
   name: 'Upper Limbs - Supinator: Left'
   pattern: ''
   pv_group: leftSide
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: Upper Limbs-Supinator Right
@@ -5186,7 +4942,6 @@ cdes:
   name: 'Upper Limbs - Supinator: Right'
   pattern: ''
   pv_group: rightSide
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: Accessed VAD Info
@@ -5205,7 +4960,6 @@ cdes:
   name: Has the patient accessed information regarding Voluntary Assisted Dying (VAD)?
   pattern: ''
   pv_group: mndYNNA
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Utilised VAD
@@ -5224,7 +4978,6 @@ cdes:
   name: Did the patient utilise VAD?
   pattern: ''
   pv_group: mndYN
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Visit Date
@@ -5244,7 +4997,6 @@ cdes:
   name: Visit Date
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: DateWidget
   widget_settings: ''
 - abbreviated_name: Walking
@@ -5263,7 +5015,6 @@ cdes:
   name: Walking
   pattern: ''
   pv_group: walkRating
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: I Can Walk
@@ -5282,7 +5033,6 @@ cdes:
   name: 'I can walk:'
   pattern: ''
   pv_group: walkYNA
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":true}'
 - abbreviated_name: Weakness In
@@ -5301,7 +5051,6 @@ cdes:
   name: 'I have weakness in my:'
   pattern: ''
   pv_group: physicalAreas
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Weight
@@ -5320,7 +5069,6 @@ cdes:
   name: Weight (in kg)
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Breathe Difficult When
@@ -5339,7 +5087,6 @@ cdes:
   name: 'I have breathing difficulties when I am:'
   pattern: ''
   pv_group: mndBreathHardSelect
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Why Avoid White Meat
@@ -5358,7 +5105,6 @@ cdes:
   name: 'White Meat (Reason):'
   pattern: ''
   pv_group: avoidReason
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Handwriting
@@ -5377,7 +5123,6 @@ cdes:
   name: Handwriting
   pattern: ''
   pv_group: writingRating
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: Excess Saliva
@@ -5396,7 +5141,6 @@ cdes:
   name: 'I have excessive saliva:'
   pattern: ''
   pv_group: mndSalivaFreq
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Current smoking status
@@ -5415,7 +5159,6 @@ cdes:
   name: Current smoking status
   pattern: ''
   pv_group: mndYN
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Ethnicity
@@ -5434,7 +5177,6 @@ cdes:
   name: Ethnicity
   pattern: ''
   pv_group: mndEthinicityScale
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":true}'
 - abbreviated_name: Ever smoked
@@ -5453,7 +5195,6 @@ cdes:
   name: Ever smoked?
   pattern: ''
   pv_group: mndYN
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Status Father
@@ -5472,7 +5213,6 @@ cdes:
   name: Status of father at time of clinical visit
   pattern: ''
   pv_group: mndstatus
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Age of Father
@@ -5491,7 +5231,6 @@ cdes:
   name: Age of Father at time of clinical visit (if known)
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Father Death Age
@@ -5510,7 +5249,6 @@ cdes:
   name: Age at Death (if known)
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Father Dementia Status
@@ -5529,7 +5267,6 @@ cdes:
   name: Confirmed dementia diagnosis for Father (Patient report)
   pattern: ''
   pv_group: mndYNUNK
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Age of Father Unknown NA
@@ -5548,7 +5285,6 @@ cdes:
   name: If Age of father at time of clinical visit is unknown or N/A, check this box
   pattern: ''
   pv_group: mndunknown
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Highest Education
@@ -5567,7 +5303,6 @@ cdes:
   name: Highest educational attainment  (select one)
   pattern: ''
   pv_group: mndeducation
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: Medical Co-morbidity
@@ -5586,7 +5321,6 @@ cdes:
   name: 'Co-morbidity: Other medical conditions (select all that apply)'
   pattern: ''
   pv_group: mndmedical
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Medical Co-morbidity Other1
@@ -5605,7 +5339,6 @@ cdes:
   name: Please Specify
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: Medical Co-morbidity Other2
@@ -5624,7 +5357,6 @@ cdes:
   name: Please Specify
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: Medical Co-morbidity Other3
@@ -5643,7 +5375,6 @@ cdes:
   name: Please Specify
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: Medical Co-morbidity Other4
@@ -5662,7 +5393,6 @@ cdes:
   name: Please Specify
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: Status Mother
@@ -5681,7 +5411,6 @@ cdes:
   name: Status of mother at time of clinic visit
   pattern: ''
   pv_group: mndstatus
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Age of Mother
@@ -5700,7 +5429,6 @@ cdes:
   name: Age of Mother at time of clinical visit (if known)
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Mother Death Age
@@ -5719,7 +5447,6 @@ cdes:
   name: Age at Death (if known)
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Mother Dementia Status
@@ -5738,7 +5465,6 @@ cdes:
   name: Confirmed dementia diagnosis for Mother (patient report)
   pattern: ''
   pv_group: mndYNUNK
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":false}'
 - abbreviated_name: Age of Mother Unknown NA
@@ -5757,7 +5483,6 @@ cdes:
   name: If Age of mother at time of clinical visit is unknown or N/A, check this box
   pattern: ''
   pv_group: mndunknown
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Occupation
@@ -5776,7 +5501,6 @@ cdes:
   name: Occupation
   pattern: ''
   pv_group: mndoccupationscale
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Packs x Years
@@ -5795,7 +5519,6 @@ cdes:
   name: Packs x Years
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Psychiatric Co-morbidity
@@ -5814,7 +5537,6 @@ cdes:
   name: 'Co-morbidity: Other psychiatric conditions (select all that apply)'
   pattern: ''
   pv_group: mndpsychiatric
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 - abbreviated_name: Psychiatric Co-morbidity Other
@@ -5833,7 +5555,6 @@ cdes:
   name: Please Specify
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: Region Sympt Began
@@ -5852,7 +5573,6 @@ cdes:
   name: Region where symptoms began
   pattern: ''
   pv_group: mndRegionBeganPVG
-  questionnaire_text: Region where symptoms began
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":true}'
 - abbreviated_name: Region Sympt Began Other
@@ -5871,7 +5591,6 @@ cdes:
   name: Please specify
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: Located
@@ -5890,7 +5609,6 @@ cdes:
   name: Located
   pattern: ''
   pv_group: locLRB
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":true}'
 - abbreviated_name: Diagnosis Type
@@ -5909,7 +5627,6 @@ cdes:
   name: Type of MND / Diagnosis
   pattern: ''
   pv_group: mndtypedxPVG
-  questionnaire_text: Type of MND / Diagnosis
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":true}'
 - abbreviated_name: Mode of Death Other
@@ -5928,7 +5645,6 @@ cdes:
   name: If Other, Specify
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: TextAreaWidget
   widget_settings: ''
 - abbreviated_name: My Most Comfy Pos
@@ -5947,7 +5663,6 @@ cdes:
   name: 'My most comfortable position is:'
   pattern: ''
   pv_group: myComfyChoices
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":true}'
 - abbreviated_name: Specialist Contact
@@ -5967,7 +5682,6 @@ cdes:
   name: MND Specialist Contact Details
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: Specialist Name
@@ -5987,7 +5701,6 @@ cdes:
   name: MND Specialist (Treating Neurologist)
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: Specialist Practice
@@ -6006,7 +5719,6 @@ cdes:
   name: MND Specialist Practice details
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: ''
 - abbreviated_name: NIV Date
@@ -6026,7 +5738,6 @@ cdes:
   name: Date commenced
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: DateWidget
   widget_settings: ''
 - abbreviated_name: Two Week Lead Death Date Oxygen
@@ -6046,7 +5757,6 @@ cdes:
   name: Date Oxygen commenced (if known)
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: DateWidget
   widget_settings: ''
 - abbreviated_name: Diagnosis Change
@@ -6065,7 +5775,6 @@ cdes:
   name: Has the diagnosis changed since last visit?
   pattern: ''
   pv_group: mndYN
-  questionnaire_text: ''
   widget_name: RadioSelect
   widget_settings: '{"force_vertical":true}'
 - abbreviated_name: Trach Date
@@ -6085,8 +5794,6 @@ cdes:
   name: Date of Surgery
   pattern: ''
   pv_group: null
-  questionnaire_text: DD-MM-YYYY. If only M+Y are known, use '01-MM-YYYY. If only
-    Y is known, use 01/06/YYYY.
   widget_name: DateWidget
   widget_settings: ''
 - abbreviated_name: Two Week Lead Death Date Trach
@@ -6106,7 +5813,6 @@ cdes:
   name: Date Tracheostomy performed (if known)
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: DateWidget
   widget_settings: ''
 - abbreviated_name: Trach and Vent Date
@@ -6126,7 +5832,6 @@ cdes:
   name: Date commenced
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: DateWidget
   widget_settings: ''
 - abbreviated_name: Files Uploaded
@@ -6145,7 +5850,6 @@ cdes:
   name: Please select file/s to upload
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: MultipleFileInput
   widget_settings: '{}'
 - abbreviated_name: If Other Specify
@@ -6164,7 +5868,6 @@ cdes:
   name: If Other, Specify
   pattern: ''
   pv_group: null
-  questionnaire_text: ''
   widget_name: ''
   widget_settings: '{}'
 code: mnd
@@ -6211,19 +5914,16 @@ consent_sections:
     position: 1
     question_label: I have read the Participant Information Sheet, or someone has
       read it to me in a language that I understand.
-    questionnaire_label: ''
   - code: IUnderstand
     instructions: ''
     position: 2
     question_label: I understand the purposes, procedures and risks of participating
       in the Registries.
-    questionnaire_label: ''
   - code: AgreeAskedQuestions
     instructions: ''
     position: 3
     question_label: I have had an opportunity to ask questions and I am satisfied
       with the answers I have received. (Check box to agree)
-    questionnaire_label: ''
   section_label: Participant Information Sheet
   validation_rule: IhaveRead and IUnderstand
 - applicability_condition: ''
@@ -6239,13 +5939,11 @@ consent_sections:
     question_label: I freely agree to participate in the MiNDAUS Clinical Registry
       as described and understand that I am free to withdraw at any time during the
       project without affecting my future health care.
-    questionnaire_label: ''
   - code: AgreeAccessHealth
     instructions: ''
     position: 2
     question_label: I give permission for MiNDAUS Project Staff to access my health
       records to ensure that the Clinical Data is complete.
-    questionnaire_label: ''
   section_label: Consent to Participate - Clinical Registry
   validation_rule: ''
 - applicability_condition: ''
@@ -6263,33 +5961,28 @@ consent_sections:
       be able to view the Clinical Information but will not be able to change it myself.  I
       also understand that if I find an error, I can ask my treating Neurologist for
       it to be corrected.
-    questionnaire_label: ''
   - code: UnderstandLink
     instructions: ''
     position: 2
     question_label: I understand that once I have agreed to link both parts of the
       Registry members of my Healthcare Team will be able to see the information I
       have entered on the MiNDAUS Patient Registry.
-    questionnaire_label: ''
   - code: emegContactAgree
     instructions: ''
     position: 3
     question_label: I understand that when I have linked both parts of the Registry
       my Healthcare Team will see the information I enter, however, I cannot rely
       on it as a method of urgent or emergency contact.
-    questionnaire_label: ''
   - code: AMNDRLink
     instructions: ''
     position: 4
     question_label: I give permission to link my AMNDR ID to the MiNDAUS Clinical
       Registry (if applicable).
-    questionnaire_label: ''
   - code: SALSALink
     instructions: ''
     position: 5
     question_label: I give permission to link my clinical information to SALSA-SCG
       (if applicable).
-    questionnaire_label: ''
   section_label: Linking My Information
   validation_rule: ''
 - applicability_condition: ''
@@ -6305,27 +5998,23 @@ consent_sections:
     question_label: I give permission for the MiNDAUS Partnership to store the information
       and data collected from me indefinitely in a safe and secure manner, as described
       in this Information Sheet.
-    questionnaire_label: ''
   - code: futureResearch
     instructions: ''
     position: 2
     question_label: I authorise the MINDAUS Partnership to share my data with ethically
       approved future research projects, in accordance with strict guidelines as set
       out in the MiNDAUS Data Management Policy.
-    questionnaire_label: ''
   - code: contactAgree
     instructions: ''
     position: 3
     question_label: I understand that the storing of data will allow contact to be
       made with me if a suitable clinical trial/ research study becomes available,
       but I understand I am under no obligation to take part.
-    questionnaire_label: ''
   - code: docuStore
     instructions: ''
     position: 4
     question_label: I understand that this signed document will be stored on the MiNDAUS
       Patient and Clinical Registry, but I am able to request a paper copy.
-    questionnaire_label: ''
   - code: releaseInfo
     instructions: ''
     position: 5
@@ -6333,7 +6022,6 @@ consent_sections:
       hospitals or laboratories outside this hospital to release information concerning
       my condition and treatment for the purposes of this project. I understand that
       such information will remain confidential.
-    questionnaire_label: ''
   section_label: My Data
   validation_rule: ''
 context_form_groups:
@@ -6774,11 +6462,8 @@ forms:
   header: |-
     <h2>My ALS-FRS Calculator</h2>
     <p><a href="https://www.mindaus.org/wp-content/uploads/2022/05/09124956/UserGuideMindausPatientApril2022PartTwoV01.pdf">MiNDAUS Registry User Guide</a></p>
-  is_questionnaire: false
   name: alsfrsInstrument
   position: 15
-  questionnaire_display_name: ''
-  questionnaire_questions: ''
   sections:
   - abbreviated_name: ALS-FRS Calculator
     allow_multiple: false
@@ -6801,8 +6486,6 @@ forms:
     - mndResp
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   - abbreviated_name: My ALS-FRS Score
     allow_multiple: false
     code: myALSFRSScoreTotal
@@ -6811,8 +6494,6 @@ forms:
     - mndALSScore
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   tags:
   - patient-reported
 - abbreviated_name: CV
@@ -6836,11 +6517,8 @@ forms:
     <h1>Completion CRF</h1>
     <p>PDF version of this form can be
     <a href="https://www.mindaus.org/wp-content/uploads/2022/09/14122841/MindausCompletionCRFParticipatingSiteApril2022V02.0.pdf">downloaded here</a></p>
-  is_questionnaire: false
   name: completionForm
   position: 6
-  questionnaire_display_name: ''
-  questionnaire_questions: ''
   sections:
   - abbreviated_name: Completion Details
     allow_multiple: false
@@ -6860,8 +6538,6 @@ forms:
     - mndSurvivability
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   - abbreviated_name: Deceased Details
     allow_multiple: false
     code: mndDeath2
@@ -6882,8 +6558,6 @@ forms:
     - trachDeathDate
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   - abbreviated_name: Completion Sign-Off
     allow_multiple: false
     code: mndCompletionComments
@@ -6898,8 +6572,6 @@ forms:
     - mndDMode11
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   tags: []
 - abbreviated_name: FV
   applicability_condition: ''
@@ -6945,16 +6617,15 @@ forms:
     mndmedicaloth4 visible if mndmedical includes "Other4"
     mndTelehealthConsultation visible if mndConsultationType=="Telehealth"
     mndFreqOther visible if mndFreq=="Other"
+    mndEthnicityOther6 visible if mndethnicity=="Other"
   display_name: First Visit
   header: |-
     <h1>First Visit</h1>
-    <p>PDF version of this form can be
+    <p>PDF version of the form for clinic staff data collection can be  <a href="https://www.mindaus.org/wp-content/uploads/2022/11/16153403/FirstVisitCaseReportFormParticipatingSiteStaffDataCollectionNovember2022V02.1.pdf">downloaded here</a><p>
+    <p>PDF version of the form combining clinic and patient data collection can be
     <a href="https://www.mindaus.org/wp-content/uploads/2022/09/14122840/MindausFVCRFParticipatingSiteApril2022V02.0.pdf">downloaded here</a></p>
-  is_questionnaire: false
   name: firstVisit
   position: 1
-  questionnaire_display_name: ''
-  questionnaire_questions: ''
   sections:
   - abbreviated_name: Patient Info
     allow_multiple: false
@@ -6974,8 +6645,6 @@ forms:
     - mndTelehealthConsultation
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   - abbreviated_name: Research Trial Involved
     allow_multiple: false
     code: mndTrialInfo
@@ -6984,8 +6653,6 @@ forms:
     - mndTrialParticipant
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   - abbreviated_name: Research Trial Details
     allow_multiple: true
     code: mndTrialDetails
@@ -6997,8 +6664,6 @@ forms:
     - mndTrialEDate
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   - abbreviated_name: Diagnosis Details
     allow_multiple: false
     code: DxDetails
@@ -7012,14 +6677,13 @@ forms:
     - DxTestOth
     extra: null
     header: ''
-    questionnaire_display_name: Diagnosis Details
-    questionnaire_help: ''
   - abbreviated_name: Presenting Details
     allow_multiple: false
     code: mndPresentingDetails
     display_name: Presenting Details
     elements:
     - mndethnicity
+    - mndEthnicityOther6
     - mndOnset
     - mndregionbegan
     - mndregionbeganOth
@@ -7029,8 +6693,6 @@ forms:
     - mndDominantHand
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   - abbreviated_name: Med History
     allow_multiple: false
     code: mndMedicalHistory
@@ -7062,8 +6724,6 @@ forms:
     - mndOccupationOther
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   - abbreviated_name: Regions Affected
     allow_multiple: false
     code: mndRegionsAffected
@@ -7081,8 +6741,6 @@ forms:
     - lLMNLRB
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   - abbreviated_name: Reflex Details
     allow_multiple: false
     code: mndReflexes
@@ -7098,8 +6756,6 @@ forms:
     - mndLowerAnkleR
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   - abbreviated_name: ALSFRS Calc
     allow_multiple: false
     code: mndALSScoreCard
@@ -7121,8 +6777,6 @@ forms:
     - mndResp
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   - abbreviated_name: ALSFRS Detail
     allow_multiple: false
     code: mndCALC
@@ -7131,8 +6785,6 @@ forms:
     - mndALSFRS
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   - abbreviated_name: Cognition
     allow_multiple: false
     code: mndCognition
@@ -7155,8 +6807,6 @@ forms:
     - mndTestOthBDate
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   - abbreviated_name: Treatment Details
     allow_multiple: false
     code: mndTreatmentStats
@@ -7167,8 +6817,6 @@ forms:
     - mndRiluzoleEDate
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   - abbreviated_name: Other Treatment Details
     allow_multiple: false
     code: mndOtherTreatment
@@ -7182,8 +6830,6 @@ forms:
     - nivDate
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   - abbreviated_name: Resp Func Tests
     allow_multiple: false
     code: mndResTests
@@ -7201,8 +6847,6 @@ forms:
     - mndO2
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   - abbreviated_name: Sleep Test Details
     allow_multiple: false
     code: mndSleepTests
@@ -7213,8 +6857,6 @@ forms:
     - mndSleepStudyDate
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   - abbreviated_name: Medication
     allow_multiple: true
     code: mndMedInfo
@@ -7228,8 +6870,6 @@ forms:
     - clinicMedAdminHow
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   - abbreviated_name: Other Therapy
     allow_multiple: false
     code: mndOtherTH
@@ -7238,8 +6878,6 @@ forms:
     - mndOtherTNT
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   - abbreviated_name: Other Therapy Details
     allow_multiple: true
     code: mndOtherTNTDetails
@@ -7250,8 +6888,6 @@ forms:
     - mndTherapyEDate
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   - abbreviated_name: Adaptive Device Details
     allow_multiple: false
     code: mndDevices
@@ -7261,8 +6897,6 @@ forms:
     - mndADOther
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   - abbreviated_name: Nutrition Feed Tube Details
     allow_multiple: false
     code: mndFT
@@ -7272,8 +6906,6 @@ forms:
     - mndFTDate
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   - abbreviated_name: Health Service Details
     allow_multiple: false
     code: mndProServices
@@ -7283,8 +6915,6 @@ forms:
     - mndProsOther
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   tags:
   - patient-reported
 - abbreviated_name: Position Form
@@ -7295,11 +6925,8 @@ forms:
     <h2>My Positioning</h2>
     <p>>How my body is positioned is important and may take some time.</p>
     <p><a href="https://www.mindaus.org/wp-content/uploads/2022/05/09124956/UserGuideMindausPatientApril2022PartTwoV01.pdf">MiNDAUS Registry User Guide</a></p>
-  is_questionnaire: false
   name: mndPositioning
   position: 4
-  questionnaire_display_name: ''
-  questionnaire_questions: ''
   sections:
   - abbreviated_name: My most comfortable position
     allow_multiple: false
@@ -7310,8 +6937,6 @@ forms:
     - mndComfyOther
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   - abbreviated_name: When In Bed
     allow_multiple: false
     code: inBed
@@ -7324,8 +6949,6 @@ forms:
     - mndNotes
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   - abbreviated_name: When Sit
     allow_multiple: false
     code: mndSitting
@@ -7336,8 +6959,6 @@ forms:
     - mndChairNotes
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   tags:
   - patient-reported
 - abbreviated_name: Appointment Form
@@ -7348,11 +6969,8 @@ forms:
     <h2>My Appointments</h2>
     <p>Please list your upcoming appointments below</p>
     <p><a href="https://www.mindaus.org/wp-content/uploads/2022/05/09124956/UserGuideMindausPatientApril2022PartTwoV01.pdf">MiNDAUS Registry User Guide</a></p>
-  is_questionnaire: false
   name: myAppointments
   position: 0
-  questionnaire_display_name: ''
-  questionnaire_questions: ''
   sections:
   - abbreviated_name: List
     allow_multiple: true
@@ -7364,8 +6982,6 @@ forms:
     - mndApptTime
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   tags:
   - patient-reported
 - abbreviated_name: Breathe Form
@@ -7379,11 +6995,8 @@ forms:
     <p><b>Please Note: MND can cause respiratory muscle weakness. It may be dangerous to give me Oxygen therapy. Please contact my Primary Carer
     and/or my Primary Health Contact if unsure.</b></p>
     <p><a href="https://www.mindaus.org/wp-content/uploads/2022/05/09124956/UserGuideMindausPatientApril2022PartTwoV01.pdf">MiNDAUS Registry User Guide</a></p>
-  is_questionnaire: false
   name: myBreathing
   position: 5
-  questionnaire_display_name: ''
-  questionnaire_questions: ''
   sections:
   - abbreviated_name: My Breathing
     allow_multiple: false
@@ -7401,8 +7014,6 @@ forms:
     - mndBAOther
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   tags:
   - patient-reported
 - abbreviated_name: Care Team Form
@@ -7414,11 +7025,8 @@ forms:
     <p>These carers and professionals are my regular contacts and know my needs. They can
     answer queries about my treatment, care and management of symptoms.<p>
     <p><a href="https://www.mindaus.org/wp-content/uploads/2022/05/09124956/UserGuideMindausPatientApril2022PartTwoV01.pdf">MiNDAUS Registry User Guide</a></p>
-  is_questionnaire: false
   name: myCareTeam
   position: 14
-  questionnaire_display_name: ''
-  questionnaire_questions: ''
   sections:
   - abbreviated_name: Specialist Details
     allow_multiple: false
@@ -7430,8 +7038,6 @@ forms:
     - mySpecialistPractice
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   - abbreviated_name: Care Team Details
     allow_multiple: true
     code: myCarerDetails
@@ -7445,8 +7051,6 @@ forms:
     - mndPrimary
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   tags:
   - patient-reported
 - abbreviated_name: Comms Form
@@ -7458,11 +7062,8 @@ forms:
   header: |-
     <h2>My Communication</h2>
     <p><a href="https://www.mindaus.org/wp-content/uploads/2022/05/09124956/UserGuideMindausPatientApril2022PartTwoV01.pdf">MiNDAUS Registry User Guide</a></p>
-  is_questionnaire: false
   name: myCommunication
   position: 3
-  questionnaire_display_name: ''
-  questionnaire_questions: ''
   sections:
   - abbreviated_name: Communicating
     allow_multiple: false
@@ -7475,8 +7076,6 @@ forms:
     - mndComChairOther
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   tags:
   - patient-reported
 - abbreviated_name: Eat Drink Form
@@ -7497,11 +7096,8 @@ forms:
   header: |-
     <h2>My Eating and Drinking needs</h2>
     <p><a href="https://www.mindaus.org/wp-content/uploads/2022/05/09124956/UserGuideMindausPatientApril2022PartTwoV01.pdf">MiNDAUS Registry User Guide</a></p>
-  is_questionnaire: false
   name: myEatDrink
   position: 6
-  questionnaire_display_name: ''
-  questionnaire_questions: ''
   sections:
   - abbreviated_name: My Eat Drink
     allow_multiple: false
@@ -7532,8 +7128,6 @@ forms:
     - mndTubeDetails
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   tags:
   - patient-reported
 - abbreviated_name: Emotion Form
@@ -7544,11 +7138,8 @@ forms:
     <h2>My Emotions and Behaviour</h2>
     <p>MND can cause some unexpected symptoms.  The following may help you to understand what is happening if I react in an unexpected way:</p>
     <p><a href="https://www.mindaus.org/wp-content/uploads/2022/05/09124956/UserGuideMindausPatientApril2022PartTwoV01.pdf">MiNDAUS Registry User Guide</a></p>
-  is_questionnaire: false
   name: myEmotions
   position: 10
-  questionnaire_display_name: ''
-  questionnaire_questions: ''
   sections:
   - abbreviated_name: My Emotions and Behaviour
     allow_multiple: false
@@ -7558,8 +7149,6 @@ forms:
     - mndEmotionNotes
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   tags:
   - patient-reported
 - abbreviated_name: ESS Form
@@ -7572,11 +7161,8 @@ forms:
     <p>In contrast to just feeling tired, how likely are you to fall asleep in the following circumstances? This relates to your usual way of life at the moment. Even if you have not done any of these recently, try to work out how they would have affected you.</p>
     <p>Use the provided scale to choose the most appropriate number for each situation.</p>
     <p><a href="https://www.mindaus.org/wp-content/uploads/2022/05/09124956/UserGuideMindausPatientApril2022PartTwoV01.pdf">MiNDAUS Registry User Guide</a></p>
-  is_questionnaire: false
   name: myESS
   position: 16
-  questionnaire_display_name: ''
-  questionnaire_questions: ''
   sections:
   - abbreviated_name: ESS Situation
     allow_multiple: false
@@ -7593,8 +7179,6 @@ forms:
     - mndESSTraffic
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   - abbreviated_name: My ESS Score
     allow_multiple: false
     code: myESSScoreTotal
@@ -7603,8 +7187,6 @@ forms:
     - mndESSScore
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   tags:
   - patient-reported
 - abbreviated_name: Legal Docs Form
@@ -7620,11 +7202,8 @@ forms:
 
     <p>We take your security and privacy very seriously. <a href="https://www.mindaus.org/wp-content/uploads/2021/03/MiNDAUS-Privacy-Policy-v1.0.pdf"> View our Privacy Policy</a></p>
     <p><a href="https://www.mindaus.org/wp-content/uploads/2022/05/09124956/UserGuideMindausPatientApril2022PartTwoV01.pdf">MiNDAUS Registry User Guide</a></p>
-  is_questionnaire: false
   name: myLegalDocs
   position: 0
-  questionnaire_display_name: ''
-  questionnaire_questions: ''
   sections:
   - abbreviated_name: Docs
     allow_multiple: false
@@ -7640,8 +7219,6 @@ forms:
     - legalDocUpload
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   tags:
   - patient-reported
 - abbreviated_name: Mouth Care Form
@@ -7653,11 +7230,8 @@ forms:
   header: |-
     <h2>Mouth Care and Saliva Management</h2>
     <p><a href="https://www.mindaus.org/wp-content/uploads/2022/05/09124956/UserGuideMindausPatientApril2022PartTwoV01.pdf">MiNDAUS Registry User Guide</a></p>
-  is_questionnaire: false
   name: myMCare
   position: 9
-  questionnaire_display_name: ''
-  questionnaire_questions: ''
   sections:
   - abbreviated_name: Mouth and Saliva
     allow_multiple: false
@@ -7672,8 +7246,6 @@ forms:
     - mndSalivaOther
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   tags:
   - patient-reported
 - abbreviated_name: Medical History Form
@@ -7684,11 +7256,8 @@ forms:
     <h2>My Medical History</h2>
     <p>Please select any of the medical or psychiatric conditions for which you have been diagnosed:</p>
     <p><a href="https://www.mindaus.org/wp-content/uploads/2022/05/09124956/UserGuideMindausPatientApril2022PartTwoV01.pdf">MiNDAUS Registry User Guide</a></p>
-  is_questionnaire: false
   name: myMedHistory
   position: 11
-  questionnaire_display_name: ''
-  questionnaire_questions: ''
   sections:
   - abbreviated_name: My Health Conditions
     allow_multiple: false
@@ -7699,8 +7268,6 @@ forms:
     - mndCondOther
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   tags:
   - patient-reported
 - abbreviated_name: Meds and Allergies Form
@@ -7718,11 +7285,8 @@ forms:
   header: |-
     <h2>My Medications & Allergies</h2>
     <p><a href="https://www.mindaus.org/wp-content/uploads/2022/05/09124956/UserGuideMindausPatientApril2022PartTwoV01.pdf">MiNDAUS Registry User Guide</a></p>
-  is_questionnaire: false
   name: myMedsNAll
   position: 12
-  questionnaire_display_name: ''
-  questionnaire_questions: ''
   sections:
   - abbreviated_name: My Meds
     allow_multiple: true
@@ -7745,8 +7309,6 @@ forms:
     - mndMedAdmin
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   - abbreviated_name: My Allergies
     allow_multiple: false
     code: myAllergies
@@ -7755,8 +7317,6 @@ forms:
     - mndAllergies
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   tags:
   - patient-reported
 - abbreviated_name: Life History Form
@@ -7768,11 +7328,8 @@ forms:
     <p>This optional section gives you an opportunity to introduce yourself to someone with as little
     or as much information as you would like to share.</p>
     <p><a href="https://www.mindaus.org/wp-content/uploads/2022/05/09124956/UserGuideMindausPatientApril2022PartTwoV01.pdf">MiNDAUS Registry User Guide</a></p>
-  is_questionnaire: false
   name: myPastLH
   position: 13
-  questionnaire_display_name: ''
-  questionnaire_questions: ''
   sections:
   - abbreviated_name: History Notes
     allow_multiple: false
@@ -7795,8 +7352,6 @@ forms:
     - mndLHRemedies
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   tags:
   - patient-reported
 - abbreviated_name: Personal Care Form
@@ -7806,11 +7361,8 @@ forms:
   header: |-
     <h2>My Personal Care</h2>
     <p><a href="https://www.mindaus.org/wp-content/uploads/2022/05/09124956/UserGuideMindausPatientApril2022PartTwoV01.pdf">MiNDAUS Registry User Guide</a></p>
-  is_questionnaire: false
   name: myPC
   position: 8
-  questionnaire_display_name: ''
-  questionnaire_questions: ''
   sections:
   - abbreviated_name: Personal Care Assist
     allow_multiple: false
@@ -7824,8 +7376,6 @@ forms:
     - mndCareNeeds
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   tags:
   - patient-reported
 - abbreviated_name: Physical Ability Form
@@ -7835,11 +7385,8 @@ forms:
   header: |-
     <h2>My Physical Ability</h2>
     <p><a href="https://www.mindaus.org/wp-content/uploads/2022/05/09124956/UserGuideMindausPatientApril2022PartTwoV01.pdf">MiNDAUS Registry User Guide</a></p>
-  is_questionnaire: false
   name: myPhysical
   position: 7
-  questionnaire_display_name: ''
-  questionnaire_questions: ''
   sections:
   - abbreviated_name: Physical Abilities
     allow_multiple: false
@@ -7855,8 +7402,6 @@ forms:
     - mndRestNeeded
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   tags:
   - patient-reported
 - abbreviated_name: External Visit Form
@@ -7872,11 +7417,8 @@ forms:
     to have your specialist fill out for you.</p>
     <p> Once you have seen your MND Specialist, the form that was completed during your visit can be uploaded here. The information collected about you will then be added to the Specialist Clinic Visit</p>
     <p><a href="https://www.mindaus.org/wp-content/uploads/2022/05/09124956/UserGuideMindausPatientApril2022PartTwoV01.pdf">MiNDAUS Registry User Guide</a></p>
-  is_questionnaire: false
   name: mySpecialistVisitForms
   position: 0
-  questionnaire_display_name: ''
-  questionnaire_questions: ''
   sections:
   - abbreviated_name: External First
     allow_multiple: false
@@ -7889,8 +7431,6 @@ forms:
     - uploadedForm
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   - abbreviated_name: External Subsequent
     allow_multiple: true
     code: externalVisitSubSec
@@ -7902,8 +7442,6 @@ forms:
     - uploadedForm
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   tags:
   - patient-reported
 - abbreviated_name: Symptoms Form
@@ -7917,11 +7455,8 @@ forms:
     <p><i>Information for patients:</i><a href="https://www.mndaustralia.org.au/mnd-connect/living-with-mnd"> Living with MND</a> for details on understanding and managing your symptoms.</p>
     <p><i>Information for health professionals:</i><a href="https://www.nice.org.uk/guidance/NG42/chapter/Recommendations?msclkid=ffd2d0fcc6b811ec9567e3a1eebf3c1d#managing-symptoms"> Managing MND symptoms for Healthcare Professionals</a> and <a href="https://www.mndaustralia.org.au/mnd-connect/for-health-professionals-service-providers/managing-symptoms">MND Australia | Managing Patient Symptoms</a></p>
     <p><a href="https://www.mindaus.org/wp-content/uploads/2022/05/09124956/UserGuideMindausPatientApril2022PartTwoV01.pdf">MiNDAUS Registry User Guide</a></p>
-  is_questionnaire: false
   name: mySymptoms
   position: 2
-  questionnaire_display_name: ''
-  questionnaire_questions: ''
   sections:
   - abbreviated_name: Symp
     allow_multiple: false
@@ -7942,8 +7477,6 @@ forms:
     - mndEmotion
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   tags:
   - patient-reported
 - abbreviated_name: SV
@@ -7979,13 +7512,11 @@ forms:
   display_name: Subsequent Visits
   header: |-
     <h2>Subsequent Visits</h2>
-    <p>PDF version of this form can be
+    <p>PDF version of the form for clinic staff data collection can be  <a href="https://www.mindaus.org/wp-content/uploads/2022/11/16153415/SubVisitCaseReportFormParticipatingSiteStaffDataCollectionNovember2022V02.1.pdf">downloaded here</a><p>
+    <p>PDF version of the form combining clinic and patient data collection can be
     <a href="https://www.mindaus.org/wp-content/uploads/2022/09/14122841/MindausSVCRFParticipatingSiteApril2022V02.0.pdf">downloaded here</a></p>
-  is_questionnaire: false
   name: subsequentVisit
   position: 2
-  questionnaire_display_name: ''
-  questionnaire_questions: ''
   sections:
   - abbreviated_name: Patient Info
     allow_multiple: false
@@ -8005,8 +7536,6 @@ forms:
     - mndTelehealthConsultation
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   - abbreviated_name: Research Trial Involved
     allow_multiple: false
     code: mndTrialInfo
@@ -8015,8 +7544,6 @@ forms:
     - mndTrialParticipant
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   - abbreviated_name: Research Trial Details
     allow_multiple: true
     code: mndTrialDetails
@@ -8028,8 +7555,6 @@ forms:
     - mndTrialEDate
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   - abbreviated_name: Dx Details
     allow_multiple: false
     code: subDxDetails
@@ -8044,8 +7569,6 @@ forms:
     - DxTestOth
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   - abbreviated_name: Regions Affected
     allow_multiple: false
     code: mndRegionsAffected
@@ -8063,8 +7586,6 @@ forms:
     - lLMNLRB
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   - abbreviated_name: Reflex Details
     allow_multiple: false
     code: mndReflexes
@@ -8080,8 +7601,6 @@ forms:
     - mndLowerAnkleR
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   - abbreviated_name: ALSFRS Calc
     allow_multiple: false
     code: mndALSScoreCard
@@ -8103,8 +7622,6 @@ forms:
     - mndResp
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   - abbreviated_name: ALSFRS Detail
     allow_multiple: false
     code: mndCALC
@@ -8113,8 +7630,6 @@ forms:
     - mndALSFRS
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   - abbreviated_name: Cognition
     allow_multiple: false
     code: mndCognition
@@ -8137,8 +7652,6 @@ forms:
     - mndTestOthBDate
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   - abbreviated_name: Treatment Details
     allow_multiple: false
     code: mndTreatmentStats
@@ -8149,8 +7662,6 @@ forms:
     - mndRiluzoleEDate
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   - abbreviated_name: Other Treatment Details
     allow_multiple: false
     code: mndOtherTreatment
@@ -8164,8 +7675,6 @@ forms:
     - nivDate
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   - abbreviated_name: Resp Func Tests
     allow_multiple: false
     code: mndResTests
@@ -8183,8 +7692,6 @@ forms:
     - mndO2
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   - abbreviated_name: Sleep Test Details
     allow_multiple: false
     code: mndSleepTests
@@ -8195,8 +7702,6 @@ forms:
     - mndSleepStudyDate
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   - abbreviated_name: Medication
     allow_multiple: true
     code: mndMedInfo
@@ -8210,8 +7715,6 @@ forms:
     - clinicMedAdminHow
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   - abbreviated_name: Other Therapy
     allow_multiple: false
     code: mndOtherTH
@@ -8220,8 +7723,6 @@ forms:
     - mndOtherTNT
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   - abbreviated_name: Other Therapy Details
     allow_multiple: true
     code: mndOtherTNTDetails
@@ -8232,8 +7733,6 @@ forms:
     - mndTherapyEDate
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   - abbreviated_name: Adaptive Device Details
     allow_multiple: false
     code: mndDevices
@@ -8243,8 +7742,6 @@ forms:
     - mndADOther
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   - abbreviated_name: Nutrition Feed Tube Details
     allow_multiple: false
     code: mndFT
@@ -8254,8 +7751,6 @@ forms:
     - mndFTDate
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   - abbreviated_name: Health Service Details
     allow_multiple: false
     code: mndProServices
@@ -8265,8 +7760,6 @@ forms:
     - mndProsOther
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   - abbreviated_name: Inpatient care allow multiple entries
     allow_multiple: true
     code: mndInpatient
@@ -8278,8 +7771,6 @@ forms:
     - mndInpatientReason
     extra: null
     header: ''
-    questionnaire_display_name: ''
-    questionnaire_help: ''
   tags: []
 forms_allowed_groups:
   alsfrsInstrument:
@@ -9515,588 +9006,480 @@ pvgs:
   - code: 1Brain
     desc: MRI Brain
     position: 1
-    questionnaire_value: MRI Brain
     value: MRI Brain
   - code: 2Cervical
     desc: MRI Cervical Spine
     position: 2
-    questionnaire_value: MRI Cervical Spine
     value: MRI Cervical Spine
   - code: 3Lumbar
     desc: MRI Lumbar Spine
     position: 3
-    questionnaire_value: MRI Lumbar Spine
     value: MRI Lumbar Spine
   - code: 4EMG
     desc: EMG/NCS
     position: 4
-    questionnaire_value: EMG/NCS
     value: EMG/NCS
   - code: 5Puncture
     desc: Lumbar Puncture
     position: 5
-    questionnaire_value: Lumbar Puncture
     value: Lumbar Puncture
   - code: 6Other
     desc: Other
     position: 6
-    questionnaire_value: Other
     value: Other
 - code: MNDConfirmPVG
   values:
   - code: 1Neurologist
     desc: Neurologist
     position: 1
-    questionnaire_value: null
     value: Neurologist
   - code: 4Other
     desc: Other
     position: 4
-    questionnaire_value: null
     value: Other
   - code: 3Physician
     desc: General Practitioner
     position: 3
-    questionnaire_value: null
     value: General Practitioner
   - code: 2Specialist
     desc: Specialist Physician
     position: 2
-    questionnaire_value: null
     value: Specialist Physician
 - code: MNDDeathDiagnosisPVG
   values:
   - code: deathUndifferentiated
     desc: Undifferentiated|
     position: 1
-    questionnaire_value: null
     value: Undifferentiated
   - code: deathALSBulbarOnset
     desc: ALS- Bulbar Onset |
     position: 2
-    questionnaire_value: null
     value: ALS- Bulbar Onset
   - code: deathALSCervicalOnset
     desc: ALS-Cervical Onset
     position: 3
-    questionnaire_value: null
     value: ALS-Cervical Onset
   - code: deathALSThorDia
     desc: '| ALS-Thoracic Diaphragmatic Onset |'
     position: 4
-    questionnaire_value: null
     value: ALS-Thoracic Diaphragmatic Onset
   - code: deathALSlumbar
     desc: ALS-Lumbar Onset |
     position: 5
-    questionnaire_value: null
     value: ALS-Lumbar Onset
   - code: deathFlailArm
     desc: Flail arm |
     position: 6
-    questionnaire_value: null
     value: Flail arm
   - code: deathFlailLeg
     desc: Flail leg |
     position: 7
-    questionnaire_value: null
     value: Flail Leg
   - code: deathPLS
     desc: PLS |
     position: 8
-    questionnaire_value: null
     value: PLS
   - code: deathALSFTD
     desc: ALS-FTD
     position: 9
-    questionnaire_value: null
     value: ALS-FTD
 - code: MNDDiagnosis
   values:
   - code: 7PLS
     desc: PLS
     position: 8
-    questionnaire_value: PLS
     value: PLS
   - code: 8Undifferentiated
     desc: Undifferentiated
     position: 1
-    questionnaire_value: Undifferentiated
     value: Undifferentiated
   - code: 6Leg
     desc: Flail leg
     position: 7
-    questionnaire_value: Flail leg
     value: Flail leg
   - code: 5Arm
     desc: Flail arm
     position: 6
-    questionnaire_value: Flail arm
     value: Flail arm
   - code: 4Lumbar
     desc: ALS-Lumbar Onset
     position: 5
-    questionnaire_value: ALS-Lumbar Onset
     value: ALS-Lumbar Onset
   - code: 3Thoracic
     desc: ALS-Thoracic Diaphragmatic Onset
     position: 4
-    questionnaire_value: ALS-Thoracic Diaphragmatic Onset
     value: ALS-Thoracic Diaphragmatic Onset
   - code: 2Cervical
     desc: ALS-Cervical Onset
     position: 3
-    questionnaire_value: ALS-Cervical Onset
     value: ALS-Cervical Onset
   - code: 1Bulbar
     desc: ALS- Bulbar Onset
     position: 2
-    questionnaire_value: ALS- Bulbar Onset
     value: ALS- Bulbar Onset
 - code: avoidReason
   values:
   - code: Allergy
     desc: Allergy
     position: 1
-    questionnaire_value: null
     value: Allergy
   - code: Intolerance
     desc: Intolerance
     position: 2
-    questionnaire_value: null
     value: Intolerance
   - code: Lifestyle Choice
     desc: Lifestyle Choice
     position: 3
-    questionnaire_value: null
     value: Lifestyle Choice
 - code: baChoices
   values:
   - code: Suctioning
     desc: Suctioning
     position: 1
-    questionnaire_value: null
     value: Suctioning
   - code: Assisted cough techniques
     desc: Assisted cough techniques
     position: 2
-    questionnaire_value: null
     value: Assisted cough techniques
   - code: A fan
     desc: A fan
     position: 3
-    questionnaire_value: null
     value: A fan
   - code: Positioning
     desc: Positioning
     position: 4
-    questionnaire_value: null
     value: Positioning
   - code: Other
     desc: Other
     position: 5
-    questionnaire_value: null
     value: Other
 - code: bedRating
   values:
   - code: '0'
     desc: Helpless
     position: 5
-    questionnaire_value: null
     value: 0. Helpless
   - code: '1'
     desc: Can initiate, but not turn or adjust sheets alone
     position: 4
-    questionnaire_value: null
     value: 1. Can initiate, but not turn or adjust sheets alone
   - code: '2'
     desc: Can turn alone or adjust sheets, but with great difficulty
     position: 3
-    questionnaire_value: null
     value: 2. Can turn alone or adjust sheets, but with great difficulty
   - code: '3'
     desc: Somewhat slow and clumsy, but no help needed
     position: 2
-    questionnaire_value: null
     value: 3. Somewhat slow and clumsy, but no help needed
   - code: '4'
     desc: Normal
     position: 1
-    questionnaire_value: null
     value: 4. Normal
 - code: blLRB
   values:
   - code: blLRB3
     desc: Both
     position: 3
-    questionnaire_value: null
     value: Both
   - code: blLRB2
     desc: Right
     position: 2
-    questionnaire_value: null
     value: Right
   - code: blLRB1
     desc: Left
     position: 1
-    questionnaire_value: null
     value: Left
 - code: breathRating
   values:
   - code: '0'
     desc: Significant difficulty, considering using mechanical respiratory support
     position: 5
-    questionnaire_value: null
     value: 0. Significant difficulty, considering using mechanical respiratory support
   - code: '1'
     desc: Occurs at rest, difficulty when either sitting or lying
     position: 4
-    questionnaire_value: null
     value: 1. Occurs at rest, difficulty when either sitting or lying
   - code: '2'
     desc: 'Occurs with one or more of the following: eating; bathing; dressing (activities
       of daily life)'
     position: 3
-    questionnaire_value: null
     value: '2. Occurs with one or more of the following: eating; bathing; dressing
       (activities of daily life)'
   - code: '3'
     desc: Occurs when walking
     position: 2
-    questionnaire_value: null
     value: 3. Occurs when walking
   - code: '4'
     desc: None
     position: 1
-    questionnaire_value: null
     value: 4. None
 - code: buLRB
   values:
   - code: buLRB1
     desc: Left
     position: 1
-    questionnaire_value: null
     value: Left
   - code: buLRB3
     desc: Both
     position: 3
-    questionnaire_value: null
     value: Both
   - code: buLRB2
     desc: Right
     position: 2
-    questionnaire_value: null
     value: Right
 - code: careChoices
   values:
   - code: 'Yes'
     desc: 'Yes'
     position: 1
-    questionnaire_value: null
     value: 'Yes'
   - code: 'No'
     desc: 'No'
     position: 2
-    questionnaire_value: null
     value: 'No'
   - code: Some
     desc: Some
     position: 3
-    questionnaire_value: null
     value: Some
 - code: chairUse
   values:
   - code: A lift or electric recliner
     desc: A lift or electric recliner
     position: 1
-    questionnaire_value: null
     value: A lift or electric recliner
   - code: Pressure relief
     desc: Pressure relief
     position: 2
-    questionnaire_value: null
     value: Pressure relief
   - code: Head or neck support
     desc: Head or neck support
     position: 3
-    questionnaire_value: null
     value: Head or neck support
   - code: An electric wheelchair
     desc: An electric wheelchair
     position: 4
-    questionnaire_value: null
     value: An electric wheelchair
 - code: clinicMedAdmin
   values:
   - code: Topical
     desc: Topical
     position: 7
-    questionnaire_value: null
     value: Topical
   - code: Rectal
     desc: Rectal
     position: 6
-    questionnaire_value: null
     value: Rectal
   - code: Sublingual
     desc: Sublingual
     position: 5
-    questionnaire_value: null
     value: Sublingual
   - code: Inhalation
     desc: Inhalation
     position: 4
-    questionnaire_value: null
     value: Inhalation
   - code: Injection
     desc: Injection
     position: 3
-    questionnaire_value: null
     value: Injection
   - code: viaPeg
     desc: viaPeg
     position: 2
-    questionnaire_value: null
     value: via Peg
   - code: Oral
     desc: Oral
     position: 1
-    questionnaire_value: Oral
     value: Oral
 - code: comTechChoices
   values:
   - code: paperPen
     desc: I write using paper, pen, boogie board, or Notes on my phone or device
     position: 1
-    questionnaire_value: null
     value: I write using paper, pen, boogie board, or Notes on my phone or device
   - code: talkToText
     desc: I use a text to talk app on my smart phone or tablet
     position: 2
-    questionnaire_value: null
     value: I use a text to talk app on my smart phone or tablet
   - code: commsBoard
     desc: I use a communication board
     position: 3
-    questionnaire_value: null
     value: I use a communication board
   - code: voiceAmplifier
     desc: I use a voice amplifier
     position: 4
-    questionnaire_value: null
     value: I use a voice amplifier
   - code: eyeGaze
     desc: I use an Eye Gaze device or computer
     position: 5
-    questionnaire_value: null
     value: I use an Eye Gaze device or computer
   - code: compWithSwitch
     desc: I use a computer operated by a switch
     position: 6
-    questionnaire_value: null
     value: I use a computer operated by a switch
   - code: Other
     desc: Other
     position: 8
-    questionnaire_value: null
     value: Other
 - code: completeReasonChoices
   values:
   - code: completeReasonChoice3
     desc: Lost to Follow-Up
     position: 3
-    questionnaire_value: null
     value: Lost to Follow-Up
   - code: completeReasonChoice2
     desc: Patient Deceased
     position: 2
-    questionnaire_value: null
     value: Patient Deceased
   - code: completeReasonChoice1
     desc: ALS Diagnosis Excluded
     position: 1
-    questionnaire_value: null
     value: ALS Diagnosis Excluded
   - code: completeReasonChoice4
     desc: Patient Withdrawal
     position: 4
-    questionnaire_value: null
     value: Patient Withdrawal
 - code: deathMeds
   values:
   - code: deathMed8
     desc: Other
     position: 8
-    questionnaire_value: null
     value: Other
   - code: deathMed7
     desc: No Drugs given
     position: 7
-    questionnaire_value: null
     value: No Drugs given
   - code: deathMed6
     desc: Unknown
     position: 6
-    questionnaire_value: null
     value: Unknown
   - code: deathMed5
     desc: Antidepressants
     position: 5
-    questionnaire_value: null
     value: Antidepressants
   - code: deathMed4
     desc: Anticholinergics
     position: 4
-    questionnaire_value: null
     value: Anticholinergics
   - code: deathMed3
     desc: Non-Steroidal Anti Inflammatories
     position: 3
-    questionnaire_value: null
     value: Non-Steroidal Anti Inflammatories
   - code: deathMed2
     desc: Benzodiazepines
     position: 2
-    questionnaire_value: null
     value: Benzodiazepines
   - code: deathMed1
     desc: Opiates
     position: 1
-    questionnaire_value: null
     value: Opiates
 - code: deathMode
   values:
   - code: deathMode5
     desc: Other
     position: 5
-    questionnaire_value: null
     value: Other
   - code: deathMode4
     desc: Unknown
     position: 4
-    questionnaire_value: null
     value: Unknown
   - code: deathMode3
     desc: Suicide
     position: 3
-    questionnaire_value: null
     value: Suicide
   - code: deathMode2
     desc: Cardiac
     position: 2
-    questionnaire_value: null
     value: Cardiac
   - code: deathMode1
     desc: Respiratory
     position: 1
-    questionnaire_value: null
     value: Respiratory
 - code: deathPlace
   values:
   - code: deathPlace6
     desc: Other
     position: 6
-    questionnaire_value: null
     value: Other
   - code: deathPlace5
     desc: Unknown
     position: 5
-    questionnaire_value: null
     value: Unknown
   - code: deathPlace4
     desc: Home
     position: 4
-    questionnaire_value: null
     value: Home
   - code: deathPlace3
     desc: Nursing Home
     position: 3
-    questionnaire_value: null
     value: Nursing Home
   - code: deathPlace2
     desc: Acute Hospital
     position: 2
-    questionnaire_value: null
     value: Acute Hospital
   - code: deathPlace1
     desc: Hospice (Palliative care)
     position: 1
-    questionnaire_value: null
     value: Hospice (Palliative care)
 - code: deceasedChoices
   values:
   - code: deceasedChoice2
     desc: Expected related to MND
     position: 2
-    questionnaire_value: null
     value: Expected related to MND
   - code: deceasedChoice1
     desc: Unexpected/Sudden Related to MND
     position: 1
-    questionnaire_value: null
     value: Unexpected / Sudden Related to MND
   - code: deceasedChoice3
     desc: Unexpected/Sudden Unrelated to MND
     position: 3
-    questionnaire_value: null
     value: Unexpected / Sudden Unrelated to MND
 - code: dressRating
   values:
   - code: '0'
     desc: Total Dependence
     position: 5
-    questionnaire_value: null
     value: 0. Total Dependence
   - code: '1'
     desc: Needs attendant for self care
     position: 4
-    questionnaire_value: null
     value: 1. Needs attendant for self care
   - code: '2'
     desc: Intermittent assistance or substitute methods
     position: 3
-    questionnaire_value: null
     value: 2. Intermittent assistance or substitute methods
   - code: '3'
     desc: Independent and complete self-care with effort or decreased efficiency
     position: 2
-    questionnaire_value: null
     value: 3. Independent and complete self-care with effort or decreased efficiency
   - code: '4'
     desc: Normal Function
     position: 1
-    questionnaire_value: null
     value: 4. Normal Function
 - code: fluidLevels
   values:
   - code: Level 0
     desc: Level 0 -  Thin (No thickening needed)
     position: 1
-    questionnaire_value: null
     value: Level 0 -  Thin (No thickening needed)
   - code: Level 1
     desc: Level 1 - Slightly thick
     position: 2
-    questionnaire_value: null
     value: Level 1 - Slightly thick
   - code: Level 2
     desc: Level 2 - Mildly thick (Previously Level 150 (mildly thick) ¼ thick or nectar)
     position: 3
-    questionnaire_value: null
     value: Level 2 - Mildly thick (Previously Level 150 (mildly thick) ¼ thick or
       nectar)
   - code: Level 3
     desc: Level 3 - Moderately thick (Previously Level 400 (moderately thick) - ½
       thick or honey)
     position: 4
-    questionnaire_value: null
     value: Level 3 - Moderately thick (Previously Level 400 (moderately thick) - ½
       thick or honey)
   - code: Level 4
     desc: Level 4 -  Extremely thick (Previously Level 900 (extremely thick) - full
       thick or pudding)
     position: 5
-    questionnaire_value: null
     value: Level 4 - Extremely thick (Previously Level 900 (extremely thick) - full
       thick or pudding)
 - code: foodLevels
@@ -10104,1854 +9487,1510 @@ pvgs:
   - code: Level 7
     desc: Level 7 - Regular (normal food)
     position: 1
-    questionnaire_value: null
     value: Level 7 - Regular (normal food)
   - code: Level 6
     desc: Level 6 - Soft and bite sized
     position: 2
-    questionnaire_value: null
     value: Level 6 - Soft and bite sized
   - code: Level 5
     desc: Level 5 - Minced and moist
     position: 3
-    questionnaire_value: null
     value: Level 5 - Minced and moist
   - code: Level 4
     desc: Level 4 - Pureed (equal to thickness of level 4 liquid)
     position: 4
-    questionnaire_value: null
     value: Level 4 - Pureed (equal to thickness of level 4 liquid)
   - code: Level 3
     desc: Level 3 - Liquidised (equal to thickness of Level 3 liquid)
     position: 5
-    questionnaire_value: null
     value: Level 3 - Liquidised (equal to thickness of Level 3 liquid)
 - code: foodTypes
   values:
   - code: Soy
     desc: Soy
     position: 4
-    questionnaire_value: null
     value: Soy
   - code: Gluten
     desc: Gluten
     position: 1
-    questionnaire_value: null
     value: Gluten
   - code: Dairy
     desc: Dairy
     position: 2
-    questionnaire_value: null
     value: Dairy
   - code: Peanuts
     desc: Peanuts
     position: 3
-    questionnaire_value: null
     value: Peanuts
   - code: Eggs
     desc: Eggs
     position: 5
-    questionnaire_value: null
     value: Eggs
   - code: Shellfish
     desc: Shellfish
     position: 6
-    questionnaire_value: null
     value: Shellfish
   - code: Red Meat
     desc: Red Meat
     position: 7
-    questionnaire_value: null
     value: Red Meat
   - code: White Meat
     desc: White Meat
     position: 8
-    questionnaire_value: null
     value: White Meat
   - code: Fish
     desc: Fish
     position: 9
-    questionnaire_value: null
     value: Fish
   - code: Other
     desc: Other
     position: 10
-    questionnaire_value: null
     value: Other
 - code: gasCutRating
   values:
   - code: '0'
     desc: Unable to perform any aspect of task
     position: 5
-    questionnaire_value: null
     value: 0. Unable to perform any aspect of task
   - code: '1'
     desc: Provides minimal assistance to caregiver
     position: 4
-    questionnaire_value: null
     value: 1. Provides minimal assistance to caregiver
   - code: '2'
     desc: Some help needed with closures and fasteners
     position: 3
-    questionnaire_value: null
     value: 2. Some help needed with closures and fasteners
   - code: '3'
     desc: Clumsy but able to perform all manipulations independently
     position: 2
-    questionnaire_value: null
     value: 3. Clumsy but able to perform all manipulations independently
   - code: '4'
     desc: Normal
     position: 1
-    questionnaire_value: null
     value: 4. Normal
 - code: interventions
   values:
   - code: intervention5
     desc: None
     position: 5
-    questionnaire_value: null
     value: None
   - code: intervention4
     desc: Tracheostomy
     position: 4
-    questionnaire_value: null
     value: Tracheostomy
   - code: intervention3
     desc: Feeding Tube
     position: 3
-    questionnaire_value: null
     value: Feeding Tube
   - code: intervention2
     desc: BiPap
     position: 2
-    questionnaire_value: null
     value: BiPap
   - code: intervention1
     desc: Oxygen
     position: 1
-    questionnaire_value: null
     value: Oxygen
 - code: layBreathRating
   values:
   - code: '0'
     desc: Unable to sleep
     position: 5
-    questionnaire_value: null
     value: 0. Unable to sleep
   - code: '1'
     desc: Can only sleep sitting up
     position: 4
-    questionnaire_value: null
     value: 1. Can only sleep sitting up
   - code: '2'
     desc: Needs extra pillows in order to sleep (more than 2)
     position: 3
-    questionnaire_value: null
     value: 2. Needs extra pillows in order to sleep (more than 2)
   - code: '3'
     desc: Some difficult sleeping at night due to shortness of breath, does not routinely
       use more than two pillows
     position: 2
-    questionnaire_value: null
     value: 3. Some difficult sleeping at night due to shortness of breath, does not
       routinely use more than two pillows
   - code: '4'
     desc: None
     position: 1
-    questionnaire_value: null
     value: 4. None
 - code: leftSide
   values:
   - code: leftSide3
     desc: Absent - Left Side
     position: 3
-    questionnaire_value: null
     value: Absent
   - code: leftSide2
     desc: Normal - Left Side
     position: 2
-    questionnaire_value: null
     value: Normal
   - code: leftSide1
     desc: Hyper Reflexive - Left Side
     position: 1
-    questionnaire_value: null
     value: Hyper Reflexive
 - code: lieHelp
   values:
   - code: Sit Up
     desc: Sit Up
     position: 1
-    questionnaire_value: null
     value: Sit Up
   - code: Turn Over
     desc: Turn Over
     position: 2
-    questionnaire_value: null
     value: Turn Over
   - code: Change Position
     desc: Change Position
     position: 3
-    questionnaire_value: null
     value: Change Position
 - code: locLRB
   values:
   - code: Left
     desc: Left hand side
     position: 1
-    questionnaire_value: null
     value: Left hand side
   - code: Right
     desc: Right hand side
     position: 2
-    questionnaire_value: null
     value: Right hand side
   - code: Both
     desc: Both
     position: 3
-    questionnaire_value: null
     value: Both
 - code: medFrequencyChoices
   values:
   - code: Whenever Needed
     desc: Whenever Needed
     position: 1
-    questionnaire_value: null
     value: Whenever Needed
   - code: Every Hour
     desc: Every Hour
     position: 2
-    questionnaire_value: null
     value: Every Hour
   - code: Every 2 Hours
     desc: Every 2 Hours
     position: 3
-    questionnaire_value: null
     value: Every 2 Hours
   - code: Every 4 Hours
     desc: Every 4 Hours
     position: 4
-    questionnaire_value: null
     value: Every 4 Hours
   - code: Every 6 Hours
     desc: Every 6 Hours
     position: 5
-    questionnaire_value: null
     value: Every 6 Hours
   - code: Four Times Daily
     desc: Four Times Daily
     position: 6
-    questionnaire_value: null
     value: Four Times Daily
   - code: Every 8 Hours
     desc: Every 8 Hours
     position: 7
-    questionnaire_value: null
     value: Every 8 Hours
   - code: Three Times Daily
     desc: Three Times Daily
     position: 8
-    questionnaire_value: null
     value: Three Times Daily
   - code: Every 12 Hours
     desc: Every 12 Hours
     position: 9
-    questionnaire_value: null
     value: Every 12 Hours
   - code: Twice a Day
     desc: Twice a Day
     position: 10
-    questionnaire_value: null
     value: Twice a Day
   - code: Daily
     desc: Daily
     position: 11
-    questionnaire_value: null
     value: Daily
   - code: Other
     desc: Other
     position: 12
-    questionnaire_value: null
     value: Other
 - code: mndADeviceChoice
   values:
   - code: mndADeviceChoice9
     desc: Other
     position: 9
-    questionnaire_value: null
     value: Other
   - code: mndADeviceChoice8
     desc: None
     position: 8
-    questionnaire_value: null
     value: None
   - code: mndADeviceChoice7
     desc: Communication Device
     position: 7
-    questionnaire_value: null
     value: Communication Device
   - code: mndADeviceChoice6
     desc: Head or Neck Support
     position: 6
-    questionnaire_value: null
     value: Head or Neck Support
   - code: mndADeviceChoice5
     desc: Total dependency on wheelchair
     position: 5
-    questionnaire_value: null
     value: Total dependency on wheelchair
   - code: mndADeviceChoice4
     desc: Wheelchair (occasional use, can walk independently)
     position: 4
-    questionnaire_value: null
     value: Wheelchair (occasional use, can walk independently)
   - code: mndADeviceChoice3
     desc: Walker/Frame
     position: 3
-    questionnaire_value: null
     value: Walker/Frame
   - code: mndADeviceChoice2
     desc: Cane
     position: 2
-    questionnaire_value: null
     value: Cane
   - code: mndADeviceChoice1
     desc: Ankle-foot Orthosis (AFO
     position: 1
-    questionnaire_value: null
     value: Ankle-foot Orthosis (AFO
 - code: mndBreathHardSelect
   values:
   - code: At rest
     desc: At rest
     position: 1
-    questionnaire_value: null
     value: At rest
   - code: Moving around
     desc: Moving around
     position: 2
-    questionnaire_value: null
     value: Moving around
   - code: Moving a lot
     desc: Moving a lot
     position: 3
-    questionnaire_value: null
     value: Moving a lot
 - code: mndBrushHabit
   values:
   - code: Once a day
     desc: Once a day
     position: 1
-    questionnaire_value: null
     value: Once a day
   - code: Twice daily
     desc: Twice daily
     position: 2
-    questionnaire_value: null
     value: Twice daily
   - code: Three times a day
     desc: Three times a day
     position: 3
-    questionnaire_value: null
     value: Three times a day
 - code: mndCareRoles
   values:
   - code: GP
     desc: GP
     position: 6
-    questionnaire_value: null
     value: GP
   - code: Community/Home Nurse
     desc: Community/Home Nurse
     position: 1
-    questionnaire_value: null
     value: Community/Home Nurse
   - code: Counsellor
     desc: Counsellor
     position: 2
-    questionnaire_value: null
     value: Counsellor
   - code: Dietician
     desc: Dietician
     position: 3
-    questionnaire_value: null
     value: Dietician
   - code: Exercise Physiologist
     desc: Exercise Physiologist
     position: 4
-    questionnaire_value: null
     value: Exercise Physiologist
   - code: Gastroenterologist
     desc: Gastroenterologist
     position: 5
-    questionnaire_value: null
     value: Gastroenterologist
   - code: MND Association Member
     desc: MND Association Member
     position: 7
-    questionnaire_value: null
     value: MND Association Member
   - code: MND Care Coordinator
     desc: MND Care Coordinator
     position: 8
-    questionnaire_value: null
     value: MND Care Coordinator
   - code: Neurologist
     desc: Neurologist
     position: 9
-    questionnaire_value: null
     value: Neurologist
   - code: Occupational Therapist
     desc: Occupational Therapist
     position: 10
-    questionnaire_value: null
     value: Occupational Therapist
   - code: Paid Carer
     desc: Paid Carer
     position: 11
-    questionnaire_value: null
     value: Paid Carer
   - code: Palliative Care
     desc: Palliative Care
     position: 12
-    questionnaire_value: null
     value: Palliative Care
   - code: Physician
     desc: Physician
     position: 13
-    questionnaire_value: null
     value: Physician
   - code: Physiotherapist
     desc: Physiotherapist
     position: 14
-    questionnaire_value: null
     value: Physiotherapist
   - code: Psychiatrist
     desc: Psychiatrist
     position: 15
-    questionnaire_value: null
     value: Psychiatrist
   - code: Psychologist
     desc: Psychologist
     position: 16
-    questionnaire_value: null
     value: Psychologist
   - code: Research Nurse for MND
     desc: Research Nurse for MND
     position: 17
-    questionnaire_value: null
     value: Research Nurse for MND
   - code: Respitory Physician
     desc: Respitory Physician
     position: 18
-    questionnaire_value: null
     value: Respitory Physician
   - code: Social Worker
     desc: Social Worker
     position: 19
-    questionnaire_value: null
     value: Social Worker
   - code: Specialist MND Nurse
     desc: Specialist MND Nurse
     position: 20
-    questionnaire_value: null
     value: Specialist MND Nurse
   - code: Specialist PC Nurse
     desc: Specialist Palliative Care Nurse
     position: 21
-    questionnaire_value: null
     value: Specialist Palliative Care Nurse
   - code: Specialist Respiratory Nurse
     desc: Specialist Respiratory Nurse
     position: 22
-    questionnaire_value: null
     value: Specialist Respiratory Nurse
   - code: Speech Pathologist (Comms)
     desc: Speech Pathologist (Communication)
     position: 23
-    questionnaire_value: null
     value: Speech Pathologist (Communication)
   - code: Speech Pathologist (Swallow)
     desc: Speech Pathologist (Swallowing)
     position: 24
-    questionnaire_value: null
     value: Speech Pathologist (Swallowing)
 - code: mndClinicalTrialNamesPVG
   values:
   - code: OtherClinicTrialName
     desc: Other
     position: null
-    questionnaire_value: Other
     value: Other
   - code: SALSATrialName
     desc: SALSA
     position: 1
-    questionnaire_value: SALSA
     value: SALSA
 - code: mndComChoices
   values:
   - code: no difficulty communicating
     desc: no difficulty communicating
     position: 1
-    questionnaire_value: null
     value: no difficulty communicating
   - code: great difficulty communicating
     desc: great difficulty communicating
     position: 3
-    questionnaire_value: null
     value: great difficulty communicating
   - code: some difficulty communicating
     desc: some difficulty communicating
     position: 2
-    questionnaire_value: null
     value: some difficulty communicating
 - code: mndConditionChoices
   values:
   - code: Asthma
     desc: Asthma
     position: 2
-    questionnaire_value: null
     value: Asthma
   - code: Cancer
     desc: Cancer
     position: 3
-    questionnaire_value: null
     value: Cancer
   - code: Depression
     desc: Depression
     position: 4
-    questionnaire_value: null
     value: Depression
   - code: Diabetes
     desc: Diabetes
     position: 5
-    questionnaire_value: null
     value: Diabetes
   - code: Heart Disease
     desc: Heart Disease
     position: 6
-    questionnaire_value: null
     value: Heart Disease
   - code: Anxiety
     desc: Anxiety
     position: 1
-    questionnaire_value: null
     value: Anxiety
   - code: High Blood Pressure
     desc: High Blood Pressure
     position: 7
-    questionnaire_value: null
     value: High Blood Pressure
   - code: Other
     desc: Other
     position: 8
-    questionnaire_value: null
     value: Other
 - code: mndConsultationTypePVG
   values:
   - code: consultStandard
     desc: standard
     position: 1
-    questionnaire_value: null
     value: Standard
   - code: consultTele
     desc: telehealth
     position: 2
-    questionnaire_value: null
     value: Telehealth
 - code: mndDementiaList
   values:
   - code: 1FTD
     desc: FTD (Frontotemporal Dementia)
     position: 1
-    questionnaire_value: FTD (Frontotemporal Dementia)
     value: FTD (Frontotemporal Dementia)
   - code: 2Alzheimers
     desc: Alzheimer’s Dementia
     position: 2
-    questionnaire_value: Alzheimer’s Dementia
     value: Alzheimer’s Dementia
   - code: 3Vascular
     desc: Vascular Dementia
     position: 3
-    questionnaire_value: Vascular Dementia
     value: Vascular Dementia
   - code: 4Parkinsons
     desc: Parkinson’s Disease + Dementia
     position: 4
-    questionnaire_value: Parkinson’s Disease + Dementia
     value: Parkinson’s Disease + Dementia
   - code: 5Other
     desc: Other, please state
     position: 5
-    questionnaire_value: Other, please state
     value: Other, please state
 - code: mndDominantHandPVG
   values:
   - code: domHandLeft
     desc: left
     position: null
-    questionnaire_value: null
     value: Left
   - code: domHandRight
     desc: right
     position: null
-    questionnaire_value: null
     value: Right
   - code: domHandBoth
     desc: both
     position: null
-    questionnaire_value: null
     value: Both
 - code: mndDoseChoice
   values:
   - code: mndDoseChoice4
     desc: gram
     position: 4
-    questionnaire_value: null
     value: gram
   - code: mndDoseChoice3
     desc: microg
     position: 3
-    questionnaire_value: null
     value: microg
   - code: mndDoseChoice2
     desc: mg
     position: 2
-    questionnaire_value: null
     value: mg
   - code: mndDoseChoice1
     desc: ml
     position: 1
-    questionnaire_value: null
     value: ml
 - code: mndDozeRating
   values:
   - code: '0'
     desc: Would never doze
     position: null
-    questionnaire_value: null
     value: 0. Would never doze
   - code: '1'
     desc: Slight chance of dozing
     position: 2
-    questionnaire_value: null
     value: 1 - Slight chance of dozing
   - code: '2'
     desc: Moderate chance of dozing
     position: 3
-    questionnaire_value: null
     value: 2 - Moderate chance of dozing
   - code: '3'
     desc: High chance of dozing
     position: 4
-    questionnaire_value: null
     value: 3. High chance of dozing
 - code: mndEatHelp
   values:
   - code: 'No'
     desc: 'No'
     position: 1
-    questionnaire_value: null
     value: 'No'
   - code: Some help
     desc: Some help
     position: 2
-    questionnaire_value: null
     value: Some help
   - code: I need to be fed
     desc: I need to be fed
     position: 3
-    questionnaire_value: null
     value: I need to be fed
 - code: mndEthinicityScale
   values:
+  - code: Other
+    desc: Other
+    position: 6
+    value: Other
   - code: 5Oceania
     desc: Oceania
     position: 5
-    questionnaire_value: Oceania
     value: Oceania
   - code: 4Americas
     desc: Americas
     position: 4
-    questionnaire_value: Americas
     value: Americas
   - code: 3AbTSI
     desc: Aboriginal/ Torres-Strait Islander
     position: 3
-    questionnaire_value: Aboriginal/ Torres-Strait Islander
     value: Aboriginal/ Torres-Strait Islander
   - code: 2Asian
     desc: Asian
     position: 2
-    questionnaire_value: Asian
     value: Asian
   - code: 1Euro
     desc: European/ Caucasian
     position: 1
-    questionnaire_value: European/ Caucasian
     value: European/ Caucasian
 - code: mndFreqChoice
   values:
   - code: mndFreqChoice9
     desc: Other (Please specify)
     position: 9
-    questionnaire_value: null
     value: Other
   - code: mndFreqChoice8
     desc: pm
     position: 8
-    questionnaire_value: null
     value: prn
   - code: mndFreqChoice7
     desc: four hourly
     position: 7
-    questionnaire_value: null
     value: four hourly
   - code: mndFreqChoice6
     desc: two hourly
     position: 6
-    questionnaire_value: null
     value: two hourly
   - code: mndFreqChoice5
     desc: hourly
     position: 5
-    questionnaire_value: null
     value: hourly
   - code: mndFreqChoice4
     desc: qid
     position: 4
-    questionnaire_value: null
     value: qid
   - code: mndFreqChoice3
     desc: tds
     position: 3
-    questionnaire_value: null
     value: tds
   - code: mndFreqChoice2
     desc: bd
     position: 2
-    questionnaire_value: null
     value: bd
   - code: mndFreqChoice1
     desc: daily
     position: 1
-    questionnaire_value: null
     value: daily
 - code: mndIPChoice
   values:
   - code: mndIPChoice2
     desc: Respite
     position: 2
-    questionnaire_value: null
     value: Respite
   - code: mndIPChoice1
     desc: Acute
     position: 1
-    questionnaire_value: null
     value: Acute
 - code: mndLDocTypes
   values:
   - code: Other3
     desc: Another additional 'Other' response for yet more document entry
     position: 8
-    questionnaire_value: null
     value: Other (3)
   - code: Other2
     desc: Second 'Other' response for the entry of additional documents
     position: 7
-    questionnaire_value: null
     value: Other (2)
   - code: Other
     desc: Other
     position: 6
-    questionnaire_value: null
     value: Other
   - code: Enduring Power of Guardianship
     desc: An Enduring Power of Guardianship
     position: 1
-    questionnaire_value: null
     value: An Enduring Power of Guardianship
   - code: A Medical Power of Attorney
     desc: A Medical Power of Attorney
     position: 2
-    questionnaire_value: null
     value: A Medical Power of Attorney
   - code: An Anticipatory Direction
     desc: An Anticipatory Direction
     position: 3
-    questionnaire_value: null
     value: An Anticipatory Direction
   - code: DNR Form
     desc: I have completed a Do Not Resuscitate (DNR) Form
     position: 4
-    questionnaire_value: null
     value: I have completed a Do Not Resuscitate (DNR) Form
   - code: Organ and/or Tissue Donation
     desc: I have organ and/or tissue donation forms
     position: 5
-    questionnaire_value: null
     value: I have organ and/or tissue donation forms
 - code: mndMedAdminChoices
   values:
   - code: appliedTopically
     desc: Applied Topically
     position: 11
-    questionnaire_value: null
     value: Applied Topically
   - code: Rectally
     desc: Rectally
     position: 9
-    questionnaire_value: Rectally
     value: Rectally
   - code: Via Puffer
     desc: Via Puffer
     position: 7
-    questionnaire_value: Via Puffer
     value: Via Puffer
   - code: Via Mouth
     desc: Via Mouth
     position: 1
-    questionnaire_value: null
     value: Via Mouth
   - code: Via PEG
     desc: Via PEG
     position: 2
-    questionnaire_value: null
     value: Via PEG
   - code: Under Tongue (Sublingual)
     desc: Under Tongue (Sublingual)
     position: 8
-    questionnaire_value: null
     value: Under Tongue (Sublingual)
   - code: Via Nebuliser
     desc: Via Nebuliser
     position: 6
-    questionnaire_value: null
     value: Via Nebuliser
   - code: InjectionIV
     desc: Injection - Intravenous
     position: 3
-    questionnaire_value: null
     value: Injection - Intravenous
   - code: Via Patch
     desc: Via Patch
     position: 10
-    questionnaire_value: null
     value: Via Patch
   - code: InjectionSC
     desc: Injection - Subcutaneous
     position: 4
-    questionnaire_value: Injection - Subcutaneous
     value: Injection - Subcutaneous
   - code: InjectionIM
     desc: Injection - Intramuscular
     position: 5
-    questionnaire_value: Injection - Intramuscular
     value: Injection - Intramuscular
 - code: mndOptions
   values:
   - code: 'Yes'
     desc: 'Yes'
     position: 1
-    questionnaire_value: null
     value: 'Yes'
   - code: Some types
     desc: Some types
     position: 2
-    questionnaire_value: null
     value: Some types
   - code: 'No'
     desc: 'No'
     position: 3
-    questionnaire_value: null
     value: 'No'
 - code: mndPrimaryPVG
   values:
   - code: PrimaryContact
     desc: Primary contact
     position: 1
-    questionnaire_value: Primary contact
     value: Primary contact
 - code: mndRegionBeganPVG
   values:
   - code: 5Other
     desc: Other
     position: 5
-    questionnaire_value: Other
     value: Other
   - code: 4Lumbar
     desc: Lumbar
     position: 4
-    questionnaire_value: Lumbar
     value: Lumbar
   - code: 3ChestAb
     desc: Chest/ Abdomen
     position: 3
-    questionnaire_value: Chest/ Abdomen
     value: Chest/ Abdomen
   - code: 2Cervical
     desc: Cervical
     position: 2
-    questionnaire_value: Cervical
     value: Cervical
   - code: 1Bulbar
     desc: Bulbar
     position: 1
-    questionnaire_value: Bulbar
     value: Bulbar
 - code: mndSalivaFreq
   values:
   - code: Always
     desc: Always
     position: 1
-    questionnaire_value: null
     value: Always
   - code: Sometimes
     desc: Sometimes
     position: 2
-    questionnaire_value: null
     value: Sometimes
   - code: 'No'
     desc: 'No'
     position: 3
-    questionnaire_value: null
     value: 'No'
 - code: mndSalivaMgmt
   values:
   - code: Medication
     desc: Medication
     position: 1
-    questionnaire_value: null
     value: Medication
   - code: Suction
     desc: Suction
     position: 2
-    questionnaire_value: null
     value: Suction
   - code: Clothing Protection
     desc: Clothing Protection
     position: 3
-    questionnaire_value: null
     value: Clothing Protection
   - code: Swallowing
     desc: Swallowing
     position: 4
-    questionnaire_value: null
     value: Swallowing
   - code: Clearance Techniques
     desc: Clearance Techniques
     position: 5
-    questionnaire_value: null
     value: Clearance Techniques
   - code: Wiping Mouth
     desc: Wiping Mouth
     position: 6
-    questionnaire_value: null
     value: Wiping Mouth
   - code: Other
     desc: Other
     position: 7
-    questionnaire_value: null
     value: Other
 - code: mndSitesPVG
   values:
   - code: Site000
     desc: Unallocated to Site
     position: null
-    questionnaire_value: Unallocated to Site
     value: Unallocated to Site
   - code: Site330
     desc: BNRC, Concord, NSW, 330
     position: null
-    questionnaire_value: BNRC, Concord, NSW, 330
     value: BNRC, Concord, NSW, 330
   - code: Site400
     desc: Sunshine, Qld, 400
     position: null
-    questionnaire_value: Sunshine, Qld, 400
     value: Sunshine, Qld, 400
   - code: Site306
     desc: Launceston, Tas, 306
     position: null
-    questionnaire_value: Launceston, Tas, 306
     value: Launceston, Tas, 306
   - code: Site305
     desc: Barwon, Vic, 305
     position: null
-    questionnaire_value: Barwon, Vic, 305
     value: Barwon, Vic, 305
   - code: 1Site007
     desc: Brain and Mind Centre, NSW, 007
     position: null
-    questionnaire_value: Brain and Mind Centre, NSW, 007
     value: Brain and Mind Centre, NSW, 007
   - code: 2Site101
     desc: Royal Brisbane and Women's, Qld, 101
     position: null
-    questionnaire_value: Royal Brisbane and Women's, Qld, 101
     value: Royal Brisbane and Women's, Qld, 101
   - code: 3Site201
     desc: Flinders, SA, 201
     position: null
-    questionnaire_value: Flinders, SA, 201
     value: Flinders, SA, 201
   - code: 4Site303
     desc: Calvary Bethlehem, Vic, 303
     position: null
-    questionnaire_value: Calvary Bethlehem, Vic, 303
     value: Calvary Bethlehem, Vic, 303
   - code: 6Site323
     desc: Calvary St Josephs, NSW, 323
     position: null
-    questionnaire_value: Calvary St Josephs, NSW, 323
     value: Calvary St Josephs, NSW, 323
   - code: 8Site457
     desc: Macquarie, NSW, 457
     position: null
-    questionnaire_value: Macquarie, NSW, 457
     value: Macquarie, NSW, 457
   - code: 9Site471
     desc: Perron, WA, 471
     position: null
-    questionnaire_value: Perron, WA, 471
     value: Perron, WA, 471
   - code: 10Site498
     desc: Fiona Stanley, WA, 498
     position: null
-    questionnaire_value: Fiona Stanley, WA, 498
     value: Fiona Stanley, WA, 498
 - code: mndTelehealthConsultationPVG
   values:
   - code: consultPhone
     desc: phone
     position: 1
-    questionnaire_value: null
     value: Telephone
   - code: consultVideo
     desc: video
     position: 2
-    questionnaire_value: null
     value: Video
   - code: consultEmailOnline
     desc: email
     position: 3
-    questionnaire_value: null
     value: Email or online
 - code: mndYN
   values:
   - code: '2'
     desc: 'No'
     position: 2
-    questionnaire_value: null
     value: 'No'
   - code: '1'
     desc: 'Yes'
     position: 1
-    questionnaire_value: null
     value: 'Yes'
 - code: mndYNNA
   values:
   - code: 1NA
     desc: NA
     position: 3
-    questionnaire_value: NA
     value: NA
   - code: 2Yes
     desc: 'Yes'
     position: 1
-    questionnaire_value: 'Yes'
     value: 'Yes'
   - code: 3No
     desc: 'No'
     position: 2
-    questionnaire_value: 'No'
     value: 'No'
 - code: mndYNUNK
   values:
   - code: 'Yes'
     desc: 'Yes'
     position: 1
-    questionnaire_value: 'Yes'
     value: 'Yes'
   - code: 'No'
     desc: 'No'
     position: 2
-    questionnaire_value: 'No'
     value: 'No'
   - code: Unknown
     desc: Unknown
     position: 3
-    questionnaire_value: Unknown
     value: Unknown
 - code: mndeducation
   values:
   - code: PostGrad
     desc: Post graduate University qualification
     position: 1
-    questionnaire_value: Post graduate University qualification
     value: Post graduate University qualification
   - code: Uni
     desc: University degree
     position: 2
-    questionnaire_value: University degree
     value: University degree
   - code: Diploma
     desc: Diploma / Certificate / Trade qualification
     position: 3
-    questionnaire_value: Diploma / Certificate / Trade qualification
     value: Diploma / Certificate / Trade qualification
   - code: Yr12
     desc: Completed Year 12
     position: 4
-    questionnaire_value: Completed Year 12
     value: Completed Year 12
   - code: HighSchool
     desc: High School before Year 12
     position: 5
-    questionnaire_value: High School before Year 12
     value: High School before Year 12
   - code: Primary
     desc: Primary School
     position: 6
-    questionnaire_value: Primary School
     value: Primary School
   - code: None
     desc: No formal education
     position: 7
-    questionnaire_value: No formal education
     value: No formal education
 - code: mndmedical
   values:
   - code: Other4
     desc: Other
     position: 10
-    questionnaire_value: Other
     value: Other
   - code: Other3
     desc: Other
     position: 9
-    questionnaire_value: Other
     value: Other
   - code: NA
     desc: N/A
     position: 1
-    questionnaire_value: N/A
     value: N/A
   - code: Diabetes
     desc: Diabetes
     position: 2
-    questionnaire_value: Diabetes
     value: Diabetes
   - code: Heart
     desc: Heart disease
     position: 3
-    questionnaire_value: Heart disease
     value: Heart disease
   - code: Hypertension
     desc: Hypertension
     position: 4
-    questionnaire_value: Hypertension
     value: Hypertension
   - code: Asthma
     desc: Asthma
     position: 5
-    questionnaire_value: Asthma
     value: Asthma
   - code: Cancer
     desc: Cancer
     position: 6
-    questionnaire_value: Cancer
     value: Cancer
   - code: Other1
     desc: Other
     position: 7
-    questionnaire_value: Other
     value: Other
   - code: Other2
     desc: Other
     position: 8
-    questionnaire_value: Other
     value: Other
 - code: mndoccupationscale
   values:
   - code: Other
     desc: Other
     position: 10
-    questionnaire_value: Other
     value: Other
   - code: Manager
     desc: Manager, Legislator, Senior Official
     position: 1
-    questionnaire_value: Manager, Legislator, Senior Official
     value: Manager, Legislator, Senior Official
   - code: Professional
     desc: Professional (eg, IT, Engineer, Medical Doctor, Teacher, Accountant, Registered
       Nurse, Lawyer. Psychologist, Librarian. Other professional)
     position: 2
-    questionnaire_value: Professional (eg, IT, Engineer, Medical Doctor, Teacher,
-      Accountant, Registered Nurse, Lawyer. Psychologist, Librarian. Other professional)
     value: Professional (eg, IT, Engineer, Medical Doctor, Teacher, Accountant, Registered
       Nurse, Lawyer. Psychologist, Librarian. Other professional)
   - code: Technician
     desc: Technician and Associate Professional, (eg, engineer technician, computer
       assistant, ship and aircraft controller and pilot)
     position: 3
-    questionnaire_value: Technician and Associate Professional, (eg, engineer technician,
-      computer assistant, ship and aircraft controller and pilot)
     value: Technician and Associate Professional, (eg, engineer technician, computer
       assistant, ship and aircraft controller and pilot)
   - code: Clerical
     desc: Clerical support worker, (eg, office clerk, customer services clerk, travel
       agentcy clerk, receptionist)
     position: 4
-    questionnaire_value: Clerical support worker, (eg, office clerk, customer services
-      clerk, travel agentcy clerk, receptionist)
     value: Clerical support worker, (eg, office clerk, customer services clerk, travel
       agentcy clerk, receptionist)
   - code: Skilled
     desc: Skilled Agricultural Fishery and Forestry worker (eg, market oriented skilled
       agriculture, forestry or fisheries worker)
     position: 5
-    questionnaire_value: Skilled Agricultural Fishery and Forestry worker (eg, market
-      oriented skilled agriculture, forestry or fisheries worker)
     value: Skilled Agricultural Fishery and Forestry worker (eg, market oriented skilled
       agriculture, forestry or fisheries worker)
   - code: Craft
     desc: Craft and related trades worker (eg, extraction and building trades worker,
       metal trades worker)
     position: 6
-    questionnaire_value: Craft and related trades worker (eg, extraction and building
-      trades worker, metal trades worker)
     value: Craft and related trades worker (eg, extraction and building trades worker,
       metal trades worker)
   - code: Plant
     desc: Plant and machine operator and assembler
     position: 7
-    questionnaire_value: Plant and machine operator and assembler
     value: Plant and machine operator and assembler
   - code: Elementary
     desc: Elementary occupation (eg, garbage collector, council worker, domestic helper,
       cleaner and launderer, farm or agricultural worker, fishery worker)
     position: 8
-    questionnaire_value: Elementary occupation (eg, garbage collector, council worker,
-      domestic helper, cleaner and launderer, farm or agricultural worker, fishery
-      worker)
     value: Elementary occupation (eg, garbage collector, council worker, domestic
       helper, cleaner and launderer, farm or agricultural worker, fishery worker)
   - code: Defence
     desc: Defence Force occupation
     position: 9
-    questionnaire_value: Defence Force occupation
     value: Defence Force occupation
 - code: mndpsychiatric
   values:
   - code: NA
     desc: N/A
     position: 1
-    questionnaire_value: N/A
     value: N/A
   - code: Depression
     desc: Depression
     position: 2
-    questionnaire_value: Depression
     value: Depression
   - code: Anxiety
     desc: Anxiety
     position: 3
-    questionnaire_value: Anxiety
     value: Anxiety
   - code: Dementia
     desc: Dementia
     position: 4
-    questionnaire_value: Dementia
     value: Dementia
   - code: Schizophrenia
     desc: Schizophrenia
     position: 5
-    questionnaire_value: Schizophrenia
     value: Schizophrenia
   - code: Other
     desc: Other
     position: 6
-    questionnaire_value: Other
     value: Other
 - code: mndstatus
   values:
   - code: Alive
     desc: Alive
     position: 1
-    questionnaire_value: Alive
     value: Alive
   - code: Deceased
     desc: Deceased
     position: 2
-    questionnaire_value: Deceased
     value: Deceased
   - code: Unknown
     desc: Unknown
     position: 3
-    questionnaire_value: Unknown
     value: Unknown
 - code: mndtypedxPVG
   values:
   - code: 2Sporadic
     desc: Sporadic
     position: 2
-    questionnaire_value: Sporadic
     value: Sporadic
   - code: 1Familial
     desc: Familial
     position: 1
-    questionnaire_value: Familial
     value: Familial
   - code: 3Unknown
     desc: Unknown
     position: 3
-    questionnaire_value: null
     value: Unknown
 - code: mndunknown
   values:
   - code: UnknownNA
     desc: Unknown/ NA
     position: 1
-    questionnaire_value: Unknown/ NA
     value: Unknown/ NA
 - code: myComfyChoices
   values:
   - code: In bed
     desc: In bed
     position: 1
-    questionnaire_value: null
     value: In bed
   - code: In my wheelchair
     desc: In my wheelchair
     position: 2
-    questionnaire_value: null
     value: In my wheelchair
   - code: In a comfortable chair
     desc: In a comfortable chair (e.g. Recliner)
     position: 3
-    questionnaire_value: null
     value: In a comfortable chair (e.g. Recliner)
   - code: Other
     desc: Other
     position: 4
-    questionnaire_value: null
     value: Other
 - code: needHelp
   values:
   - code: An adjustable bed
     desc: An adjustable bed
     position: 1
-    questionnaire_value: null
     value: An adjustable bed
   - code: Extra pillows
     desc: Extra pillows
     position: 2
-    questionnaire_value: null
     value: Extra pillows
   - code: Pressure relieving mattress
     desc: Pressure relieving mattress
     position: 3
-    questionnaire_value: null
     value: Pressure relieving mattress
   - code: Bed cradle
     desc: Bed cradle
     position: 4
-    questionnaire_value: null
     value: Bed cradle
   - code: Neck support when sitting up
     desc: Neck support when sitting up
     position: 5
-    questionnaire_value: null
     value: Neck support when sitting up
 - code: nivPowerChoices
   values:
   - code: Independent
     desc: Independent
     position: 1
-    questionnaire_value: null
     value: Independent
   - code: Need some assistance
     desc: Need some assistance
     position: 2
-    questionnaire_value: null
     value: Need some assistance
   - code: Need full assistance
     desc: Need full assistance
     position: 3
-    questionnaire_value: null
     value: Need full assistance
 - code: nivUse
   values:
   - code: Whenever I sleep
     desc: Whenever I sleep
     position: 1
-    questionnaire_value: null
     value: Whenever I sleep
   - code: When needed
     desc: When needed
     position: 2
-    questionnaire_value: null
     value: When needed
   - code: Most of the time
     desc: Most of the time
     position: 3
-    questionnaire_value: null
     value: Most of the time
 - code: noGasRating
   values:
   - code: '1'
     desc: Food must be cut by someone, but can still feed slowly but by
     position: 4
-    questionnaire_value: null
     value: 1. Food must be cut by someone, but can still feed slowly
   - code: '0'
     desc: Needs to be fed
     position: 5
-    questionnaire_value: null
     value: 0. Needs to be fed
   - code: '2'
     desc: Can cut most foods although clumsy and slow; some help needed
     position: 3
-    questionnaire_value: null
     value: 2. Can cut most foods although clumsy and slow; some help needed
   - code: '3'
     desc: Somewhat slow and clumsy, but no help needed
     position: 2
-    questionnaire_value: null
     value: 3. Somewhat slow and clumsy, but no help needed
   - code: '4'
     desc: Normal
     position: 1
-    questionnaire_value: null
     value: 4. Normal
 - code: pegReasons
   values:
   - code: For hydration
     desc: For hydration
     position: 1
-    questionnaire_value: null
     value: For hydration
   - code: To top up my meals
     desc: To top up my meals
     position: 2
-    questionnaire_value: null
     value: To top up my meals
   - code: For all food and drink
     desc: For all food and drink
     position: 3
-    questionnaire_value: null
     value: For all food and drink
   - code: Need PEG but enjoy some food
     desc: I need tube feeding but enjoy small amounts of food by mouth
     position: 4
-    questionnaire_value: null
     value: I need tube feeding but enjoy small amounts of food by mouth
   - code: I need help with my tube feeds
     desc: I need help with my tube feeds
     position: 5
-    questionnaire_value: null
     value: I need help with my tube feeds
 - code: physicalAreas
   values:
   - code: Upper Limbs
     desc: Upper Limbs
     position: 1
-    questionnaire_value: null
     value: Upper Limbs
   - code: Lower Limbs
     desc: Lower Limbs
     position: 2
-    questionnaire_value: null
     value: Lower Limbs
   - code: Head/Neck
     desc: Head/Neck
     position: 3
-    questionnaire_value: null
     value: Head/Neck
   - code: Trunk
     desc: Trunk
     position: 4
-    questionnaire_value: null
     value: Trunk
 - code: proChoices
   values:
   - code: proChoice18
     desc: Other
     position: 18
-    questionnaire_value: null
     value: Other
   - code: proChoice17
     desc: None
     position: 17
-    questionnaire_value: null
     value: None
   - code: proChoice16
     desc: Internet use for MND information
     position: 16
-    questionnaire_value: null
     value: Internet use for MND information
   - code: proChoice14
     desc: Social Worker
     position: 14
-    questionnaire_value: null
     value: Social Worker
   - code: proChoice13
     desc: Dietician
     position: 13
-    questionnaire_value: null
     value: Dietician
   - code: proChoice12
     desc: Home assessment/modification
     position: 12
-    questionnaire_value: null
     value: Home assessment/modification
   - code: proChoice11
     desc: Paid Attendant (for ADL's)
     position: 11
-    questionnaire_value: null
     value: Paid Attendant (for ADL's)
   - code: proChoice10
     desc: Counsellor
     position: 10
-    questionnaire_value: null
     value: Counsellor
   - code: proChoice8
     desc: Occupational Therapist
     position: 8
-    questionnaire_value: null
     value: Occupational Therapist
   - code: proChoice7
     desc: Community/Home Nursing
     position: 7
-    questionnaire_value: null
     value: Community/Home Nursing
   - code: proChoice6
     desc: Research/Clinic Nurse for MND
     position: 6
-    questionnaire_value: null
     value: Research/Clinic Nurse for MND
   - code: proChoice5
     desc: Palliative Care Physician
     position: 5
-    questionnaire_value: null
     value: Palliative Care Physician
   - code: proChoice3
     desc: Physiotherapist
     position: 3
-    questionnaire_value: null
     value: Physiotherapist
   - code: proChoice2
     desc: MND Care Coordinator (MND Association Affiliated)
     position: 2
-    questionnaire_value: null
     value: MND Care Coordinator (MND Association Affiliated)
   - code: proChoice1
     desc: Is the patient a member of/involved with an MND Association?
     position: 1
-    questionnaire_value: null
     value: Is the patient a member of/involved with an MND Association?
   - code: proChoice4
     desc: Respiratory/Sleep Physician
     position: 4
-    questionnaire_value: null
     value: Respiratory/Sleep Physician
   - code: proChoice9
     desc: Speech Pathologist
     position: 9
-    questionnaire_value: null
     value: Speech Pathologist
   - code: proChoice15
     desc: Has the patient used inpatient respite care in the past for MND?
     position: 15
-    questionnaire_value: null
     value: Has the patient used inpatient respite care in the past for MND?
 - code: respRating
   values:
   - code: '2'
     desc: Continuous use of BiPAP during the night
     position: 3
-    questionnaire_value: null
     value: 2. Continuous use of BiPAP during the night
   - code: '0'
     desc: Invasive mechanical ventilation by intubation or tracheostomy
     position: 5
-    questionnaire_value: null
     value: 0. Invasive mechanical ventilation by intubation or tracheostomy
   - code: '1'
     desc: Continuous use of BiPAP during the night and day
     position: 4
-    questionnaire_value: null
     value: 1. Continuous use of BiPAP during the night and day
   - code: '3'
     desc: Intermittent use of BiPAP
     position: 2
-    questionnaire_value: null
     value: 3. Intermittent use of BiPAP
   - code: '4'
     desc: None
     position: 1
-    questionnaire_value: null
     value: 4. None
 - code: rightSide
   values:
   - code: rightSide3
     desc: Absent - Right Side
     position: 3
-    questionnaire_value: null
     value: Absent
   - code: rightSide2
     desc: Normal - Right Side
     position: 2
-    questionnaire_value: null
     value: Normal
   - code: rightSide1
     desc: 'Hyper Reflexive: Right Side'
     position: 1
-    questionnaire_value: null
     value: Hyper Reflexive
 - code: salivaRating
   values:
   - code: '0'
     desc: Marked drooling; requires constant tissue or handkerchief
     position: 5
-    questionnaire_value: null
     value: 0. Marked drooling; requires constant tissue or handkerchief
   - code: '1'
     desc: Marked excess of saliva with some drooling
     position: 4
-    questionnaire_value: null
     value: 1. Marked excess of saliva with some drooling
   - code: '2'
     desc: Moderately excessive Saliva; may have minimal drooling
     position: 3
-    questionnaire_value: null
     value: 2. Moderately excessive Saliva; may have minimal drooling
   - code: '3'
     desc: Slight but definite excess of saliva in mouth; may have night time drooling
     position: 2
-    questionnaire_value: null
     value: 3. Slight but definite excess of saliva in mouth; may have night time drooling
   - code: '4'
     desc: Normal
     position: 1
-    questionnaire_value: null
     value: 4. Normal
 - code: speechRating
   values:
   - code: '0'
     desc: Loss of useful speech
     position: 5
-    questionnaire_value: null
     value: 0. Loss of useful speech
   - code: '1'
     desc: Speech combined with non verbal communication
     position: 4
-    questionnaire_value: null
     value: 1. Speech combined with non verbal communication
   - code: '2'
     desc: Intelligible with repeating
     position: 3
-    questionnaire_value: null
     value: 2. Intelligible with repeating
   - code: '3'
     desc: Detectable speech disturbance
     position: 2
-    questionnaire_value: null
     value: 3. Detectable speech disturbance
   - code: '4'
     desc: Normal speech processes
     position: 1
-    questionnaire_value: null
     value: 4. Normal speech processes
 - code: stairsRating
   values:
   - code: '0'
     desc: Cannot do
     position: 5
-    questionnaire_value: null
     value: 0. Cannot do
   - code: '1'
     desc: Needs Assistance
     position: 4
-    questionnaire_value: null
     value: 1. Needs Assistance
   - code: '2'
     desc: Mild unsteadiness or fatigue
     position: 3
-    questionnaire_value: null
     value: 2. Mild unsteadiness or fatigue
   - code: '3'
     desc: Slow
     position: 2
-    questionnaire_value: null
     value: 3. Slow
   - code: '4'
     desc: Normal
     position: 1
-    questionnaire_value: null
     value: 4. Normal
 - code: swallowRating
   values:
   - code: '0'
     desc: Nil by Mouth (exclusively parenteral or enteral feeding)
     position: 5
-    questionnaire_value: null
     value: 0. Nil by Mouth (exclusively parenteral or enteral feeding)
   - code: '1'
     desc: Needs supplemental tube feeding
     position: 4
-    questionnaire_value: null
     value: 1. Needs supplemental tube feeding
   - code: '2'
     desc: Dietary consistency changes
     position: 3
-    questionnaire_value: null
     value: 2. Dietary consistency changes
   - code: '3'
     desc: Early Eating Problems - occasional choking
     position: 2
-    questionnaire_value: null
     value: 3. Early Eating Problems - occasional choking
   - code: '4'
     desc: Normal eating habits
     position: 1
-    questionnaire_value: null
     value: 4. Normal eating habits
 - code: transferConditions
   values:
   - code: Not Needed
     desc: Not Needed
     position: 1
-    questionnaire_value: null
     value: Not Needed
   - code: Bed
     desc: Bed
     position: 2
-    questionnaire_value: null
     value: Bed
   - code: A Chair
     desc: A Chair
     position: 3
-    questionnaire_value: null
     value: A Chair
   - code: Toilet
     desc: Toilet
     position: 4
-    questionnaire_value: null
     value: Toilet
 - code: walkAids
   values:
   - code: Arm/Wrist Splints
     desc: Arm/Wrist Splints
     position: 1
-    questionnaire_value: null
     value: Arm/Wrist Splints
   - code: Leg/Foot Splints
     desc: Leg/Foot Splints
     position: 2
-    questionnaire_value: null
     value: Leg/Foot Splints
   - code: Head/Neck Support
     desc: Head/Neck Support
     position: 3
-    questionnaire_value: null
     value: Head/Neck Support
 - code: walkRating
   values:
   - code: '0'
     desc: No purposeful leg movement
     position: 5
-    questionnaire_value: null
     value: 0. No purposeful leg movement
   - code: '1'
     desc: Nonambulatory functional movement
     position: 4
-    questionnaire_value: null
     value: 1. Nonambulatory functional movement
   - code: '2'
     desc: Walks with assistance
     position: 3
-    questionnaire_value: null
     value: 2. Walks with assistance
   - code: '3'
     desc: Early ambulation difficulties
     position: 2
-    questionnaire_value: null
     value: 3. Early ambulation difficulties
   - code: '4'
     desc: Normal
     position: 1
-    questionnaire_value: null
     value: 4. Normal
 - code: walkYNA
   values:
   - code: 'Yes'
     desc: 'Yes'
     position: 1
-    questionnaire_value: null
     value: 'Yes'
   - code: 'No'
     desc: 'No'
     position: 2
-    questionnaire_value: null
     value: 'No'
   - code: With Support or Aids
     desc: With Support or Aids
     position: 3
-    questionnaire_value: null
     value: With Support or Aids
 - code: whoChoices
   values:
   - code: whoChoice3
     desc: Relative or caregiver
     position: 3
-    questionnaire_value: null
     value: Relative or caregiver
   - code: whoChoice2
     desc: Healthcare Professional
     position: 2
-    questionnaire_value: null
     value: Healthcare Professional
   - code: whoChoice1
     desc: Neurologist
     position: 1
-    questionnaire_value: null
     value: Neurologist
   - code: whoChoice4
     desc: Other
     position: 4
-    questionnaire_value: null
     value: Other
 - code: writingRating
   values:
   - code: '0'
     desc: Unable to grip pen
     position: 5
-    questionnaire_value: null
     value: 0. Unable to grip pen
   - code: '1'
     desc: Able to grip pen but unable to write
     position: 4
-    questionnaire_value: null
     value: 1. Able to grip pen but unable to write
   - code: '2'
     desc: Not all words are legible
     position: 3
-    questionnaire_value: null
     value: 2. Not all words are legible
   - code: '3'
     desc: 'Slow or sloppy: all words are legible'
     position: 2
-    questionnaire_value: null
     value: '3. Slow or sloppy: all words are legible'
   - code: '4'
     desc: Normal
     position: 1
-    questionnaire_value: null
     value: 4. Normal
 registry_dashboards: []
 reports: []
