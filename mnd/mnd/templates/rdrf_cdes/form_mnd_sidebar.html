@@ -1,0 +1,15 @@
+{% load i18n %}
+
+<div width="100%" class="card collapsible">
+<div class="card-body">
+  {% if request.user.is_clinician and not request.user.ethically_cleared %}
+    <span class="fa fa-file" aria-hidden="true"></span>
+    {% trans 'About Me PDF' %}
+  {% else %}
+    <a href="{% url 'about_me' registry_code patient_id %}" download>
+      <span class="fa fa-file" aria-hidden="true"></span>
+      {% trans 'About Me PDF' %}
+    </a>
+  {% endif %}
+</div>
+</div>
