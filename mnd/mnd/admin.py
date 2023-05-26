@@ -9,6 +9,10 @@ class DuplicatePatientAdmin(admin.ModelAdmin):
     list_display = ("patient_link", "working_groups", "created_at", "created_by", "last_updated")
     list_filter = ("is_duplicate",)
 
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        return qs.filter(patient__active=True)
+
     def patient_link(self, obj):
         patient_url = reverse("patient_edit", kwargs={
             "registry_code": obj.patient.rdrf_registry.first().code,
