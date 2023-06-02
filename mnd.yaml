@@ -1,4 +1,4 @@
-EXPORT_TIME: '2023-02-01 11:25:37.888136'
+EXPORT_TIME: '2023-06-02 11:39:28.967123'
 EXPORT_TYPE: REGISTRY_PLUS_CDES
 RDRF_VERSION: 1.0.0
 REGISTRY_VERSION: '1.0'
@@ -1482,7 +1482,7 @@ cdes:
   datatype: date
   desc: ''
   important: true
-  instructions: ''
+  instructions: Not needed on subsequent visit
   is_required: false
   max_length: null
   max_value: null
@@ -3964,7 +3964,8 @@ cdes:
   datatype: range
   desc: ''
   important: true
-  instructions: ''
+  instructions: Please add dates First Visit only, or if treatment has changed-(commenced
+    or ceased) since last visit
   is_required: false
   max_length: null
   max_value: null
@@ -6402,6 +6403,8 @@ email_notifications:
 
       <p>If needed, we will contact you through your e-mail address {{patient.user.email}}.
 
+      <p>Please note that the Data Curator, Catherine Hansen, may contact you regarding your registration, to gather feedback and to let you know details of clinical trials or research. These emails will come from <a href="mailto:catherine.hansen@deakin.edu.au">catherine.hansen@deakin.edu.au</a>.<p>
+
       <p>Yours sincerely,<br>
       The MiNDAUS Registry Team<br>
     description: New Patient Registered
@@ -6443,6 +6446,8 @@ email_notifications:
       <p><a href="{{ activation_url }}">Activation link</a></p>
 
       <p>If needed, we will contact you through your e-mail address {{patient.user.email}}.
+
+      <p>Please note that the Data Curator, Catherine Hansen, may contact you regarding your registration, to gather feedback and to let you know details of clinical trials or research. These emails will come from <a href="mailto:catherine.hansen@deakin.edu.au">catherine.hansen@deakin.edu.au</a>.<p>
 
       <p>Yours sincerely,<br>
       The MiNDAUS Registry Team<br>
@@ -6516,7 +6521,7 @@ forms:
   header: |-
     <h1>Completion CRF</h1>
     <p>PDF version of this form can be
-    <a href="https://www.mindaus.org/wp-content/uploads/2022/09/14122841/MindausCompletionCRFParticipatingSiteApril2022V02.0.pdf">downloaded here</a></p>
+    <a href="https://www.mindaus.org/wp-content/uploads/2023/03/22131743/MiNDAUSCompletionCRFFebruary2023.pdf">downloaded here</a></p>
   name: completionForm
   position: 6
   sections:
@@ -6621,7 +6626,7 @@ forms:
   display_name: First Visit
   header: |-
     <h1>First Visit</h1>
-    <p>PDF version of the form for clinic staff data collection can be  <a href="https://www.mindaus.org/wp-content/uploads/2022/11/16153403/FirstVisitCaseReportFormParticipatingSiteStaffDataCollectionNovember2022V02.1.pdf">downloaded here</a><p>
+    <p>PDF version of the form for clinic staff data collection can be <a href="https://www.mindaus.org/wp-content/uploads/2023/03/22131748/MiNDAUSFirstVisitCRFFebruary2023V02.2.pdf">downloaded here</a><p>
     <p>PDF version of the form combining clinic and patient data collection can be
     <a href="https://www.mindaus.org/wp-content/uploads/2022/09/14122840/MindausFVCRFParticipatingSiteApril2022V02.0.pdf">downloaded here</a></p>
   name: firstVisit
@@ -7512,7 +7517,7 @@ forms:
   display_name: Subsequent Visits
   header: |-
     <h2>Subsequent Visits</h2>
-    <p>PDF version of the form for clinic staff data collection can be  <a href="https://www.mindaus.org/wp-content/uploads/2022/11/16153415/SubVisitCaseReportFormParticipatingSiteStaffDataCollectionNovember2022V02.1.pdf">downloaded here</a><p>
+    <p>PDF version of the form for clinic staff data collection can be  <a href="https://www.mindaus.org/wp-content/uploads/2023/03/22131752/MiNDAUSSubVisitCRFFebruary2023V02.2.pdf">downloaded here</a><p>
     <p>PDF version of the form combining clinic and patient data collection can be
     <a href="https://www.mindaus.org/wp-content/uploads/2022/09/14122841/MindausSVCRFParticipatingSiteApril2022V02.0.pdf">downloaded here</a></p>
   name: subsequentVisit
@@ -7926,7 +7931,12 @@ forms_readonly_groups:
 generic_sections: []
 group_permissions:
 - name: Working Group Curators
-  permissions: []
+  permissions:
+  - codename: can_run_reports
+    content_type:
+    - report
+    - reportdesign
+    name: Can run reports
 - name: Patients
   permissions: []
 - name: Carer
@@ -8990,11 +9000,17 @@ group_permissions:
     - patients
     - state
     name: Can view state
+  - codename: can_run_reports
+    content_type:
+    - report
+    - reportdesign
+    name: Can run reports
+longitudinal_followups: []
 metadata_json: '{"features": ["registration", "contexts", "patients_create_users",
-  "clinicians_need_ethical_clearance", "patient_guid", "patient_address_is_mandatory",
-  "consent_checks"], "patient_list": {"columns": ["full_name", "date_of_birth", {"code":
-  {"label": "Gender"}}, "last_updated_overall_at", "modules", "actions"], "facets":
-  ["working_groups", {"living_status": {"default": "Alive"}}]}}'
+  "clinicians_need_ethical_clearance", "clinicians_see_created_patients", "patient_guid",
+  "patient_address_is_mandatory", "consent_checks"], "patient_list": {"columns": ["full_name",
+  "date_of_birth", {"code": {"label": "Gender"}}, "last_updated_overall_at", "modules",
+  "actions"], "facets": ["working_groups", {"living_status": {"default": "Alive"}}]}}'
 name: MiNDAUS Registry
 next_of_kin_relationships: []
 patient_data_section: {}
@@ -9593,9 +9609,9 @@ pvgs:
 - code: layBreathRating
   values:
   - code: '0'
-    desc: Unable to sleep
+    desc: Unable to sleep without mechanical assistance
     position: 5
-    value: 0. Unable to sleep
+    value: 0. Unable to sleep without mechanical assistance
   - code: '1'
     desc: Can only sleep sitting up
     position: 4
@@ -10266,6 +10282,14 @@ pvgs:
     value: Other
 - code: mndSitesPVG
   values:
+  - code: Site500
+    desc: Midland, SJOG, WA, 500
+    position: null
+    value: Midland, SJOG, WA, 500
+  - code: Site304
+    desc: Bundoora, Vic, 304
+    position: null
+    value: Bundoora, Vic, 304
   - code: Site000
     desc: Unallocated to Site
     position: null
@@ -10994,7 +11018,6 @@ pvgs:
     value: 4. Normal
 registry_dashboards: []
 reports: []
-reports_v2: []
 splash_screen: |-
   <style>
       #mnd-splash h1, h2, h3 {
@@ -11097,18 +11120,37 @@ splash_screen: |-
           </div>
       </div>
   </div>
+working_group_types: []
 working_groups:
-- Sunshine, Qld, 400
-- Royal Brisbane and Women's, Qld, 101
-- Perron, WA, 471
-- Macquarie, NSW, 457
-- Launceston, Tas, 306
-- Flinders, SA, 201
-- Fiona Stanley, WA, 498
-- Calvary St Josephs, NSW, 323
-- Calvary Bethlehem, Vic, 303
-- Brain and Mind Centre, NSW, 007
-- Barwon, Vic, 305
-- Unallocated
-- Concord, NSW, 330
-- Bundoora, Vic, 304
+- name: Barwon, Vic, 305
+  type: null
+- name: Brain and Mind Centre, NSW, 007
+  type: null
+- name: Bundoora, Vic, 304
+  type: null
+- name: Calvary Bethlehem, Vic, 303
+  type: null
+- name: Calvary St Josephs, NSW, 323
+  type: null
+- name: Concord, NSW, 330
+  type: null
+- name: Fiona Stanley, WA, 498
+  type: null
+- name: Flinders, SA, 201
+  type: null
+- name: Launceston, Tas, 306
+  type: null
+- name: Macquarie, NSW, 457
+  type: null
+- name: Midland, SJOG, WA, 500
+  type: null
+- name: MNDAssociation, Tas, 307
+  type: null
+- name: Perron, WA, 471
+  type: null
+- name: Royal Brisbane and Women's, Qld, 101
+  type: null
+- name: Sunshine Coast University Hospital, Qld, 400
+  type: null
+- name: Unallocated
+  type: null
