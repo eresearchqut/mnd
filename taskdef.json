@@ -116,6 +116,14 @@
                 {
                     "name": "VIRUS_CHECKING_ENABLED",
                     "value": "$VIRUS_CHECKING_ENABLED"
+                },
+                {
+                    "name": "BREACHED_PASSWORD_DETECTION",
+                    "value": "$BREACHED_PASSWORD_DETECTION"
+                },
+                {
+                    "name": "MAX_BREACHED_PASSWORD_THRESHOLD",
+                    "value": "$MAX_BREACHED_PASSWORD_THRESHOLD"
                 }
             ],
             "image": "${IMAGE_REPO}:${IMAGE_TAG}",
