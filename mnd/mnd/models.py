@@ -1,10 +1,8 @@
 import pycountry
-
 from django.db import models
 from django.dispatch import receiver
-
-from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
 from simple_history.models import HistoricalRecords
 
 from rdrf.users.utils import user_email_updated
@@ -99,15 +97,15 @@ class PrimaryCarer(models.Model):
 
 
 @receiver(user_email_updated)
-def update_carer_email(sender, user, **kwargs):
+def update_carer_email(sender, user, previous_email, **kwargs):
     if user.is_carer:
         if carer_patient := Patient.objects.filter(carer=user).first():
             if primary_carer := carer_patient.primary_carers.first():
                 primary_carer.email = user.email  # Synchronise the carer's email with the user's updated email
                 primary_carer.save()
 
-                # Update any existing carer registrations for this primary_carer
-                CarerRegistration.objects.filter(carer=primary_carer).update(carer_email=user.email)
+        # Update any existing carer registrations for the previous email address
+        CarerRegistration.objects.filter(carer_email=previous_email).update(carer_email=user.email)
 
 
 class PrimaryCarerRelationship(models.Model):
