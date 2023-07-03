@@ -101,15 +101,13 @@ class PrimaryCarer(models.Model):
 @receiver(user_email_updated)
 def update_carer_email(sender, user, **kwargs):
     if user.is_carer:
+        if carer_patient := Patient.objects.filter(carer=user).first():
+            if primary_carer := carer_patient.primary_carers.first():
+                primary_carer.email = user.email  # Synchronise the carer's email with the user's updated email
+                primary_carer.save()
 
-        # Update the primary carer
-        primary_carer = Patient.objects.filter(carer=user).first().primary_carers.first()
-        if primary_carer:
-            primary_carer.email = user.email  # Synchronise the carer's email with the user's updated email
-            primary_carer.save()
-
-        # Update any existing carer registrations for this primary_carer
-        CarerRegistration.objects.filter(carer=primary_carer).update(carer_email=user.email)
+                # Update any existing carer registrations for this primary_carer
+                CarerRegistration.objects.filter(carer=primary_carer).update(carer_email=user.email)
 
 
 class PrimaryCarerRelationship(models.Model):
