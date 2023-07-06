@@ -105,7 +105,7 @@ def update_carer_email(sender, user, previous_email, **kwargs):
                 primary_carer.save()
 
         # Update any existing carer registrations for the previous email address
-        CarerRegistration.objects.filter(carer_email=previous_email).update(carer_email=user.email)
+        CarerRegistration.objects.filter(carer_email__iexact=previous_email).update(carer_email=user.email)
 
 
 class PrimaryCarerRelationship(models.Model):
@@ -148,7 +148,7 @@ class CarerRegistrationManager(models.Manager):
     def _pending_registration_qs(self, primary_carer, patient):
         return self.filter(
             carer=primary_carer,
-            carer_email=primary_carer.email,
+            carer_email__iexact=primary_carer.email,
             patient=patient,
             expires_on__gte=timezone.now(),
             status=CarerRegistration.CREATED
@@ -163,7 +163,7 @@ class CarerRegistrationManager(models.Manager):
     def is_carer_registered(self, primary_carer, patient):
         return self.filter(
             carer=primary_carer,
-            carer_email=primary_carer.email,
+            carer_email__iexact=primary_carer.email,
             patient=patient,
             status=CarerRegistration.REGISTERED
         ).exists()
@@ -172,7 +172,7 @@ class CarerRegistrationManager(models.Manager):
         return self.filter(
             carer=primary_carer,
             patient=patient,
-            carer_email=primary_carer.email,
+            carer_email__iexact=primary_carer.email,
             status=CarerRegistration.REGISTERED
         ).exists()
 
@@ -180,7 +180,7 @@ class CarerRegistrationManager(models.Manager):
         return self.filter(
             carer=primary_carer,
             patient=patient,
-            carer_email=primary_carer.email,
+            carer_email__iexact=primary_carer.email,
             status=CarerRegistration.DEACTIVATED
         ).exists()
 
@@ -188,7 +188,7 @@ class CarerRegistrationManager(models.Manager):
         last_registration = self.filter(
             carer=primary_carer,
             patient=patient,
-            carer_email=primary_carer.email,
+            carer_email__iexact=primary_carer.email,
             status=CarerRegistration.CREATED
         ).order_by('-expires_on').first()
         return last_registration is not None and last_registration.expires_on < timezone.now()

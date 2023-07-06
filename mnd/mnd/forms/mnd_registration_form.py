@@ -53,7 +53,7 @@ class MNDCarerRegistrationForm(RegistrationFormCaseInsensitiveCheck):
         if not CarerRegistration.objects.filter(
             token=token,
             status=CarerRegistration.CREATED,
-            carer_email=email,
+            carer_email__iexact=email,
             expires_on__gte=timezone.now()
         ).exists():
             raise ValidationError(_("Invalid token !"))

@@ -102,7 +102,7 @@ class CarerOperations:
         )
 
     def activate_carer(self):
-        self.patient.carer = CustomUser.objects.get(email=self.primary_carer.email)
+        self.patient.carer = CustomUser.objects.get(email__iexact=self.primary_carer.email)
         self.patient.save(update_fields=['carer'])
         CarerRegistration.objects.filter(
             carer=self.primary_carer, patient=self.patient, status=CarerRegistration.DEACTIVATED
@@ -127,7 +127,7 @@ class CarerOperations:
     def register_carer(self):
         primary_carer_user = (
             CustomUser.objects
-            .filter(username=self.primary_carer.email)
+            .filter(username__iexact=self.primary_carer.email)
             .distinct()
             .first()
         )
@@ -154,7 +154,7 @@ class CarerOperations:
             reg.save()
 
         is_inactive_user = primary_carer_user and not primary_carer_user.is_active
-        is_patient = Patient.objects.really_all().filter(email=self.primary_carer.email).exists()
+        is_patient = Patient.objects.really_all().filter(email__iexact=self.primary_carer.email).exists()
         if is_patient or is_inactive_user:
             # If is patient or an inactive user just return success but do not send out emails
             success_message = _(f"{primary_carer_str(self.primary_carer)} invited!")

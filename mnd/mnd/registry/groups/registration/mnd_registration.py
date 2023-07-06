@@ -59,7 +59,7 @@ class MNDCarerRegistration(BaseRegistration):
         # automatically register those
         pending_registrations = (
             CarerRegistration.objects.filter(
-                carer_email=carer_email,
+                carer_email__iexact=carer_email,
                 status=CarerRegistration.CREATED,
                 expires_on__gte=timezone.now()
             ).exclude(pk=carer_registration.pk)

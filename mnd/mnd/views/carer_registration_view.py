@@ -41,7 +41,7 @@ class CarerOperationsView(View):
         if not request.user.is_carer:
             return HttpResponseForbidden()
         patients = request.user.patients_in_care.all()
-        primary_carer = PrimaryCarer.objects.filter(email=request.user.email).first()
+        primary_carer = PrimaryCarer.objects.filter(email__iexact=request.user.email).first()
         return render(
             request,
             "registration/carer_self_operations.html",
@@ -54,7 +54,7 @@ class CarerOperationsView(View):
     def post(self, request):
         if not request.user.is_carer:
             return HttpResponseForbidden()
-        primary_carer = PrimaryCarer.objects.get(email=request.user.email)
+        primary_carer = PrimaryCarer.objects.get(email__iexact=request.user.email)
         patient_id = request.POST.get('patient_id', None)
         if patient_id:
             patient = Patient.objects.get(pk=patient_id)

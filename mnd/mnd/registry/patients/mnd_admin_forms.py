@@ -209,7 +209,7 @@ class PrimaryCarerForm(PrefixedModelForm):
         if existing_user and not existing_user.is_carer:
             raise forms.ValidationError(_("The email address is already registered into the system"))
 
-        if Patient.objects.really_all().filter(email=email).exists():
+        if Patient.objects.really_all().filter(email__iexact=email).exists():
             # Patient with the same email exists. Allow the change here but invites will not be sent out
             return email
 
@@ -217,7 +217,7 @@ class PrimaryCarerForm(PrefixedModelForm):
             if email != instance.email:
                 # Delete pending carer invites for the old email
                 CarerRegistration.objects.filter(
-                    carer_email=instance.email,
+                    carer_email__iexact=instance.email,
                     status=CarerRegistration.CREATED,
                     expires_on__gte=timezone.now()
                 ).delete()
