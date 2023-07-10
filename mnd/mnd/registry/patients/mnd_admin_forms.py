@@ -235,7 +235,7 @@ class PrimaryCarerForm(PrefixedModelForm):
         instance = getattr(self, 'instance', None)
         carer_instance_update = False
         if 'email' in self.changed_data:
-            existing_carer = PrimaryCarer.objects.filter(email__iexact=email.lower()).first()
+            existing_carer = PrimaryCarer.objects.filter(email__iexact=email).first()
             if existing_carer:
                 carer_instance_update = True
                 self.instance = existing_carer
