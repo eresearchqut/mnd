@@ -1,5 +1,6 @@
 import pycountry
 from django.db import models
+from django.db.models import Subquery
 from django.dispatch import receiver
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
@@ -101,16 +102,15 @@ def update_carer_email(sender, user, previous_email, **kwargs):
     if user.is_carer:
         new_email = user.email
         for primary_carer in PrimaryCarer.objects.filter(email__iexact=previous_email):
-
-            # Get any deactivated registrations
-            deactivated_registrations = primary_carer.carerregistration_set.filter(status=CarerRegistration.DEACTIVATED)
-            # Get associated relationships
+            # 1. Force new primary carer in relationship to disassociate from primary carer with new email
+            # -> Get relationships with deactivated registrations
             relationships_to_disassociate = PrimaryCarerRelationship.objects.filter(
                 carer=primary_carer,
-                patient__in=[r.patient for r in deactivated_registrations]
+                patient__in=Subquery(
+                    primary_carer.carerregistration_set.filter(status=CarerRegistration.DEACTIVATED).values('patient'))
             )
 
-            # 1. Force new primary carer in relationship to disassociate from primary carer with new email
+            # -> Force a new primary carer object to disassociate from the one linked with the new email
             for relationship in relationships_to_disassociate:
                 rc_copy = relationship.carer
                 rc_copy.pk = None
