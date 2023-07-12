@@ -1,5 +1,6 @@
 import pycountry
 from django.db import models
+from django.db.models import Subquery
 from django.dispatch import receiver
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
@@ -99,13 +100,32 @@ class PrimaryCarer(models.Model):
 @receiver(user_email_updated)
 def update_carer_email(sender, user, previous_email, **kwargs):
     if user.is_carer:
-        if carer_patient := Patient.objects.filter(carer=user).first():
-            if primary_carer := carer_patient.primary_carers.first():
-                primary_carer.email = user.email  # Synchronise the carer's email with the user's updated email
+        new_email = user.email
+        for primary_carer in PrimaryCarer.objects.filter(email__iexact=previous_email):
+            # 1. Force new primary carer in relationship to disassociate from primary carer with new email
+            # -> Get relationships with deactivated registrations
+            relationships_to_disassociate = PrimaryCarerRelationship.objects.filter(
+                carer=primary_carer,
+                patient__in=Subquery(
+                    primary_carer.carerregistration_set.filter(status=CarerRegistration.DEACTIVATED).values('patient'))
+            )
+
+            # -> Force a new primary carer object to disassociate from the one linked with the new email
+            for relationship in relationships_to_disassociate:
+                rc_copy = relationship.carer
+                rc_copy.pk = None
+                rc_copy.save()
+                relationship.carer = rc_copy
+                relationship.save()
+
+            if active_registrations := primary_carer.carerregistration_set.filter(status__in=[CarerRegistration.CREATED, CarerRegistration.REGISTERED]):
+                # 2. Update active registrations with the new email
+                active_registrations.update(carer_email=new_email)
+
+                # 3. Update this primary carer's email
+                primary_carer.email = new_email
                 primary_carer.save()
 
-        # Update any existing carer registrations for the previous email address
-        CarerRegistration.objects.filter(carer_email__iexact=previous_email).update(carer_email=user.email)
 
 
 class PrimaryCarerRelationship(models.Model):
