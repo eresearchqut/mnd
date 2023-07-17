@@ -1,3 +1,4 @@
+{% load curator_email %}
 {% load version_number %}
 {% load i18n %}
 
@@ -26,7 +27,7 @@
 
       <div class="col-md-4" id="footer-authorised">
         <p>{% trans "For further support, please contact Catherine Hansen, MiNDAUS Data Curator" %}</p>
-        <p><a href="mailto:catherine.hansen@deakin.edu.au">catherine.hansen@deakin.edu.au</a></p>
+          <p><a href="mailto:{% curator_email %}">{% curator_email %}</a></p>
         </div>
       </div>
     </div>
