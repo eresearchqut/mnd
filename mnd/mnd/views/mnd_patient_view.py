@@ -203,9 +203,10 @@ class FormSectionMixin(PatientFormMixin):
         )
         return forms
 
-    def _handle_primary_carer_relationship(self, forms, form, instance):
+    def _handle_primary_carer_relationship(self, form, instance, forms):
+        email = form.cleaned_data['email']
         patient_form = forms['patient_form']
-        if patient_form and patient_form.cleaned_data['email'] == form.cleaned_data['email']:
+        if patient_form and patient_form.cleaned_data['email'] == email:
             patient_form.add_error('email', self.EMAILS_SAME_ERROR)
             return False
 
@@ -240,7 +241,7 @@ class FormSectionMixin(PatientFormMixin):
                     instance.patient = self.object
                     instance.save()
                     if key == self.PRIMARY_CARER_KEY:
-                        if not self._handle_primary_carer_relationship(forms, forms[key], instance):
+                        if not self._handle_primary_carer_relationship(forms[key], instance, forms):
                             self.object = None
                             raise Exception(self.EMAILS_SAME_ERROR)
                     elif key == self.DUPLICATE_PATIENT_KEY:
