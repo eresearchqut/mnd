@@ -1,4 +1,5 @@
 from django.utils.translation import gettext as _
+from django.db import transaction
 
 from rdrf.events.events import EventType
 from rdrf.helpers.constants import PATIENT_PERSONAL_DETAILS_SECTION_NAME
@@ -104,10 +105,11 @@ class FormSectionMixin(PatientFormMixin):
     DUPLICATE_PATIENT_KEY = "duplicate_patient_form"
     PATIENT_LANGUAGE_KEY = "patient_language_form"
 
+    EMAILS_SAME_ERROR = "Patient email and principal carer email should not be the same"
+
     def get_form_sections(self, user, request, patient, registry, patient_form,
                           patient_address_form, patient_doctor_form, patient_relative_form,
-                          builder):
-
+                          builder, error_after_all_forms_are_valid=None):
         mnd_builder = MNDSectionFieldBuilder()
         form_sections = super().get_form_sections(
             user, request, patient, registry, patient_form,
@@ -169,6 +171,14 @@ class FormSectionMixin(PatientFormMixin):
                     DuplicatePatientForm, _("Potential duplicate"), "duplicate_patient", get_duplicate_patient(patient), request
                 )
             )
+
+        if error_after_all_forms_are_valid:
+            for pair in form_sections:
+                form = pair[0]
+                if form.prefix == 'primary_carer':
+                    form.add_error('email', error_after_all_forms_are_valid[0])
+                    break
+
         return form_sections
 
     def get_forms(self, request, registry_model, user, instance=None):
@@ -193,8 +203,12 @@ class FormSectionMixin(PatientFormMixin):
         )
         return forms
 
-    def _handle_primary_carer_relationship(self, form, instance):
-        email = form.cleaned_data['email']
+    def _handle_primary_carer_relationship(self, forms, form, instance):
+        patient_form = forms['patient_form']
+        if patient_form and patient_form.cleaned_data['email'] == form.cleaned_data['email']:
+            patient_form.add_error('email', self.EMAILS_SAME_ERROR)
+            return False
+
         rel = form.cleaned_data.get('relationship')
         rel_info = form.cleaned_data.get('relationship_info')
         carer = instance or PrimaryCarer.objects.filter(email__iexact=email).first()
@@ -216,20 +230,25 @@ class FormSectionMixin(PatientFormMixin):
                                  {"patient": instance.patient})
 
     def all_forms_valid(self, forms):
-        ret_val = super().all_forms_valid(forms)
-        formset_keys = [self.PATIENT_LANGUAGE_KEY, self.PATIENT_INSURANCE_KEY, self.PRIMARY_CARER_KEY,
-                        self.PREFERRED_CONTACT_KEY, self.DUPLICATE_PATIENT_KEY]
-        for key in formset_keys:
-            instance = forms[key].save(commit=False)
-            instance.patient = self.object
-            instance.save()
-            if key == self.PRIMARY_CARER_KEY:
-                self._handle_primary_carer_relationship(forms[key], instance)
-            elif key == self.DUPLICATE_PATIENT_KEY:
-                self._handle_duplicate_patients(forms[key], instance)
+        try:
+            with transaction.atomic():
+                ret_val = super().all_forms_valid(forms)[1]
+                formset_keys = [self.PATIENT_LANGUAGE_KEY, self.PATIENT_INSURANCE_KEY, self.PRIMARY_CARER_KEY,
+                                self.PREFERRED_CONTACT_KEY, self.DUPLICATE_PATIENT_KEY]
+                for key in formset_keys:
+                    instance = forms[key].save(commit=False)
+                    instance.patient = self.object
+                    instance.save()
+                    if key == self.PRIMARY_CARER_KEY:
+                        if not self._handle_primary_carer_relationship(forms, forms[key], instance):
+                            self.object = None
+                            raise Exception(self.EMAILS_SAME_ERROR)
+                    elif key == self.DUPLICATE_PATIENT_KEY:
+                        self._handle_duplicate_patients(forms[key], instance)
 
-        return ret_val
-
+                return True, ret_val
+        except Exception as ex:
+            return False, [str(ex)]
 
 class AddPatientView(FormSectionMixin, ParentAddPatientView):
     pass
