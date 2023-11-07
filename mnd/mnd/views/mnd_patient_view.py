@@ -1,6 +1,8 @@
+from django.utils.module_loading import import_string
 from django.utils.translation import gettext as _
 from django.db import transaction
 
+from rdrf import settings
 from rdrf.events.events import EventType
 from rdrf.helpers.constants import PATIENT_PERSONAL_DETAILS_SECTION_NAME
 from rdrf.services.io.notifications.email_notification import process_notification
@@ -9,6 +11,7 @@ from rdrf.views.patient_view import (
 )
 from rdrf.helpers.form_section_helper import DemographicsSectionFieldBuilder
 
+from rdrf.helpers.registry_features import RegistryFeatures
 from ..registry.patients.mnd_admin_forms import (
     PatientInsuranceForm, PrimaryCarerForm, PreferredContactForm,
     DuplicatePatientForm, PatientLanguageForm
@@ -233,7 +236,7 @@ class FormSectionMixin(PatientFormMixin):
     def all_forms_valid(self, forms):
         try:
             with transaction.atomic():
-                ret_val = super().all_forms_valid(forms)[1]
+                ret_val = super().all_forms_valid(forms, False)[1]
                 formset_keys = [self.PATIENT_LANGUAGE_KEY, self.PATIENT_INSURANCE_KEY, self.PRIMARY_CARER_KEY,
                                 self.PREFERRED_CONTACT_KEY, self.DUPLICATE_PATIENT_KEY]
                 for key in formset_keys:
@@ -246,7 +249,9 @@ class FormSectionMixin(PatientFormMixin):
                             raise Exception(self.EMAILS_SAME_ERROR)
                     elif key == self.DUPLICATE_PATIENT_KEY:
                         self._handle_duplicate_patients(forms[key], instance)
-
+                if self.registry_model.has_feature(RegistryFeatures.PATIENTS_CREATE_USERS):
+                    registration = import_string(settings.REGISTRATION_CLASS)(self.request)
+                    registration.send_activation_email(self.registry_model.code, self.object.user, self.object, self_registration=False)
                 return True, ret_val
         except Exception as ex:
             return False, [str(ex)]
