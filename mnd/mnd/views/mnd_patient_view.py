@@ -27,6 +27,9 @@ def get_section(form, section_name, section_prefix, instance, request, initial=N
     if patient:
         form_instance.set_patient(patient)
 
+    if form == PrimaryCarerForm:
+        form_instance.set_patient_email(request.POST.get('email'))
+
     section = (section_name, [f for f in form_instance.fields])
     return form_instance, (section,)
 
@@ -35,6 +38,10 @@ def get_form(form, request, prefix, instance=None, initial=None, patient=None):
     form_instance = form(request.POST, prefix=prefix, instance=instance, initial=initial or {})
     if patient:
         form_instance.set_patient(patient)
+
+    if form == PrimaryCarerForm:
+        form_instance.set_patient_email(request.POST.get('email'))
+
     return form_instance
 
 
