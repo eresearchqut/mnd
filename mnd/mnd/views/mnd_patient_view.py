@@ -1,8 +1,5 @@
-from django.utils.module_loading import import_string
 from django.utils.translation import gettext as _
-from django.db import transaction
 
-from rdrf import settings
 from rdrf.events.events import EventType
 from rdrf.helpers.constants import PATIENT_PERSONAL_DETAILS_SECTION_NAME
 from rdrf.services.io.notifications.email_notification import process_notification
@@ -10,8 +7,6 @@ from rdrf.views.patient_view import (
     PatientFormMixin, AddPatientView as ParentAddPatientView, PatientEditView as ParentEditPatientView
 )
 from rdrf.helpers.form_section_helper import DemographicsSectionFieldBuilder
-
-from rdrf.helpers.registry_features import RegistryFeatures
 from ..registry.patients.mnd_admin_forms import (
     PatientInsuranceForm, PrimaryCarerForm, PreferredContactForm,
     DuplicatePatientForm, PatientLanguageForm
@@ -31,6 +26,9 @@ def get_section(form, section_name, section_prefix, instance, request, initial=N
     if patient:
         form_instance.set_patient(patient)
 
+    if form == PrimaryCarerForm:
+        form_instance.set_patient_email(request.POST.get('email'))
+
     section = (section_name, [f for f in form_instance.fields])
     return form_instance, (section,)
 
@@ -39,6 +37,10 @@ def get_form(form, request, prefix, instance=None, initial=None, patient=None):
     form_instance = form(request.POST, prefix=prefix, instance=instance, initial=initial or {})
     if patient:
         form_instance.set_patient(patient)
+
+    if form == PrimaryCarerForm:
+        form_instance.set_patient_email(request.POST.get('email'))
+
     return form_instance
 
 
@@ -108,11 +110,9 @@ class FormSectionMixin(PatientFormMixin):
     DUPLICATE_PATIENT_KEY = "duplicate_patient_form"
     PATIENT_LANGUAGE_KEY = "patient_language_form"
 
-    EMAILS_SAME_ERROR = "Patient email and principal carer email should not be the same"
-
     def get_form_sections(self, user, request, patient, registry, patient_form,
                           patient_address_form, patient_doctor_form, patient_relative_form,
-                          builder, error_after_all_forms_are_valid=None):
+                          builder):
         mnd_builder = MNDSectionFieldBuilder()
         form_sections = super().get_form_sections(
             user, request, patient, registry, patient_form,
@@ -175,13 +175,6 @@ class FormSectionMixin(PatientFormMixin):
                 )
             )
 
-        if error_after_all_forms_are_valid:
-            for pair in form_sections:
-                form = pair[0]
-                if form.prefix == 'primary_carer':
-                    form.add_error('email', error_after_all_forms_are_valid[0])
-                    break
-
         return form_sections
 
     def get_forms(self, request, registry_model, user, instance=None):
@@ -206,13 +199,7 @@ class FormSectionMixin(PatientFormMixin):
         )
         return forms
 
-    def _handle_primary_carer_relationship(self, form, instance, forms):
-        email = form.cleaned_data['email']
-        patient_form = forms['patient_form']
-        if patient_form and patient_form.cleaned_data['email'] == email:
-            patient_form.add_error('email', self.EMAILS_SAME_ERROR)
-            return False
-
+    def _handle_primary_carer_relationship(self, form, instance):
         rel = form.cleaned_data.get('relationship')
         rel_info = form.cleaned_data.get('relationship_info')
         carer = instance or PrimaryCarer.objects.filter(email__iexact=email).first()
@@ -234,27 +221,19 @@ class FormSectionMixin(PatientFormMixin):
                                  {"patient": instance.patient})
 
     def all_forms_valid(self, forms):
-        try:
-            with transaction.atomic():
-                ret_val = super().all_forms_valid(forms, False)[1]
-                formset_keys = [self.PATIENT_LANGUAGE_KEY, self.PATIENT_INSURANCE_KEY, self.PRIMARY_CARER_KEY,
-                                self.PREFERRED_CONTACT_KEY, self.DUPLICATE_PATIENT_KEY]
-                for key in formset_keys:
-                    instance = forms[key].save(commit=False)
-                    instance.patient = self.object
-                    instance.save()
-                    if key == self.PRIMARY_CARER_KEY:
-                        if not self._handle_primary_carer_relationship(forms[key], instance, forms):
-                            self.object = None
-                            raise Exception(self.EMAILS_SAME_ERROR)
-                    elif key == self.DUPLICATE_PATIENT_KEY:
-                        self._handle_duplicate_patients(forms[key], instance)
-                if self.registry_model.has_feature(RegistryFeatures.PATIENTS_CREATE_USERS):
-                    registration = import_string(settings.REGISTRATION_CLASS)(self.request)
-                    registration.send_activation_email(self.registry_model.code, self.object.user, self.object, self_registration=False)
-                return True, ret_val
-        except Exception as ex:
-            return False, [str(ex)]
+        ret_val = super().all_forms_valid(forms)
+        formset_keys = [self.PATIENT_LANGUAGE_KEY, self.PATIENT_INSURANCE_KEY, self.PRIMARY_CARER_KEY,
+                        self.PREFERRED_CONTACT_KEY, self.DUPLICATE_PATIENT_KEY]
+        for key in formset_keys:
+            instance = forms[key].save(commit=False)
+            instance.patient = self.object
+            instance.save()
+            if key == self.PRIMARY_CARER_KEY:
+                self._handle_primary_carer_relationship(forms[key], instance)
+            elif key == self.DUPLICATE_PATIENT_KEY:
+                self._handle_duplicate_patients(forms[key], instance)
+
+        return ret_val
 
 class AddPatientView(FormSectionMixin, ParentAddPatientView):
     pass

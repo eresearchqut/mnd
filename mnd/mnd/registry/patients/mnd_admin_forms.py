@@ -138,6 +138,7 @@ class PrimaryCarerForm(PrefixedModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.patient = None
+        self.patient_email = None
 
     @staticmethod
     def _is_valid_phone(phone_no):
@@ -170,6 +171,9 @@ class PrimaryCarerForm(PrefixedModelForm):
         if instance and self.patient:
             return CarerRegistration.objects.has_registered_carer(instance, self.patient)
         return False
+
+    def set_patient_email(self, patient_email):
+        self.patient_email = patient_email
 
     def set_patient(self, patient):
         self.patient = patient
@@ -208,6 +212,9 @@ class PrimaryCarerForm(PrefixedModelForm):
         existing_user = CustomUser.objects.filter(username__iexact=email.lower(), is_active=True).first()
         if existing_user and not existing_user.is_carer:
             raise forms.ValidationError(_("The email address is already registered into the system"))
+
+        if (self.patient_email and self.patient_email == email) or (self.patient and self.patient.email == email):
+            raise forms.ValidationError(_("Principal carer email and patient contact email should not be the same"))
 
         if Patient.objects.really_all().filter(email__iexact=email).exists():
             # Patient with the same email exists. Allow the change here but invites will not be sent out
