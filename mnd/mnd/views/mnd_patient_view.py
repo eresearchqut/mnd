@@ -7,6 +7,7 @@ from rdrf.views.patient_view import (
     PatientFormMixin, AddPatientView as ParentAddPatientView, PatientEditView as ParentEditPatientView
 )
 from rdrf.helpers.form_section_helper import DemographicsSectionFieldBuilder
+
 from ..registry.patients.mnd_admin_forms import (
     PatientInsuranceForm, PrimaryCarerForm, PreferredContactForm,
     DuplicatePatientForm, PatientLanguageForm
@@ -113,6 +114,7 @@ class FormSectionMixin(PatientFormMixin):
     def get_form_sections(self, user, request, patient, registry, patient_form,
                           patient_address_form, patient_doctor_form, patient_relative_form,
                           builder):
+
         mnd_builder = MNDSectionFieldBuilder()
         form_sections = super().get_form_sections(
             user, request, patient, registry, patient_form,
@@ -174,7 +176,6 @@ class FormSectionMixin(PatientFormMixin):
                     DuplicatePatientForm, _("Potential duplicate"), "duplicate_patient", get_duplicate_patient(patient), request
                 )
             )
-
         return form_sections
 
     def get_forms(self, request, registry_model, user, instance=None):
@@ -200,6 +201,7 @@ class FormSectionMixin(PatientFormMixin):
         return forms
 
     def _handle_primary_carer_relationship(self, form, instance):
+        email = form.cleaned_data['email']
         rel = form.cleaned_data.get('relationship')
         rel_info = form.cleaned_data.get('relationship_info')
         carer = instance or PrimaryCarer.objects.filter(email__iexact=email).first()
@@ -234,6 +236,7 @@ class FormSectionMixin(PatientFormMixin):
                 self._handle_duplicate_patients(forms[key], instance)
 
         return ret_val
+
 
 class AddPatientView(FormSectionMixin, ParentAddPatientView):
     pass
