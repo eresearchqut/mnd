@@ -36,17 +36,13 @@
         <a href="{% url 'registration_register' registry.code %}"
            class="btn custom-btn">Patient registration</a>
       </div>
-      <div>
-        <a href="{% url 'carer_registration' registry.code %}"
-           class="btn custom-btn">Principal caregiver registration</a>
-      </div>
     {% endif %}
   </div>
 </header>
 
 <div class="content">
   <div class="d-none d-md-block">
-    <img src="{% static 'images/mnd/mnd_intro.jpg' %}" width="100%" alt="MiNDAUS propotional image"/>
+    <img src="{% static 'images/mnd/mnd_intro.jpg' %}" width="100%" alt="MiNDAUS promotional image"/>
   </div>
   <div class="mobile-content d-md-none">
     <br>
@@ -59,10 +55,6 @@
       <div>
         <a href="{% url 'registration_register' registry.code %}"
            class="btn custom-btn">Patient registration</a>
-      </div>
-      <div>
-        <a href="{% url 'carer_registration' registry.code %}"
-           class="btn custom-btn">Principal caregiver registration</a>
       </div>
     {% endif %}
   </div>
