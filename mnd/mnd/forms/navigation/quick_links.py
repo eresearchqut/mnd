@@ -1,4 +1,4 @@
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from rdrf.forms.navigation.quick_links import (
     RegularMenuConfig, QuickLinks, make_link, make_entries
 )
