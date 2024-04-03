@@ -9,6 +9,7 @@ from .views.mnd_registration_view import MNDRegistrationView
 from .views.health_check import health_check
 from mnd.integration.mims import mims_view
 from rdrf.urls import urlpatterns as rdrf_urlpatterns
+from rdrf.views.handler_views import handler404, handler500, handler_application_error, handler_exceptions
 
 # Any custom URLs go here before we include the TRRF urls
 urlpatterns = [
@@ -31,3 +32,8 @@ urlpatterns = [
 
     re_path(r'', include('rdrf.urls')),
 ]
+
+handler404 = handler404
+handler500 = handler500
+handler_application_error = handler_application_error
+handler_exceptions = handler_exceptions
