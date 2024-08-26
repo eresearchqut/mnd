@@ -4,7 +4,6 @@ from ... import initial_data
 
 
 class Command(RdrfCommand):
-
     def load_module_data(self, name, **options):
         try:
             module = getattr(initial_data, name)

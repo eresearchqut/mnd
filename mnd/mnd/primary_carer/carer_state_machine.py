@@ -2,25 +2,23 @@ import logging
 
 from rdrf.events.events import EventType
 
-from .registration_flags import RegistrationFlags
 from .carer_operations import CarerOperations
-
+from .registration_flags import RegistrationFlags
 
 logger = logging.getLogger(__name__)
 
 
 class CarerState:
-    TOKEN_ALREADY_GENERATED = 'token_already_generated'
-    INVITED = 'carer_invite'
-    DEACTIVATED = 'carer_deactivated'
-    ACTIVATED = 'carer_activated'
-    RE_INVITED = 'carer_reinvited'
-    REGISTRATION_DISABLED = 'carer_registration_disabled'
-    CARER_NOT_SET = 'carer_not_set_for_patient'
+    TOKEN_ALREADY_GENERATED = "token_already_generated"
+    INVITED = "carer_invite"
+    DEACTIVATED = "carer_deactivated"
+    ACTIVATED = "carer_activated"
+    RE_INVITED = "carer_reinvited"
+    REGISTRATION_DISABLED = "carer_registration_disabled"
+    CARER_NOT_SET = "carer_not_set_for_patient"
 
 
 class State:
-
     def __init__(self, carer, patient):
         self.carer = carer
         self.patient = patient
@@ -37,7 +35,6 @@ class State:
 
 
 class CarerInvite(State):
-
     def __init__(self, carer, patient):
         super().__init__(carer, patient)
         self.state = CarerState.INVITED
@@ -59,7 +56,6 @@ class CarerInvite(State):
 
 
 class CarerTokenGenerated(State):
-
     def __init__(self, carer, patient):
         super().__init__(carer, patient)
         self.state = CarerState.TOKEN_ALREADY_GENERATED
@@ -75,7 +71,6 @@ class CarerTokenGenerated(State):
 
 
 class CarerRegistrationDisabled(State):
-
     def __init__(self, carer, patient):
         super().__init__(carer, patient)
         self.state = CarerState.REGISTRATION_DISABLED
@@ -85,7 +80,6 @@ class CarerRegistrationDisabled(State):
 
 
 class CarerNotSetForPatient(State):
-
     def __init__(self, carer, patient):
         super().__init__(carer, patient)
         self.state = CarerState.CARER_NOT_SET
@@ -95,7 +89,6 @@ class CarerNotSetForPatient(State):
 
 
 class CarerReInvite(State):
-
     def __init__(self, carer, patient):
         super().__init__(carer, patient)
         self.state = CarerState.RE_INVITED
@@ -113,7 +106,6 @@ class CarerReInvite(State):
 
 
 class CarerDeactivate(State):
-
     def __init__(self, carer, patient):
         super().__init__(carer, patient)
         self.state = CarerState.DEACTIVATED
@@ -126,12 +118,13 @@ class CarerDeactivate(State):
 
     def process_action(self, request, display_only=False):
         if display_only:
-            return CarerOperations(request, self).nop(event_type=EventType.CARER_DEACTIVATED)
+            return CarerOperations(request, self).nop(
+                event_type=EventType.CARER_DEACTIVATED
+            )
         return CarerOperations(request, self).deactivate_carer()
 
 
 class CarerActivate(State):
-
     def __init__(self, carer, patient):
         super().__init__(carer, patient)
         self.state = CarerState.ACTIVATED
@@ -144,7 +137,9 @@ class CarerActivate(State):
 
     def process_action(self, request, display_only=False):
         if display_only:
-            return CarerOperations(request, self).nop(event_type=EventType.CARER_ACTIVATED)
+            return CarerOperations(request, self).nop(
+                event_type=EventType.CARER_ACTIVATED
+            )
         return CarerOperations(request, self).activate_carer()
 
 

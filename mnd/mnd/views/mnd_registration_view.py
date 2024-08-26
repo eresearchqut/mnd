@@ -1,15 +1,13 @@
-from rdrf.views.registration_rdrf import RdrfRegistrationView
-
 from django.shortcuts import get_object_or_404
 
 from rdrf.models.definition.models import Registry
+from rdrf.views.registration_rdrf import RdrfRegistrationView
 
-from ..registry.groups.registration.mnd_registration import MNDCarerRegistration
 from ..forms.mnd_registration_form import MNDCarerRegistrationForm
+from ..registry.groups.registration.mnd_registration import MNDCarerRegistration
 
 
 class MNDRegistrationView(RdrfRegistrationView):
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, *kwargs)
         self.form_class = MNDCarerRegistrationForm

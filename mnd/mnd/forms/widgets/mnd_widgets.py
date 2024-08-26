@@ -11,8 +11,8 @@ def _get_product_name(raw_value):
 
 
 class ProductLookupWidget(LookupWidget):
-    SOURCE_URL = reverse_lazy('mims_product_search')
-    SECONDARY_SOURCE = reverse_lazy('mims_product_details')
+    SOURCE_URL = reverse_lazy("mims_product_search")
+    SECONDARY_SOURCE = reverse_lazy("mims_product_details")
 
     @staticmethod
     def usable_for_types():
@@ -40,18 +40,27 @@ class ProductLookupWidget(LookupWidget):
                     }
                 });
             </script>
-        """ % (name, name,
-               name, name, value or '',
-               name, name,
-               name, value or '', self.SECONDARY_SOURCE,
-               name,
-               name,
-               self.SOURCE_URL, self.SECONDARY_SOURCE)
+        """ % (
+            name,
+            name,
+            name,
+            name,
+            value or "",
+            name,
+            name,
+            name,
+            value or "",
+            self.SECONDARY_SOURCE,
+            name,
+            name,
+            self.SOURCE_URL,
+            self.SECONDARY_SOURCE,
+        )
 
 
 class CMILookupWidget(LookupWidget):
-    SOURCE_URL = reverse_lazy('mims_product_search')
-    SECONDARY_SOURCE = reverse_lazy('mims_cmi_details')
+    SOURCE_URL = reverse_lazy("mims_product_search")
+    SECONDARY_SOURCE = reverse_lazy("mims_cmi_details")
 
     @staticmethod
     def usable_for_types():
@@ -81,10 +90,18 @@ class CMILookupWidget(LookupWidget):
                     });
                 })();
             </script>
-        """ % (name, name,
-               name, name, value or '',
-               name,
-               name, name,
-               value or '', self.SECONDARY_SOURCE,
-               name,
-               self.SOURCE_URL, self.SECONDARY_SOURCE)
+        """ % (
+            name,
+            name,
+            name,
+            name,
+            value or "",
+            name,
+            name,
+            name,
+            value or "",
+            self.SECONDARY_SOURCE,
+            name,
+            self.SOURCE_URL,
+            self.SECONDARY_SOURCE,
+        )

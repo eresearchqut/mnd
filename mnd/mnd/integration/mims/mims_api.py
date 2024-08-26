@@ -1,12 +1,12 @@
-from cachetools import TTLCache
 import functools
 import logging
-import requests
 import urllib
 
+import requests
+from cachetools import TTLCache
 from django.conf import settings
 
-from mnd.models import MIMSProductCache, MIMSCMICache
+from mnd.models import MIMSCMICache, MIMSProductCache
 
 logger = logging.getLogger(__name__)
 
@@ -17,18 +17,21 @@ def cached_lookup(model):
         def wrapper(self, uuid):
             response = fn(self, uuid)
             if response:
-                model.objects.update_or_create(uuid=uuid, defaults={'data': response})
+                model.objects.update_or_create(
+                    uuid=uuid, defaults={"data": response}
+                )
             else:
                 cached_value = model.objects.filter(uuid=uuid).first()
                 if cached_value:
                     response = cached_value.data
             return response
+
         return wrapper
+
     return decorator
 
 
 class MIMSApi:
-
     PAGE_SIZE = 50
 
     TOKEN_URI = "oauth2/v1/token"
@@ -48,7 +51,7 @@ class MIMSApi:
         data = {
             "grant_type": "client_credentials",
             "client_id": self.client_id,
-            "client_secret": self.client_secret
+            "client_secret": self.client_secret,
         }
         try:
             resp = requests.post(url, data=data)
@@ -64,10 +67,7 @@ class MIMSApi:
             self._refresh_token()
         try:
             token = self.token_cache["access_token"]
-            return {
-                "api-key": self.api_key,
-                "Authorization": f"Bearer {token}"
-            }
+            return {"api-key": self.api_key, "Authorization": f"Bearer {token}"}
         except KeyError:
             self._refresh_token()
 
@@ -75,14 +75,14 @@ class MIMSApi:
         return f"{self.service_endpoint}/{endpoint}"
 
     def search_product(self, product, page, limit=PAGE_SIZE):
-        params = urllib.parse.urlencode({
-            "term": product,
-            "include": True,
-            "page": page,
-            "limit": limit
-        })
+        params = urllib.parse.urlencode(
+            {"term": product, "include": True, "page": page, "limit": limit}
+        )
         try:
-            resp = requests.get(self._full_url(f"{self.PRODUCT_URI}?{params}"), headers=self._make_auth_header())
+            resp = requests.get(
+                self._full_url(f"{self.PRODUCT_URI}?{params}"),
+                headers=self._make_auth_header(),
+            )
             return resp.json() if resp.status_code == 200 else {}
         except requests.exceptions.RequestException as e:
             logger.exception("Exception while searching for products", e)
@@ -90,11 +90,14 @@ class MIMSApi:
 
     @cached_lookup(MIMSProductCache)
     def get_product_details(self, product_id):
-        fields = urllib.parse.urlencode({
-            "fields": "cmis, brand, productName, mimsClasses, acgs"
-        })
+        fields = urllib.parse.urlencode(
+            {"fields": "cmis, brand, productName, mimsClasses, acgs"}
+        )
         try:
-            resp = requests.get(self._full_url(f"{self.PRODUCT_URI}/{product_id}?{fields}"), headers=self._make_auth_header())
+            resp = requests.get(
+                self._full_url(f"{self.PRODUCT_URI}/{product_id}?{fields}"),
+                headers=self._make_auth_header(),
+            )
             return resp.json() if resp.status_code == 200 else {}
         except requests.exceptions.RequestException as e:
             logger.exception("Exception while fetching product details", e)
@@ -103,7 +106,10 @@ class MIMSApi:
     @cached_lookup(MIMSCMICache)
     def get_cmi_details(self, cmi_id):
         try:
-            resp = requests.get(self._full_url(f"{self.CMI_DETAILS_URI}/{cmi_id}"), headers=self._make_auth_header())
+            resp = requests.get(
+                self._full_url(f"{self.CMI_DETAILS_URI}/{cmi_id}"),
+                headers=self._make_auth_header(),
+            )
             return resp.json() if resp.status_code == 200 else {}
         except requests.exceptions.RequestException as e:
             logger.exception("Exception while getting cmi details", e)

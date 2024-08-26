@@ -9,7 +9,6 @@ _single_section_field_mappings = {
     ("myLegalDocs", "legalQuestions", "mndACD"): "acd",
     ("myLegalDocs", "legalQuestions", "mndLDocs"): "checkbox_mappings",
     ("myLegalDocs", "legalQuestions", "mndDocLocation"): "pDocuments",
-
     # My recent symptoms
     ("mySymptoms", "symptomTypes", "mndSymptomDate"): "mndSymptomsDate_af_date",
     ("mySymptoms", "symptomTypes", "mndFatigue"): "fatigue",
@@ -23,7 +22,6 @@ _single_section_field_mappings = {
     ("mySymptoms", "symptomTypes", "mndChoking"): "choking",
     ("mySymptoms", "symptomTypes", "mndDepression"): "depression",
     ("mySymptoms", "symptomTypes", "mndEmotion"): "emotion",
-
     # My Life History
     ("myPastLH", "mndHistoryNotes", "mndLHLife"): "life_history",
     ("myPastLH", "mndHistoryNotes", "mndLHWork"): "work_history",
@@ -39,16 +37,13 @@ _single_section_field_mappings = {
     ("myPastLH", "mndHistoryNotes", "mndLHAnnoyances"): "dislikes_text",
     ("myPastLH", "mndHistoryNotes", "mndLHWorries"): "worries_text",
     ("myPastLH", "mndHistoryNotes", "mndLHRemedies"): "anxious_text",
-
     # My Past medical history
     ("myMedHistory", "mndMHDiagnosis", "mndConditions"): "checkbox_mappings",
     ("myMedHistory", "mndMHDiagnosis", "mndCondOther"): "mh_other",
-
     # My Communication
     ("myCommunication", "mndComms", "mndComDifficulty"): "commLevel",
     ("myCommunication", "mndComms", "mndComTechs"): "checkbox_mappings",
     ("myCommunication", "mndComms", "mndComChairOther"): "commMoreInfo",
-
     # My positioning
     ("mndPositioning", "mostComfyPos", "myMostComfy"): "comfy_pos",
     ("mndPositioning", "mostComfyPos", "mndComfyOther"): "mndPosOther",
@@ -60,7 +55,6 @@ _single_section_field_mappings = {
     ("mndPositioning", "mndSitting", "mndChairNeed"): "checkbox_mappings",
     ("mndPositioning", "mndSitting", "mndChairNotes"): "mndPosSD",
     ("mndPositioning", "mndSitting", "mndChairMove"): "move_chair",
-
     # My breathing
     ("myBreathing", "mndBreathing", "mndBreathHard"): "bre_trouble",
     ("myBreathing", "mndBreathing", "mndWhenBreathHard"): "checkbox_mappings",
@@ -71,7 +65,6 @@ _single_section_field_mappings = {
     ("myBreathing", "mndBreathing", "mndNIVWhen"): "checkbox_mappings",
     ("myBreathing", "mndBreathing", "mndNIVUse"): "checkbox_mappings",
     ("myBreathing", "mndBreathing", "mndNIVdur"): "mndNIV_Hours_Day",
-
     # My eating and drinking needs
     ("myEatDrink", "mndEating", "mndSwallowD"): "swal",
     ("myEatDrink", "mndEating", "mndByMouth"): "eat_bm",
@@ -95,7 +88,6 @@ _single_section_field_mappings = {
     ("myEatDrink", "mndEating", "mndFoodPrefer"): "prefer_free-text",
     ("myEatDrink", "mndEating", "mndAvoidOther"): "avoid_other",
     # ("myEatDrink", "mndEating", "mndOther"): "",
-
     # My physical ability
     ("myPhysical", "physicalAbility", "mndWeakness"): "checkbox_mappings",
     ("myPhysical", "physicalAbility", "mndPhyUse"): "checkbox_mappings",
@@ -104,14 +96,16 @@ _single_section_field_mappings = {
     ("myPhysical", "physicalAbility", "mndMoveAids"): "move-around_fill",
     ("myPhysical", "physicalAbility", "mndTaskAids"): "do-things_fill",
     ("myPhysical", "physicalAbility", "mndRestNeeded"): "rest_fill",
-
     # My personal care
-    ("myPC", "personalCare", "mndPHygiene"): "hygiene",  # button has lower case "some" option instead of "Some"
+    (
+        "myPC",
+        "personalCare",
+        "mndPHygiene",
+    ): "hygiene",  # button has lower case "some" option instead of "Some"
     ("myPC", "personalCare", "mndShower"): "shower",
     ("myPC", "personalCare", "mndDress"): "dress",
     ("myPC", "personalCare", "mndToil"): "toilet",
     ("myPC", "personalCare", "mndCareNeeds"): "personal-care",
-
     # My mouth care and saliva
     ("myMCare", "mndMouth", "mndMHelp"): "mouth_care",
     ("myMCare", "mndMouth", "mndBrush"): "brush-teeth",
@@ -119,13 +113,13 @@ _single_section_field_mappings = {
     ("myMCare", "mndMouth", "mndXSaliva"): "saliva",
     ("myMCare", "mndMouth", "mndManageSaliva"): "checkbox_mappings",
     ("myMCare", "mndMouth", "mndSalivaOther"): "sm_other",
-
     # My emotions
     ("myEmotions", "mndEmotionCare", "mndEmotionNotes"): "emotions_fill",
-
     # My medications and allergies
-    ("myMedsNAll", "myAllergies", "mndAllergies"): ("allergies_text", "MedicationAllergies"),
-
+    ("myMedsNAll", "myAllergies", "mndAllergies"): (
+        "allergies_text",
+        "MedicationAllergies",
+    ),
     # First visit
     ("firstVisit", "DxDetails", "MNDDiagnosis"): "mndType",
     ("firstVisit", "mndPresentingDetails", "mndDateConfirm"): "mndDiagDate",
@@ -140,12 +134,10 @@ _multi_section_field_mappings = {
     ("myMedsNAll", "myMedList", "mndMedPurpose"): "med_use",
     ("myMedsNAll", "myMedList", "mndMedAdmin"): "med_taken",
     ("myMedsNAll", "myMedList", "mndMedTime"): "med_times",
-
     # My appointments
     ("myAppointments", "mndApptList", "mndAName"): "Name of Team memberRow",
     ("myAppointments", "mndApptList", "mndApptDate"): "Date of appointmentRow",
     ("myAppointments", "mndApptList", "mndApptTime"): "TimeRow",
-
     # My care team
     ("myCareTeam", "myCarerDetails", "mndCRole"): "mndCarerProfession",
     ("myCareTeam", "myCarerDetails", "mndCName"): "NameRow",
@@ -161,7 +153,7 @@ _cascading_section_field_mappings = {
             ("firstVisit", "mndCALC", "mndALSFRS"),
             ("alsfrsInstrument", "myALSFRSScoreTotal", "mndALSScore"),
         ],
-        "default": ("mndCALC", "0")
+        "default": ("mndCALC", "0"),
     },
 }
 
@@ -183,7 +175,7 @@ def _communication_value_mapping(input_val):
     mappings = {
         "no difficulty communicating": "No difficulty",
         "some difficulty communicating": "Some Difficulty",
-        "great difficulty communicating": "Great difficulty"
+        "great difficulty communicating": "Great difficulty",
     }
     return mappings.get(input_val, "")
 
@@ -192,7 +184,7 @@ def _comfy_pos_mapping(input_val):
     mappings = {
         "In bed": "bed",
         "In my wheelchair": "wheelchair",
-        "In a comfortable chair (e.g. Recliner)": "Chair"
+        "In a comfortable chair (e.g. Recliner)": "Chair",
     }
     return mappings.get(input_val, "")
 
@@ -212,20 +204,12 @@ def _mnd_type_mapping(input_val):
 
 
 def _eat_drink_by_mouth_mapping(input_val):
-    mappings = {
-        "Yes": "Yes",
-        "Some types": "Some",
-        "No": "No"
-    }
+    mappings = {"Yes": "Yes", "Some types": "Some", "No": "No"}
     return mappings.get(input_val, "")
 
 
 def _help_eat_mapppings(input_val):
-    mappings = {
-        "I need to be fed": "Need",
-        "Some help": "some",
-        "No": "No"
-    }
+    mappings = {"I need to be fed": "Need", "Some help": "some", "No": "No"}
     return mappings.get(input_val, "")
 
 
@@ -239,17 +223,13 @@ def _avoid_details_mapping(input_val):
     mappings = {
         "Allergy": "Allergy",
         "Intolerance": "Intolerance",
-        "Lifestyle Choice": "Lifestyle_Choice"
+        "Lifestyle Choice": "Lifestyle_Choice",
     }
     return mappings.get(input_val, "")
 
 
 def _walk_values_mapping(input_val):
-    mappings = {
-        "Yes": "Yes",
-        "No": "No",
-        "With Support or Aids": "need_aid"
-    }
+    mappings = {"Yes": "Yes", "No": "No", "With Support or Aids": "need_aid"}
     return mappings.get(input_val, "")
 
 
@@ -257,7 +237,7 @@ def _brush_teeth_mapping(input_val):
     mappings = {
         "Once a day": "Once",
         "Twice daily": "Twice",
-        "Three times a day": "3-times"
+        "Three times a day": "3-times",
     }
     return mappings.get(input_val, "")
 
@@ -269,7 +249,9 @@ def _medication_mapping(input_val):
 
 def _date_mapping(input_val):
     if input_val:
-        return datetime.datetime.strptime(input_val, "%Y-%m-%d").strftime("%d/%m/%Y")
+        return datetime.datetime.strptime(input_val, "%Y-%m-%d").strftime(
+            "%d/%m/%Y"
+        )
     else:
         return ""
 
@@ -339,7 +321,7 @@ _checkbox_mapping_cdes = {
     "mndNeedHelp": {
         "Sit Up": "sit",
         "Turn Over": "turn_over",
-        "Change Position": "change_pos"
+        "Change Position": "change_pos",
     },
     "mndNeedUse": {
         "An adjustable bed": "adj_bed",
@@ -357,13 +339,13 @@ _checkbox_mapping_cdes = {
     "mndWhenBreathHard": {
         "At rest": "rest",
         "Moving around": "moving",
-        "Moving a lot": "moving_lots"
+        "Moving a lot": "moving_lots",
     },
     "mndBreathAssist": {
         "Suctioning": "suct",
         "Assisted cough techniques": "act",
         "A fan": "fan",
-        "Positioning": "bre_pos"
+        "Positioning": "bre_pos",
     },
     "mndNIVWhen": {
         "Whenever I sleep": "niv_sleep",
@@ -373,7 +355,7 @@ _checkbox_mapping_cdes = {
     "mndNIVUse": {
         "Independent": "niv_ind",
         "Need some assistance": "niv_some_help",
-        "Need full assistance": "niv_full_assist"
+        "Need full assistance": "niv_full_assist",
     },
     "mndTube": {
         # Cannot find option in PDF for all options
@@ -417,7 +399,7 @@ _checkbox_mapping_cdes = {
         "Swallowing": "sm_swallowing",
         "Clearance Techniques": "sm_clearance",
         "Wiping Mouth": "smWiping",
-    }
+    },
 }
 
 
@@ -428,9 +410,13 @@ def _set_data_fields(data, field, cde_code, value):
     elif cde_code in _checkbox_mapping_cdes:
         mappings = _checkbox_mapping_cdes[cde_code]
         if isinstance(value, list):
-            checkbox_updates = {mappings[v]: "Yes" for v in value if v in mappings}
+            checkbox_updates = {
+                mappings[v]: "Yes" for v in value if v in mappings
+            }
         else:
-            checkbox_updates = {mappings[v]: "Yes" for v in [value] if v in mappings}
+            checkbox_updates = {
+                mappings[v]: "Yes" for v in [value] if v in mappings
+            }
         data.update(checkbox_updates)
     else:
         data[field] = value
@@ -450,7 +436,11 @@ def generate_pdf_field_mappings(form_values):
     data = {}
 
     # Dynamic data tuple -> pdf field
-    for (form_code, section_code, cde_code), field in _single_section_field_mappings.items():
+    for (
+        form_code,
+        section_code,
+        cde_code,
+    ), field in _single_section_field_mappings.items():
         single_section_key = (form_code, section_code, cde_code, 0)
         if single_section_key in form_values:
             value = form_values[single_section_key]
@@ -473,9 +463,19 @@ def generate_pdf_field_mappings(form_values):
                     _set_data_fields(data, pdf_field, cde_code, value)
 
                     # Retrieve matching date value
-                    if pdf_field == "alsfrsScore" and form_code != "alsfrsInstrument":
-                        if date_value := form_values.get((form_code, "mndPatientInformation", "mndVDate", 0)):
-                            _set_data_fields(data, "mndTestDate_af_date", None, _date_mapping(date_value))
+                    if (
+                        pdf_field == "alsfrsScore"
+                        and form_code != "alsfrsInstrument"
+                    ):
+                        if date_value := form_values.get(
+                            (form_code, "mndPatientInformation", "mndVDate", 0)
+                        ):
+                            _set_data_fields(
+                                data,
+                                "mndTestDate_af_date",
+                                None,
+                                _date_mapping(date_value),
+                            )
                     break
         else:
             _set_data_fields(data, pdf_field, default_code, default_value)
@@ -489,14 +489,25 @@ def generate_pdf_field_mappings(form_values):
         carer_indexes.insert(0, primary_carer_index)
 
     # Dynamic data tuple -> indexed pdf fields
-    for (form_code, section_code, cde_code), field in _multi_section_field_mappings.items():
-        indexes = carer_indexes if section_code == _care_team_section else section_indexes
+    for (
+        form_code,
+        section_code,
+        cde_code,
+    ), field in _multi_section_field_mappings.items():
+        indexes = (
+            carer_indexes
+            if section_code == _care_team_section
+            else section_indexes
+        )
         for idx, i in enumerate(indexes):
             indexed_field = f"{field}{idx + 1}"
             if field == "med_times":
                 # special handling for medicine administration times
                 suffixes = ["", "2", "3", "4", "5", "6", "6Plus"]
-                keys = [(form_code, section_code, cde_code + suffix, i) for suffix in suffixes]
+                keys = [
+                    (form_code, section_code, cde_code + suffix, i)
+                    for suffix in suffixes
+                ]
                 if any(k in form_values for k in keys):
                     values = [form_values[k] for k in keys if k in form_values]
                     value = ", ".join([v for v in values if v])
@@ -508,6 +519,6 @@ def generate_pdf_field_mappings(form_values):
                     _set_data_fields(data, indexed_field, cde_code, value)
                 else:
                     # Default to empty values for non existing indexed values
-                    _set_data_fields(data, indexed_field, cde_code, '')
+                    _set_data_fields(data, indexed_field, cde_code, "")
 
     return data

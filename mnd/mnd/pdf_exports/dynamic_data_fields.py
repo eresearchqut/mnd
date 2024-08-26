@@ -16,13 +16,17 @@ def _get_form_values(dyn_data):
             if not section_dict["allow_multiple"]:
                 for cde_dict in section_dict["cdes"]:
                     cde_code = cde_dict["code"]
-                    form_values[(form_code, section_code, cde_code, 0)] = cde_dict["value"]
+                    form_values[(form_code, section_code, cde_code, 0)] = (
+                        cde_dict["value"]
+                    )
             else:
                 items = section_dict["cdes"]
                 for idx, section in enumerate(items):
                     for cde_dict in section:
                         cde_code = cde_dict["code"]
-                        form_values[(form_code, section_code, cde_code, idx + 1)] = cde_dict["value"]
+                        form_values[
+                            (form_code, section_code, cde_code, idx + 1)
+                        ] = cde_dict["value"]
     return form_values
 
 
@@ -30,12 +34,14 @@ def generate_dynamic_data_fields(registry, patient):
     form_values = {}
     max_ts = None
     for context_model in patient.context_models:
-        dyn_data = patient.get_dynamic_data(registry, context_id=context_model.id)
+        dyn_data = patient.get_dynamic_data(
+            registry, context_id=context_model.id
+        )
         if not dyn_data:
             continue
         form_ts = dyn_data.get("timestamp", None)
         if form_ts:
-            as_dt = datetime.datetime.strptime(form_ts[:10], '%Y-%m-%d')
+            as_dt = datetime.datetime.strptime(form_ts[:10], "%Y-%m-%d")
             if not max_ts:
                 max_ts = as_dt
             elif as_dt > max_ts:
@@ -50,7 +56,9 @@ def generate_dynamic_data_fields(registry, patient):
         form, section, code, section_index = key
         new_value = fvr.resolve(code, value)
         if new_value != value:
-            updated_form_values[(form, section, code, section_index)] = new_value
+            updated_form_values[(form, section, code, section_index)] = (
+                new_value
+            )
 
     form_values.update(updated_form_values)
 
