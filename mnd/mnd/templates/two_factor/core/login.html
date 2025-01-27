@@ -5,7 +5,7 @@
 
 {% block login_footer %}
 <div class="card-footer d-flex justify-content-between">
-    <a href="{% url 'login_assistance' %}">{% trans "Trouble signing in?" %}</a>
+    <a href="{% url 'password_reset' %}">{% trans "Trouble signing in?" %}</a>
     <a href="{% static 'docs/PatientRegistryUserGuideV01.pdf' %}">{% trans "User guide" %}</a>
     <a href="{% url 'registration_register' 'mnd' %}">{% trans "Register here" %}</a>
 </div>
