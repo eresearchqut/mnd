@@ -1,6 +1,6 @@
 import functools
 import logging
-import urllib
+from urllib.parse import urlencode
 
 import requests
 from cachetools import TTLCache
@@ -34,9 +34,9 @@ def cached_lookup(model):
 class MIMSApi:
     PAGE_SIZE = 50
 
-    TOKEN_URI = "oauth2/v1/token"
-    PRODUCT_URI = "au/druglist/v1/products"
-    CMI_DETAILS_URI = "au/cmi/v1/cmis"
+    TOKEN_URI = "oauth2/v3/token"
+    PRODUCT_URI = "au/druglist/v3/products"
+    CMI_DETAILS_URI = "au/cmi/v3/cmis"
 
     def __init__(self):
         self.api_key = settings.MIMS_API_KEY
@@ -75,7 +75,7 @@ class MIMSApi:
         return f"{self.service_endpoint}/{endpoint}"
 
     def search_product(self, product, page, limit=PAGE_SIZE):
-        params = urllib.parse.urlencode(
+        params = urlencode(
             {"term": product, "include": True, "page": page, "limit": limit}
         )
         try:
@@ -90,7 +90,7 @@ class MIMSApi:
 
     @cached_lookup(MIMSProductCache)
     def get_product_details(self, product_id):
-        fields = urllib.parse.urlencode(
+        fields = urlencode(
             {"fields": "cmis, brand, productName, mimsClasses, acgs"}
         )
         try:
@@ -105,9 +105,10 @@ class MIMSApi:
 
     @cached_lookup(MIMSCMICache)
     def get_cmi_details(self, cmi_id):
+        fields = urlencode({"format": "pdf"})
         try:
             resp = requests.get(
-                self._full_url(f"{self.CMI_DETAILS_URI}/{cmi_id}"),
+                self._full_url(f"{self.CMI_DETAILS_URI}/{cmi_id}?{fields}"),
                 headers=self._make_auth_header(),
             )
             return resp.json() if resp.status_code == 200 else {}
