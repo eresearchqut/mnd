@@ -1,6 +1,6 @@
 import functools
 import logging
-import urllib
+from urllib.parse import urlencode
 
 import requests
 from cachetools import TTLCache
@@ -75,7 +75,7 @@ class MIMSApi:
         return f"{self.service_endpoint}/{endpoint}"
 
     def search_product(self, product, page, limit=PAGE_SIZE):
-        params = urllib.parse.urlencode(
+        params = urlencode(
             {"term": product, "include": True, "page": page, "limit": limit}
         )
         try:
@@ -90,7 +90,7 @@ class MIMSApi:
 
     @cached_lookup(MIMSProductCache)
     def get_product_details(self, product_id):
-        fields = urllib.parse.urlencode(
+        fields = urlencode(
             {"fields": "cmis, brand, productName, mimsClasses, acgs"}
         )
         try:
