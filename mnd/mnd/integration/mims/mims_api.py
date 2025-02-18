@@ -105,9 +105,10 @@ class MIMSApi:
 
     @cached_lookup(MIMSCMICache)
     def get_cmi_details(self, cmi_id):
+        fields = urlencode({"format": "pdf"})
         try:
             resp = requests.get(
-                self._full_url(f"{self.CMI_DETAILS_URI}/{cmi_id}"),
+                self._full_url(f"{self.CMI_DETAILS_URI}/{cmi_id}?{fields}"),
                 headers=self._make_auth_header(),
             )
             return resp.json() if resp.status_code == 200 else {}
