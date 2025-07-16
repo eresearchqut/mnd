@@ -34,9 +34,9 @@ def cached_lookup(model):
 class MIMSApi:
     PAGE_SIZE = 50
 
-    TOKEN_URI = "oauth2/v1/token"
-    PRODUCT_URI = "au/druglist/v1/products"
-    CMI_DETAILS_URI = "au/cmi/v1/cmis"
+    TOKEN_URI = "oauth2/v3/token"
+    PRODUCT_URI = "au/druglist/v3/products"
+    CMI_DETAILS_URI = "au/cmi/v3/cmis"
 
     def __init__(self):
         self.api_key = settings.MIMS_API_KEY
