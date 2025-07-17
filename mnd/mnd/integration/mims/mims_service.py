@@ -11,7 +11,7 @@ from .mims_api import MIMSApi
 MAX_SEARCH_PAGES = 5
 MIN_SEARCH_STRING_LENGTH = 4
 CMI_DOCUMENT_FORMATS = ("pdf", "reducedpdf")
-CACHE_TIMEOUT = 3600
+CACHE_TIMEOUT = 10
 
 ProductSearchResult = namedtuple(
     "ProductSearchResult", "id value activeIngredient"
