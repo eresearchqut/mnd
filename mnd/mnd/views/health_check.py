@@ -1,5 +1,4 @@
 from django.http import JsonResponse
-
 from rdrf.models.definition.models import Registry
 
 

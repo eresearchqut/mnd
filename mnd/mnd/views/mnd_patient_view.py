@@ -1,7 +1,6 @@
 import logging
 
 from django.utils.translation import gettext as _
-
 from rdrf.events.events import EventType
 from rdrf.helpers.constants import PATIENT_PERSONAL_DETAILS_SECTION_NAME
 from rdrf.helpers.form_section_helper import DemographicsSectionFieldBuilder

@@ -1,5 +1,4 @@
 from django.shortcuts import get_object_or_404
-
 from rdrf.models.definition.models import Registry
 from rdrf.views.registration_rdrf import RdrfRegistrationView
 

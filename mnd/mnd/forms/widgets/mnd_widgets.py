@@ -1,8 +1,8 @@
 from django.urls import reverse_lazy
-
-from mnd.integration.mims.mims_service import mims_product_details
 from rdrf.forms.widgets.widgets import LookupWidget
 from rdrf.helpers.cde_data_types import CDEDataTypes
+
+from mnd.integration.mims.mims_service import mims_product_details
 
 
 def _get_product_name(raw_value):

@@ -4,6 +4,7 @@ from django import forms
 from django.utils import timezone
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext as _
+from rdrf.forms.widgets import widgets
 from registry.groups.models import CustomUser
 from registry.patients.models import Patient
 
@@ -16,7 +17,6 @@ from mnd.models import (
     PrimaryCarer,
     PrimaryCarerRelationship,
 )
-from rdrf.forms.widgets import widgets
 
 logger = logging.getLogger(__name__)
 

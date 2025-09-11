@@ -4,13 +4,12 @@ import os
 from django.http import FileResponse
 from django.shortcuts import get_object_or_404
 from django.views.decorators.http import require_GET
-from registry.patients.models import Patient
-
 from rdrf.models.definition.models import Registry
 from rdrf.security.security_checks import (
     get_object_or_permission_denied,
     security_check_user_patient,
 )
+from registry.patients.models import Patient
 
 from ..pdf_exports.export import export_to_pdf
 

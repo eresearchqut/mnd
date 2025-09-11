@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from django.views.generic.base import View
-
 from rdrf.helpers.registry_features import RegistryFeatures
 from rdrf.models.definition.models import Registry
 

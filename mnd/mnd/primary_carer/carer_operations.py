@@ -7,14 +7,13 @@ from django.shortcuts import reverse
 from django.utils import timezone
 from django.utils.http import urlencode
 from django.utils.translation import gettext as _
-from registry.groups.models import CustomUser
-from registry.patients.models import Patient
-
 from rdrf.events.events import EventType
 from rdrf.helpers.utils import make_full_url
 from rdrf.services.io.notifications.email_notification import (
     process_notification,
 )
+from registry.groups.models import CustomUser
+from registry.patients.models import Patient
 
 from ..models import CarerRegistration
 from .utils import primary_carer_str
