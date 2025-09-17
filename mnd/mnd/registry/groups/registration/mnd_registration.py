@@ -1,15 +1,14 @@
 import logging
 
 from django.utils import timezone
-from registration.models import RegistrationProfile
-from registry.groups import GROUPS
-from registry.groups.registration.base import BaseRegistration
-
 from mnd.models import CarerRegistration
 from rdrf.events.events import EventType
 from rdrf.services.io.notifications.email_notification import (
     process_notification,
 )
+from registration.models import RegistrationProfile
+from registry.groups import GROUPS
+from registry.groups.registration.base import BaseRegistration
 
 logger = logging.getLogger(__name__)
 

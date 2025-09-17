@@ -4,10 +4,9 @@ from django.db.models import Subquery
 from django.dispatch import receiver
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
+from rdrf.users.utils import user_email_updated
 from registry.patients.models import Patient
 from simple_history.models import HistoricalRecords
-
-from rdrf.users.utils import user_email_updated
 
 LANGUAGE_CHOICES = [
     (lang.alpha_2, lang.name)

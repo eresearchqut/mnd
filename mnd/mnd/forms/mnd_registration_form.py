@@ -3,7 +3,6 @@ import uuid
 from django.forms import CharField, ValidationError
 from django.utils import timezone
 from django.utils.translation import gettext as _
-
 from rdrf.forms.registration_forms import (
     PatientRegistrationForm,
     RegistrationFormCaseInsensitiveCheck,

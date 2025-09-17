@@ -2,14 +2,13 @@ import logging
 
 import graphene
 from graphene_django import DjangoObjectType
-from report.schema import get_patient_fields
-
 from mnd.models import (
     PatientInsurance,
     PreferredContact,
     PrimaryCarer,
     PrimaryCarerRelationship,
 )
+from report.schema import get_patient_fields
 
 logger = logging.getLogger(__name__)
 

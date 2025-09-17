@@ -1,13 +1,13 @@
 from django.conf.urls import include
 from django.urls import re_path
-
-from mnd.integration.mims import mims_view
 from rdrf.views.handler_views import (
     handler404,
     handler500,
     handler_application_error,
     handler_exceptions,
 )
+
+from mnd.integration.mims import mims_view
 
 from .views.carer_registration_view import (
     CarerOperationsView,
