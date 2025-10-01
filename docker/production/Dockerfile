@@ -72,6 +72,7 @@ RUN mkdir -p /usr/share/man/man1
 RUN apt-get update && apt-get install -y --no-install-recommends \
   # Base
   # TODO check if requirements are needed
+  git \
   gettext \
   libpq5 \
   nodejs \
