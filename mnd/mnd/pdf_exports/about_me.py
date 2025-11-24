@@ -1,3 +1,5 @@
+import html
+
 import pycountry
 
 from ..models import PrimaryCarer, PrimaryCarerRelationship
@@ -244,7 +246,10 @@ def generate_pdf_form_fields(registry, patient):
     )
     data.update(generate_dynamic_data_fields(registry, patient))
 
-    return {k: "" if v is None else v for k, v in data.items()}
+    return {
+        k: ("" if v is None else html.escape(v) if isinstance(v, str) else v)
+        for k, v in data.items()
+    }
 
 
 def get_pdf_template():
