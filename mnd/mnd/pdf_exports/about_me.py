@@ -1,3 +1,5 @@
+import html
+
 import pycountry
 
 from ..models import PrimaryCarer, PrimaryCarerRelationship
@@ -220,7 +222,7 @@ def _generate_primary_carer_fields(primary_carer, patient, patient_address):
         "p2HomePhone": primary_carer.home_phone,
         "p2MobilePhone": primary_carer.mobile_phone,
         "p2Lang": _language_mapping(primary_carer.preferred_language),
-        "same_address": primary_carer.same_address,
+        "same_address": _yes_no_off(primary_carer.same_address),
         "p2Interpreter": _yes_no_off(primary_carer.interpreter_required),
     }
     result.update(primary_carer_address(primary_carer, patient_address))
@@ -244,7 +246,10 @@ def generate_pdf_form_fields(registry, patient):
     )
     data.update(generate_dynamic_data_fields(registry, patient))
 
-    return {k: "" if v is None else v for k, v in data.items()}
+    return {
+        k: ("" if v is None else html.escape(v) if isinstance(v, str) else v)
+        for k, v in data.items()
+    }
 
 
 def get_pdf_template():
