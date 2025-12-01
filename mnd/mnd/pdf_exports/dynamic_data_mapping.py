@@ -363,6 +363,7 @@ _checkbox_mapping_cdes = {
         "To top up my meals": "meals",
         "For all food and drink": "all_fd",
         "I need help with my tube feeds": "ft_help",
+        "Need PEG but enjoy some food": "safbm",
     },
     "mndAvoidFoods": {
         "Gluten": "gluten",
