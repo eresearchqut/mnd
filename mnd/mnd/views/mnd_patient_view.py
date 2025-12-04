@@ -160,6 +160,7 @@ class FormSectionMixin(PatientFormMixin):
                 if "umrn" in form_instance.fields:
                     form_instance.fields["umrn"].label = _("AMNDR ID")
                 if "working_groups" in form_instance.fields:
+                    form_instance.fields["working_groups"].label = _("MND Clinic")
                     form_instance.fields["working_groups"].help_text = _("""
                     Please select the clinic that you attend or will attend.
                      If you do not attend a clinic, please leave as 'mnd Unallocated'.
