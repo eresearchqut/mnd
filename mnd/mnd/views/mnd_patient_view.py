@@ -163,7 +163,7 @@ class FormSectionMixin(PatientFormMixin):
                     form_instance.fields["working_groups"].label = _("MND Clinic")
                     form_instance.fields["working_groups"].help_text = _("""
                     Please select the clinic that you attend or will attend.
-                     If you do not attend a clinic, please leave as 'mnd Unallocated'.
+                     If you do not attend a clinic, please leave as 'Unallocated'.
                      Selecting a clinic means that your clinic can view and collect your clinical information.
                      To add an additional clinic, hold the ctrl / cmd key and select a clinic,
                      or contact your current clinic for assistance.
