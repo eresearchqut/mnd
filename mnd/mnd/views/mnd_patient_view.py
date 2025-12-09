@@ -1,6 +1,7 @@
 import logging
 
 from django.utils.translation import gettext as _
+
 from rdrf.events.events import EventType
 from rdrf.helpers.constants import PATIENT_PERSONAL_DETAILS_SECTION_NAME
 from rdrf.helpers.form_section_helper import DemographicsSectionFieldBuilder
@@ -160,9 +161,13 @@ class FormSectionMixin(PatientFormMixin):
                 if "umrn" in form_instance.fields:
                     form_instance.fields["umrn"].label = _("AMNDR ID")
                 if "working_groups" in form_instance.fields:
+                    form_instance.fields["working_groups"].label = _("MND Clinic")
+                    form_instance.fields["working_groups"].widget.attrs.update({
+                        "size": len(form_instance.fields["working_groups"].choices)
+                    })
                     form_instance.fields["working_groups"].help_text = _("""
                     Please select the clinic that you attend or will attend.
-                     If you do not attend a clinic, please leave as 'mnd Unallocated'.
+                     If you do not attend a clinic, please leave as 'Unallocated'.
                      Selecting a clinic means that your clinic can view and collect your clinical information.
                      To add an additional clinic, hold the ctrl / cmd key and select a clinic,
                      or contact your current clinic for assistance.
