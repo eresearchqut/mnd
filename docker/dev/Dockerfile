@@ -1,10 +1,12 @@
-# FROM muccg/rdrf-builder
-FROM python:3.13 as builder
+# Builder stage
+FROM python:3.13 AS builder
 
-ENV PYTHONUNBUFFERED 1
+ENV PYTHONUNBUFFERED=1
+
+# Install uv
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-  # TODO check if requirements are needed
   # Base
   gettext \
   libpq5 \
@@ -22,75 +24,68 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   zlib1g-dev \
   && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN mkdir -p /requirements/rdrf
-WORKDIR /requirements
+WORKDIR /app
 
-# RUN env | sort
+# Copy rdrf (trrf) dependency files first for layer caching
+COPY rdrf/pyproject.toml rdrf/uv.lock ./rdrf/
+COPY rdrf/clients ./rdrf/clients
 
-# Add our python deps in multiple docker layers
-# hgvs was failing due to lack of nose, hence the order
-
-COPY requirements/* ./
-COPY rdrf/requirements/* ./rdrf/
-
-COPY rdrf/clients ./clients
-
-RUN --mount=type=cache,target=/root/.cache/pip \
-    pip install --upgrade pip setuptools \
-    && pip install -r rdrf/requirements.txt \
-    && pip install -r rdrf/dev-requirements.txt \
-    && pip install -r rdrf/test-requirements.txt \
-    && pip install -r requirements.txt \
-    && pip install -r dev-requirements.txt \
-    && pip install -r test-requirements.txt
+# Sync rdrf dependencies to /opt/venv (outside /app which gets volume-mounted in dev)
+ENV UV_PROJECT_ENVIRONMENT=/opt/venv
+ENV UV_LINK_MODE=copy
+WORKDIR /app/rdrf
+RUN --mount=type=cache,target=/root/.cache/uv \
+    uv sync --locked --no-install-project --all-extras
 
 VOLUME ["/data"]
 
+# Runtime stage
 FROM python:3.13-slim
 
+# Install uv
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
+
 ENV PYTHONPATH="/app/rdrf/rdrf/:/app/mnd/"
-ENV DJANGO_SETTINGS_MODULE mnd.settings
+ENV DJANGO_SETTINGS_MODULE=mnd.settings
 ENV STATIC_ROOT="/data/static"
 ENV WRITABLE_DIRECTORY="/data/scratch"
-ENV LOCALE_PATHS="/data/translations/locale"
+ENV LOCALE_PATHS="/app/translations/locale"
 ENV LOG_DIRECTORY="/data/log"
 ENV MEDIA_ROOT="/data/static/media"
 
-# RUN apt-get update && apt-get install -y --no-install-recommends \
-#    libxml2 \
-#   && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-# This is done in order to workaround problems installing openjdk as reported here:
-# https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=863199
-RUN mkdir -p /usr/share/man/man1
-
 RUN apt-get update && apt-get install -y --no-install-recommends \
   # Base
-  # TODO check if requirements are needed
   gettext \
   libpq5 \
+  media-types \
   nodejs \
   postgresql-client \
   unixodbc \
+  unixodbc-dev \
+  build-essential \
   libmagic1 \
   git \
   pdftk \
   && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN mkdir -p /requirements/rdrf/
-WORKDIR /requirements
+# Copy venv from builder to /opt/venv
+COPY --from=builder /opt/venv /opt/venv
 
-COPY --from=builder /requirements/ .
+WORKDIR /app
 
-RUN --mount=type=cache,target=/root/.cache/pip \
-    pip install -r rdrf/requirements.txt \
-    && pip install -r rdrf/dev-requirements.txt \
-    && pip install -r rdrf/test-requirements.txt \
-    && pip install -r requirements.txt \
-    && pip install -r dev-requirements.txt \
-    && pip install -r test-requirements.txt
+# Copy rdrf dependency files
+COPY rdrf/pyproject.toml rdrf/uv.lock ./rdrf/
+COPY rdrf/clients ./rdrf/clients
 
-RUN rm -Rf /root/.cache
+# Finalize dependency install
+ENV UV_PROJECT_ENVIRONMENT=/opt/venv
+ENV UV_LINK_MODE=copy
+WORKDIR /app/rdrf
+RUN --mount=type=cache,target=/root/.cache/uv \
+    uv sync --locked --all-extras
+
+# Add venv to PATH
+ENV PATH="/opt/venv/bin:$PATH"
 
 COPY docker/dev/docker-entrypoint.sh /
 RUN chmod +x /docker-entrypoint.sh
@@ -100,7 +95,7 @@ RUN chmod +x /aws-lambda-rie
 
 VOLUME ["/app", "/data"]
 
-ENV HOME /data
+ENV HOME=/data
 WORKDIR /data
 
 EXPOSE 8000

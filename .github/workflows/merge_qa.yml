@@ -4,16 +4,19 @@ on:
   repository_dispatch:
     types:
       - merge_qa
+permissions:
+  contents: write
 jobs:
   merge_qa:
     name: Merge QA
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           submodules: recursive
           fetch-depth: 0
+          persist-credentials: true
       - name: Merge next_release branch into cicd branch
         run: |
           git config --global user.name "${GITHUB_ACTOR}"

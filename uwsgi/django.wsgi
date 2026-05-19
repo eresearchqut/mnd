@@ -1,11 +1,6 @@
-# Generic WSGI application
 import os
 from django.core.wsgi import get_wsgi_application
 
-def application(environ, start):
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mnd.settings")
 
-    # copy any vars into os.environ
-    for key in environ:
-        os.environ[key] = str(environ[key])
-
-    return get_wsgi_application()(environ,start)
+application = get_wsgi_application()

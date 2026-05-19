@@ -1,10 +1,12 @@
-# Container to build our prod image
-FROM python:3.13 as builder
+# Builder stage
+FROM python:3.13 AS builder
 
-ENV PYTHONUNBUFFERED 1
+ENV PYTHONUNBUFFERED=1
+
+# Install uv
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-  # TODO check if requirements are needed
   # Base
   gettext \
   libpq5 \
@@ -22,41 +24,39 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   zlib1g-dev \
   && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN mkdir -p /requirements/rdrf/
-WORKDIR /requirements
+WORKDIR /app
 
-# RUN env | sort
+# Copy rdrf (trrf) dependency files first for layer caching
+COPY rdrf/pyproject.toml rdrf/uv.lock ./rdrf/
+COPY rdrf/clients ./rdrf/clients
 
-# Add our python deps in multiple docker layers
-# hgvs was failing due to lack of nose, hence the order
+# Sync production dependencies only
+ENV UV_LINK_MODE=copy
+WORKDIR /app/rdrf
+RUN --mount=type=cache,target=/root/.cache/uv \
+    uv sync --locked --no-install-project --no-dev
 
-COPY rdrf/requirements/* rdrf/
-COPY requirements/* ./
-
-COPY rdrf/clients ./clients
-
-RUN pip install --upgrade setuptools pip
-RUN pip install -r rdrf/requirements.txt
-RUN pip install -r requirements.txt
-
-# Actual image we are building
+# Runtime stage
 FROM python:3.13-slim
 
-ENV PYTHONUNBUFFERED 1
+ENV PYTHONUNBUFFERED=1
+
+# Install uv
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
 ENV PYTHONPATH="/app/rdrf/rdrf/:/app/mnd/"
-ENV DJANGO_SETTINGS_MODULE mnd.settings
+ENV DJANGO_SETTINGS_MODULE=mnd.settings
 
-ENV PROJECT_NAME mnd
-ENV PROJECT_SOURCE https://github.com/eresearchqut/mnd.git
-ENV DEPLOYMENT prod
-ENV PRODUCTION 1
-ENV DEBUG 0
-ENV STATIC_ROOT /data/static
-ENV WRITABLE_DIRECTORY /data/scratch
-ENV MEDIA_ROOT /data/static/media
-ENV LOG_DIRECTORY /data/log
-ENV LOCALE_PATHS /data/translations/locale
+ENV PROJECT_NAME=mnd
+ENV PROJECT_SOURCE=https://github.com/eresearchqut/mnd.git
+ENV DEPLOYMENT=prod
+ENV PRODUCTION=1
+ENV DEBUG=0
+ENV STATIC_ROOT=/data/static
+ENV WRITABLE_DIRECTORY=/data/scratch
+ENV MEDIA_ROOT=/data/static/media
+ENV LOG_DIRECTORY=/data/log
+ENV LOCALE_PATHS=/data/translations/locale
 
 RUN mkdir /app
 
@@ -66,15 +66,12 @@ RUN addgroup --gid 1000 django \
   && chown django:django /data \
   && chown django:django /app
 
-# https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=863199
-RUN mkdir -p /usr/share/man/man1
-
 RUN apt-get update && apt-get install -y --no-install-recommends \
   # Base
-  # TODO check if requirements are needed
   git \
   gettext \
   libpq5 \
+  media-types \
   nodejs \
   unixodbc \
   ssl-cert \
@@ -83,45 +80,43 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   curl \
   && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN mkdir -p /requirements/rdrf/
-WORKDIR /requirements
+WORKDIR /app
 
-COPY --from=builder /root/.cache /root/.cache
-COPY --from=builder /requirements/requirements.txt .
-COPY --from=builder /requirements/rdrf/requirements.txt rdrf/
+# Copy venv from builder
+COPY --from=builder /app/rdrf/.venv /app/rdrf/.venv
 
-COPY rdrf/clients ./clients
+# Copy rdrf dependency files
+COPY rdrf/pyproject.toml rdrf/uv.lock ./rdrf/
+COPY rdrf/clients ./rdrf/clients
 
-RUN pip install -r rdrf/requirements.txt
-RUN pip install -r requirements.txt
+# Finalize dependency install (production only)
+ENV UV_LINK_MODE=copy
+WORKDIR /app/rdrf
+RUN --mount=type=cache,target=/root/.cache/uv \
+    uv sync --locked --no-dev
 
-# The generate snakeoil cert is valid for 10 years, but if you need to
+# Add venv to PATH
+ENV PATH="/app/rdrf/.venv/bin:$PATH"
+
+# The generated snakeoil cert is valid for 10 years, but if you need to
 # re-generate it you can use:
 # RUN make-ssl-cert generate-default-snakeoil --force-overwrite
 
 RUN chgrp -R django /etc/ssl/private/ \
   && chmod g+r /etc/ssl/private/ssl-cert-snakeoil.key
 
-RUN rm -Rf /root/.cache
-
-# Currently just using the dev entrypoint for prod as well
-# TODO separate or move one level up
 COPY docker/dev/docker-entrypoint.sh /
 RUN chmod +x /docker-entrypoint.sh
 
 VOLUME ["/data"]
-ENV HOME /data
+ENV HOME=/data
 
 EXPOSE 9000
 
 COPY --chown=django:django . /app
-# RUN chown -R django /app
-
-# COPY --from=nodebuilder /app/root/.cache /root/.cache
 
 USER django
 WORKDIR /data
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["uwsgi"]
-
