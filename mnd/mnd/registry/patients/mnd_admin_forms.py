@@ -214,7 +214,7 @@ class PrimaryCarerForm(PrefixedModelForm):
 
     def has_assigned_carer(self):
         instance = getattr(self, "instance")
-        if instance and self.patient:
+        if instance and instance.pk and self.patient:
             return CarerRegistration.objects.has_registered_carer(
                 instance, self.patient
             )
